@@ -1,5 +1,5 @@
 /**
- * The script is part of MojiJS.
+ * The script is part of Mojix.
  * 
  * AUTHOR:
  *  natade (http://twitter.com/natadea)
@@ -1003,7 +1003,7 @@ class Unicode {
 Unicode.is_initmap = false;
 
 /**
- * The script is part of MojiJS.
+ * The script is part of Mojix.
  * 
  * AUTHOR:
  *  natade (http://twitter.com/natadea)
@@ -1593,7 +1593,7 @@ class SJIS {
 }
 
 /**
- * The script is part of MojiJS.
+ * The script is part of Mojix.
  * 
  * AUTHOR:
  *  natade (http://twitter.com/natadea)
@@ -1969,7 +1969,7 @@ class CP932 {
 }
 
 /**
- * The script is part of MojiJS.
+ * The script is part of Mojix.
  * 
  * AUTHOR:
  *  natade (http://twitter.com/natadea)
@@ -2486,7 +2486,7 @@ class SJIS2004 {
 }
 
 /**
- * The script is part of MojiJS.
+ * The script is part of Mojix.
  * 
  * AUTHOR:
  *  natade (http://twitter.com/natadea)
@@ -2706,7 +2706,7 @@ class EUCJPMS {
 }
 
 /**
- * The script is part of MojiJS.
+ * The script is part of Mojix.
  * 
  * AUTHOR:
  *  natade (http://twitter.com/natadea)
@@ -2834,7 +2834,7 @@ class EUCJIS2004 {
 }
 
 /**
- * The script is part of MojiJS.
+ * The script is part of Mojix.
  * 
  * AUTHOR:
  *  natade (http://twitter.com/natadea)
@@ -3087,7 +3087,7 @@ class Encode {
 }
 
 /**
- * The script is part of MojiJS.
+ * The script is part of Mojix.
  * 
  * AUTHOR:
  *  natade (http://twitter.com/natadea)
@@ -4167,7 +4167,7 @@ class Japanese {
 }
 
 /**
- * The script is part of MojiJS.
+ * The script is part of Mojix.
  * 
  * AUTHOR:
  *  natade (http://twitter.com/natadea)
@@ -4835,7 +4835,7 @@ class MojiAnalyzer {
 }
 
 /**
- * The script is part of MojiJS.
+ * The script is part of Mojix.
  * 
  * AUTHOR:
  *  natade (http://twitter.com/natadea)
@@ -4843,6 +4843,7 @@ class MojiAnalyzer {
  * LICENSE:
  *  The MIT license https://opensource.org/licenses/MIT
  */
+
 
 /**
  * 文字列比較関数を作成用のツールクラス
@@ -5100,7 +5101,7 @@ const StringComparator = {
 };
 
 /**
- * The script is part of jptext.
+ * The script is part of Mojix.
  * 
  * AUTHOR:
  *  natade (http://twitter.com/natadea)
@@ -5112,7 +5113,7 @@ const StringComparator = {
 /**
  * 日本語を扱うための様々な機能を提供します
  */
-class MojiJS {
+class Mojix {
 
 	// ---------------------------------
 	// 文字列のエンコードとデコードを扱う関数
@@ -5554,4 +5555,4 @@ class MojiJS {
 
 }
 
-export default MojiJS;
+export { Mojix as default };

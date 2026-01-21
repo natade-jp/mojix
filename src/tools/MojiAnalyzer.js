@@ -1,5 +1,5 @@
 ﻿/**
- * The script is part of MojiJS.
+ * The script is part of Mojix.
  * 
  * AUTHOR:
  *  natade (http://twitter.com/natadea)

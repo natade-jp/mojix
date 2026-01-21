@@ -43,7 +43,7 @@
       "actualCount": 24,
       "undocumentLines": []
     },
-    "src/MojiJS.js": {
+    "src/mojix.js": {
       "expectCount": 42,
       "actualCount": 42,
       "undocumentLines": []

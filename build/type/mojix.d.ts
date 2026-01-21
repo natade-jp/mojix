@@ -1,22 +1,233 @@
+export { Mojix as default };
 /**
  * 面区点情報
- * @typedef {Object} _MenKuTen_
- * @property {string} [text] 面-区-点
- * @property {number} [men=1] 面
- * @property {number} ku 区
- * @property {number} ten 点
  */
-declare type _MenKuTen_ = {
+export type MenKuTen = {
+    /**
+     * 面-区-点
+     */
     text?: string;
+    /**
+     * 面
+     */
     men?: number;
+    /**
+     * 区
+     */
     ku: number;
+    /**
+     * 点
+     */
     ten: number;
 };
-
+/**
+ * 文字のエンコード情報
+ */
+export type MojiEncodeData = {
+    /**
+     * 区点 コード
+     */
+    kuten: any;
+    /**
+     * 面区点 コード
+     */
+    menkuten: any;
+    /**
+     * CP932(Windows-31J) コード
+     */
+    cp932_code: number;
+    /**
+     * Shift_JIS-2004 コード
+     */
+    sjis2004_code: number;
+    /**
+     * UTF-8 配列
+     */
+    utf8_array: Array<number>;
+    /**
+     * UTF-16 配列
+     */
+    utf16_array: Array<number>;
+    /**
+     * UTF-32 配列
+     */
+    utf32_array: Array<number>;
+    /**
+     * CP932(Windows-31J) バイト配列
+     */
+    cp932_array: Array<number>;
+    /**
+     * Shift_JIS-2004 コード バイト配列
+     */
+    sjis2004_array: Array<number>;
+    /**
+     * Shift_JIS バイト配列
+     */
+    shift_jis_array: Array<number>;
+    /**
+     * ISO-2022-JP バイト配列
+     */
+    iso2022jp_array: Array<number>;
+    /**
+     * eucJP-ms バイト配列
+     */
+    eucjpms_array: Array<number>;
+    /**
+     * EUC-JP-2004 バイト配列
+     */
+    eucjis2004_array: Array<number>;
+};
+/**
+ * 文字の種別情報
+ */
+export type MojiTypeData = {
+    /**
+     * Shift_JIS に登録された文字
+     */
+    is_regular_sjis: boolean;
+    /**
+     * Shift_JIS-2004 に登録された文字
+     */
+    is_regular_sjis2004: boolean;
+    /**
+     * 常用漢字
+     */
+    is_joyo_kanji: boolean;
+    /**
+     * 人名用漢字
+     */
+    is_jinmeiyo_kanji: boolean;
+    /**
+     * Windows-31J(CP932) 外字
+     */
+    is_gaiji_cp932: boolean;
+    /**
+     * Windows-31J(CP932) IBM拡張文字
+     */
+    is_IBM_extended_character: boolean;
+    /**
+     * Windows-31J(CP932) NEC選定IBM拡張文字
+     */
+    is_NEC_selection_IBM_extended_character: boolean;
+    /**
+     * Windows-31J(CP932) NEC特殊文字
+     */
+    is_NEC_special_character: boolean;
+    /**
+     * Shift_JIS-2004 を使用して漢字の水準調査(1未満だと水準調査失敗)
+     */
+    kanji_suijun: number;
+    /**
+     * 要 Unicode サロゲートペア
+     */
+    is_surrogate_pair: boolean;
+    /**
+     * 制御文字名（制御文字ではない場合は null）
+     */
+    control_name: string;
+    /**
+     * 制御文字
+     */
+    is_control_charcter: boolean;
+    /**
+     * Unicodeブロック名
+     */
+    blockname: string;
+    /**
+     * 漢字
+     */
+    is_kanji: boolean;
+    /**
+     * ひらがな
+     */
+    is_hiragana: boolean;
+    /**
+     * カタカナ
+     */
+    is_katakana: boolean;
+    /**
+     * 全角ASCII
+     */
+    is_fullwidth_ascii: boolean;
+    /**
+     * 半角カタカナ
+     */
+    is_halfwidth_katakana: boolean;
+    /**
+     * 絵文字
+     */
+    is_emoji: boolean;
+    /**
+     * 顔文字
+     */
+    is_emoticons: boolean;
+    /**
+     * 記号(VS16 が付くと絵文字化)
+     */
+    is_symbol_base: boolean;
+    /**
+     * 外字
+     */
+    is_gaiji: boolean;
+    /**
+     * グラフェムを構成するための文字
+     */
+    is_grapheme_component: boolean;
+    /**
+     * ゼロ幅文字
+     */
+    is_zero_width_character: boolean;
+    /**
+     * 結合文字
+     */
+    is_combining_mark: boolean;
+    /**
+     * 異体字セレクタ
+     */
+    is_variation_selector: boolean;
+    /**
+     * スキントーン修飾子
+     */
+    is_skin_tone_modifier: boolean;
+    /**
+     * タグ文字
+     */
+    is_tag_character: boolean;
+};
+/**
+ * 文字の種別情報
+ */
+export type MojiData = {
+    /**
+     * 文字のエンコード情報
+     */
+    encode: MojiEncodeData;
+    /**
+     * 文字の種別情報
+     */
+    type: MojiTypeData;
+    /**
+     * 解析した文字
+     */
+    character: string;
+    /**
+     * 解析した文字のコードポイント
+     */
+    codepoint: number;
+};
+/**
+ * The script is part of Mojix.
+ *
+ * AUTHOR:
+ *  natade (http://twitter.com/natadea)
+ *
+ * LICENSE:
+ *  The MIT license https://opensource.org/licenses/MIT
+ */
 /**
  * 日本語を扱うための様々な機能を提供します
  */
-declare class MojiJS {
+declare class Mojix {
     /**
      * 文字列からバイナリ配列にエンコードする
      * @param {String} text - 変換したいテキスト
@@ -24,14 +235,14 @@ declare class MojiJS {
      * @param {boolean} [is_with_bom=false] - BOMをつけるかどうか
      * @returns {Array<number>} バイナリ配列(失敗時はnull)
      */
-    static encode(text: string, charset: string, is_with_bom?: boolean): number[];
+    static encode(text: string, charset: string, is_with_bom?: boolean): Array<number>;
     /**
      * バイナリ配列から文字列にデコードする
      * @param {Array<number>} binary - 変換したいバイナリ配列
      * @param {String} [charset="autodetect"] - キャラセット(UTF-8/16/32,Shift_JIS,Windows-31J,Shift_JIS-2004,EUC-JP,EUC-JP-2004)
      * @returns {String} 変換した文字列（失敗したらnull）
      */
-    static decode(binary: number[], charset?: string): string;
+    static decode(binary: Array<number>, charset?: string): string;
     /**
      * サロゲートペア対応のコードポイント取得
      * @param {String} text - 対象テキスト
@@ -44,7 +255,7 @@ declare class MojiJS {
      * @param {...(number|Array<number>)} codepoint - 変換したいコードポイントの数値配列、又は数値を並べた可変引数
      * @returns {String} 変換後のテキスト
      */
-    static fromCodePoint(...codepoint: (number | number[])[]): string;
+    static fromCodePoint(...args: (number | number[])[]): string;
     /**
      * コードポイント換算で文字列数をカウント
      * @param {String} text - 対象テキスト
@@ -58,49 +269,49 @@ declare class MojiJS {
      * @param {String} text - 変換したいテキスト
      * @returns {Array<number>} UTF32(コードポイント)のデータが入った配列
      */
-    static toUTF32Array(text: string): number[];
+    static toUTF32Array(text: string): Array<number>;
     /**
      * UTF32の配列から文字列に変換
      * @param {Array<number>} utf32 - 変換したいテキスト
      * @returns {String} 変換後のテキスト
      */
-    static fromUTF32Array(utf32: number[]): string;
+    static fromUTF32Array(utf32: Array<number>): string;
     /**
      * 文字列をUTF16の配列に変換
      * @param {String} text - 変換したいテキスト
      * @returns {Array<number>} UTF16のデータが入った配列
      */
-    static toUTF16Array(text: string): number[];
+    static toUTF16Array(text: string): Array<number>;
     /**
      * UTF16の配列から文字列に変換
      * @param {Array<number>} utf16 - 変換したいテキスト
      * @returns {String} 変換後のテキスト
      */
-    static fromUTF16Array(utf16: number[]): string;
+    static fromUTF16Array(utf16: Array<number>): string;
     /**
      * 文字列をUTF8の配列に変換
      * @param {String} text - 変換したいテキスト
      * @returns {Array<number>} UTF8のデータが入った配列
      */
-    static toUTF8Array(text: string): number[];
+    static toUTF8Array(text: string): Array<number>;
     /**
      * UTF8の配列から文字列に変換
      * @param {Array<number>} utf8 - 変換したいテキスト
      * @returns {String} 変換後のテキスト
      */
-    static fromUTF8Array(utf8: number[]): string;
+    static fromUTF8Array(utf8: Array<number>): string;
     /**
      * 結合した文字を考慮して文字列を文字の配列に変換する
      * @param {String} text - 変換したいテキスト
      * @returns {Array<Array<number>>} UTF32(コードポイント)の配列が入った配列
      */
-    static toMojiArrayFromString(text: string): number[][];
+    static toMojiArrayFromString(text: string): Array<Array<number>>;
     /**
      * 結合した文字を考慮して文字の配列を文字列に変換する
      * @param {Array<Array<number>>} mojiarray - UTF32(コードポイント)の配列が入った配列
      * @returns {string} UTF32(コードポイント)の配列が入った配列
      */
-    static toStringFromMojiArray(mojiarray: number[][]): string;
+    static toStringFromMojiArray(mojiarray: Array<Array<number>>): string;
     /**
      * 指定したテキストを切り出す
      * - 単位はコードポイントの文字数
@@ -135,28 +346,28 @@ declare class MojiJS {
      * 指定した文字から Windows-31J 上の区点番号に変換
      * - 2文字以上を指定した場合は、1文字目のみを変換する
      * @param {String} text - 変換したいテキスト
-     * @returns {_MenKuTen_} 区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
+     * @returns {import("./encode/SJIS.js").MenKuTen} 区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
      */
-    static toKuTen(text: string): _MenKuTen_;
+    static toKuTen(text: string): any;
     /**
      * Windows-31J 上の区点番号から文字列に変換
-     * @param {_MenKuTen_|string} kuten - 区点番号
+     * @param {import("./encode/SJIS.js").MenKuTen|string} kuten - 区点番号
      * @returns {String} 変換後のテキスト
      */
-    static fromKuTen(kuten: any): string;
+    static fromKuTen(kuten: any | string): string;
     /**
      * 指定した文字から Shift_JIS-2004 上の面区点番号に変換
      * - 2文字以上を指定した場合は、1文字目のみを変換する
      * @param {String} text - 変換したいテキスト
-     * @returns {_MenKuTen_} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
+     * @returns {import("./encode/SJIS.js").MenKuTen} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
      */
-    static toMenKuTen(text: string): _MenKuTen_;
+    static toMenKuTen(text: string): any;
     /**
      * Shift_JIS-2004 上の面区点番号から文字列に変換
-     * @param {_MenKuTen_|string} menkuten - 面区点番号
+     * @param {import("./encode/SJIS.js").MenKuTen|string} menkuten - 面区点番号
      * @returns {String} 変換後のテキスト
      */
-    static fromMenKuTen(menkuten: any): string;
+    static fromMenKuTen(menkuten: any | string): string;
     /**
      * カタカナをひらがなに変換
      * @param {String} text - 変換したいテキスト
@@ -268,9 +479,9 @@ declare class MojiJS {
     /**
      * 指定した1つのUTF-32 コードポイントに関して、解析を行い情報を返します
      * @param {Number} unicode_codepoint - UTF-32 のコードポイント
-     * @returns {_MojiData_} 文字の情報がつまったオブジェクト
+     * @returns {import("./tools/MojiAnalyzer.js").MojiData} 文字の情報がつまったオブジェクト
      */
-    static getMojiData(unicode_codepoint: number): _MojiData_;
+    static getMojiData(unicode_codepoint: number): any;
     /**
      * 2つの文字列を比較する関数
      * - sortの引数で利用できます
@@ -291,113 +502,3 @@ declare class MojiJS {
      */
     static compareToForNatural(a: any, b: any): number;
 }
-
-/**
- * 文字のエンコード情報
- * @typedef {Object} _MojiEncodeData_
- * @property {_MenKuTen_} kuten 区点 コード
- * @property {_MenKuTen_} menkuten 面区点 コード
- * @property {number} cp932_code _CP932_(Windows-31J) コード
- * @property {number} sjis2004_code Shift_JIS-2004 コード
- * @property {Array<number>} utf8_array UTF-8 配列
- * @property {Array<number>} utf16_array UTF-16 配列
- * @property {Array<number>} utf32_array UTF-32 配列
- * @property {Array<number>} cp932_array _CP932_(Windows-31J) バイト配列
- * @property {Array<number>} sjis2004_array Shift_JIS-2004 コード バイト配列
- * @property {Array<number>} shift_jis_array Shift_JIS バイト配列
- * @property {Array<number>} iso2022jp_array ISO-2022-JP バイト配列
- * @property {Array<number>} eucjpms_array eucJP-ms バイト配列
- * @property {Array<number>} eucjis2004_array EUC-JP-2004 バイト配列
- */
-declare type _MojiEncodeData_ = {
-    cp932_code: number;
-    sjis2004_code: number;
-    utf8_array: number[];
-    utf16_array: number[];
-    utf32_array: number[];
-    cp932_array: number[];
-    sjis2004_array: number[];
-    shift_jis_array: number[];
-    iso2022jp_array: number[];
-    eucjpms_array: number[];
-    eucjis2004_array: number[];
-};
-
-/**
- * 文字の種別情報
- * @typedef {Object} _MojiTypeData_
- * @property {boolean} is_regular_sjis Shift_JIS に登録された文字
- * @property {boolean} is_regular_sjis2004 Shift_JIS-2004 に登録された文字
- * @property {boolean} is_joyo_kanji 常用漢字
- * @property {boolean} is_jinmeiyo_kanji 人名用漢字
- * @property {boolean} is_gaiji_cp932 Windows-31J(_CP932_) 外字
- * @property {boolean} is_IBM_extended_character Windows-31J(_CP932_) IBM拡張文字
- * @property {boolean} is_NEC_selection_IBM_extended_character Windows-31J(_CP932_) NEC選定IBM拡張文字
- * @property {boolean} is_NEC_special_character Windows-31J(_CP932_) NEC特殊文字
- * @property {number} kanji_suijun Shift_JIS-2004 を使用して漢字の水準調査(1未満だと水準調査失敗)
- * @property {boolean} is_surrogate_pair 要 _Unicode_ サロゲートペア
- * @property {string} control_name 制御文字名（制御文字ではない場合は null）
- * @property {boolean} is_control_charcter 制御文字
- * @property {string} blockname _Unicode_ブロック名
- * @property {boolean} is_kanji 漢字
- * @property {boolean} is_hiragana ひらがな
- * @property {boolean} is_katakana カタカナ
- * @property {boolean} is_fullwidth_ascii 全角ASCII
- * @property {boolean} is_halfwidth_katakana 半角カタカナ
- * @property {boolean} is_emoji 絵文字
- * @property {boolean} is_emoticons 顔文字
- * @property {boolean} is_symbol_base 記号(VS16 が付くと絵文字化)
- * @property {boolean} is_gaiji 外字
- * @property {boolean} is_grapheme_component グラフェムを構成するための文字
- * @property {boolean} is_zero_width_character ゼロ幅文字
- * @property {boolean} is_combining_mark 結合文字
- * @property {boolean} is_variation_selector 異体字セレクタ
- * @property {boolean} is_skin_tone_modifier スキントーン修飾子
- * @property {boolean} is_tag_character タグ文字
- */
-declare type _MojiTypeData_ = {
-    is_regular_sjis: boolean;
-    is_regular_sjis2004: boolean;
-    is_joyo_kanji: boolean;
-    is_jinmeiyo_kanji: boolean;
-    is_gaiji_cp932: boolean;
-    is_IBM_extended_character: boolean;
-    is_NEC_selection_IBM_extended_character: boolean;
-    is_NEC_special_character: boolean;
-    kanji_suijun: number;
-    is_surrogate_pair: boolean;
-    control_name: string;
-    is_control_charcter: boolean;
-    blockname: string;
-    is_kanji: boolean;
-    is_hiragana: boolean;
-    is_katakana: boolean;
-    is_fullwidth_ascii: boolean;
-    is_halfwidth_katakana: boolean;
-    is_emoji: boolean;
-    is_emoticons: boolean;
-    is_symbol_base: boolean;
-    is_gaiji: boolean;
-    is_grapheme_component: boolean;
-    is_zero_width_character: boolean;
-    is_combining_mark: boolean;
-    is_variation_selector: boolean;
-    is_skin_tone_modifier: boolean;
-    is_tag_character: boolean;
-};
-
-/**
- * 文字の種別情報
- * @typedef {Object} _MojiData_
- * @property {_MojiEncodeData_} encode 文字のエンコード情報
- * @property {_MojiTypeData_} type 文字の種別情報
- * @property {string} character 解析した文字
- * @property {number} codepoint 解析した文字のコードポイント
- */
-declare type _MojiData_ = {
-    encode: _MojiEncodeData_;
-    type: _MojiTypeData_;
-    character: string;
-    codepoint: number;
-};
-

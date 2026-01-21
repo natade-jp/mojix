@@ -2,11 +2,14 @@
 /npm-debug.log
 /src/
 /out/
+/tmp/
 /html/
 /docs/
 /scripts/
 /.vscode/
 jest.config.js
+.prettierignore
+.prettierrc
 .npmrc
 .babelrc
 .travis.yml
@@ -17,3 +20,4 @@ jest.config.js
 Thumbs.db
 *.bak
 tsconfig.json
+jsconfig.json

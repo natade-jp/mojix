@@ -1,34 +1,28 @@
-﻿const File = require("./File.js");
+﻿import NTFile from "ntfile";
 
 const jest_config_js = {
-	"verbose": true,
-	"rootDir": "./src",
-	"moduleFileExtensions": [
-		"js",
-		"mjs"
-	],
-	// @ts-ignore
-	"testMatch": [
-	],
-	"transform": {
+	verbose: true,
+	rootDir: "./src",
+	moduleFileExtensions: ["js", "mjs"],
+	/**
+	 * @type {string[]}
+	 */
+	testMatch: [],
+	transform: {
 		"^.+\\.(js|mjs)$": "babel-jest"
 	}
 };
 
-if(process.argv[2]) {
+if (process.argv[2]) {
 	const test_file_name = process.argv[2];
-	jest_config_js["testMatch"].push("**/?(*.)" + test_file_name + ".test.?(m)js");
+	jest_config_js.testMatch.push("**/?(*.)" + test_file_name + ".test.?(m)js");
+} else {
+	jest_config_js.testMatch.push("**/__tests__/**/*.?(m)js?(x)");
+	jest_config_js.testMatch.push("**/?(*.)(spec|test).?(m)js?(x)");
 }
-else {
-	jest_config_js["testMatch"].push("**/__tests__/**/*.?(m)js?(x)");
-	jest_config_js["testMatch"].push("**/?(*.)(spec|test).?(m)js?(x)");
-}
 
-File.saveTextFile(
-	"jest.config.js",
-	"module.exports = " + JSON.stringify( jest_config_js ) + ";"
-);
+NTFile.saveTextFile("jest.config.js", "module.exports = " + JSON.stringify(jest_config_js) + ";");
 
-File.exec("npx jest");
+NTFile.exec("npx jest");
 
-File.deleteFile("jest.config.js");
+NTFile.deleteFile("jest.config.js");

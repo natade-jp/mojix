@@ -1,5 +1,5 @@
 ﻿/**
- * The script is part of jptext.
+ * The script is part of Mojix.
  * 
  * AUTHOR:
  *  natade (http://twitter.com/natadea)
@@ -19,7 +19,7 @@ import SJIS2004 from "./encode/SJIS2004.js";
 /**
  * 日本語を扱うための様々な機能を提供します
  */
-export default class MojiJS {
+export default class Mojix {
 
 	// ---------------------------------
 	// 文字列のエンコードとデコードを扱う関数
