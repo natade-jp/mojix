@@ -1,7 +1,7 @@
 {
 	"name": "mojix",
 	"version": "0.0.1",
-	"description": "To convert or to analyze the character data of the Japanese.",
+	"description": "Moji / Kanji / Unicode analysis utilities (work in progress)",
 	"author": "natade-jp <natade3@gmail.com> (https://github.com/natade-jp)",
 	"repository": {
 		"type": "git",
@@ -12,25 +12,6 @@
 	"types": "./build/type/mojix.d.ts",
 	"main": "./build/esm/mojix.js",
 	"keywords": [
-		"cp932",
-		"ms932",
-		"windows-31j",
-		"sjis",
-		"shift_jis",
-		"shift_jis-2004",
-		"euc-jp",
-		"euc-jis-2004",
-		"eucjp-ms",
-		"japanese",
-		"hiragana",
-		"katakana",
-		"romaji",
-		"utf-8",
-		"utf-16",
-		"utf-32",
-		"encoding",
-		"kanji",
-		"unicode"
 	],
 	"exports": {
 		".": {
