@@ -40,6 +40,7 @@ export default class Mojix {
 		return Encode.encode(text, charset, is_with_bom);
 	}
 
+	/* eslint-disable max-len */
 	/**
 	 * バイナリ配列から文字列にデコードする
 	 * @param {number[]} binary - 変換したいバイナリ配列
@@ -49,6 +50,7 @@ export default class Mojix {
 	static decode(binary, charset) {
 		return Encode.decode(binary, charset);
 	}
+	/* eslint-enable max-len */
 
 	// ---------------------------------
 	// Unicode を扱う関数群

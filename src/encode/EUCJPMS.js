@@ -25,6 +25,7 @@ class EUCJPMSMAP {
 		}
 		EUCJPMSMAP.is_initmap = true;
 
+		/* eslint-disable max-len */
 		/* eslint-disable object-property-newline */
 		/**
 		 * 変換マップ
@@ -49,6 +50,7 @@ class EUCJPMSMAP {
 			0xF4F8: 0xFBF7, 0xF4F9: 0xFBF9, 0xF4FA: 0xFBFA, 0xF4FB: 0xFBFC, 0xF4FC: 0xFC42, 0xF4FD: 0xFC49, 0xF4FE: 0xFC4B
 		};
 		/* eslint-enable object-property-newline */
+		/* eslint-enable max-len */
 
 		/**
 		 * @type {Record<number, number>}

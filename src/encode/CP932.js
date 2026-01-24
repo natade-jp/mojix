@@ -33,6 +33,7 @@ class CP932MAP {
 		 * @returns {Record<number, number>}
 		 */
 		const getCp932ToUnicodeMap = function () {
+			/* eslint-disable max-len */
 			/* eslint-disable object-property-newline */
 			/**
 			 * 1バイトの変換マップ
@@ -72,6 +73,7 @@ class CP932MAP {
 				0xFD: 0xF8F1, 0xFE: 0xF8F2, 0xFF: 0xF8F3
 			};
 			/* eslint-enable object-property-newline */
+			/* eslint-enable max-len */
 
 			/**
 			 * 2バイト文字（0x8140-0xffff）の変換マップ作成用の文字列
@@ -189,6 +191,7 @@ class CP932MAP {
 		 */
 		const cp932_to_unicode_map = getCp932ToUnicodeMap();
 
+		/* eslint-disable max-len */
 		/**
 		 * 重複された CP932 のコード
 		 * @type {number[]}
@@ -221,6 +224,7 @@ class CP932MAP {
 			0xEEEC, 0xEEEF, 0xEEF0, 0xEEF1, 0xEEF2, 0xEEF3, 0xEEF4, 0xEEF5, 0xEEF6, 0xEEF7, 0xEEF8, 0xEEF9, 0xEEFA, 0xEEFB, 0xEEFC, 0xFA4A,
 			0xFA4B, 0xFA4C, 0xFA4D, 0xFA4E, 0xFA4F, 0xFA50, 0xFA51, 0xFA52, 0xFA53, 0xFA54, 0xFA58, 0xFA59, 0xFA5A, 0xFA5B
 		];
+		/* eslint-enable max-len */
 
 		/**
 		 * @type {Record<number, number>}

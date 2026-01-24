@@ -1,6 +1,7 @@
 ﻿import SJIS2004 from "./SJIS2004.js";
 
 const getTestCharacterMap = function () {
+	/* eslint-disable max-len */
 	/* eslint-disable object-property-newline */
 	/**
 	 * 変換マップ
@@ -1448,7 +1449,9 @@ const getTestCharacterMap = function () {
 		0xFCF4: 0x2A6B2
 	};
 	/* eslint-enable object-property-newline */
+	/* eslint-enable max-len */
 
+	/* eslint-disable max-len */
 	/* eslint-disable object-property-newline */
 	/**
 	 * 全角用の文字がある場合は、全角へ変換できるようにする。
@@ -1476,6 +1479,7 @@ const getTestCharacterMap = function () {
 		0x8299: 0xFF59, 0x829A: 0xFF5A
 	};
 	/* eslint-enable object-property-newline */
+	/* eslint-enable max-len */
 
 	// 「sjis2004_to_unicode_map_2」の中の特殊な文字について
 	// 一部CP932とShift_JIS-2004とでコードが一致していない文字がある

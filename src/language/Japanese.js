@@ -659,6 +659,7 @@ export default class Japanese {
 			}
 			return output.join("");
 		};
+		/* eslint-disable max-len */
 		// 上から下への優先度で変換する。
 		// ([xl]?[kgsztdnhbpmyrwlxvqfj])(\1)?y?[aiuoe] ... yが入り込む可能性がある文字。前の文字を繰り返して「tta -> った」にも対応。
 		// [xl]?(gw|ch|cch|sh|ssh|ts|tts|th|tth)?[aiuoe] ... yを使用しない文字
@@ -666,6 +667,7 @@ export default class Japanese {
 		// [?!-] ... 記号
 		// prettier-ignore
 		return (text.replace(/([xl]?[kgsztdnhbpmyrwlxvqfj])(\1)?y?[aiuoe]|[xl]?([gqstf]w|ch|cch|sh|ssh|ts|tts|th|tth)?[aiuoe]|nn?|[?!-.,]/gi, func));
+		/* eslint-enable max-len */
 	}
 
 	/**

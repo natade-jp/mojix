@@ -147,6 +147,7 @@ export default class Encode {
 		return null;
 	}
 
+	/* eslint-disable max-len */
 	/**
 	 * バイナリ配列から文字列にデコードする
 	 * @param {number[]} binary - 変換したいバイナリ配列
@@ -230,4 +231,5 @@ export default class Encode {
 		}
 		return null;
 	}
+	/* eslint-enable max-len */
 }

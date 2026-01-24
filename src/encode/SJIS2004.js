@@ -36,6 +36,7 @@ class SJIS2004MAP {
 		 * @returns {Object<number, number|number[]>}
 		 */
 		const getSJIS2004ToUnicodeMap = function () {
+			/* eslint-disable max-len */
 			/* eslint-disable object-property-newline */
 			/**
 			 * 変換マップ
@@ -226,6 +227,7 @@ class SJIS2004MAP {
 				0x878E: 0x337D, 0x878F: 0x337C, 0x8793: 0x222E, 0x8798: 0x221F, 0x8799: 0x22BF, 0x879D: 0x2756, 0x879E: 0x261E
 			};
 			/* eslint-enable object-property-newline */
+			/* eslint-enable max-len */
 
 			/**
 			 * 漢字の2バイト文字（0x879f-0xffff）の変換マップ作成用の文字列
@@ -338,6 +340,7 @@ class SJIS2004MAP {
 			return sjis2004_to_unicode_map;
 		};
 
+		/* eslint-disable max-len */
 		/**
 		 * 変換マップ
 		 * - 2文字に変換される場合もあるので注意
@@ -374,6 +377,7 @@ class SJIS2004MAP {
 			0x8299: 0xFF59, 0x829A: 0xFF5A
 		};
 		/* eslint-enable object-property-newline */
+		/* eslint-enable max-len */
 
 		// 「sjis2004_to_unicode_map_2」の中の特殊な文字について
 		// 一部CP932とShift_JIS-2004とでコードが一致していない文字がある

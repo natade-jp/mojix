@@ -207,6 +207,7 @@ class Unicode {
 			"CJK Compatibility Ideographs Supplement", "CJK Unified Ideographs Extension G", "CJK Unified Ideographs Extension H", "CJK Unified Ideographs Extension J", "Tags", "Variation Selectors Supplement", "Supplementary Private Use Area-A", "Supplementary Private Use Area-B"
 		];
 
+		/* eslint-disable max-len */
 		// prettier-ignore
 		const unicode_blockaddress_array = [
 			0x007F, 0x00FF, 0x017F, 0x024F, 0x02AF, 0x02FF, 0x036F, 0x03FF, 0x04FF, 0x052F, 0x058F, 0x05FF, 0x06FF, 0x074F, 0x077F, 0x07BF,
@@ -231,6 +232,7 @@ class Unicode {
 			0x1F5FF, 0x1F64F, 0x1F67F, 0x1F6FF, 0x1F77F, 0x1F7FF, 0x1F8FF, 0x1F9FF, 0x1FA6F, 0x1FAFF, 0x1FBFF, 0x2A6DF, 0x2B73F, 0x2B81F, 0x2CEAF, 0x2EBEF, 0x2EE5F,
 			0x2FA1F, 0x3134F, 0x323AF, 0x3347F, 0xE007F, 0xE01EF, 0xFFFFF, 0x10FFFF
 		];
+		/* eslint-enable max-len */
 
 		/**
 		 * コードポイントからUnicodeのブロック名に変換する
@@ -1636,6 +1638,7 @@ class CP932MAP {
 		 * @returns {Record<number, number>}
 		 */
 		const getCp932ToUnicodeMap = function () {
+			/* eslint-disable max-len */
 			/* eslint-disable object-property-newline */
 			/**
 			 * 1バイトの変換マップ
@@ -1675,6 +1678,7 @@ class CP932MAP {
 				0xFD: 0xF8F1, 0xFE: 0xF8F2, 0xFF: 0xF8F3
 			};
 			/* eslint-enable object-property-newline */
+			/* eslint-enable max-len */
 
 			/**
 			 * 2バイト文字（0x8140-0xffff）の変換マップ作成用の文字列
@@ -1792,6 +1796,7 @@ class CP932MAP {
 		 */
 		const cp932_to_unicode_map = getCp932ToUnicodeMap();
 
+		/* eslint-disable max-len */
 		/**
 		 * 重複された CP932 のコード
 		 * @type {number[]}
@@ -1824,6 +1829,7 @@ class CP932MAP {
 			0xEEEC, 0xEEEF, 0xEEF0, 0xEEF1, 0xEEF2, 0xEEF3, 0xEEF4, 0xEEF5, 0xEEF6, 0xEEF7, 0xEEF8, 0xEEF9, 0xEEFA, 0xEEFB, 0xEEFC, 0xFA4A,
 			0xFA4B, 0xFA4C, 0xFA4D, 0xFA4E, 0xFA4F, 0xFA50, 0xFA51, 0xFA52, 0xFA53, 0xFA54, 0xFA58, 0xFA59, 0xFA5A, 0xFA5B
 		];
+		/* eslint-enable max-len */
 
 		/**
 		 * @type {Record<number, number>}
@@ -2022,6 +2028,7 @@ class SJIS2004MAP {
 		 * @returns {Object<number, number|number[]>}
 		 */
 		const getSJIS2004ToUnicodeMap = function () {
+			/* eslint-disable max-len */
 			/* eslint-disable object-property-newline */
 			/**
 			 * 変換マップ
@@ -2212,6 +2219,7 @@ class SJIS2004MAP {
 				0x878E: 0x337D, 0x878F: 0x337C, 0x8793: 0x222E, 0x8798: 0x221F, 0x8799: 0x22BF, 0x879D: 0x2756, 0x879E: 0x261E
 			};
 			/* eslint-enable object-property-newline */
+			/* eslint-enable max-len */
 
 			/**
 			 * 漢字の2バイト文字（0x879f-0xffff）の変換マップ作成用の文字列
@@ -2324,6 +2332,7 @@ class SJIS2004MAP {
 			return sjis2004_to_unicode_map;
 		};
 
+		/* eslint-disable max-len */
 		/**
 		 * 変換マップ
 		 * - 2文字に変換される場合もあるので注意
@@ -2360,6 +2369,7 @@ class SJIS2004MAP {
 			0x8299: 0xFF59, 0x829A: 0xFF5A
 		};
 		/* eslint-enable object-property-newline */
+		/* eslint-enable max-len */
 
 		// 「sjis2004_to_unicode_map_2」の中の特殊な文字について
 		// 一部CP932とShift_JIS-2004とでコードが一致していない文字がある
@@ -2536,6 +2546,7 @@ class EUCJPMSMAP {
 		}
 		EUCJPMSMAP.is_initmap = true;
 
+		/* eslint-disable max-len */
 		/* eslint-disable object-property-newline */
 		/**
 		 * 変換マップ
@@ -2560,6 +2571,7 @@ class EUCJPMSMAP {
 			0xF4F8: 0xFBF7, 0xF4F9: 0xFBF9, 0xF4FA: 0xFBFA, 0xF4FB: 0xFBFC, 0xF4FC: 0xFC42, 0xF4FD: 0xFC49, 0xF4FE: 0xFC4B
 		};
 		/* eslint-enable object-property-newline */
+		/* eslint-enable max-len */
 
 		/**
 		 * @type {Record<number, number>}
@@ -3012,6 +3024,7 @@ class Encode {
 		return null;
 	}
 
+	/* eslint-disable max-len */
 	/**
 	 * バイナリ配列から文字列にデコードする
 	 * @param {number[]} binary - 変換したいバイナリ配列
@@ -3095,6 +3108,7 @@ class Encode {
 		}
 		return null;
 	}
+	/* eslint-enable max-len */
 }
 
 /**
@@ -3757,6 +3771,7 @@ class Japanese {
 			}
 			return output.join("");
 		};
+		/* eslint-disable max-len */
 		// 上から下への優先度で変換する。
 		// ([xl]?[kgsztdnhbpmyrwlxvqfj])(\1)?y?[aiuoe] ... yが入り込む可能性がある文字。前の文字を繰り返して「tta -> った」にも対応。
 		// [xl]?(gw|ch|cch|sh|ssh|ts|tts|th|tth)?[aiuoe] ... yを使用しない文字
@@ -3764,6 +3779,7 @@ class Japanese {
 		// [?!-] ... 記号
 		// prettier-ignore
 		return (text.replace(/([xl]?[kgsztdnhbpmyrwlxvqfj])(\1)?y?[aiuoe]|[xl]?([gqstf]w|ch|cch|sh|ssh|ts|tts|th|tth)?[aiuoe]|nn?|[?!-.,]/gi, func));
+		/* eslint-enable max-len */
 	}
 
 	/**
@@ -5160,6 +5176,7 @@ class Mojix {
 		return Encode.encode(text, charset, is_with_bom);
 	}
 
+	/* eslint-disable max-len */
 	/**
 	 * バイナリ配列から文字列にデコードする
 	 * @param {number[]} binary - 変換したいバイナリ配列
@@ -5169,6 +5186,7 @@ class Mojix {
 	static decode(binary, charset) {
 		return Encode.decode(binary, charset);
 	}
+	/* eslint-enable max-len */
 
 	// ---------------------------------
 	// Unicode を扱う関数群

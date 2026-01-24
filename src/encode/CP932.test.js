@@ -1,6 +1,7 @@
 ﻿import CP932 from "./CP932.js";
 
 const getTestCharacterMap = function () {
+	/* eslint-disable max-len */
 	/* eslint-disable object-property-newline */
 	/**
 	 * 変換マップ
@@ -1240,7 +1241,9 @@ const getTestCharacterMap = function () {
 		0xFC40: 0x9ADC, 0xFC41: 0x9B75, 0xFC42: 0x9B72, 0xFC43: 0x9B8F, 0xFC44: 0x9BB1, 0xFC45: 0x9BBB, 0xFC46: 0x9C00, 0xFC47: 0x9D70,
 		0xFC48: 0x9D6B, 0xFC49: 0xFA2D, 0xFC4A: 0x9E19, 0xFC4B: 0x9ED1
 	};
+	/* eslint-enable max-len */
 
+	/* eslint-disable max-len */
 	/**
 	 * 重複された CP932 のコード
 	 * @type {number[]}
@@ -1274,6 +1277,7 @@ const getTestCharacterMap = function () {
 		0xFA4B, 0xFA4C, 0xFA4D, 0xFA4E, 0xFA4F, 0xFA50, 0xFA51, 0xFA52, 0xFA53, 0xFA54, 0xFA58, 0xFA59, 0xFA5A, 0xFA5B
 	];
 	/* eslint-enable object-property-newline */
+	/* eslint-enable max-len */
 
 	/**
 	 * @type {Record<number, number>}
