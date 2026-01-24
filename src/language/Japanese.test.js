@@ -128,7 +128,7 @@ testOperator1("toRomajiFromKatakana", "ミョウゴニチ", "myougonichi");
 {
 	const text = "ABCあいう高髙①";
 	// prettier-ignore
-	test("cutTextForWidth  1", () => { expect(Japanese.cutTextForWidth(text,-1, 5)).toBe("ABC "); });
+	test("cutTextForWidth  1", () => { expect(Japanese.cutTextForWidth(text, -1, 5)).toBe("ABC "); });
 	// prettier-ignore
 	test("cutTextForWidth  2", () => { expect(Japanese.cutTextForWidth(text, 0, 5)).toBe("ABCあ"); });
 	// prettier-ignore
@@ -150,9 +150,9 @@ testOperator1("toRomajiFromKatakana", "ミョウゴニチ", "myougonichi");
 	// prettier-ignore
 	test("cutTextForWidth 11", () => { expect(Japanese.cutTextForWidth(text, 9, 5)).toBe("高髙 "); });
 	// prettier-ignore
-	test("cutTextForWidth 12", () => { expect(Japanese.cutTextForWidth(text,10, 5)).toBe(" 髙①"); });
+	test("cutTextForWidth 12", () => { expect(Japanese.cutTextForWidth(text, 10, 5)).toBe(" 髙①"); });
 	// prettier-ignore
-	test("cutTextForWidth 13", () => { expect(Japanese.cutTextForWidth(text,11, 5)).toBe("髙①"); });
+	test("cutTextForWidth 13", () => { expect(Japanese.cutTextForWidth(text, 11, 5)).toBe("髙①"); });
 }
 
 {

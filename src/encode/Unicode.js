@@ -56,17 +56,17 @@ export default class Unicode {
 		// prettier-ignore
 		control_charcter_map = {
 			// --- C0 control characters (ASCII 0x00–0x1F) ---
-			0:  "NUL", // Null
-			1:  "SOH", // Start of Heading
-			2:  "STX", // Start of Text
-			3:  "ETX", // End of Text
-			4:  "EOT", // End of Transmission
-			5:  "ENQ", // Enquiry
-			6:  "ACK", // Acknowledge
-			7:  "BEL", // Bell (beep)
+			0: "NUL", // Null
+			1: "SOH", // Start of Heading
+			2: "STX", // Start of Text
+			3: "ETX", // End of Text
+			4: "EOT", // End of Transmission
+			5: "ENQ", // Enquiry
+			6: "ACK", // Acknowledge
+			7: "BEL", // Bell (beep)
 
-			8:  "BS",  // Backspace
-			9:  "HT",  // Horizontal Tab
+			8: "BS",  // Backspace
+			9: "HT",  // Horizontal Tab
 			10: "LF",  // Line Feed
 			11: "VT",  // Vertical Tab
 			12: "FF",  // Form Feed
@@ -121,7 +121,7 @@ export default class Unicode {
 			150: "SPA", // Start of Protected Area
 			151: "EPA", // End of Protected Area
 			152: "SOS", // Start of String
-			153: "SGCI",// Single Graphic Character Introducer
+			153: "SGCI", // Single Graphic Character Introducer
 			154: "SCI", // Single Character Introducer
 			155: "CSI", // Control Sequence Introducer
 			156: "ST",  // String Terminator
@@ -155,7 +155,7 @@ export default class Unicode {
 			0x2066: "LRI",    // LEFT-TO-RIGHT ISOLATE
 			0x2067: "RLI",    // RIGHT-TO-LEFT ISOLATE
 			0x2068: "FSI",    // FIRST STRONG ISOLATE
-			0x2069: "PDI" ,   // POP DIRECTIONAL ISOLATE
+			0x2069: "PDI",    // POP DIRECTIONAL ISOLATE
 
 			// Unicode Noncharacter（検証・防御用途）
 			0xFFFE: "NONCHAR_FFFE",
@@ -255,20 +255,28 @@ export default class Unicode {
 		 */
 		getVariationSelectorsNumberFromCodePoint = function (codepoint, annotate) {
 			// モンゴル自由字形選択子 U+180B〜U+180D (3個)
-			if (0x180b <= codepoint && codepoint <= 0x180d) {
-				return "FVS" + (codepoint - 0x180b + 1);
+			// prettier-ignore
+			if (0x180B <= codepoint && codepoint <= 0x180D) {
+				// prettier-ignore
+				return "FVS" + (codepoint - 0x180B + 1);
 			}
 			// SVSで利用される異体字セレクタ U+FE00〜U+FE0F (VS1～VS16) (16個)
-			if (0xfe00 <= codepoint && codepoint <= 0xfe0f) {
-				const n = codepoint - 0xfe00 + 1;
+			// prettier-ignore
+			if (0xFE00 <= codepoint && codepoint <= 0xFE0F) {
+				// prettier-ignore
+				const n = codepoint - 0xFE00 + 1;
 				if (!annotate) return "VS" + n;
-				if (codepoint === 0xfe0e) return "VS15 (text)";
-				if (codepoint === 0xfe0f) return "VS16 (emoji)";
+				// prettier-ignore
+				if (codepoint === 0xFE0E) return "VS15 (text)";
+				// prettier-ignore
+				if (codepoint === 0xFE0F) return "VS16 (emoji)";
 				return "VS" + n;
 			}
 			// IVSで利用される異体字セレクタ U+E0100〜U+E01EF (VS17～VS256) (240個)
-			else if (0xe0100 <= codepoint && codepoint <= 0xe01ef) {
-				return "VS" + (codepoint - 0xe0100 + 17);
+			// prettier-ignore
+			else if (0xE0100 <= codepoint && codepoint <= 0xE01EF) {
+				// prettier-ignore
+				return "VS" + (codepoint - 0xE0100 + 17);
 			}
 			return null;
 		};
@@ -280,13 +288,16 @@ export default class Unicode {
 		 */
 		getTagCharacterFromCodePoint = function (codepoint) {
 			// TAG characters U+E0020..U+E007F
-			if (0xe0020 <= codepoint && codepoint <= 0xe007f) {
+			// prettier-ignore
+			if (0xE0020 <= codepoint && codepoint <= 0xE007F) {
 				// CANCEL TAG
-				if (codepoint === 0xe007f) {
+				// prettier-ignore
+				if (codepoint === 0xE007F) {
 					return "CANCEL_TAG";
 				}
 				// TAG_20..TAG_7E のように返す
-				const ascii = codepoint - 0xe0000; // 0x20..0x7E
+				// prettier-ignore
+				const ascii = codepoint - 0xE0000; // 0x20..0x7E
 				return "TAG_" + ascii.toString(16).toUpperCase().padStart(2, "0");
 			}
 			return null;
@@ -301,7 +312,8 @@ export default class Unicode {
 	 */
 	static isHighSurrogateAt(text, index) {
 		const ch = text.charCodeAt(index);
-		return 0xd800 <= ch && ch <= 0xdbff;
+		// prettier-ignore
+		return 0xD800 <= ch && ch <= 0xDBFF;
 	}
 
 	/**
@@ -312,7 +324,8 @@ export default class Unicode {
 	 */
 	static isLowSurrogateAt(text, index) {
 		const ch = text.charCodeAt(index);
-		return 0xdc00 <= ch && ch <= 0xdfff;
+		// prettier-ignore
+		return 0xDC00 <= ch && ch <= 0xDFFF;
 	}
 
 	/**
@@ -323,7 +336,8 @@ export default class Unicode {
 	 */
 	static isSurrogatePairAt(text, index) {
 		const ch = text.charCodeAt(index);
-		return 0xd800 <= ch && ch <= 0xdfff;
+		// prettier-ignore
+		return 0xD800 <= ch && ch <= 0xDFFF;
 	}
 
 	/**
@@ -337,7 +351,8 @@ export default class Unicode {
 		if (Unicode.isHighSurrogateAt(text, index_)) {
 			const high = text.charCodeAt(index_);
 			const low = text.charCodeAt(index_ + 1);
-			return (((high - 0xd800) << 10) | (low - 0xdc00)) + 0x10000;
+			// prettier-ignore
+			return (((high - 0xD800) << 10) | (low - 0xDC00)) + 0x10000;
 		} else {
 			return text.charCodeAt(index_);
 		}
@@ -442,8 +457,10 @@ export default class Unicode {
 		for (let i = 0; i < codepoint_array.length; i++) {
 			const codepoint = codepoint_array[i];
 			if (0x10000 <= codepoint) {
-				const high = ((codepoint - 0x10000) >> 10) + 0xd800;
-				const low = (codepoint & 0x3ff) + 0xdc00;
+				// prettier-ignore
+				const high = ((codepoint - 0x10000) >> 10) + 0xD800;
+				// prettier-ignore
+				const low = (codepoint & 0x3FF) + 0xDC00;
 				utf16_array.push(high);
 				utf16_array.push(low);
 			} else {
@@ -566,23 +583,28 @@ export default class Unicode {
 	 */
 	static getCharsetFromBOM(utfbinary) {
 		if (utfbinary.length >= 4) {
-			if (utfbinary[0] === 0x00 && utfbinary[1] === 0x00 && utfbinary[2] === 0xfe && utfbinary[3] === 0xff) {
+			// prettier-ignore
+			if (utfbinary[0] === 0x00 && utfbinary[1] === 0x00 && utfbinary[2] === 0xFE && utfbinary[3] === 0xFF) {
 				return "UTF-32BE";
 			}
-			if (utfbinary[0] === 0xff && utfbinary[1] === 0xfe && utfbinary[2] === 0x00 && utfbinary[3] === 0x00) {
+			// prettier-ignore
+			if (utfbinary[0] === 0xFF && utfbinary[1] === 0xFE && utfbinary[2] === 0x00 && utfbinary[3] === 0x00) {
 				return "UTF-32LE";
 			}
 		}
 		if (utfbinary.length >= 3) {
-			if (utfbinary[0] === 0xef && utfbinary[1] === 0xbb && utfbinary[2] === 0xbf) {
+			// prettier-ignore
+			if (utfbinary[0] === 0xEF && utfbinary[1] === 0xBB && utfbinary[2] === 0xBF) {
 				return "UTF-8";
 			}
 		}
 		if (utfbinary.length >= 2) {
-			if (utfbinary[0] === 0xfe && utfbinary[1] === 0xff) {
+			// prettier-ignore
+			if (utfbinary[0] === 0xFE && utfbinary[1] === 0xFF) {
 				return "UTF-16BE";
 			}
-			if (utfbinary[0] === 0xff && utfbinary[1] === 0xfe) {
+			// prettier-ignore
+			if (utfbinary[0] === 0xFF && utfbinary[1] === 0xFE) {
 				return "UTF-16LE";
 			}
 		}
@@ -624,19 +646,25 @@ export default class Unicode {
 				if (size === 0) {
 					if (bin < 0x80) {
 						utf32_array.push(bin);
-					} else if (bin < 0xe0) {
+						// prettier-ignore
+					} else if (bin < 0xE0) {
 						size = 1;
-						write = bin & 0x1f; // 0001 1111
-					} else if (bin < 0xf0) {
+						// prettier-ignore
+						write = bin & 0x1F; // 0001 1111
+						// prettier-ignore
+					} else if (bin < 0xF0) {
 						size = 2;
-						write = bin & 0xf; // 0000 1111
+						// prettier-ignore
+						write = bin & 0xF; // 0000 1111
 					} else {
 						size = 3;
+						// prettier-ignore
 						write = bin & 0x7; // 0000 0111
 					}
 				} else {
 					write <<= 6;
-					write |= bin & 0x3f; // 0011 1111
+					// prettier-ignore
+					write |= bin & 0x3F; // 0011 1111
 					size--;
 					if (size === 0) {
 						utf32_array.push(write);
@@ -663,11 +691,13 @@ export default class Unicode {
 			}
 			// UTF-32 につめる
 			for (let i = 0; i < utf16.length; i++) {
-				if (0xd800 <= utf16[i] && utf16[i] <= 0xdbff) {
+				// prettier-ignore
+				if (0xD800 <= utf16[i] && utf16[i] <= 0xDBFF) {
 					if (i + 2 <= utf16.length) {
 						const high = utf16[i];
 						const low = utf16[i + 1];
-						utf32_array.push((((high - 0xd800) << 10) | (low - 0xdc00)) + 0x10000);
+						// prettier-ignore
+						utf32_array.push((((high - 0xD800) << 10) | (low - 0xDC00)) + 0x10000);
 					}
 					i++;
 				} else {
@@ -717,14 +747,17 @@ export default class Unicode {
 		if (/utf-?8n?/i.test(charset)) {
 			// bom をつける
 			if (is_with_bom_) {
-				binary.push(0xef);
-				binary.push(0xbb);
-				binary.push(0xbf);
+				// prettier-ignore
+				binary.push(0xEF);
+				// prettier-ignore
+				binary.push(0xBB);
+				// prettier-ignore
+				binary.push(0xBF);
 			}
 			for (let i = 0; i < utf32_array.length; i++) {
 				let codepoint = utf32_array[i];
 				// 1バイト文字
-				if (codepoint <= 0x7f) {
+				if (codepoint <= 0x7F) {
 					binary.push(codepoint);
 					continue;
 				}
@@ -742,11 +775,14 @@ export default class Unicode {
 					let write = codepoint & ((1 << 6) - 1);
 					if (j === size - 1) {
 						if (size === 2) {
-							write |= 0xc0; // 1100 0000
+							// prettier-ignore
+							write |= 0xC0; // 1100 0000
 						} else if (size === 3) {
-							write |= 0xe0; // 1110 0000
+							// prettier-ignore
+							write |= 0xE0; // 1110 0000
 						} else {
-							write |= 0xf0; // 1111 0000
+							// prettier-ignore
+							write |= 0xF0; // 1111 0000
 						}
 						buffer.push(write);
 						break;
@@ -769,23 +805,23 @@ export default class Unicode {
 			if (/utf-?16(be)/i.test(charset)) {
 				// bom をつける
 				if (is_with_bom_) {
-					binary.push(0xfe);
-					binary.push(0xff);
+					binary.push(0xFE);
+					binary.push(0xFF);
 				}
 				for (let i = 0; i < utf16_array.length; i++) {
 					binary.push(utf16_array[i] >> 8);
-					binary.push(utf16_array[i] & 0xff);
+					binary.push(utf16_array[i] & 0xFF);
 				}
 			}
 			// UTF-16LE
 			else if (/utf-?16(le)?/i.test(charset)) {
 				// bom をつける
 				if (is_with_bom_) {
-					binary.push(0xff);
-					binary.push(0xfe);
+					binary.push(0xFF);
+					binary.push(0xFE);
 				}
 				for (let i = 0; i < utf16_array.length; i++) {
-					binary.push(utf16_array[i] & 0xff);
+					binary.push(utf16_array[i] & 0xFF);
 					binary.push(utf16_array[i] >> 8);
 				}
 			}
@@ -799,30 +835,30 @@ export default class Unicode {
 				if (is_with_bom_) {
 					binary.push(0x00);
 					binary.push(0x00);
-					binary.push(0xfe);
-					binary.push(0xff);
+					binary.push(0xFE);
+					binary.push(0xFF);
 				}
 				for (let i = 0; i < utf32_array.length; i++) {
-					binary.push((utf32_array[i] >> 24) & 0xff);
-					binary.push((utf32_array[i] >> 16) & 0xff);
-					binary.push((utf32_array[i] >> 8) & 0xff);
-					binary.push(utf32_array[i] & 0xff);
+					binary.push((utf32_array[i] >> 24) & 0xFF);
+					binary.push((utf32_array[i] >> 16) & 0xFF);
+					binary.push((utf32_array[i] >> 8) & 0xFF);
+					binary.push(utf32_array[i] & 0xFF);
 				}
 			}
 			// UTF-32LE
 			else if (/utf-?32(le)?/i.test(charset)) {
 				// bom をつける
 				if (is_with_bom_) {
-					binary.push(0xff);
-					binary.push(0xfe);
+					binary.push(0xFF);
+					binary.push(0xFE);
 					binary.push(0x00);
 					binary.push(0x00);
 				}
 				for (let i = 0; i < utf32_array.length; i++) {
-					binary.push(utf32_array[i] & 0xff);
-					binary.push((utf32_array[i] >> 8) & 0xff);
-					binary.push((utf32_array[i] >> 16) & 0xff);
-					binary.push((utf32_array[i] >> 24) & 0xff);
+					binary.push(utf32_array[i] & 0xFF);
+					binary.push((utf32_array[i] >> 8) & 0xFF);
+					binary.push((utf32_array[i] >> 16) & 0xFF);
+					binary.push((utf32_array[i] >> 24) & 0xFF);
 				}
 			}
 			return binary;
@@ -879,12 +915,13 @@ export default class Unicode {
 	 * @returns {boolean} 確認結果
 	 */
 	static isGraphemeComponentFromCodePoint(codepoint) {
+		// prettier-ignore
 		return (
 			Unicode.isCombiningMarkFromCodePoint(codepoint) || // 結合文字
 			Unicode.isVariationSelectorFromCodePoint(codepoint) || // 異体字セレクタ
 			Unicode.isEmojiModifierFromCodePoint(codepoint) || // スキントーン修飾子
 			Unicode.isTagCharacterFromCodePoint(codepoint) || // タグ文字
-			codepoint === 0x200d // ZWJ (ZERO WIDTH JOINER) ゼロ幅接合子
+			codepoint === 0x200D // ZWJ (ZERO WIDTH JOINER) ゼロ幅接合子
 		);
 	}
 
@@ -897,10 +934,11 @@ export default class Unicode {
 	 * @returns {boolean} 確認結果
 	 */
 	static isZeroWidthCharacterFromCodePoint(codepoint) {
+		// prettier-ignore
 		return (
-			codepoint === 0x200b || // ZWSP (ZERO WIDTH SPACE) ゼロ幅スペース
-			codepoint === 0x200c || // ZWNJ (ZERO WIDTH NON-JOINER) ゼロ幅非接合子
-			codepoint === 0x200d || // ZWJ (ZERO WIDTH JOINER) ゼロ幅接合子
+			codepoint === 0x200B || // ZWSP (ZERO WIDTH SPACE) ゼロ幅スペース
+			codepoint === 0x200C || // ZWNJ (ZERO WIDTH NON-JOINER) ゼロ幅非接合子
+			codepoint === 0x200D || // ZWJ (ZERO WIDTH JOINER) ゼロ幅接合子
 			codepoint === 0x2060 // WJ (WORD JOINER) 単語結合子
 		);
 	}
@@ -921,19 +959,25 @@ export default class Unicode {
 			// フォールバック処理
 			return (
 				// Combining Diacritical Marks
-				(0x0300 <= codepoint && codepoint <= 0x036f) ||
+				// prettier-ignore
+				(0x0300 <= codepoint && codepoint <= 0x036F) ||
 				// Combining Diacritical Marks Extended
-				(0x1ab0 <= codepoint && codepoint <= 0x1aff) ||
+				// prettier-ignore
+				(0x1AB0 <= codepoint && codepoint <= 0x1AFF) ||
 				// Combining Diacritical Marks Supplement
-				(0x1dc0 <= codepoint && codepoint <= 0x1dff) ||
+				// prettier-ignore
+				(0x1DC0 <= codepoint && codepoint <= 0x1DFF) ||
 				// Combining Diacritical Marks for Symbols
-				(0x20d0 <= codepoint && codepoint <= 0x20ff) ||
+				// prettier-ignore
+				(0x20D0 <= codepoint && codepoint <= 0x20FF) ||
 				// 日本語に含まれる2種類の文字
 				// COMBINING VOICED SOUND MARK
 				// COMBINING SEMI-VOICED SOUND MARK
-				(0x3099 <= codepoint && codepoint <= 0x309a) ||
+				// prettier-ignore
+				(0x3099 <= codepoint && codepoint <= 0x309A) ||
 				// Combining Half Marks
-				(0xfe20 <= codepoint && codepoint <= 0xfe2f)
+				// prettier-ignore
+				(0xFE20 <= codepoint && codepoint <= 0xFE2F)
 			);
 		}
 	}
@@ -946,11 +990,14 @@ export default class Unicode {
 	static isVariationSelectorFromCodePoint(codepoint) {
 		return (
 			// モンゴル自由字形選択子 U+180B〜U+180D (3個)
-			(0x180b <= codepoint && codepoint <= 0x180d) ||
+			// prettier-ignore
+			(0x180B <= codepoint && codepoint <= 0x180D) ||
 			// SVSで利用される異体字セレクタ U+FE00〜U+FE0F (VS1～VS16) (16個)
-			(0xfe00 <= codepoint && codepoint <= 0xfe0f) ||
+			// prettier-ignore
+			(0xFE00 <= codepoint && codepoint <= 0xFE0F) ||
 			// IVSで利用される異体字セレクタ U+E0100〜U+E01EF (VS17～VS256) (240個)
-			(0xe0100 <= codepoint && codepoint <= 0xe01ef)
+			// prettier-ignore
+			(0xE0100 <= codepoint && codepoint <= 0xE01EF)
 		);
 	}
 
@@ -962,7 +1009,8 @@ export default class Unicode {
 	static isEmojiModifierFromCodePoint(codepoint) {
 		return (
 			// EMOJI MODIFIER FITZPATRICK
-			0x1f3fb <= codepoint && codepoint <= 0x1f3ff
+			// prettier-ignore
+			0x1F3FB <= codepoint && codepoint <= 0x1F3FF
 		);
 	}
 
@@ -974,7 +1022,8 @@ export default class Unicode {
 	static isTagCharacterFromCodePoint(codepoint) {
 		return (
 			// TAG CHARACTER
-			0xe0000 <= codepoint && codepoint <= 0xe007f
+			// prettier-ignore
+			0xE0000 <= codepoint && codepoint <= 0xE007F
 		);
 	}
 }

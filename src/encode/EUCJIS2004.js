@@ -25,15 +25,19 @@ export default class EUCJIS2004 {
 		const sjis_array = SJIS2004.toSJIS2004Array(text);
 		const bin = [];
 		const ng = "?".charCodeAt(0);
-		const SS2 = 0x8e; // C1制御文字 シングルシフト2
-		const SS3 = 0x8f; // C1制御文字 シングルシフト3
+		// prettier-ignore
+		const SS2 = 0x8E; // C1制御文字 シングルシフト2
+		// prettier-ignore
+		const SS3 = 0x8F; // C1制御文字 シングルシフト3
 		for (let i = 0; i < sjis_array.length; i++) {
 			const code = sjis_array[i];
 			const kuten = SJIS.toMenKuTenFromSJIS2004Code(code);
+			// prettier-ignore
 			if (code < 0x80) {
 				// G0 ASCII
 				bin.push(code);
-			} else if (code < 0xe0) {
+				// prettier-ignore
+			} else if (code < 0xE0) {
 				// G2 半角カタカナ
 				bin.push(SS2);
 				bin.push(code);
@@ -47,8 +51,10 @@ export default class EUCJIS2004 {
 				if (kuten.ku <= 94) {
 					// 区点は94まで利用できる。
 					// つまり、最大でも 94 + 0xA0 = 0xFE となり 0xFF 以上にならない
-					bin.push(kuten.ku + 0xa0);
-					bin.push(kuten.ten + 0xa0);
+					// prettier-ignore
+					bin.push(kuten.ku + 0xA0);
+					// prettier-ignore
+					bin.push(kuten.ten + 0xA0);
 				} else {
 					bin.push(ng);
 				}
@@ -65,12 +71,15 @@ export default class EUCJIS2004 {
 	static fromEUCJIS2004Binary(eucjp) {
 		const sjis_array = [];
 		const ng = "?".charCodeAt(0);
-		const SS2 = 0x8e; // C1制御文字 シングルシフト2
-		const SS3 = 0x8f; // C1制御文字 シングルシフト3
+		// prettier-ignore
+		const SS2 = 0x8E; // C1制御文字 シングルシフト2
+		// prettier-ignore
+		const SS3 = 0x8F; // C1制御文字 シングルシフト3
 		for (let i = 0; i < eucjp.length; i++) {
 			let x1, x2;
 			x1 = eucjp[i];
 			// ASCII
+			// prettier-ignore
 			if (x1 < 0x80) {
 				sjis_array.push(x1);
 				continue;
@@ -106,13 +115,15 @@ export default class EUCJIS2004 {
 				continue;
 			}
 
-			if (0xa1 <= x1 && x1 <= 0xfe && 0xa1 <= x2 && x2 <= 0xfe) {
+			// prettier-ignore
+			if (0xA1 <= x1 && x1 <= 0xFE && 0xA1 <= x2 && x2 <= 0xFE) {
 				// EUC-JIS-2000 JIS X 0213:2004 の2面に対応
 				// 日本語
+				// prettier-ignore
 				const kuten = {
 					men: men,
-					ku: x1 - 0xa0,
-					ten: x2 - 0xa0
+					ku: x1 - 0xA0,
+					ten: x2 - 0xA0
 				};
 				sjis_array.push(SJIS.toSJIS2004CodeFromMenKuTen(kuten));
 			} else {

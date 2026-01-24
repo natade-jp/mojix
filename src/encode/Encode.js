@@ -75,35 +75,43 @@ class EncodeTools {
 		for (let i = 0; i < utf32_array.length; i++) {
 			const ch = utf32_array[i];
 			// a-zA-Z
-			if ((0x41 <= ch && ch <= 0x5a) || (0x61 <= ch && ch <= 0x6a)) {
+			// prettier-ignore
+			if ((0x41 <= ch && ch <= 0x5A) || (0x61 <= ch && ch <= 0x6A)) {
 				type = 1;
 			}
 			// 0-9
+			// prettier-ignore
 			else if (0x30 <= ch && ch <= 0x39) {
 				type = 2;
 			}
 			// ぁ-ん
+			// prettier-ignore
 			else if (0x3041 <= ch && ch <= 0x3093) {
 				type = 3;
 			}
 			// ァ-ン
-			else if (0x30a1 <= ch && ch <= 0x30f3) {
+			// prettier-ignore
+			else if (0x30A1 <= ch && ch <= 0x30F3) {
 				type = 4;
 			}
 			// 全角英字
-			else if ((0xff21 <= ch && ch <= 0xff3a) || (0xff41 <= ch && ch <= 0xff5a)) {
+			// prettier-ignore
+			else if ((0xFF21 <= ch && ch <= 0xFF3A) || (0xFF41 <= ch && ch <= 0xFF5A)) {
 				type = 5;
 			}
 			// 全角数値
-			else if (0xff10 <= ch && ch <= 0xff19) {
+			// prettier-ignore
+			else if (0xFF10 <= ch && ch <= 0xFF19) {
 				type = 6;
 			}
 			// 半角カタカナ
-			else if (0xff61 <= ch && ch < 0xffa0) {
+			// prettier-ignore
+			else if (0xFF61 <= ch && ch < 0xFFA0) {
 				type = 7;
 			}
 			// CJK統合漢字拡張A - CJK統合漢字, 追加漢字面
-			else if ((0x3400 <= ch && ch < 0xa000) || (0x20000 <= ch && ch < 0x2fa20)) {
+			// prettier-ignore
+			else if ((0x3400 <= ch && ch < 0xA000) || (0x20000 <= ch && ch < 0x2FA20)) {
 				type = 8;
 			} else {
 				old_type = -1;

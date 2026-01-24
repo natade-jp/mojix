@@ -111,7 +111,7 @@ class ComparatorTool {
 			return -1;
 		}
 		// 同じ桁同士の比較
-		for (; t1p < t1end; ) {
+		for (; t1p < t1end;) {
 			if (t1[t1p] > t2[t2p]) {
 				return 1;
 			} else if (t1[t1p] < t2[t2p]) {

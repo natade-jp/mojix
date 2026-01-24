@@ -74,13 +74,11 @@
 		"esdoc": "^1.1.0",
 		"esdoc-standard-plugin": "^1.0.0",
 		"eslint": "^9.37.0",
-		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-jest": "^29.0.1",
 		"eslint-plugin-unicorn": "^62.0.0",
 		"globals": "^17.1.0",
 		"jest": "^29.6.4",
 		"ntfile": "^1.0.0",
-		"prettier": "^3.0.2",
 		"rollup": "^3.29.5",
 		"typescript": "^5.9.3"
 	}

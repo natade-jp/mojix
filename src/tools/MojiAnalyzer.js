@@ -575,10 +575,14 @@ export default class MojiAnalyzer {
 
 		// Windows-31J(CP932) に関しての調査
 		// 外字, IBM拡張文字, NEC選定IBM拡張文字, NEC特殊文字
-		type.is_gaiji_cp932 = cp932code ? 0xf040 <= cp932code && cp932code <= 0xf9fc : false;
-		type.is_IBM_extended_character = cp932code ? 0xfa40 <= cp932code && cp932code <= 0xfc4b : false;
-		type.is_NEC_selection_IBM_extended_character = cp932code ? 0xed40 <= cp932code && cp932code <= 0xeefc : false;
-		type.is_NEC_special_character = cp932code ? 0x8740 <= cp932code && cp932code <= 0x879c : false;
+		// prettier-ignore
+		type.is_gaiji_cp932 = cp932code ? 0xF040 <= cp932code && cp932code <= 0xF9FC : false;
+		// prettier-ignore
+		type.is_IBM_extended_character = cp932code ? 0xFA40 <= cp932code && cp932code <= 0xFC4B : false;
+		// prettier-ignore
+		type.is_NEC_selection_IBM_extended_character = cp932code ? 0xED40 <= cp932code && cp932code <= 0xEEFC : false;
+		// prettier-ignore
+		type.is_NEC_special_character = cp932code ? 0x8740 <= cp932code && cp932code <= 0x879C : false;
 
 		// Shift_JIS-2004 を使用して漢字の水準調査(ない場合はnullになる)
 		type.kanji_suijun = SJIS.toJISKanjiSuijunFromSJISCode(sjis2004code);
@@ -590,10 +594,11 @@ export default class MojiAnalyzer {
 		type.is_surrogate_pair = encode.utf16_array.length > 1;
 
 		// SJIS系の配列
-		encode.cp932_array = cp932code ? (cp932code >= 0x100 ? [cp932code >> 8, cp932code & 0xff] : [cp932code]) : [];
+		// prettier-ignore
+		encode.cp932_array = cp932code ? (cp932code >= 0x100 ? [cp932code >> 8, cp932code & 0xFF] : [cp932code]) : [];
 		encode.sjis2004_array = sjis2004code
 			? sjis2004code >= 0x100
-				? [sjis2004code >> 8, sjis2004code & 0xff]
+				? [sjis2004code >> 8, sjis2004code & 0xFF]
 				: [sjis2004code]
 			: [];
 
@@ -620,11 +625,14 @@ export default class MojiAnalyzer {
 		encode.eucjis2004_array = checkEUCJPError(character, encode.eucjis2004_array);
 
 		// ISO-2022-JP , EUC-JP
-		if (cp932code < 0xe0 || is_regular_sjis) {
+		// prettier-ignore
+		if (cp932code < 0xE0 || is_regular_sjis) {
+			// prettier-ignore
 			if (cp932code < 0x80) {
 				encode.shift_jis_array = [cp932code];
 				encode.iso2022jp_array = [];
-			} else if (cp932code < 0xe0) {
+				// prettier-ignore
+			} else if (cp932code < 0xE0) {
 				// 半角カタカナの扱い
 				encode.shift_jis_array = [cp932code];
 				encode.iso2022jp_array = [];

@@ -21,10 +21,8 @@ const equalsArray = function (x, y) {
 	const text = "謹𪘂麵";
 	// prettier-ignore
 	const eucjis2004 = [0xFC, 0xB0, 0x8F, 0xFE, 0xF0, 0xFE, 0xF0];
-	test("toEUCJIS2004Binary", () => {
-		expect(equalsArray(EUCJIS2004.toEUCJIS2004Binary(text), eucjis2004)).toBe(true);
-	});
-	test("fromEUCJIS2004Binary", () => {
-		expect(EUCJIS2004.fromEUCJIS2004Binary(eucjis2004)).toBe(text);
-	});
+	// prettier-ignore
+	test("toEUCJIS2004Binary", () => { expect(equalsArray(EUCJIS2004.toEUCJIS2004Binary(text), eucjis2004)).toBe(true); });
+	// prettier-ignore
+	test("fromEUCJIS2004Binary", () => { expect(EUCJIS2004.fromEUCJIS2004Binary(eucjis2004)).toBe(text); });
 }

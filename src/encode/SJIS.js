@@ -63,7 +63,7 @@ export default class SJIS {
 				sjisbin.push(sjis[i]);
 			} else {
 				sjisbin.push(sjis[i] >> 8);
-				sjisbin.push(sjis[i] & 0xff);
+				sjisbin.push(sjis[i] & 0xFF);
 			}
 		}
 		return sjisbin;
@@ -91,7 +91,7 @@ export default class SJIS {
 				y = map[x];
 			} else {
 				// 2バイト文字かのチェック
-				if ((0x81 <= x && x <= 0x9f) || (0xe0 <= x && x <= 0xfc)) {
+				if ((0x81 <= x && x <= 0x9F) || (0xE0 <= x && x <= 0xFC)) {
 					x <<= 8;
 					i++;
 					x |= sjis[i];
@@ -151,40 +151,40 @@ export default class SJIS {
 		// アルゴリズムは面区点番号表からリバースエンジニアリング
 
 		let s1 = x >> 8;
-		let s2 = x & 0xff;
+		let s2 = x & 0xFF;
 		let men = 0;
 		let ku = 0;
 		let ten = 0;
 
 		// 面情報の位置判定
-		if (s1 < 0xf0) {
+		if (s1 < 0xF0) {
 			men = 1;
 			// 区の計算方法の切り替え
 			// 63区から、0x9F→0xE0に飛ぶ
-			if (s1 < 0xe0) {
+			if (s1 < 0xE0) {
 				s1 = s1 - 0x81;
 			} else {
-				s1 = s1 - 0xc1;
+				s1 = s1 - 0xC1;
 			}
 		} else {
 			// ※2面は第4水準のみ
 			men = 2;
 			// 2面1区 ～ 2面8区
-			if (((s1 === 0xf0 || s1 === 0xf2) && s2 < 0x9f) || s1 === 0xf1) {
-				s1 = s1 - 0xf0;
+			if (((s1 === 0xF0 || s1 === 0xF2) && s2 < 0x9F) || s1 === 0xF1) {
+				s1 = s1 - 0xF0;
 			}
 			// 2面12区 ～ 2面15区
-			else if ((s1 === 0xf4 && s2 < 0x9f) || s1 < 0xf4) {
-				s1 = s1 - 0xed;
+			else if ((s1 === 0xF4 && s2 < 0x9F) || s1 < 0xF4) {
+				s1 = s1 - 0xED;
 			}
 			// 2面78区 ～ 2面94区
 			else {
-				s1 = s1 - 0xce;
+				s1 = s1 - 0xCE;
 			}
 		}
 
 		// 区情報の位置判定
-		if (s2 < 0x9f) {
+		if (s2 < 0x9F) {
 			ku = s1 * 2 + 1;
 			// 点情報の計算方法の切り替え
 			// 0x7Fが欠番のため「+1」を除去
@@ -195,7 +195,7 @@ export default class SJIS {
 			}
 		} else {
 			ku = s1 * 2 + 2;
-			s2 = s2 - 0x9f + 1;
+			s2 = s2 - 0x9F + 1;
 		}
 
 		// 点情報の位置判定
@@ -345,20 +345,20 @@ export default class SJIS {
 		// アルゴリズムは区点番号表からリバースエンジニアリング
 
 		let s1 = x >> 8;
-		let s2 = x & 0xff;
+		let s2 = x & 0xFF;
 		let ku = 0;
 		let ten = 0;
 
 		// 区の計算方法の切り替え
 		// 63区から、0x9F→0xE0に飛ぶ
-		if (s1 < 0xe0) {
+		if (s1 < 0xE0) {
 			s1 = s1 - 0x81;
 		} else {
-			s1 = s1 - 0xc1;
+			s1 = s1 - 0xC1;
 		}
 
 		// 区情報の位置判定
-		if (s2 < 0x9f) {
+		if (s2 < 0x9F) {
 			ku = s1 * 2 + 1;
 			// 点情報の計算方法の切り替え
 			// 0x7Fが欠番のため「+1」を除去
@@ -369,7 +369,7 @@ export default class SJIS {
 			}
 		} else {
 			ku = s1 * 2 + 2;
-			s2 = s2 - 0x9f + 1;
+			s2 = s2 - 0x9F + 1;
 		}
 
 		// 点情報の位置判定
