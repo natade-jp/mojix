@@ -955,6 +955,7 @@ class Unicode {
 		}
 		try {
 			return new RegExp("\\p{Mark}", "u").test(String.fromCodePoint(codepoint));
+		// eslint-disable-next-line no-unused-vars
 		} catch (e) {
 			// フォールバック処理
 			return (

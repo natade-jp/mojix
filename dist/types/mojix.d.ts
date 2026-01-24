@@ -1,11 +1,234 @@
 /**
+ * 面区点情報
+ */
+type MenKuTen$2 = {
+    /**
+     * 面-区-点
+     */
+    text?: string;
+    /**
+     * 面
+     */
+    men?: number;
+    /**
+     * 区
+     */
+    ku: number;
+    /**
+     * 点
+     */
+    ten: number;
+};
+
+type MenKuTen$1 = MenKuTen$2;
+/**
+ * 文字のエンコード情報
+ */
+type MojiEncodeData = {
+    /**
+     * 区点 コード
+     */
+    kuten: MenKuTen$1;
+    /**
+     * 面区点 コード
+     */
+    menkuten: MenKuTen$1;
+    /**
+     * CP932(Windows-31J) コード
+     */
+    cp932_code: number;
+    /**
+     * Shift_JIS-2004 コード
+     */
+    sjis2004_code: number;
+    /**
+     * UTF-8 配列
+     */
+    utf8_array: number[];
+    /**
+     * UTF-16 配列
+     */
+    utf16_array: number[];
+    /**
+     * UTF-32 配列
+     */
+    utf32_array: number[];
+    /**
+     * CP932(Windows-31J) バイト配列
+     */
+    cp932_array: number[];
+    /**
+     * Shift_JIS-2004 コード バイト配列
+     */
+    sjis2004_array: number[];
+    /**
+     * Shift_JIS バイト配列
+     */
+    shift_jis_array: number[];
+    /**
+     * ISO-2022-JP バイト配列
+     */
+    iso2022jp_array: number[];
+    /**
+     * eucJP-ms バイト配列
+     */
+    eucjpms_array: number[];
+    /**
+     * EUC-JP-2004 バイト配列
+     *
+     * 文字の種別情報
+     */
+    eucjis2004_array: number[];
+};
+/**
+ * 文字のエンコード情報
+ */
+type MojiTypeData = {
+    /**
+     * Shift_JIS に登録された文字
+     */
+    is_regular_sjis: boolean;
+    /**
+     * Shift_JIS-2004 に登録された文字
+     */
+    is_regular_sjis2004: boolean;
+    /**
+     * 常用漢字
+     */
+    is_joyo_kanji: boolean;
+    /**
+     * 人名用漢字
+     */
+    is_jinmeiyo_kanji: boolean;
+    /**
+     * Windows-31J(CP932) 外字
+     */
+    is_gaiji_cp932: boolean;
+    /**
+     * Windows-31J(CP932) IBM拡張文字
+     */
+    is_IBM_extended_character: boolean;
+    /**
+     * Windows-31J(CP932) NEC選定IBM拡張文字
+     */
+    is_NEC_selection_IBM_extended_character: boolean;
+    /**
+     * Windows-31J(CP932) NEC特殊文字
+     */
+    is_NEC_special_character: boolean;
+    /**
+     * Shift_JIS-2004 を使用して漢字の水準調査(1未満だと水準調査失敗)
+     */
+    kanji_suijun: number;
+    /**
+     * 要 Unicode サロゲートペア
+     */
+    is_surrogate_pair: boolean;
+    /**
+     * 制御文字名（制御文字ではない場合は null）
+     */
+    control_name: string;
+    /**
+     * 制御文字
+     */
+    is_control_charcter: boolean;
+    /**
+     * Unicodeブロック名
+     */
+    blockname: string;
+    /**
+     * 漢字
+     */
+    is_kanji: boolean;
+    /**
+     * ひらがな
+     */
+    is_hiragana: boolean;
+    /**
+     * カタカナ
+     */
+    is_katakana: boolean;
+    /**
+     * 全角ASCII
+     */
+    is_fullwidth_ascii: boolean;
+    /**
+     * 半角カタカナ
+     */
+    is_halfwidth_katakana: boolean;
+    /**
+     * 絵文字
+     */
+    is_emoji: boolean;
+    /**
+     * 顔文字
+     */
+    is_emoticons: boolean;
+    /**
+     * 記号(VS16 が付くと絵文字化)
+     */
+    is_symbol_base: boolean;
+    /**
+     * 外字
+     */
+    is_gaiji: boolean;
+    /**
+     * グラフェムを構成するための文字
+     */
+    is_grapheme_component: boolean;
+    /**
+     * ゼロ幅文字
+     */
+    is_zero_width_character: boolean;
+    /**
+     * 結合文字
+     */
+    is_combining_mark: boolean;
+    /**
+     * 異体字セレクタ
+     */
+    is_variation_selector: boolean;
+    /**
+     * スキントーン修飾子
+     */
+    is_skin_tone_modifier: boolean;
+    /**
+     * タグ文字
+     *
+     * 文字の種別情報
+     */
+    is_tag_character: boolean;
+};
+/**
+ * 文字のエンコード情報
+ */
+type MojiData$1 = {
+    /**
+     * 文字のエンコード情報
+     */
+    encode: MojiEncodeData;
+    /**
+     * 文字の種別情報
+     */
+    type: MojiTypeData;
+    /**
+     * 解析した文字
+     */
+    character: string;
+    /**
+     * 解析した文字のコードポイント
+     */
+    codepoint: number;
+};
+
+/**
  * @typedef {import('./encode/SJIS.js').MenKuTen} MenKuTen
  * @typedef {import('./tools/MojiAnalyzer.js').MojiData} MojiData
  */
 /**
  * 日本語を扱うための様々な機能を提供します
  */
-export default class Mojix {
+declare class Mojix {
     /**
      * 文字列からバイナリ配列にエンコードする
      * @param {string} text - 変換したいテキスト
@@ -280,5 +503,8 @@ export default class Mojix {
      */
     static compareToForNatural(a: any, b: any): number;
 }
-export type MenKuTen = import("./encode/SJIS.js").MenKuTen;
-export type MojiData = import("./tools/MojiAnalyzer.js").MojiData;
+type MenKuTen = MenKuTen$2;
+type MojiData = MojiData$1;
+
+export { Mojix as default };
+export type { MenKuTen, MojiData };

@@ -10,7 +10,7 @@
 		{
 			"name": "esdoc-standard-plugin",
 			"option": {
-				"unexportedIdentifier": {"enable": false}
+				"unexportedIdentifier": { "enable": false }
 			}
 		}
 	]

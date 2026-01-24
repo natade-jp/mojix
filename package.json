@@ -2,38 +2,45 @@
 	"name": "mojix",
 	"version": "0.0.1",
 	"description": "Moji / Kanji / Unicode analysis utilities (work in progress)",
+	"keywords": [],
 	"author": "natade-jp <natade3@gmail.com> (https://github.com/natade-jp)",
+	"license": "MIT",
+	"type": "module",
+	"source": "./src/mojix.js",
+	"main": "./dist/cjs/mojix.js",
+	"module": "./dist/esm/mojix.js",
+	"types": "./dist/types/mojix.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/types/mojix.d.ts",
+			"import": "./dist/esm/mojix.js",
+			"require": "./dist/cjs/mojix.js",
+			"browser": "./dist/umd/mojix.js",
+			"default": "./dist/esm/mojix.js"
+		}
+	},
+	"unpkg": "./dist/umd/mojix.min.js",
+	"jsdelivr": "./dist/umd/mojix.min.js",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/natade-jp/mojix.git"
 	},
-	"license": "MIT",
-	"source": "./src/mojix.js",
-	"types": "./build/type/mojix.d.ts",
-	"main": "./build/esm/mojix.js",
-	"keywords": [],
-	"exports": {
-		".": {
-			"browser": "./build/umd/mojix.js",
-			"umd": "./build/umd/mojix.js",
-			"import": "./build/esm/mojix.js",
-			"require": "./build/cjs/mojix.js"
-		}
+	"bugs": {
+		"url": "https://github.com/natade-jp/mojix/issues"
 	},
-	"type": "module",
+	"homepage": "https://github.com/natade-jp/mojix",
+	"files": [
+		"dist/"
+	],
 	"scripts": {
 		"build": "node ./scripts/package.build.js",
 		"test": "jest",
 		"test_target": "node ./scripts/package.test.js",
-		"doc": "node ./scripts/package.doc.js",
-		"type": "node ./scripts/package.type.js"
+		"doc": "node ./scripts/package.doc.js"
 	},
 	"directories": {
 		"src": "./src",
 		"build": "./build"
-	},
-	"bugs": {
-		"url": "https://github.com/natade-jp/mojix/issues"
 	},
 	"jest": {
 		"verbose": true,
@@ -59,7 +66,6 @@
 			}
 		}
 	},
-	"homepage": "https://github.com/natade-jp/mojix",
 	"devDependencies": {
 		"@eslint/js": "^9.39.2",
 		"@rollup/plugin-buble": "^1.0.3",
@@ -75,9 +81,11 @@
 		"esdoc-standard-plugin": "^1.0.0",
 		"eslint": "^9.39.2",
 		"eslint-plugin-jest": "^29.0.1",
+		"eslint-plugin-jsonc": "^2.21.0",
 		"eslint-plugin-unicorn": "^62.0.0",
 		"globals": "^17.1.0",
 		"jest": "^30.2.0",
+		"jsonc-eslint-parser": "^2.4.2",
 		"ntfile": "^2.0.0",
 		"rollup": "^4.56.0",
 		"rollup-plugin-dts": "^6.3.0",
