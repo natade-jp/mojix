@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="To convert or to analyze the character data of the Japanese."><meta property="twitter:card" content="summary"><meta property="twitter:title" content="mojix"><meta property="twitter:description" content="To convert or to analyze the character data of the Japanese."></head>
+<meta name="description" content="Moji / Kanji / Unicode analysis utilities (work in progress)"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="mojix"><meta property="twitter:description" content="Moji / Kanji / Unicode analysis utilities (work in progress)"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -32,8 +32,6 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mojix.js~Mojix.html">Mojix</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#encode">encode</a><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MenKuTen">MenKuTen</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#tools">tools</a><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiData">MojiData</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiEncodeData">MojiEncodeData</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiTypeData">MojiTypeData</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -41,10 +39,10 @@
 <div class="content" data-ice="content"><h1 data-ice="title">src/encode/SJIS.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&#xFEFF;/**
  * The script is part of Mojix.
- * 
+ *
  * AUTHOR:
  *  natade (http://twitter.com/natadea)
- * 
+ *
  * LICENSE:
  *  The MIT license https://opensource.org/licenses/MIT
  */
@@ -65,12 +63,11 @@ import Unicode from &quot;./Unicode.js&quot;;
  * @ignore
  */
 export default class SJIS {
-
 	/**
 	 * &#x6587;&#x5B57;&#x5217;&#x3092; Shift_JIS &#x306E;&#x914D;&#x5217;&#x306B;&#x5909;&#x63DB;&#x3002;&#x5909;&#x63DB;&#x3067;&#x304D;&#x306A;&#x3044;&#x6587;&#x5B57;&#x306F; &quot;?&quot; &#x306B;&#x5909;&#x63DB;&#x3055;&#x308C;&#x308B;&#x3002;
-	 * @param {String} text - &#x5909;&#x63DB;&#x3057;&#x305F;&#x3044;&#x30C6;&#x30AD;&#x30B9;&#x30C8;
+	 * @param {string} text - &#x5909;&#x63DB;&#x3057;&#x305F;&#x3044;&#x30C6;&#x30AD;&#x30B9;&#x30C8;
 	 * @param {Object&lt;number, number&gt;} unicode_to_sjis - Unicode &#x304B;&#x3089; Shift_JIS &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
-	 * @returns {Array&lt;number&gt;} Shift_JIS &#x306E;&#x30C7;&#x30FC;&#x30BF;&#x304C;&#x5165;&#x3063;&#x305F;&#x914D;&#x5217;
+	 * @returns {number[]} Shift_JIS &#x306E;&#x30C7;&#x30FC;&#x30BF;&#x304C;&#x5165;&#x3063;&#x305F;&#x914D;&#x5217;
 	 * @ignore
 	 */
 	static toSJISArray(text, unicode_to_sjis) {
@@ -78,12 +75,11 @@ export default class SJIS {
 		const utf32 = Unicode.toUTF32Array(text);
 		const sjis = [];
 		const ng = &quot;?&quot;.charCodeAt(0);
-		for(let i = 0; i &lt; utf32.length; i++) {
+		for (let i = 0; i &lt; utf32.length; i++) {
 			const map_bin = map[utf32[i]];
-			if(map_bin) {
+			if (map_bin) {
 				sjis.push(map_bin);
-			}
-			else {
+			} else {
 				sjis.push(ng);
 			}
 		}
@@ -93,19 +89,18 @@ export default class SJIS {
 	/**
 	 * &#x6587;&#x5B57;&#x5217;&#x3092; Shift_JIS &#x306E;&#x30D0;&#x30A4;&#x30CA;&#x30EA;&#x914D;&#x5217;&#x306B;&#x5909;&#x63DB;&#x3002;&#x5909;&#x63DB;&#x3067;&#x304D;&#x306A;&#x3044;&#x6587;&#x5B57;&#x306F; &quot;?&quot; &#x306B;&#x5909;&#x63DB;&#x3055;&#x308C;&#x308B;&#x3002;
 	 * - &#x65E5;&#x672C;&#x8A9E;&#x6587;&#x5B57;&#x306F;2&#x30D0;&#x30A4;&#x30C8;&#x3068;&#x3057;&#x3066;&#x3001;&#x914D;&#x5217;&#x3082;2&#x3064;&#x5206;&#x3001;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;&#x3002;
-	 * @param {String} text - &#x5909;&#x63DB;&#x3057;&#x305F;&#x3044;&#x30C6;&#x30AD;&#x30B9;&#x30C8;
+	 * @param {string} text - &#x5909;&#x63DB;&#x3057;&#x305F;&#x3044;&#x30C6;&#x30AD;&#x30B9;&#x30C8;
 	 * @param {Object&lt;number, number&gt;} unicode_to_sjis - Unicode &#x304B;&#x3089; Shift_JIS &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
-	 * @returns {Array&lt;number&gt;} Shift_JIS &#x306E;&#x30C7;&#x30FC;&#x30BF;&#x304C;&#x5165;&#x3063;&#x305F;&#x30D0;&#x30A4;&#x30CA;&#x30EA;&#x914D;&#x5217;
+	 * @returns {number[]} Shift_JIS &#x306E;&#x30C7;&#x30FC;&#x30BF;&#x304C;&#x5165;&#x3063;&#x305F;&#x30D0;&#x30A4;&#x30CA;&#x30EA;&#x914D;&#x5217;
 	 * @ignore
 	 */
 	static toSJISBinary(text, unicode_to_sjis) {
 		const sjis = SJIS.toSJISArray(text, unicode_to_sjis);
 		const sjisbin = [];
-		for(let i = 0; i &lt; sjis.length; i++) {
-			if(sjis[i] &lt; 0x100) {
+		for (let i = 0; i &lt; sjis.length; i++) {
+			if (sjis[i] &lt; 0x100) {
 				sjisbin.push(sjis[i]);
-			}
-			else {
+			} else {
 				sjisbin.push(sjis[i] &gt;&gt; 8);
 				sjisbin.push(sjis[i] &amp; 0xFF);
 			}
@@ -115,42 +110,40 @@ export default class SJIS {
 
 	/**
 	 * SJIS&#x306E;&#x914D;&#x5217;&#x304B;&#x3089;&#x6587;&#x5B57;&#x5217;&#x306B;&#x5909;&#x63DB;
-	 * @param {Array&lt;number&gt;} sjis - &#x5909;&#x63DB;&#x3057;&#x305F;&#x3044;&#x30C6;&#x30AD;&#x30B9;&#x30C8;
-	 * @param {Object&lt;number, number|Array&lt;number&gt;&gt;} sjis_to_unicode - Shift_JIS &#x304B;&#x3089; Unicode &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
-	 * @returns {String} &#x5909;&#x63DB;&#x5F8C;&#x306E;&#x30C6;&#x30AD;&#x30B9;&#x30C8;
+	 * @param {number[]} sjis - &#x5909;&#x63DB;&#x3057;&#x305F;&#x3044;&#x30C6;&#x30AD;&#x30B9;&#x30C8;
+	 * @param {Object&lt;number, number|number[]&gt;} sjis_to_unicode - Shift_JIS &#x304B;&#x3089; Unicode &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
+	 * @returns {string} &#x5909;&#x63DB;&#x5F8C;&#x306E;&#x30C6;&#x30AD;&#x30B9;&#x30C8;
 	 * @ignore
 	 */
 	static fromSJISArray(sjis, sjis_to_unicode) {
 		const map = sjis_to_unicode;
 		const utf16 = [];
 		const ng = &quot;?&quot;.charCodeAt(0);
-		for(let i = 0; i &lt; sjis.length; i++) {
+		for (let i = 0; i &lt; sjis.length; i++) {
 			let x = sjis[i];
 			/**
-			 * @type {number|Array&lt;number&gt;}
+			 * @type {number|number[]}
 			 */
 			let y = [];
-			if(x &gt;= 0x100) {
+			if (x &gt;= 0x100) {
 				// &#x3059;&#x3067;&#x306B;1&#x3064;&#x306E;&#x5909;&#x6570;&#x306B;&#x307E;&#x3068;&#x3081;&#x3089;&#x308C;&#x3066;&#x3044;&#x308B;
 				y = map[x];
-			}
-			else {
+			} else {
 				// 2&#x30D0;&#x30A4;&#x30C8;&#x6587;&#x5B57;&#x304B;&#x306E;&#x30C1;&#x30A7;&#x30C3;&#x30AF;
-				if( ((0x81 &lt;= x) &amp;&amp; (x &lt;= 0x9F)) || ((0xE0 &lt;= x) &amp;&amp; (x &lt;= 0xFC)) ) {
+				if ((0x81 &lt;= x &amp;&amp; x &lt;= 0x9F) || (0xE0 &lt;= x &amp;&amp; x &lt;= 0xFC)) {
 					x &lt;&lt;= 8;
 					i++;
 					x |= sjis[i];
 					y = map[x];
-				}
-				else {
+				} else {
 					y = map[x];
 				}
 			}
-			if(y) {
+			if (y) {
 				// &#x914D;&#x5217;&#x306A;&#x3089;&#x914D;&#x5217;&#x3092;&#x7D50;&#x5408;
 				// &#x203B; Unicode&#x306E;&#x7D50;&#x5408;&#x6587;&#x5B57;&#x306E;&#x53EF;&#x80FD;&#x6027;&#x304C;&#x3042;&#x308B;&#x305F;&#x3081;
-				if(y instanceof Array) {
-					for(let j = 0; j &lt; y.length; j++) {
+				if (y instanceof Array) {
+					for (let j = 0; j &lt; y.length; j++) {
 						utf16.push(y[j]);
 					}
 				}
@@ -158,8 +151,7 @@ export default class SJIS {
 				else {
 					utf16.push(y);
 				}
-			}
-			else {
+			} else {
 				utf16.push(ng);
 			}
 		}
@@ -168,13 +160,13 @@ export default class SJIS {
 
 	/**
 	 * &#x6307;&#x5B9A;&#x3057;&#x305F;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;&#x306E;&#x6587;&#x5B57;&#x304B;&#x3089; Shift_JIS &#x4E0A;&#x306E;&#x7B26;&#x53F7;&#x5316;&#x6570;&#x5024;&#x306B;&#x5909;&#x63DB;
-	 * @param {Number} unicode_codepoint - Unicode&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;
+	 * @param {number} unicode_codepoint - Unicode&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;
 	 * @param {Object&lt;number, number&gt;} unicode_to_sjis - Unicode &#x304B;&#x3089; Shift_JIS &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
-	 * @returns {Number} &#x7B26;&#x53F7;&#x5316;&#x6570;&#x5024;(&#x5909;&#x63DB;&#x3067;&#x304D;&#x306A;&#x3044;&#x5834;&#x5408;&#x306F;null&#x3068;&#x306A;&#x308B;)
+	 * @returns {number} &#x7B26;&#x53F7;&#x5316;&#x6570;&#x5024;(&#x5909;&#x63DB;&#x3067;&#x304D;&#x306A;&#x3044;&#x5834;&#x5408;&#x306F;null&#x3068;&#x306A;&#x308B;)
 	 * @ignore
 	 */
 	static toSJISCodeFromUnicode(unicode_codepoint, unicode_to_sjis) {
-		if(!unicode_to_sjis[unicode_codepoint]) {
+		if (!unicode_to_sjis[unicode_codepoint]) {
 			return null;
 		}
 		const utf16_text = Unicode.fromUTF32Array([unicode_codepoint]);
@@ -184,15 +176,15 @@ export default class SJIS {
 
 	/**
 	 * &#x6307;&#x5B9A;&#x3057;&#x305F; Shift_JIS-2004 &#x306E;&#x30B3;&#x30FC;&#x30C9;&#x304B;&#x3089;&#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;&#x306B;&#x5909;&#x63DB;
-	 * @param {Number} sjis_code - Shift_JIS-2004 &#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;
+	 * @param {number} sjis_code - Shift_JIS-2004 &#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;
 	 * @returns {MenKuTen} &#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;(&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#xFF08;1&#x30D0;&#x30A4;&#x30C8;&#x306E;JIS&#x30B3;&#x30FC;&#x30C9;&#x306A;&#x3069;&#xFF09;&#x306F;null&#x3092;&#x8FD4;&#x3059;)
 	 */
 	static toMenKuTenFromSJIS2004Code(sjis_code) {
-		if(!sjis_code) {
+		if (!sjis_code) {
 			return null;
 		}
 		const x = sjis_code;
-		if(x &lt; 0x100) {
+		if (x &lt; 0x100) {
 			return null;
 		}
 		// &#x30A2;&#x30EB;&#x30B4;&#x30EA;&#x30BA;&#x30E0;&#x306F;&#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;&#x8868;&#x304B;&#x3089;&#x30EA;&#x30D0;&#x30FC;&#x30B9;&#x30A8;&#x30F3;&#x30B8;&#x30CB;&#x30A2;&#x30EA;&#x30F3;&#x30B0;
@@ -204,26 +196,24 @@ export default class SJIS {
 		let ten = 0;
 
 		// &#x9762;&#x60C5;&#x5831;&#x306E;&#x4F4D;&#x7F6E;&#x5224;&#x5B9A;
-		if(s1 &lt; 0xF0) {
+		if (s1 &lt; 0xF0) {
 			men = 1;
 			// &#x533A;&#x306E;&#x8A08;&#x7B97;&#x65B9;&#x6CD5;&#x306E;&#x5207;&#x308A;&#x66FF;&#x3048;
 			// 63&#x533A;&#x304B;&#x3089;&#x3001;0x9F&#x2192;0xE0&#x306B;&#x98DB;&#x3076;
-			if(s1 &lt; 0xE0) {
+			if (s1 &lt; 0xE0) {
 				s1 = s1 - 0x81;
-			}
-			else {
+			} else {
 				s1 = s1 - 0xC1;
 			}
-		}
-		else {
+		} else {
 			// &#x203B;2&#x9762;&#x306F;&#x7B2C;4&#x6C34;&#x6E96;&#x306E;&#x307F;
 			men = 2;
 			// 2&#x9762;1&#x533A; &#xFF5E; 2&#x9762;8&#x533A;
-			if((((s1 === 0xF0) || (s1 === 0xF2)) &amp;&amp; (s2 &lt; 0x9F)) || (s1 === 0xF1)) {
+			if (((s1 === 0xF0 || s1 === 0xF2) &amp;&amp; s2 &lt; 0x9F) || s1 === 0xF1) {
 				s1 = s1 - 0xF0;
 			}
 			// 2&#x9762;12&#x533A; &#xFF5E; 2&#x9762;15&#x533A;
-			else if(((s1 === 0xF4) &amp;&amp; (s2 &lt; 0x9F)) || (s1 &lt; 0xF4)) {
+			else if ((s1 === 0xF4 &amp;&amp; s2 &lt; 0x9F) || s1 &lt; 0xF4) {
 				s1 = s1 - 0xED;
 			}
 			// 2&#x9762;78&#x533A; &#xFF5E; 2&#x9762;94&#x533A;
@@ -233,83 +223,80 @@ export default class SJIS {
 		}
 
 		// &#x533A;&#x60C5;&#x5831;&#x306E;&#x4F4D;&#x7F6E;&#x5224;&#x5B9A;
-		if(s2 &lt; 0x9f) {
+		if (s2 &lt; 0x9F) {
 			ku = s1 * 2 + 1;
 			// &#x70B9;&#x60C5;&#x5831;&#x306E;&#x8A08;&#x7B97;&#x65B9;&#x6CD5;&#x306E;&#x5207;&#x308A;&#x66FF;&#x3048;
 			// 0x7F&#x304C;&#x6B20;&#x756A;&#x306E;&#x305F;&#x3081;&#x300C;+1&#x300D;&#x3092;&#x9664;&#x53BB;
-			if(s2 &lt; 0x80) {
+			if (s2 &lt; 0x80) {
 				s2 = s2 - 0x40 + 1;
-			}
-			else {
+			} else {
 				s2 = s2 - 0x40;
 			}
-		}
-		else {
+		} else {
 			ku = s1 * 2 + 2;
-			s2 = s2 - 0x9f + 1;
+			s2 = s2 - 0x9F + 1;
 		}
 
 		// &#x70B9;&#x60C5;&#x5831;&#x306E;&#x4F4D;&#x7F6E;&#x5224;&#x5B9A;
 		ten = s2;
 
 		return {
-			text : &quot;&quot; + men + &quot;-&quot; + ku + &quot;-&quot; + ten,
-			men : men,
-			ku : ku,
-			ten : ten
+			text: &quot;&quot; + men + &quot;-&quot; + ku + &quot;-&quot; + ten,
+			men: men,
+			ku: ku,
+			ten: ten
 		};
 	}
 
 	/**
 	 * &#x6307;&#x5B9A;&#x3057;&#x305F;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;&#x306E;&#x6587;&#x5B57;&#x304B;&#x3089; Shift_JIS-2004 &#x4E0A;&#x306E;&#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;&#x306B;&#x5909;&#x63DB;
-	 * @param {Number} unicode_codepoint - Unicode&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;
+	 * @param {number} unicode_codepoint - Unicode&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;
 	 * @param {Object&lt;number, number&gt;} unicode_to_sjis - Unicode &#x304B;&#x3089; Shift_JIS-2004 &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
 	 * @returns {MenKuTen} &#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;(&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#xFF08;1&#x30D0;&#x30A4;&#x30C8;&#x306E;JIS&#x30B3;&#x30FC;&#x30C9;&#x306A;&#x3069;&#xFF09;&#x306F;null&#x3092;&#x8FD4;&#x3059;)
 	 * @ignore
 	 */
 	static toMenKuTenFromUnicode(unicode_codepoint, unicode_to_sjis) {
-		if(!unicode_to_sjis[unicode_codepoint]) {
+		if (!unicode_to_sjis[unicode_codepoint]) {
 			return null;
 		}
 		const x = SJIS.toSJISCodeFromUnicode(unicode_codepoint, unicode_to_sjis);
 		return SJIS.toMenKuTenFromSJIS2004Code(x);
 	}
-	
+
 	/**
 	 * &#x6307;&#x5B9A;&#x3057;&#x305F;&#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;&#x304B;&#x3089; Shift_JIS-2004 &#x30B3;&#x30FC;&#x30C9;&#x306B;&#x5909;&#x63DB;
 	 * @param {MenKuTen|string} menkuten - &#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;&#xFF08;&#x9762;&#x304C;&#x7701;&#x7565;&#x3055;&#x308C;&#x305F;&#x5834;&#x5408;&#x306F;&#x3001;1&#x3068;&#x307F;&#x306A;&#x3059;&#xFF09;
-	 * @returns {Number} Shift_JIS-2004 &#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;(&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#x306F;null&#x3092;&#x8FD4;&#x3059;)
+	 * @returns {number} Shift_JIS-2004 &#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;(&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#x306F;null&#x3092;&#x8FD4;&#x3059;)
 	 */
 	static toSJIS2004CodeFromMenKuTen(menkuten) {
-		let m = null, k = null, t = null;
+		let m = null,
+			k = null,
+			t = null;
 		let text = null;
-		if(menkuten instanceof Object) {
-			if(menkuten.text &amp;&amp; (typeof menkuten.text === &quot;string&quot;)) {
+		if (menkuten instanceof Object) {
+			if (menkuten.text &amp;&amp; typeof menkuten.text === &quot;string&quot;) {
 				text = menkuten.text;
-			}
-			else if((menkuten.ku) &amp;&amp; (menkuten.ten)) {
+			} else if (menkuten.ku &amp;&amp; menkuten.ten) {
 				m = menkuten.men ? menkuten.men : 1;
 				k = menkuten.ku;
 				t = menkuten.ten;
 			}
-		}
-		else  if((typeof menkuten === &quot;string&quot;)) {
+		} else if (typeof menkuten === &quot;string&quot;) {
 			text = menkuten;
 		}
-		if(text) {
+		if (text) {
 			const strmkt = text.split(&quot;-&quot;);
-			if(strmkt.length === 3) {
+			if (strmkt.length === 3) {
 				m = parseInt(strmkt[0], 10);
 				k = parseInt(strmkt[1], 10);
 				t = parseInt(strmkt[2], 10);
-			}
-			else if(strmkt.length === 2) {
+			} else if (strmkt.length === 2) {
 				m = 1;
 				k = parseInt(strmkt[0], 10);
 				t = parseInt(strmkt[1], 10);
 			}
 		}
-		if(!m || !k || !t) {
+		if (!m || !k || !t) {
 			throw &quot;IllegalArgumentException&quot;;
 		}
 
@@ -319,7 +306,7 @@ export default class SJIS {
 		/**
 		 * @type {Object&lt;number, number&gt;}
 		 */
-		const kmap = {1:1,3:1,4:1,5:1,8:1,12:1,13:1,14:1,15:1};
+		const kmap = { 1: 1, 3: 1, 4: 1, 5: 1, 8: 1, 12: 1, 13: 1, 14: 1, 15: 1 };
 
 		// &#x53C2;&#x8003;
 		// 2019/1/1 Shift JIS - Wikipedia
@@ -328,76 +315,70 @@ export default class SJIS {
 		// &#x533A;&#x3084;&#x70B9;&#x306E;&#x5224;&#x5B9A;&#x90E8;&#x5206;&#x306F;&#x3001;&#x901A;&#x5E38;94&#x307E;&#x3067;&#x3067;&#x3042;&#x308B;&#x305F;&#x3081;&#x3001;&#x6B63;&#x78BA;&#x306B;&#x306F;k&#x3084;t&#x306F; &lt;=94 &#x3068;&#x3059;&#x308B;&#x3079;&#x304D;&#x3002;
 		// &#x3057;&#x304B;&#x3057;&#x3001;Shift_JIS&#x7BC4;&#x56F2;&#x5916;&#xFF08;IBM&#x62E1;&#x5F35;&#x6F22;&#x5B57;&#xFF09;&#x3067;&#x3082;&#x5229;&#x7528;&#x3055;&#x308C;&#x308B;&#x305F;&#x3081;&#x5236;&#x9650;&#x3092;&#x53D6;&#x308A;&#x6255;&#x3063;&#x3066;&#x3044;&#x308B;&#x3002;
 
-		if(m === 1) {
-			if((1 &lt;= k) &amp;&amp; (k &lt;= 62)) {
+		if (m === 1) {
+			if (1 &lt;= k &amp;&amp; k &lt;= 62) {
 				s1 = Math.floor((k + 257) / 2);
-			}
-			else if(63 &lt;= k) {
+			} else if (63 &lt;= k) {
 				s1 = Math.floor((k + 385) / 2);
 			}
-		}
-		else if(m === 2) {
-			if(kmap[k]) {
-				s1 = Math.floor((k + 479) / 2) - (Math.floor(k / 8) * 3);
-			}
-			else if(78 &lt;= k) {
+		} else if (m === 2) {
+			if (kmap[k]) {
+				s1 = Math.floor((k + 479) / 2) - Math.floor(k / 8) * 3;
+			} else if (78 &lt;= k) {
 				s1 = Math.floor((k + 411) / 2);
 			}
 		}
 
-		if((k % 2) === 1) {
-			if((1 &lt;= t) &amp;&amp; (t &lt;= 63)) {
+		if (k % 2 === 1) {
+			if (1 &lt;= t &amp;&amp; t &lt;= 63) {
 				s2 = t + 63;
-			}
-			else if(64 &lt;= t) {
+			} else if (64 &lt;= t) {
 				s2 = t + 64;
 			}
-		}
-		else {
+		} else {
 			s2 = t + 158;
 		}
 
-		if((s1 === -1) || (s2 === -1)) {
+		if (s1 === -1 || s2 === -1) {
 			return null;
 		}
 		return (s1 &lt;&lt; 8) | s2;
 	}
-	
+
 	/**
 	 * &#x6307;&#x5B9A;&#x3057;&#x305F;&#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;&#x304B;&#x3089; Unicode &#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;&#x306B;&#x5909;&#x63DB;
 	 * @param {MenKuTen|string} menkuten - &#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;
-	 * @param {Object&lt;number, number|Array&lt;number&gt;&gt;} sjis_to_unicode - Shift_JIS-2004 &#x304B;&#x3089; Unicode &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
-	 * @returns {Array&lt;number&gt;} UTF-32&#x306E;&#x914D;&#x5217;(&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#x306F;null&#x3092;&#x8FD4;&#x3059;)
+	 * @param {Object&lt;number, number|number[]&gt;} sjis_to_unicode - Shift_JIS-2004 &#x304B;&#x3089; Unicode &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
+	 * @returns {number[]} UTF-32&#x306E;&#x914D;&#x5217;(&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#x306F;null&#x3092;&#x8FD4;&#x3059;)
 	 * @ignore
 	 */
 	static toUnicodeCodeFromMenKuTen(menkuten, sjis_to_unicode) {
 		const sjis_code = SJIS.toSJIS2004CodeFromMenKuTen(menkuten);
-		if(!sjis_code) {
+		if (!sjis_code) {
 			return null;
 		}
 		const unicode = sjis_to_unicode[sjis_code];
-		if(!unicode) {
+		if (!unicode) {
 			return null;
 		}
-		if(unicode instanceof Array) {
+		if (unicode instanceof Array) {
 			return unicode;
-		}
-		else {
+		} else {
 			return [unicode];
 		}
 	}
 
 	/**
 	 * &#x6307;&#x5B9A;&#x3057;&#x305F; Shift_JIS &#x306E;&#x30B3;&#x30FC;&#x30C9;&#x304B;&#x3089;&#x533A;&#x70B9;&#x756A;&#x53F7;&#x306B;&#x5909;&#x63DB;
-	 * @param {Number} sjis_code - Shift_JIS &#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;
+	 * @param {number} sjis_code - Shift_JIS &#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;
 	 * @returns {MenKuTen} &#x533A;&#x70B9;&#x756A;&#x53F7;(&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#xFF08;1&#x30D0;&#x30A4;&#x30C8;&#x306E;JIS&#x30B3;&#x30FC;&#x30C9;&#x306A;&#x3069;&#xFF09;&#x306F;null&#x3092;&#x8FD4;&#x3059;)
 	 */
 	static toKuTenFromSJISCode(sjis_code) {
-		if(!sjis_code) {
+		if (!sjis_code) {
 			return null;
 		}
 		const x = sjis_code;
-		if(x &lt; 0x100) {
+		if (x &lt; 0x100) {
 			return null;
 		}
 		// &#x30A2;&#x30EB;&#x30B4;&#x30EA;&#x30BA;&#x30E0;&#x306F;&#x533A;&#x70B9;&#x756A;&#x53F7;&#x8868;&#x304B;&#x3089;&#x30EA;&#x30D0;&#x30FC;&#x30B9;&#x30A8;&#x30F3;&#x30B8;&#x30CB;&#x30A2;&#x30EA;&#x30F3;&#x30B0;
@@ -409,50 +390,47 @@ export default class SJIS {
 
 		// &#x533A;&#x306E;&#x8A08;&#x7B97;&#x65B9;&#x6CD5;&#x306E;&#x5207;&#x308A;&#x66FF;&#x3048;
 		// 63&#x533A;&#x304B;&#x3089;&#x3001;0x9F&#x2192;0xE0&#x306B;&#x98DB;&#x3076;
-		if(s1 &lt; 0xE0) {
+		if (s1 &lt; 0xE0) {
 			s1 = s1 - 0x81;
-		}
-		else {
+		} else {
 			s1 = s1 - 0xC1;
 		}
 
 		// &#x533A;&#x60C5;&#x5831;&#x306E;&#x4F4D;&#x7F6E;&#x5224;&#x5B9A;
-		if(s2 &lt; 0x9f) {
+		if (s2 &lt; 0x9F) {
 			ku = s1 * 2 + 1;
 			// &#x70B9;&#x60C5;&#x5831;&#x306E;&#x8A08;&#x7B97;&#x65B9;&#x6CD5;&#x306E;&#x5207;&#x308A;&#x66FF;&#x3048;
 			// 0x7F&#x304C;&#x6B20;&#x756A;&#x306E;&#x305F;&#x3081;&#x300C;+1&#x300D;&#x3092;&#x9664;&#x53BB;
-			if(s2 &lt; 0x80) {
+			if (s2 &lt; 0x80) {
 				s2 = s2 - 0x40 + 1;
-			}
-			else {
+			} else {
 				s2 = s2 - 0x40;
 			}
-		}
-		else {
+		} else {
 			ku = s1 * 2 + 2;
-			s2 = s2 - 0x9f + 1;
+			s2 = s2 - 0x9F + 1;
 		}
 
 		// &#x70B9;&#x60C5;&#x5831;&#x306E;&#x4F4D;&#x7F6E;&#x5224;&#x5B9A;
 		ten = s2;
 
 		return {
-			text : ku + &quot;-&quot; + ten,
-			men : 1,
-			ku : ku,
-			ten : ten
+			text: ku + &quot;-&quot; + ten,
+			men: 1,
+			ku: ku,
+			ten: ten
 		};
 	}
-	
+
 	/**
 	 * &#x6307;&#x5B9A;&#x3057;&#x305F;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;&#x306E;&#x6587;&#x5B57;&#x304B;&#x3089; Shift_JIS &#x4E0A;&#x306E;&#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;&#x306B;&#x5909;&#x63DB;
-	 * @param {Number} unicode_codepoint - Unicode&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;
+	 * @param {number} unicode_codepoint - Unicode&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;
 	 * @param {Object&lt;number, number&gt;} unicode_to_sjis - Unicode &#x304B;&#x3089; Shift_JIS &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
 	 * @returns {MenKuTen} &#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;(&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#xFF08;1&#x30D0;&#x30A4;&#x30C8;&#x306E;JIS&#x30B3;&#x30FC;&#x30C9;&#x306A;&#x3069;&#xFF09;&#x306F;null&#x3092;&#x8FD4;&#x3059;)
 	 * @ignore
 	 */
 	static toKuTenFromUnicode(unicode_codepoint, unicode_to_sjis) {
-		if(!unicode_to_sjis[unicode_codepoint]) {
+		if (!unicode_to_sjis[unicode_codepoint]) {
 			return null;
 		}
 		const x = SJIS.toSJISCodeFromUnicode(unicode_codepoint, unicode_to_sjis);
@@ -462,7 +440,7 @@ export default class SJIS {
 	/**
 	 * &#x6307;&#x5B9A;&#x3057;&#x305F;&#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;&#xFF0F;&#x533A;&#x70B9;&#x756A;&#x53F7;&#x304B;&#x3089; Shift_JIS &#x30B3;&#x30FC;&#x30C9;&#x306B;&#x5909;&#x63DB;
 	 * @param {MenKuTen|string} kuten - &#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;&#xFF0F;&#x533A;&#x70B9;&#x756A;&#x53F7;
-	 * @returns {Number} Shift_JIS &#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;(&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#x306F;null&#x3092;&#x8FD4;&#x3059;)
+	 * @returns {number} Shift_JIS &#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;(&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#x306F;null&#x3092;&#x8FD4;&#x3059;)
 	 */
 	static toSJISCodeFromKuTen(kuten) {
 		// 1&#xFF5E;94&#x533A;&#x307E;&#x3067;&#x5B58;&#x5728;&#x3057;&#x3066;&#x3044;&#x308B;&#x305F;&#x3081;&#x9762;&#x53E5;&#x70B9;&#x5909;&#x63DB;&#x7528;&#x3067;&#x6D41;&#x7528;&#x53EF;&#x80FD;&#x3002;
@@ -470,84 +448,81 @@ export default class SJIS {
 		// &#x4ECA;&#x56DE;&#x3001;toSJIS2004CodeFromMenKuTen&#x3067;&#x306F;&#x533A;&#x306E;&#x7BC4;&#x56F2;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3092;&#x3057;&#x306A;&#x3044;&#x305F;&#x3081;&#x554F;&#x984C;&#x306A;&#x3057;&#x3002;
 		return SJIS.toSJIS2004CodeFromMenKuTen(kuten);
 	}
-	
+
 	/**
 	 * &#x6307;&#x5B9A;&#x3057;&#x305F;&#x533A;&#x70B9;&#x756A;&#x53F7;&#x304B;&#x3089; Unicode &#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;&#x306B;&#x5909;&#x63DB;
 	 * @param {MenKuTen|string} kuten - &#x533A;&#x70B9;&#x756A;&#x53F7;
-	 * @param {Object&lt;number, number|Array&lt;number&gt;&gt;} sjis_to_unicode - Shift_JIS &#x304B;&#x3089; Unicode &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
-	 * @returns {Array&lt;number&gt;} UTF-32&#x306E;&#x914D;&#x5217;(&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#x306F;null&#x3092;&#x8FD4;&#x3059;)
+	 * @param {Object&lt;number, number|number[]&gt;} sjis_to_unicode - Shift_JIS &#x304B;&#x3089; Unicode &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
+	 * @returns {number[]} UTF-32&#x306E;&#x914D;&#x5217;(&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#x306F;null&#x3092;&#x8FD4;&#x3059;)
 	 * @ignore
 	 */
 	static toUnicodeCodeFromKuTen(kuten, sjis_to_unicode) {
 		const sjis_code = SJIS.toSJISCodeFromKuTen(kuten);
-		if(!sjis_code) {
+		if (!sjis_code) {
 			return null;
 		}
 		const unicode = sjis_to_unicode[sjis_code];
-		if(!unicode) {
+		if (!unicode) {
 			return null;
 		}
-		if(unicode instanceof Array) {
+		if (unicode instanceof Array) {
 			return unicode;
-		}
-		else {
+		} else {
 			return [unicode];
 		}
 	}
 
 	/**
 	 * Shift_JIS &#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;&#x304B;&#x3089;JIS&#x6F22;&#x5B57;&#x6C34;&#x6E96;&#xFF08;JIS Chinese character standard&#xFF09;&#x306B;&#x5909;&#x63DB;
-	 * @param {Number} sjis_code - Shift_JIS-2004 &#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;
-	 * @returns {Number} -1...&#x5909;&#x63DB;&#x4E0D;&#x53EF;, 0...&#x6C34;&#x6E96;&#x306A;&#x3057;, 1...&#x7B2C;1&#x6C34;&#x6E96;, ...
+	 * @param {number} sjis_code - Shift_JIS-2004 &#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;
+	 * @returns {number} -1...&#x5909;&#x63DB;&#x4E0D;&#x53EF;, 0...&#x6C34;&#x6E96;&#x306A;&#x3057;, 1...&#x7B2C;1&#x6C34;&#x6E96;, ...
 	 */
 	static toJISKanjiSuijunFromSJISCode(sjis_code) {
-		if(!sjis_code) {
+		if (!sjis_code) {
 			return 0;
 		}
 		const menkuten = SJIS.toMenKuTenFromSJIS2004Code(sjis_code);
 		// &#x30A2;&#x30EB;&#x30B4;&#x30EA;&#x30BA;&#x30E0;&#x306F;JIS&#x6F22;&#x5B57;&#x4E00;&#x89A7;&#x8868;&#x304B;&#x3089;&#x30EA;&#x30D0;&#x30FC;&#x30B9;&#x30A8;&#x30F3;&#x30B8;&#x30CB;&#x30A2;&#x30EA;&#x30F3;&#x30B0;
-		if(!menkuten) {
+		if (!menkuten) {
 			return 0;
 		}
 		// 2&#x9762;&#x306F;&#x7B2C;4&#x6C34;&#x6E96;
-		if(menkuten.men &gt; 1) {
+		if (menkuten.men &gt; 1) {
 			return 4;
 		}
 		// 1&#x9762;&#x306F;&#x7B2C;1&#xFF5E;3&#x6C34;&#x6E96;
-		if(menkuten.ku &lt; 14) {
+		if (menkuten.ku &lt; 14) {
 			// 14&#x533A;&#x3088;&#x308A;&#x5C0F;&#x3055;&#x3044;&#x3068;&#x975E;&#x6F22;&#x5B57;
 			return 0;
 		}
-		if(menkuten.ku &lt; 16) {
+		if (menkuten.ku &lt; 16) {
 			// 14&#x533A;&#x3068;15&#x533A;&#x306F;&#x7B2C;3&#x6C34;&#x6E96;
 			return 3;
 		}
-		if(menkuten.ku &lt; 47) {
+		if (menkuten.ku &lt; 47) {
 			return 1;
 		}
 		// 47&#x533A;&#x306B;&#x306F;&#x3001;&#x7B2C;1&#x6C34;&#x6E96;&#x3068;&#x7B2C;3&#x6C34;&#x6E96;&#x304C;&#x6DF7;&#x3058;&#x308B;
-		if(menkuten.ku === 47) {
-			if(menkuten.ten &lt; 52) {
+		if (menkuten.ku === 47) {
+			if (menkuten.ten &lt; 52) {
 				return 1;
-			}
-			else {
+			} else {
 				return 3;
 			}
 		}
-		if(menkuten.ku &lt; 84) {
+		if (menkuten.ku &lt; 84) {
 			return 2;
 		}
 		// 84&#x533A;&#x306B;&#x306F;&#x3001;&#x7B2C;2&#x6C34;&#x6E96;&#x3068;&#x7B2C;3&#x6C34;&#x6E96;&#x304C;&#x6DF7;&#x3058;&#x308B;
-		if(menkuten.ku === 84) {
-			if(menkuten.ten &lt; 7) {
+		if (menkuten.ku === 84) {
+			if (menkuten.ten &lt; 7) {
 				return 2;
-			}
-			else {
+			} else {
 				return 3;
 			}
 		}
 		// &#x6B8B;&#x308A;94&#x533A;&#x307E;&#x3067;&#x7B2C;3&#x6C34;&#x6E96;
-		if(menkuten.ku &lt; 95) {
+		if (menkuten.ku &lt; 95) {
 			return 3;
 		}
 		return 0;
@@ -555,13 +530,13 @@ export default class SJIS {
 
 	/**
 	 * Unicode &#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;&#x304B;&#x3089;JIS&#x6F22;&#x5B57;&#x6C34;&#x6E96;&#xFF08;JIS Chinese character standard&#xFF09;&#x306B;&#x5909;&#x63DB;
-	 * @param {Number} unicode_codepoint - Unicode&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;
+	 * @param {number} unicode_codepoint - Unicode&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;
 	 * @param {Object&lt;number, number&gt;} unicode_to_sjis - Unicode &#x304B;&#x3089; Shift_JIS &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
-	 * @returns {Number} -1...&#x5909;&#x63DB;&#x4E0D;&#x53EF;, 0...&#x6C34;&#x6E96;&#x306A;&#x3057;, 1...&#x7B2C;1&#x6C34;&#x6E96;, ...
+	 * @returns {number} -1...&#x5909;&#x63DB;&#x4E0D;&#x53EF;, 0...&#x6C34;&#x6E96;&#x306A;&#x3057;, 1...&#x7B2C;1&#x6C34;&#x6E96;, ...
 	 * @ignore
 	 */
 	static toJISKanjiSuijunFromUnicode(unicode_codepoint, unicode_to_sjis) {
-		if(!unicode_to_sjis[unicode_codepoint]) {
+		if (!unicode_to_sjis[unicode_codepoint]) {
 			return -1;
 		}
 		const x = SJIS.toSJISCodeFromUnicode(unicode_codepoint, unicode_to_sjis);
@@ -571,64 +546,57 @@ export default class SJIS {
 	/**
 	 * &#x6307;&#x5B9A;&#x3057;&#x305F;&#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;&#x304B;&#x3089; Shift_JIS &#x306E;&#x4ED5;&#x69D8;&#x4E0A;&#x3001;&#x6B63;&#x898F;&#x306A;&#x7269;&#x304B;&#x5224;&#x5B9A;
 	 * @param {MenKuTen|string} menkuten - &#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;&#xFF08;&#x9762;&#x304C;&#x7701;&#x7565;&#x3055;&#x308C;&#x305F;&#x5834;&#x5408;&#x306F;&#x3001;1&#x3068;&#x307F;&#x306A;&#x3059;&#xFF09;
-	 * @returns {Boolean} &#x6B63;&#x898F;&#x306A;&#x30C7;&#x30FC;&#x30BF;&#x306F; true, &#x4E0D;&#x6B63;&#x306A;&#x30C7;&#x30FC;&#x30BF;&#x306F; false
+	 * @returns {boolean} &#x6B63;&#x898F;&#x306A;&#x30C7;&#x30FC;&#x30BF;&#x306F; true, &#x4E0D;&#x6B63;&#x306A;&#x30C7;&#x30FC;&#x30BF;&#x306F; false
 	 */
 	static isRegularMenKuten(menkuten) {
 		let m, k, t;
 
 		// &#x5F15;&#x6570;&#x306E;&#x30C6;&#x30B9;&#x30C8;
-		if(menkuten instanceof Object) {
+		if (menkuten instanceof Object) {
 			m = menkuten.men ? menkuten.men : 1;
 			k = menkuten.ku;
 			t = menkuten.ten;
-		}
-		else if(typeof menkuten === &quot;string&quot;) {
+		} else if (typeof menkuten === &quot;string&quot;) {
 			const strmkt = menkuten.split(&quot;-&quot;);
-			if(strmkt.length === 3) {
+			if (strmkt.length === 3) {
 				m = parseInt(strmkt[0], 10);
 				k = parseInt(strmkt[1], 10);
 				t = parseInt(strmkt[2], 10);
-			}
-			else if(strmkt.length === 2) {
+			} else if (strmkt.length === 2) {
 				m = 1;
 				k = parseInt(strmkt[0], 10);
 				t = parseInt(strmkt[1], 10);
-			}
-			else {
+			} else {
 				return false;
 			}
-		}
-		else {
+		} else {
 			return false;
 		}
 
 		/**
 		 * @type {Object&lt;number, number&gt;}
 		 */
-		const kmap = {1:1,3:1,4:1,5:1,8:1,12:1,13:1,14:1,15:1};
-		if(m === 1) {
+		const kmap = { 1: 1, 3: 1, 4: 1, 5: 1, 8: 1, 12: 1, 13: 1, 14: 1, 15: 1 };
+		if (m === 1) {
 			// 1&#x9762;&#x306F;1-94&#x533A;&#x307E;&#x3067;&#x5B58;&#x5728;
-			if(!((1 &lt;= k) &amp;&amp; (k &lt;= 94))) {
+			if (!(1 &lt;= k &amp;&amp; k &lt;= 94)) {
 				return false;
 			}
-		}
-		else if(m === 2) {
+		} else if (m === 2) {
 			// 2&#x9762;&#x306F;&#x3001;1,3,4,5,8,12,13,14,15,78-94&#x533A;&#x307E;&#x3067;&#x5B58;&#x5728;
-			if(!((kmap[k]) || ((78 &lt;= k) &amp;&amp; (k &lt;= 94)))) {
+			if (!(kmap[k] || (78 &lt;= k &amp;&amp; k &lt;= 94))) {
 				return false;
 			}
-		}
-		else {
+		} else {
 			// &#x9762;&#x304C;&#x4E0D;&#x6B63;
 			return false;
 		}
 		// &#x70B9;&#x306F;1-94&#x70B9;&#x307E;&#x3067;&#x5B58;&#x5728;
-		if(!((1 &lt;= t) &amp;&amp; (t &lt;= 94))) {
+		if (!(1 &lt;= t &amp;&amp; t &lt;= 94)) {
 			return false;
 		}
 		return true;
 	}
-
 }
 </code></pre>
 

@@ -28,7 +28,7 @@ class EUCJPMSMAP {
 		/**
 		 * 変換マップ
 		 * CP932のIBM拡張文字の一部は、eucJP-msのG3の83区から84区に配列されている。
-		 * @type {Object<number, number>}
+		 * @type {Record<number, number>}
 		 */
 		// prettier-ignore
 		const eucjpms_to_cp932_map = {
@@ -49,7 +49,7 @@ class EUCJPMSMAP {
 		};
 
 		/**
-		 * @type {Object<number, number>}
+		 * @type {Record<number, number>}
 		 */
 		const cp932_to_eucjpms_map = {};
 
@@ -63,7 +63,7 @@ class EUCJPMSMAP {
 	}
 
 	/**
-	 * @returns {Object<number, number>}
+	 * @returns {Record<number, number>}
 	 */
 	static CP932_TO_EUCJPMS() {
 		EUCJPMSMAP.init();
@@ -71,7 +71,7 @@ class EUCJPMSMAP {
 	}
 
 	/**
-	 * @returns {Object<number, number>}
+	 * @returns {Record<number, number>}
 	 */
 	static EUCJPMS_TO_CP932() {
 		EUCJPMSMAP.init();
@@ -87,13 +87,13 @@ EUCJPMSMAP.is_initmap = false;
 
 /**
  * 変換用マップ
- * @type {Object<number, number>}
+ * @type {Record<number, number>}
  */
 EUCJPMSMAP.cp932_to_eucjpms_map = null;
 
 /**
  * 変換用マップ
- * @type {Object<number, number>}
+ * @type {Record<number, number>}
  */
 EUCJPMSMAP.eucjpms_to_cp932_map = null;
 
@@ -105,8 +105,8 @@ export default class EUCJPMS {
 	/**
 	 * 文字列を eucJP-ms のバイナリ配列に変換。変換できない文字は "?" に変換される。
 	 * - 日本語文字は2バイトとして、配列も2つ分、使用します。
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {Array<number>} eucJP-ms のデータが入ったバイナリ配列
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {number[]} eucJP-ms のデータが入ったバイナリ配列
 	 */
 	static toEUCJPMSBinary(text) {
 		const sjis_array = CP932.toCP932Array(text);
@@ -150,8 +150,8 @@ export default class EUCJPMS {
 
 	/**
 	 * eucJP-ms の配列から文字列に変換
-	 * @param {Array<number>} eucjp - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {number[]} eucjp - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static fromEUCJPMSBinary(eucjp) {
 		const sjis_array = [];

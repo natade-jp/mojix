@@ -606,18 +606,6 @@ window.esdocSearchIndex = [
     "typedef"
   ],
   [
-    "src/tools/mojianalyzer.js~mojiencodedata",
-    "typedef/index.html#static-typedef-MojiEncodeData",
-    "src/tools/MojiAnalyzer.js~MojiEncodeData",
-    "typedef"
-  ],
-  [
-    "src/tools/mojianalyzer.js~mojitypedata",
-    "typedef/index.html#static-typedef-MojiTypeData",
-    "src/tools/MojiAnalyzer.js~MojiTypeData",
-    "typedef"
-  ],
-  [
     "src/tools/stringcomparator.js",
     "file/src/tools/StringComparator.js.html",
     "src/tools/StringComparator.js",

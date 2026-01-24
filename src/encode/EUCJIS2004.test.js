@@ -1,8 +1,8 @@
 ﻿import EUCJIS2004 from "./EUCJIS2004.js";
 
 /**
- * @param {Array} x
- * @param {Array} y
+ * @param {number[]} x
+ * @param {number[]} y
  * @returns {boolean}
  */
 const equalsArray = function (x, y) {

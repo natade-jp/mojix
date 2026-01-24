@@ -18,8 +18,8 @@ import Unicode from "../encode/Unicode.js";
 class ComparatorTool {
 	/**
 	 * 文字列の揺れを除去し正規化します。
-	 * @param {String} string_data - 正規化したいテキスト
-	 * @returns {String} 正規化後のテキスト
+	 * @param {string} string_data - 正規化したいテキスト
+	 * @returns {string} 正規化後のテキスト
 	 */
 	static toNormalizeString(string_data) {
 		let normalize_text = null;
@@ -39,7 +39,7 @@ class ComparatorTool {
 	/**
 	 * ASCIIコードが半角数値かどうかを判定する
 	 * @param {number} string_number - ASCIIコード
-	 * @returns {Boolean} 数値ならTRUE
+	 * @returns {boolean} 数値ならTRUE
 	 */
 	static isNumberAscii(string_number) {
 		const ASCII_0 = 0x30;
@@ -49,7 +49,7 @@ class ComparatorTool {
 
 	/**
 	 * ASCIIコード配列の中で指定した位置から数値が何バイト続くか
-	 * @param {Array<number>} string_number_array - ASCIIコードの配列
+	 * @param {number[]} string_number_array - ASCIIコードの配列
 	 * @param {number} offset - どの位置から調べるか
 	 * @returns {number} 数値ならTRUE
 	 */
@@ -64,10 +64,10 @@ class ComparatorTool {
 
 	/**
 	 * ASCIIコード配列の中の指定した位置にある数値データ同士をCompareする
-	 * @param {Array<number>} t1 - ASCIIコードの配列（比較元）
+	 * @param {number[]} t1 - ASCIIコードの配列（比較元）
 	 * @param {number} t1off - どの位置から調べるか
 	 * @param {number} t1size - 調べるサイズ
-	 * @param {Array<number>} t2 - ASCIIコードの配列（比較先）
+	 * @param {number[]} t2 - ASCIIコードの配列（比較先）
 	 * @param {number} t2off - どの位置から調べるか
 	 * @param {number} t2size - 調べるサイズ
 	 * @returns {number} Compare結果
@@ -125,8 +125,8 @@ class ComparatorTool {
 
 	/**
 	 * ASCIIコード配列の同士をCompareする
-	 * @param {Array<number>} t1 - ASCIIコードの配列（比較元）
-	 * @param {Array<number>} t2 - ASCIIコードの配列（比較先）
+	 * @param {number[]} t1 - ASCIIコードの配列（比較元）
+	 * @param {number[]} t2 - ASCIIコードの配列（比較先）
 	 * @returns {number} Compare結果
 	 */
 	static compareText(t1, t2) {
@@ -240,7 +240,7 @@ class ComparatorTool {
  * - sortの引数で利用できます
  * @ignore
  */
-const StringComparator = {
+const stringComparator = {
 	/**
 	 * 2つの文字列を比較する関数
 	 * @type {function(any, any): number}
@@ -256,4 +256,4 @@ const StringComparator = {
 	NATURAL: ComparatorTool.compareToForNatural
 };
 
-export default StringComparator;
+export default stringComparator;

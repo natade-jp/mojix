@@ -17,49 +17,49 @@ import EUCJIS2004 from "../encode/EUCJIS2004.js";
 
 /**
  * 1981年より前に常用漢字とされているか
- * @type {Object<number, number>}
+ * @type {Record<number, number>}
  * @ignore
  */
 let joyokanji_before_1981_map = null;
 
 /**
  * 1981年時点で追加された常用漢字か
- * @type {Object<number, number>}
+ * @type {Record<number, number>}
  * @ignore
  */
 let joyokanji_add_1981_map = null;
 
 /**
  * 2010年時点で追加された常用漢字か
- * @type {Object<number, number>}
+ * @type {Record<number, number>}
  * @ignore
  */
 let joyokanji_add_2010_map = null;
 
 /**
  * 2010年時点で削除された常用漢字か
- * @type {Object<number, number>}
+ * @type {Record<number, number>}
  * @ignore
  */
 let joyokanji_delete_2010_map = null;
 
 /**
  * 2017年時点で常用漢字でかつ人名用漢字か
- * @type {Object<number, number>}
+ * @type {Record<number, number>}
  * @ignore
  */
 let jinmeiyokanji_joyokanji_isetai_2017_map = null;
 
 /**
  * 2017年時点で常用漢字でないが人名用漢字か（異性体なし）
- * @type {Object<number, number>}
+ * @type {Record<number, number>}
  * @ignore
  */
 let jinmeiyokanji_notjoyokanji_2017_map = null;
 
 /**
  * 2017年時点で異性体がある人名漢字
- * @type {Object<number, number>}
+ * @type {Record<number, number>}
  * @ignore
  */
 let jinmeiyokanji_notjoyokanji_isetai_2017_map = null;
@@ -81,12 +81,12 @@ class MOJI_CHAR_MAP {
 		/**
 		 * 文字列から、UTF32の存在マップを作成
 		 * @param {string} string_data
-		 * @returns {Object<number, number>}
+		 * @returns {Record<number, number>}
 		 */
 		const createMap = function (string_data) {
 			const utf32_array = Unicode.toUTF32Array(string_data);
 			/**
-			 * @type {Object<number, number>}
+			 * @type {Record<number, number>}
 			 */
 			const map = {};
 			for (const key in utf32_array) {
@@ -303,7 +303,7 @@ MOJI_CHAR_MAP.is_initmap = false;
 class MojiAnalizerTools {
 	/**
 	 * 指定したコードポイントの漢字は1981年より前に常用漢字とされているか判定する
-	 * @param {Number} unicode_codepoint - Unicodeのコードポイント
+	 * @param {number} unicode_codepoint - Unicodeのコードポイント
 	 * @returns {boolean} 判定結果
 	 */
 	static isJoyoKanjiBefore1981(unicode_codepoint) {
@@ -313,7 +313,7 @@ class MojiAnalizerTools {
 
 	/**
 	 * 指定したコードポイントの漢字は1981年時点で常用漢字かを判定する
-	 * @param {Number} unicode_codepoint - Unicodeのコードポイント
+	 * @param {number} unicode_codepoint - Unicodeのコードポイント
 	 * @returns {boolean} 判定結果
 	 */
 	static isJoyoKanji1981(unicode_codepoint) {
@@ -324,7 +324,7 @@ class MojiAnalizerTools {
 
 	/**
 	 * 指定したコードポイントの漢字は2010年時点で常用漢字かを判定する
-	 * @param {Number} unicode_codepoint - Unicodeのコードポイント
+	 * @param {number} unicode_codepoint - Unicodeのコードポイント
 	 * @returns {boolean} 判定結果
 	 */
 	static isJoyoKanji2010(unicode_codepoint) {
@@ -339,7 +339,7 @@ class MojiAnalizerTools {
 
 	/**
 	 * 指定したコードポイントの漢字は2017年時点で人名漢字でのみ存在するかを判定する
-	 * @param {Number} unicode_codepoint - Unicodeのコードポイント
+	 * @param {number} unicode_codepoint - Unicodeのコードポイント
 	 * @returns {boolean} 判定結果
 	 */
 	static isOnlyJinmeiyoKanji2017(unicode_codepoint) {
@@ -358,7 +358,7 @@ class MojiAnalizerTools {
 
 	/**
 	 * 指定したコードポイントの漢字は2017年時点で人名漢字で許可されているかを判定する
-	 * @param {Number} unicode_codepoint - Unicodeのコードポイント
+	 * @param {number} unicode_codepoint - Unicodeのコードポイント
 	 * @returns {boolean} 判定結果
 	 */
 	static isJinmeiyoKanji2017(unicode_codepoint) {
@@ -370,7 +370,7 @@ class MojiAnalizerTools {
 
 	/**
 	 * 指定したコードポイントの漢字は本ソースコードの最新の時点で常用漢字かを判定する
-	 * @param {Number} unicode_codepoint - Unicodeのコードポイント
+	 * @param {number} unicode_codepoint - Unicodeのコードポイント
 	 * @returns {boolean} 判定結果
 	 */
 	static isJoyoKanji(unicode_codepoint) {
@@ -379,7 +379,7 @@ class MojiAnalizerTools {
 
 	/**
 	 * 指定したコードポイントの漢字は本ソースコードの最新の時点で人名漢字でのみ存在するかを判定する
-	 * @param {Number} unicode_codepoint - Unicodeのコードポイント
+	 * @param {number} unicode_codepoint - Unicodeのコードポイント
 	 * @returns {boolean} 判定結果
 	 */
 	static isOnlyJinmeiyoKanji(unicode_codepoint) {
@@ -388,7 +388,7 @@ class MojiAnalizerTools {
 
 	/**
 	 * 指定したコードポイントの漢字は本ソースコードの最新の時点で人名漢字で許可されているかを判定する
-	 * @param {Number} unicode_codepoint - Unicodeのコードポイント
+	 * @param {number} unicode_codepoint - Unicodeのコードポイント
 	 * @returns {boolean} 判定結果
 	 */
 	static isJinmeiyoKanji(unicode_codepoint) {
@@ -403,18 +403,16 @@ class MojiAnalizerTools {
  * @property {import("../encode/SJIS.js").MenKuTen} menkuten 面区点 コード
  * @property {number} cp932_code CP932(Windows-31J) コード
  * @property {number} sjis2004_code Shift_JIS-2004 コード
- * @property {Array<number>} utf8_array UTF-8 配列
- * @property {Array<number>} utf16_array UTF-16 配列
- * @property {Array<number>} utf32_array UTF-32 配列
- * @property {Array<number>} cp932_array CP932(Windows-31J) バイト配列
- * @property {Array<number>} sjis2004_array Shift_JIS-2004 コード バイト配列
- * @property {Array<number>} shift_jis_array Shift_JIS バイト配列
- * @property {Array<number>} iso2022jp_array ISO-2022-JP バイト配列
- * @property {Array<number>} eucjpms_array eucJP-ms バイト配列
- * @property {Array<number>} eucjis2004_array EUC-JP-2004 バイト配列
- */
-
-/**
+ * @property {number[]} utf8_array UTF-8 配列
+ * @property {number[]} utf16_array UTF-16 配列
+ * @property {number[]} utf32_array UTF-32 配列
+ * @property {number[]} cp932_array CP932(Windows-31J) バイト配列
+ * @property {number[]} sjis2004_array Shift_JIS-2004 コード バイト配列
+ * @property {number[]} shift_jis_array Shift_JIS バイト配列
+ * @property {number[]} iso2022jp_array ISO-2022-JP バイト配列
+ * @property {number[]} eucjpms_array eucJP-ms バイト配列
+ * @property {number[]} eucjis2004_array EUC-JP-2004 バイト配列
+ * 
  * 文字の種別情報
  * @typedef {Object} MojiTypeData
  * @property {boolean} is_regular_sjis Shift_JIS に登録された文字
@@ -445,9 +443,7 @@ class MojiAnalizerTools {
  * @property {boolean} is_variation_selector 異体字セレクタ
  * @property {boolean} is_skin_tone_modifier スキントーン修飾子
  * @property {boolean} is_tag_character タグ文字
- */
-
-/**
+ * 
  * 文字の種別情報
  * @typedef {Object} MojiData
  * @property {MojiEncodeData} encode 文字のエンコード情報
@@ -535,7 +531,7 @@ export default class MojiAnalyzer {
 
 	/**
 	 * 指定した1つのUTF-32 コードポイントに関して、解析を行い情報を返します
-	 * @param {Number} unicode_codepoint - UTF-32 のコードポイント
+	 * @param {number} unicode_codepoint - UTF-32 のコードポイント
 	 * @returns {MojiData} 文字の情報がつまったオブジェクト
 	 */
 	static getMojiData(unicode_codepoint) {

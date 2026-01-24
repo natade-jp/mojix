@@ -16,7 +16,7 @@
 
 	/**
 	 * 制御文字マップ
-	 * @type {Object<number, string>}
+	 * @type {Record<number, string>}
 	 * @ignore
 	 */
 	let control_charcter_map = null;
@@ -33,7 +33,7 @@
 	 * @type {(codepoint: number, annotate?: boolean) => (string|null)}
 	 * @ignore
 	 */
-	let getVariationSelectorsNumberFromCodePoint = null;
+	let getVariationSelectorsnumberFromCodePoint = null;
 
 	/**
 	 * コードポイントからタグ文字の判定をする
@@ -179,35 +179,35 @@
 				"Khmer", "Mongolian", "Unified Canadian Aboriginal Syllabics Extended", "Limbu", "Tai Le", "New Tai Lue", "Khmer Symbols", "Buginese", 
 				"Tai Tham", "Combining Diacritical Marks Extended", "Balinese", "Sundanese", "Batak", "Lepcha", "Ol Chiki", "Cyrillic Extended-C", 
 				"Georgian Extended", "Sundanese Supplement", "Vedic Extensions", "Phonetic Extensions", "Phonetic Extensions Supplement", "Combining Diacritical Marks Supplement", "Latin Extended Additional", "Greek Extended", 
-				"General Punctuation", "Superscripts and Subscripts", "Currency Symbols", "Combining Diacritical Marks for Symbols", "Letterlike Symbols", "Number Forms", "Arrows", "Mathematical Operators", 
+				"General Punctuation", "Superscripts and Subscripts", "Currency Symbols", "Combining Diacritical Marks for Symbols", "Letterlike Symbols", "number Forms", "Arrows", "Mathematical Operators", 
 				"Miscellaneous Technical", "Control Pictures", "Optical Character Recognition", "Enclosed Alphanumerics", "Box Drawing", "Block Elements", "Geometric Shapes", "Miscellaneous Symbols", 
 				"Dingbats", "Miscellaneous Mathematical Symbols-A", "Supplemental Arrows-A", "Braille Patterns", "Supplemental Arrows-B", "Miscellaneous Mathematical Symbols-B", "Supplemental Mathematical Operators", "Miscellaneous Symbols and Arrows", 
 				"Glagolitic", "Latin Extended-C", "Coptic", "Georgian Supplement", "Tifinagh", "Ethiopic Extended", "Cyrillic Extended-A", "Supplemental Punctuation", 
 				"CJK Radicals Supplement", "Kangxi Radicals", "Ideographic Description Characters", "CJK Symbols and Punctuation", "Hiragana", "Katakana", "Bopomofo", "Hangul Compatibility Jamo", 
 				"Kanbun", "Bopomofo Extended", "CJK Strokes", "Katakana Phonetic Extensions", "Enclosed CJK Letters and Months", "CJK Compatibility", "CJK Unified Ideographs Extension A", "Yijing Hexagram Symbols", 
 				"CJK Unified Ideographs", "Yi Syllables", "Yi Radicals", "Lisu", "Vai", "Cyrillic Extended-B", "Bamum", "Modifier Tone Letters", 
-				"Latin Extended-D", "Syloti Nagri", "Common Indic Number Forms", "Phags-pa", "Saurashtra", "Devanagari Extended", "Kayah Li", "Rejang", 
+				"Latin Extended-D", "Syloti Nagri", "Common Indic number Forms", "Phags-pa", "Saurashtra", "Devanagari Extended", "Kayah Li", "Rejang", 
 				"Hangul Jamo Extended-A", "Javanese", "Myanmar Extended-B", "Cham", "Myanmar Extended-A", "Tai Viet", "Meetei Mayek Extensions", "Ethiopic Extended-A", 
 				"Latin Extended-E", "Cherokee Supplement", "Meetei Mayek", "Hangul Syllables", "Hangul Jamo Extended-B", "High Surrogates", "High Private Use Surrogates", "Low Surrogates", 
 				"Private Use Area", "CJK Compatibility Ideographs", "Alphabetic Presentation Forms", "Arabic Presentation Forms-A", "Variation Selectors", "Vertical Forms", "Combining Half Marks", "CJK Compatibility Forms", 
-				"Small Form Variants", "Arabic Presentation Forms-B", "Halfwidth and Fullwidth Forms", "Specials", "Linear B Syllabary", "Linear B Ideograms", "Aegean Numbers", "Ancient Greek Numbers", 
-				"Ancient Symbols", "Phaistos Disc", "Lycian", "Carian", "Coptic Epact Numbers", "Old Italic", "Gothic", "Old Permic", 
+				"Small Form Variants", "Arabic Presentation Forms-B", "Halfwidth and Fullwidth Forms", "Specials", "Linear B Syllabary", "Linear B Ideograms", "Aegean numbers", "Ancient Greek numbers", 
+				"Ancient Symbols", "Phaistos Disc", "Lycian", "Carian", "Coptic Epact numbers", "Old Italic", "Gothic", "Old Permic", 
 				"Ugaritic", "Old Persian", "Deseret", "Shavian", "Osmanya", "Osage", "Elbasan", "Caucasian Albanian", 
 				"Vithkuqi", "Linear A", "Latin Extended-F", "Cypriot Syllabary", "Imperial Aramaic", "Palmyrene", "Nabataean", "Hatran", 
 				"Phoenician", "Lydian", "Meroitic Hieroglyphs", "Meroitic Cursive", "Kharoshthi", "Old South Arabian", "Old North Arabian", "Manichaean", 
 				"Avestan", "Inscriptional Parthian", "Inscriptional Pahlavi", "Psalter Pahlavi", "Old Turkic", "Old Hungarian", "Hanifi Rohingya", "Rumi Numeral Symbols", 
 				"Yezidi", "Arabic Extended-C", "Old Sogdian", "Sogdian", "Old Uyghur", "Chorasmian", "Elymaic", "Brahmi", 
-				"Kaithi", "Sora Sompeng", "Chakma", "Mahajani", "Sharada", "Sinhala Archaic Numbers", "Khojki", "Multani", 
+				"Kaithi", "Sora Sompeng", "Chakma", "Mahajani", "Sharada", "Sinhala Archaic numbers", "Khojki", "Multani", 
 				"Khudawadi", "Grantha", "Newa", "Tirhuta", "Siddham", "Modi", "Mongolian Supplement", "Takri", 
 				"Ahom", "Dogra", "Warang Citi", "Dives Akuru", "Nandinagari", "Zanabazar Square", "Soyombo", "Unified Canadian Aboriginal Syllabics Extended-A", 
 				"Pau Cin Hau", "Devanagari Extended-A", "Bhaiksuki", "Marchen", "Masaram Gondi", "Gunjala Gondi", "Makasar", "Kawi", 
-				"Lisu Supplement", "Tamil Supplement", "Cuneiform", "Cuneiform Numbers and Punctuation", "Early Dynastic Cuneiform", "Cypro-Minoan", "Egyptian Hieroglyphs", "Egyptian Hieroglyph Format Controls", 
+				"Lisu Supplement", "Tamil Supplement", "Cuneiform", "Cuneiform numbers and Punctuation", "Early Dynastic Cuneiform", "Cypro-Minoan", "Egyptian Hieroglyphs", "Egyptian Hieroglyph Format Controls", 
 				"Anatolian Hieroglyphs", "Bamum Supplement", "Mro", "Tangsa", "Bassa Vah", "Pahawh Hmong", "Medefaidrin", "Miao", 
 				"Ideographic Symbols and Punctuation", "Tangut", "Tangut Components", "Khitan Small Script", "Tangut Supplement", "Kana Extended-B", "Kana Supplement", "Kana Extended-A", 
 				"Small Kana Extension", "Nushu", "Duployan", "Shorthand Format Controls", "Znamenny Musical Notation", "Byzantine Musical Symbols", "Musical Symbols", "Ancient Greek Musical Notation", 
 				"Kaktovik Numerals", "Mayan Numerals", "Tai Xuan Jing Symbols", "Counting Rod Numerals", "Mathematical Alphanumeric Symbols", "Sutton SignWriting", "Latin Extended-G", "Glagolitic Supplement", 
 				"Cyrillic Extended-D", "Nyiakeng Puachue Hmong", "Toto", "Wancho", "Nag Mundari", "Ethiopic Extended-B", "Mende Kikakui", "Adlam", 
-				"Indic Siyaq Numbers", "Ottoman Siyaq Numbers", "Arabic Mathematical Alphabetic Symbols", "Mahjong Tiles", "Domino Tiles", "Playing Cards", "Enclosed Alphanumeric Supplement", "Enclosed Ideographic Supplement", 
+				"Indic Siyaq numbers", "Ottoman Siyaq numbers", "Arabic Mathematical Alphabetic Symbols", "Mahjong Tiles", "Domino Tiles", "Playing Cards", "Enclosed Alphanumeric Supplement", "Enclosed Ideographic Supplement", 
 				"Miscellaneous Symbols and Pictographs", "Emoticons", "Ornamental Dingbats", "Transport and Map Symbols", "Alchemical Symbols", "Geometric Shapes Extended", "Supplemental Arrows-C", "Supplemental Symbols and Pictographs", 
 				"Chess Symbols", "Symbols and Pictographs Extended-A", "Symbols for Legacy Computing", "CJK Unified Ideographs Extension B", "CJK Unified Ideographs Extension C", "CJK Unified Ideographs Extension D", "CJK Unified Ideographs Extension E", "CJK Unified Ideographs Extension F", "CJK Unified Ideographs Extension I", 
 				"CJK Compatibility Ideographs Supplement", "CJK Unified Ideographs Extension G", "CJK Unified Ideographs Extension H", "CJK Unified Ideographs Extension J", "Tags", "Variation Selectors Supplement", "Supplementary Private Use Area-A", "Supplementary Private Use Area-B"
@@ -241,7 +241,7 @@
 			/**
 			 * コードポイントからUnicodeのブロック名に変換する
 			 * 変換できない場合は "-" を返す
-			 * @param {Number} codepoint - コードポイント
+			 * @param {number} codepoint - コードポイント
 			 * @returns {string}
 			 */
 			toBlockNameFromUnicode = function (codepoint) {
@@ -255,11 +255,11 @@
 
 			/**
 			 * コードポイントから異体字セレクタの判定
-			 * @param {Number} codepoint - コードポイント
+			 * @param {number} codepoint - コードポイント
 			 * @param {boolean} [annotate = false] - 注釈をつけるか否か
 			 * @returns {string|null} 確認結果(異体字セレクタではない場合はNULLを返す)
 			 */
-			getVariationSelectorsNumberFromCodePoint = function (codepoint, annotate) {
+			getVariationSelectorsnumberFromCodePoint = function (codepoint, annotate) {
 				// モンゴル自由字形選択子 U+180B〜U+180D (3個)
 				// prettier-ignore
 				if (0x180B <= codepoint && codepoint <= 0x180D) {
@@ -289,7 +289,7 @@
 
 			/**
 			 * コードポイントからタグ文字の判定
-			 * @param {Number} codepoint - コードポイント
+			 * @param {number} codepoint - コードポイント
 			 * @returns {string|null} 確認結果(タグ文字ではない場合はNULLを返す)
 			 */
 			getTagCharacterFromCodePoint = function (codepoint) {
@@ -312,9 +312,9 @@
 
 		/**
 		 * 上位のサロゲートペアの判定
-		 * @param {String} text - 対象テキスト
-		 * @param {Number} index - インデックス
-		 * @returns {Boolean} 確認結果
+		 * @param {string} text - 対象テキスト
+		 * @param {number} index - インデックス
+		 * @returns {boolean} 確認結果
 		 */
 		static isHighSurrogateAt(text, index) {
 			const ch = text.charCodeAt(index);
@@ -324,9 +324,9 @@
 
 		/**
 		 * 下位のサロゲートペアの判定
-		 * @param {String} text - 対象テキスト
-		 * @param {Number} index - インデックス
-		 * @returns {Boolean} 確認結果
+		 * @param {string} text - 対象テキスト
+		 * @param {number} index - インデックス
+		 * @returns {boolean} 確認結果
 		 */
 		static isLowSurrogateAt(text, index) {
 			const ch = text.charCodeAt(index);
@@ -336,9 +336,9 @@
 
 		/**
 		 * サロゲートペアの判定
-		 * @param {String} text - 対象テキスト
-		 * @param {Number} index - インデックス
-		 * @returns {Boolean} 確認結果
+		 * @param {string} text - 対象テキスト
+		 * @param {number} index - インデックス
+		 * @returns {boolean} 確認結果
 		 */
 		static isSurrogatePairAt(text, index) {
 			const ch = text.charCodeAt(index);
@@ -348,9 +348,9 @@
 
 		/**
 		 * サロゲートペア対応のコードポイント取得
-		 * @param {String} text - 対象テキスト
-		 * @param {Number} [index = 0] - インデックス
-		 * @returns {Number} コードポイント
+		 * @param {string} text - 対象テキスト
+		 * @param {number} [index = 0] - インデックス
+		 * @returns {number} コードポイント
 		 */
 		static codePointAt(text, index) {
 			const index_ = index !== undefined ? index : 0;
@@ -366,9 +366,9 @@
 
 		/**
 		 * インデックスの前にあるコードポイント
-		 * @param {String} text - 対象テキスト
-		 * @param {Number} index - インデックス
-		 * @returns {Number} コードポイント
+		 * @param {string} text - 対象テキスト
+		 * @param {number} index - インデックス
+		 * @returns {number} コードポイント
 		 */
 		static codePointBefore(text, index) {
 			if (!Unicode.isLowSurrogateAt(text, index - 1)) {
@@ -380,10 +380,10 @@
 
 		/**
 		 * コードポイント換算で文字列数をカウント
-		 * @param {String} text - 対象テキスト
-		 * @param {Number} [beginIndex=0] - 最初のインデックス（省略可）
-		 * @param {Number} [endIndex] - 最後のインデックス（ここは含めない）（省略可）
-		 * @returns {Number} 文字数
+		 * @param {string} text - 対象テキスト
+		 * @param {number} [beginIndex=0] - 最初のインデックス（省略可）
+		 * @param {number} [endIndex] - 最後のインデックス（ここは含めない）（省略可）
+		 * @returns {number} 文字数
 		 */
 		static codePointCount(text, beginIndex, endIndex) {
 			if (beginIndex === undefined) {
@@ -404,10 +404,10 @@
 
 		/**
 		 * コードポイント換算で文字列配列の位置を計算
-		 * @param {String} text - 対象テキスト
-		 * @param {Number} index - オフセット
-		 * @param {Number} codePointOffset - ずらすコードポイント数
-		 * @returns {Number} ずらしたインデックス
+		 * @param {string} text - 対象テキスト
+		 * @param {number} index - オフセット
+		 * @param {number} codePointOffset - ずらすコードポイント数
+		 * @returns {number} ずらしたインデックス
 		 */
 		static offsetByCodePoints(text, index, codePointOffset) {
 			let count = 0;
@@ -441,16 +441,16 @@
 
 		/**
 		 * コードポイントの数値データをUTF16の配列に変換
-		 * @param {...(number|Array<number>)} codepoint - 変換したいUTF-32の配列、又はコードポイントを並べた可変引数
-		 * @returns {Array<number>} 変換後のテキスト
+		 * @param {...(number|number[])} codepoint - 変換したいUTF-32の配列、又はコードポイントを並べた可変引数
+		 * @returns {number[]} 変換後のテキスト
 		 */
 		static toUTF16ArrayFromCodePoint() {
 			/**
-			 * @type {Array<number>}
+			 * @type {number[]}
 			 */
 			const utf16_array = [];
 			/**
-			 * @type {Array<number>}
+			 * @type {number[]}
 			 */
 			let codepoint_array = [];
 			if (arguments[0].length) {
@@ -478,8 +478,8 @@
 
 		/**
 		 * コードポイントの数値データを文字列に変換
-		 * @param {...(number|Array<number>)} codepoint - 変換したいコードポイントの数値配列、又は数値を並べた可変引数
-		 * @returns {String} 変換後のテキスト
+		 * @param {...(number|number[])} codepoint - 変換したいコードポイントの数値配列、又は数値を並べた可変引数
+		 * @returns {string} 変換後のテキスト
 		 */
 		static fromCodePoint(codepoint) {
 			let utf16_array = null;
@@ -501,8 +501,8 @@
 
 		/**
 		 * 文字列をUTF32(コードポイント)の配列に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {Array<number>} UTF32(コードポイント)のデータが入った配列
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {number[]} UTF32(コードポイント)のデータが入った配列
 		 */
 		static toUTF32Array(text) {
 			const utf32 = [];
@@ -514,8 +514,8 @@
 
 		/**
 		 * UTF32の配列から文字列に変換
-		 * @param {Array<number>} utf32 - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {number[]} utf32 - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static fromUTF32Array(utf32) {
 			return Unicode.fromCodePoint(utf32);
@@ -523,8 +523,8 @@
 
 		/**
 		 * 文字列をUTF16の配列に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {Array<number>} UTF16のデータが入った配列
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {number[]} UTF16のデータが入った配列
 		 */
 		static toUTF16Array(text) {
 			const utf16 = [];
@@ -536,8 +536,8 @@
 
 		/**
 		 * UTF16の配列から文字列に変換
-		 * @param {Array<number>} utf16 - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {number[]} utf16 - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static fromUTF16Array(utf16) {
 			const text = [];
@@ -549,8 +549,8 @@
 
 		/**
 		 * 文字列をUTF8の配列に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {Array<number>} UTF8のデータが入った配列
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {number[]} UTF8のデータが入った配列
 		 */
 		static toUTF8Array(text) {
 			return Unicode.toUTFBinaryFromCodePoint(Unicode.toUTF32Array(text), "utf-8", false);
@@ -558,8 +558,8 @@
 
 		/**
 		 * UTF8の配列から文字列に変換
-		 * @param {Array<number>} utf8 - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {number[]} utf8 - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static fromUTF8Array(utf8) {
 			return Unicode.fromCodePoint(Unicode.toCodePointFromUTFBinary(utf8, "utf-8"));
@@ -568,10 +568,10 @@
 		/**
 		 * 指定したテキストを切り出す
 		 * - 単位は文字数
-		 * @param {String} text - 切り出したいテキスト
-		 * @param {Number} offset - 切り出し位置
-		 * @param {Number} size - 切り出す長さ
-		 * @returns {String} 切り出したテキスト
+		 * @param {string} text - 切り出したいテキスト
+		 * @param {number} offset - 切り出し位置
+		 * @param {number} size - 切り出す長さ
+		 * @returns {string} 切り出したテキスト
 		 */
 		static cutTextForCodePoint(text, offset, size) {
 			const utf32 = Unicode.toUTF32Array(text);
@@ -584,7 +584,7 @@
 
 		/**
 		 * UTFのバイナリ配列からバイトオーダーマーク(BOM)を調査する
-		 * @param {Array<number>} utfbinary - 調査するバイナリ配列
+		 * @param {number[]} utfbinary - 調査するバイナリ配列
 		 * @returns {string} 符号化形式(不明時はnull)
 		 */
 		static getCharsetFromBOM(utfbinary) {
@@ -619,9 +619,9 @@
 
 		/**
 		 * UTFのバイナリ配列からコードポイントに変換
-		 * @param {Array<number>} binary - 変換したいバイナリ配列
-		 * @param {String} [charset] - UTFの種類（省略した場合はBOM付きを期待する）
-		 * @returns {Array<number>} コードポイントの配列(失敗時はnull)
+		 * @param {number[]} binary - 変換したいバイナリ配列
+		 * @param {string} [charset] - UTFの種類（省略した場合はBOM付きを期待する）
+		 * @returns {number[]} コードポイントの配列(失敗時はnull)
 		 */
 		static toCodePointFromUTFBinary(binary, charset) {
 			const utf32_array = [];
@@ -734,10 +734,10 @@
 
 		/**
 		 * UTF32配列からバイナリ配列に変換
-		 * @param {Array<number>} utf32_array - 変換したいUTF-32配列
-		 * @param {String} charset - UTFの種類
+		 * @param {number[]} utf32_array - 変換したいUTF-32配列
+		 * @param {string} charset - UTFの種類
 		 * @param {boolean} [is_with_bom=true] - BOMをつけるかどうか
-		 * @returns {Array<number>} バイナリ配列(失敗時はnull)
+		 * @returns {number[]} バイナリ配列(失敗時はnull)
 		 */
 		static toUTFBinaryFromCodePoint(utf32_array, charset, is_with_bom) {
 			let is_with_bom_ = is_with_bom !== undefined ? is_with_bom : true;
@@ -746,7 +746,7 @@
 				is_with_bom_ = true;
 			}
 			/**
-			 * @type {Array<number>}
+			 * @type {number[]}
 			 */
 			const binary = [];
 			// UTF-8
@@ -875,7 +875,7 @@
 		/**
 		 * コードポイントからUnicodeのブロック名に変換する
 		 * 変換できない場合は "-" を返す
-		 * @param {Number} codepoint - コードポイント
+		 * @param {number} codepoint - コードポイント
 		 * @returns {string}
 		 */
 		static toBlockNameFromUnicode(codepoint) {
@@ -886,14 +886,14 @@
 		/**
 		 * コードポイントから制御文字名に変換する
 		 * 変換できない場合は null を返す
-		 * @param {Number} codepoint - コードポイント
+		 * @param {number} codepoint - コードポイント
 		 * @returns {string}
 		 */
 		static toControlCharcterName(codepoint) {
 			Unicode.init();
 
 			// 異体字セレクタの確認を行い、異体字セレクタ用の制御文字(FVS, VSx)を返す
-			const info_variation_selectors_number = getVariationSelectorsNumberFromCodePoint(codepoint);
+			const info_variation_selectors_number = getVariationSelectorsnumberFromCodePoint(codepoint);
 			if (info_variation_selectors_number !== null) {
 				return info_variation_selectors_number;
 			}
@@ -917,7 +917,7 @@
 		 * - タグ文字（TAG CHARACTER）
 		 * - ゼロ幅接合子
 		 *
-		 * @param {Number} codepoint - コードポイント
+		 * @param {number} codepoint - コードポイント
 		 * @returns {boolean} 確認結果
 		 */
 		static isGraphemeComponentFromCodePoint(codepoint) {
@@ -936,7 +936,7 @@
 		 *
 		 * 含まれるもの:
 		 * - ゼロ幅スペース, ゼロ幅非接合子, ゼロ幅接合子, 単語結合子
-		 * @param {Number} codepoint - コードポイント
+		 * @param {number} codepoint - コードポイント
 		 * @returns {boolean} 確認結果
 		 */
 		static isZeroWidthCharacterFromCodePoint(codepoint) {
@@ -951,7 +951,7 @@
 
 		/**
 		 * コードポイントから結合文字の判定
-		 * @param {Number} codepoint - コードポイント
+		 * @param {number} codepoint - コードポイント
 		 * @returns {boolean} 確認結果
 		 */
 		static isCombiningMarkFromCodePoint(codepoint) {
@@ -990,7 +990,7 @@
 
 		/**
 		 * コードポイントから異体字セレクタの判定
-		 * @param {Number} codepoint - コードポイント
+		 * @param {number} codepoint - コードポイント
 		 * @returns {boolean} 確認結果
 		 */
 		static isVariationSelectorFromCodePoint(codepoint) {
@@ -1009,7 +1009,7 @@
 
 		/**
 		 * コードポイントからスキントーン修飾子の判定
-		 * @param {Number} codepoint - コードポイント
+		 * @param {number} codepoint - コードポイント
 		 * @returns {boolean} 確認結果
 		 */
 		static isEmojiModifierFromCodePoint(codepoint) {
@@ -1022,7 +1022,7 @@
 
 		/**
 		 * コードポイントからタグ文字の判定
-		 * @param {Number} codepoint - コードポイント
+		 * @param {number} codepoint - コードポイント
 		 * @returns {boolean} 確認結果
 		 */
 		static isTagCharacterFromCodePoint(codepoint) {
@@ -1049,6 +1049,7 @@
 	 *  The MIT license https://opensource.org/licenses/MIT
 	 */
 
+
 	/**
 	 * 面区点情報
 	 * @typedef {Object} MenKuTen
@@ -1065,9 +1066,9 @@
 	class SJIS {
 		/**
 		 * 文字列を Shift_JIS の配列に変換。変換できない文字は "?" に変換される。
-		 * @param {String} text - 変換したいテキスト
-		 * @param {Object<number, number>} unicode_to_sjis - Unicode から Shift_JIS への変換マップ
-		 * @returns {Array<number>} Shift_JIS のデータが入った配列
+		 * @param {string} text - 変換したいテキスト
+		 * @param {Record<number, number>} unicode_to_sjis - Unicode から Shift_JIS への変換マップ
+		 * @returns {number[]} Shift_JIS のデータが入った配列
 		 * @ignore
 		 */
 		static toSJISArray(text, unicode_to_sjis) {
@@ -1089,9 +1090,9 @@
 		/**
 		 * 文字列を Shift_JIS のバイナリ配列に変換。変換できない文字は "?" に変換される。
 		 * - 日本語文字は2バイトとして、配列も2つ分、使用します。
-		 * @param {String} text - 変換したいテキスト
-		 * @param {Object<number, number>} unicode_to_sjis - Unicode から Shift_JIS への変換マップ
-		 * @returns {Array<number>} Shift_JIS のデータが入ったバイナリ配列
+		 * @param {string} text - 変換したいテキスト
+		 * @param {Record<number, number>} unicode_to_sjis - Unicode から Shift_JIS への変換マップ
+		 * @returns {number[]} Shift_JIS のデータが入ったバイナリ配列
 		 * @ignore
 		 */
 		static toSJISBinary(text, unicode_to_sjis) {
@@ -1110,9 +1111,9 @@
 
 		/**
 		 * SJISの配列から文字列に変換
-		 * @param {Array<number>} sjis - 変換したいテキスト
-		 * @param {Object<number, number|Array<number>>} sjis_to_unicode - Shift_JIS から Unicode への変換マップ
-		 * @returns {String} 変換後のテキスト
+		 * @param {number[]} sjis - 変換したいテキスト
+		 * @param {Record<number, number|number[]>} sjis_to_unicode - Shift_JIS から Unicode への変換マップ
+		 * @returns {string} 変換後のテキスト
 		 * @ignore
 		 */
 		static fromSJISArray(sjis, sjis_to_unicode) {
@@ -1122,7 +1123,7 @@
 			for (let i = 0; i < sjis.length; i++) {
 				let x = sjis[i];
 				/**
-				 * @type {number|Array<number>}
+				 * @type {number|number[]}
 				 */
 				let y = [];
 				if (x >= 0x100) {
@@ -1160,9 +1161,9 @@
 
 		/**
 		 * 指定したコードポイントの文字から Shift_JIS 上の符号化数値に変換
-		 * @param {Number} unicode_codepoint - Unicodeのコードポイント
-		 * @param {Object<number, number>} unicode_to_sjis - Unicode から Shift_JIS への変換マップ
-		 * @returns {Number} 符号化数値(変換できない場合はnullとなる)
+		 * @param {number} unicode_codepoint - Unicodeのコードポイント
+		 * @param {Record<number, number>} unicode_to_sjis - Unicode から Shift_JIS への変換マップ
+		 * @returns {number} 符号化数値(変換できない場合はnullとなる)
 		 * @ignore
 		 */
 		static toSJISCodeFromUnicode(unicode_codepoint, unicode_to_sjis) {
@@ -1176,7 +1177,7 @@
 
 		/**
 		 * 指定した Shift_JIS-2004 のコードから面区点番号に変換
-		 * @param {Number} sjis_code - Shift_JIS-2004 のコードポイント
+		 * @param {number} sjis_code - Shift_JIS-2004 のコードポイント
 		 * @returns {MenKuTen} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 		 */
 		static toMenKuTenFromSJIS2004Code(sjis_code) {
@@ -1250,8 +1251,8 @@
 
 		/**
 		 * 指定したコードポイントの文字から Shift_JIS-2004 上の面区点番号に変換
-		 * @param {Number} unicode_codepoint - Unicodeのコードポイント
-		 * @param {Object<number, number>} unicode_to_sjis - Unicode から Shift_JIS-2004 への変換マップ
+		 * @param {number} unicode_codepoint - Unicodeのコードポイント
+		 * @param {Record<number, number>} unicode_to_sjis - Unicode から Shift_JIS-2004 への変換マップ
 		 * @returns {MenKuTen} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 		 * @ignore
 		 */
@@ -1266,7 +1267,7 @@
 		/**
 		 * 指定した面区点番号から Shift_JIS-2004 コードに変換
 		 * @param {MenKuTen|string} menkuten - 面区点番号（面が省略された場合は、1とみなす）
-		 * @returns {Number} Shift_JIS-2004 のコードポイント(存在しない場合はnullを返す)
+		 * @returns {number} Shift_JIS-2004 のコードポイント(存在しない場合はnullを返す)
 		 */
 		static toSJIS2004CodeFromMenKuTen(menkuten) {
 			let m = null,
@@ -1304,7 +1305,7 @@
 			let s2 = -1;
 
 			/**
-			 * @type {Object<number, number>}
+			 * @type {Record<number, number>}
 			 */
 			const kmap = { 1: 1, 3: 1, 4: 1, 5: 1, 8: 1, 12: 1, 13: 1, 14: 1, 15: 1 };
 
@@ -1348,8 +1349,8 @@
 		/**
 		 * 指定した面区点番号から Unicode コードポイントに変換
 		 * @param {MenKuTen|string} menkuten - 面区点番号
-		 * @param {Object<number, number|Array<number>>} sjis_to_unicode - Shift_JIS-2004 から Unicode への変換マップ
-		 * @returns {Array<number>} UTF-32の配列(存在しない場合はnullを返す)
+		 * @param {Object<number, number|number[]>} sjis_to_unicode - Shift_JIS-2004 から Unicode への変換マップ
+		 * @returns {number[]} UTF-32の配列(存在しない場合はnullを返す)
 		 * @ignore
 		 */
 		static toUnicodeCodeFromMenKuTen(menkuten, sjis_to_unicode) {
@@ -1370,7 +1371,7 @@
 
 		/**
 		 * 指定した Shift_JIS のコードから区点番号に変換
-		 * @param {Number} sjis_code - Shift_JIS のコードポイント
+		 * @param {number} sjis_code - Shift_JIS のコードポイント
 		 * @returns {MenKuTen} 区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 		 */
 		static toKuTenFromSJISCode(sjis_code) {
@@ -1424,8 +1425,8 @@
 
 		/**
 		 * 指定したコードポイントの文字から Shift_JIS 上の面区点番号に変換
-		 * @param {Number} unicode_codepoint - Unicodeのコードポイント
-		 * @param {Object<number, number>} unicode_to_sjis - Unicode から Shift_JIS への変換マップ
+		 * @param {number} unicode_codepoint - Unicodeのコードポイント
+		 * @param {Record<number, number>} unicode_to_sjis - Unicode から Shift_JIS への変換マップ
 		 * @returns {MenKuTen} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 		 * @ignore
 		 */
@@ -1440,7 +1441,7 @@
 		/**
 		 * 指定した面区点番号／区点番号から Shift_JIS コードに変換
 		 * @param {MenKuTen|string} kuten - 面区点番号／区点番号
-		 * @returns {Number} Shift_JIS のコードポイント(存在しない場合はnullを返す)
+		 * @returns {number} Shift_JIS のコードポイント(存在しない場合はnullを返す)
 		 */
 		static toSJISCodeFromKuTen(kuten) {
 			// 1～94区まで存在しているため面句点変換用で流用可能。
@@ -1452,8 +1453,8 @@
 		/**
 		 * 指定した区点番号から Unicode コードポイントに変換
 		 * @param {MenKuTen|string} kuten - 区点番号
-		 * @param {Object<number, number|Array<number>>} sjis_to_unicode - Shift_JIS から Unicode への変換マップ
-		 * @returns {Array<number>} UTF-32の配列(存在しない場合はnullを返す)
+		 * @param {Object<number, number|number[]>} sjis_to_unicode - Shift_JIS から Unicode への変換マップ
+		 * @returns {number[]} UTF-32の配列(存在しない場合はnullを返す)
 		 * @ignore
 		 */
 		static toUnicodeCodeFromKuTen(kuten, sjis_to_unicode) {
@@ -1474,8 +1475,8 @@
 
 		/**
 		 * Shift_JIS のコードポイントからJIS漢字水準（JIS Chinese character standard）に変換
-		 * @param {Number} sjis_code - Shift_JIS-2004 のコードポイント
-		 * @returns {Number} -1...変換不可, 0...水準なし, 1...第1水準, ...
+		 * @param {number} sjis_code - Shift_JIS-2004 のコードポイント
+		 * @returns {number} -1...変換不可, 0...水準なし, 1...第1水準, ...
 		 */
 		static toJISKanjiSuijunFromSJISCode(sjis_code) {
 			if (!sjis_code) {
@@ -1530,9 +1531,9 @@
 
 		/**
 		 * Unicode のコードポイントからJIS漢字水準（JIS Chinese character standard）に変換
-		 * @param {Number} unicode_codepoint - Unicodeのコードポイント
-		 * @param {Object<number, number>} unicode_to_sjis - Unicode から Shift_JIS への変換マップ
-		 * @returns {Number} -1...変換不可, 0...水準なし, 1...第1水準, ...
+		 * @param {number} unicode_codepoint - Unicodeのコードポイント
+		 * @param {Record<number, number>} unicode_to_sjis - Unicode から Shift_JIS への変換マップ
+		 * @returns {number} -1...変換不可, 0...水準なし, 1...第1水準, ...
 		 * @ignore
 		 */
 		static toJISKanjiSuijunFromUnicode(unicode_codepoint, unicode_to_sjis) {
@@ -1546,7 +1547,7 @@
 		/**
 		 * 指定した面区点番号から Shift_JIS の仕様上、正規な物か判定
 		 * @param {MenKuTen|string} menkuten - 面区点番号（面が省略された場合は、1とみなす）
-		 * @returns {Boolean} 正規なデータは true, 不正なデータは false
+		 * @returns {boolean} 正規なデータは true, 不正なデータは false
 		 */
 		static isRegularMenKuten(menkuten) {
 			let m, k, t;
@@ -1574,7 +1575,7 @@
 			}
 
 			/**
-			 * @type {Object<number, number>}
+			 * @type {Record<number, number>}
 			 */
 			const kmap = { 1: 1, 3: 1, 4: 1, 5: 1, 8: 1, 12: 1, 13: 1, 14: 1, 15: 1 };
 			if (m === 1) {
@@ -1609,6 +1610,7 @@
 	 *  The MIT license https://opensource.org/licenses/MIT
 	 */
 
+
 	/**
 	 * CP932, Windows-31J の変換マップ作成用クラス
 	 * @ignore
@@ -1624,7 +1626,7 @@
 			CP932MAP.is_initmap = true;
 
 			/**
-			 * @returns {Object<number, number>}
+			 * @returns {Record<number, number>}
 			 */
 			const getCp932ToUnicodeMap = function () {
 
@@ -1635,7 +1637,7 @@
 				 * 参考：WideCharToMultiByte
 				 * メモ：今回は使っていないが、以下の文献も参考になるかもしれません。
 				 * ftp://www.unicode.org/Public/MAPPINGS/OBSOLETE/EASTASIA/JIS/JIS0208.TXT
-				 * @type {Object<number, number>}
+				 * @type {Record<number, number>}
 				 */
 				// prettier-ignore
 				const cp932_to_unicode_map = {
@@ -1780,13 +1782,13 @@
 
 			/**
 			 * CP932 変換マップ
-			 * @type {Object<number, number>}
+			 * @type {Record<number, number>}
 			 */
 			const cp932_to_unicode_map = getCp932ToUnicodeMap();
 
 			/**
 			 * 重複された CP932 のコード
-			 * @type {Array<number>}
+			 * @type {number[]}
 			 */
 			// prettier-ignore
 			const duplicate_map_array = [
@@ -1818,12 +1820,12 @@
 			];
 
 			/**
-			 * @type {Object<number, number>}
+			 * @type {Record<number, number>}
 			 */
 			const duplicate_map = {};
 
 			/**
-			 * @type {Object<number, number>}
+			 * @type {Record<number, number>}
 			 */
 			const unicode_to_cp932_map = {};
 
@@ -1868,7 +1870,7 @@
 		}
 
 		/**
-		 * @returns {Object<number, number>}
+		 * @returns {Record<number, number>}
 		 */
 		static CP932_TO_UNICODE() {
 			CP932MAP.init();
@@ -1876,7 +1878,7 @@
 		}
 
 		/**
-		 * @returns {Object<number, number>}
+		 * @returns {Record<number, number>}
 		 */
 		static UNICODE_TO_CP932() {
 			CP932MAP.init();
@@ -1892,13 +1894,13 @@
 
 	/**
 	 * 変換用マップ
-	 * @type {Object<number, number>}
+	 * @type {Record<number, number>}
 	 */
 	CP932MAP.cp932_to_unicode_map = null;
 
 	/**
 	 * 変換用マップ
-	 * @type {Object<number, number>}
+	 * @type {Record<number, number>}
 	 */
 	CP932MAP.unicode_to_cp932_map = null;
 
@@ -1909,8 +1911,8 @@
 	class CP932 {
 		/**
 		 * Unicode のコードから CP932 のコードに変換
-		 * @param {Number} unicode_codepoint - Unicode のコードポイント
-		 * @returns {Number} CP932 のコードポイント (存在しない場合は undefined)
+		 * @param {number} unicode_codepoint - Unicode のコードポイント
+		 * @returns {number} CP932 のコードポイント (存在しない場合は undefined)
 		 */
 		static toCP932FromUnicode(unicode_codepoint) {
 			return CP932MAP.UNICODE_TO_CP932()[unicode_codepoint];
@@ -1918,8 +1920,8 @@
 
 		/**
 		 * CP932 のコードから Unicode のコードに変換
-		 * @param {Number} cp932_codepoint - CP932 のコードポイント
-		 * @returns {Number} Unicode のコードポイント (存在しない場合は undefined)
+		 * @param {number} cp932_codepoint - CP932 のコードポイント
+		 * @returns {number} Unicode のコードポイント (存在しない場合は undefined)
 		 */
 		static toUnicodeFromCP932(cp932_codepoint) {
 			return CP932MAP.CP932_TO_UNICODE()[cp932_codepoint];
@@ -1927,8 +1929,8 @@
 
 		/**
 		 * 文字列を CP932 の配列に変換。変換できない文字は "?" に変換される。
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {Array<number>} CP932 のデータが入った配列
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {number[]} CP932 のデータが入った配列
 		 */
 		static toCP932Array(text) {
 			return SJIS.toSJISArray(text, CP932MAP.UNICODE_TO_CP932());
@@ -1937,8 +1939,8 @@
 		/**
 		 * 文字列を CP932 のバイナリ配列に変換。変換できない文字は "?" に変換される。
 		 * - 日本語文字は2バイトとして、配列も2つ分、使用します。
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {Array<number>} CP932 のデータが入ったバイナリ配列
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {number[]} CP932 のデータが入ったバイナリ配列
 		 */
 		static toCP932Binary(text) {
 			return SJIS.toSJISBinary(text, CP932MAP.UNICODE_TO_CP932());
@@ -1946,8 +1948,8 @@
 
 		/**
 		 * CP932 の配列から文字列に変換
-		 * @param {Array<number>} cp932 - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {number[]} cp932 - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static fromCP932Array(cp932) {
 			return SJIS.fromSJISArray(cp932, CP932MAP.CP932_TO_UNICODE());
@@ -1956,7 +1958,7 @@
 		/**
 		 * 指定した文字から Windows-31J 上の区点番号に変換
 		 * - 2文字以上を指定した場合は、1文字目のみを変換する
-		 * @param {String} text - 変換したいテキスト
+		 * @param {string} text - 変換したいテキスト
 		 * @returns {import("./SJIS.js").MenKuTen} 区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 		 */
 		static toKuTen(text) {
@@ -1970,7 +1972,7 @@
 		/**
 		 * Windows-31J 上の区点番号から文字列に変換
 		 * @param {import("./SJIS.js").MenKuTen|string} kuten - 区点番号
-		 * @returns {String} 変換後のテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static fromKuTen(kuten) {
 			const code = SJIS.toUnicodeCodeFromKuTen(kuten, CP932MAP.CP932_TO_UNICODE());
@@ -1987,6 +1989,7 @@
 	 * LICENSE:
 	 *  The MIT license https://opensource.org/licenses/MIT
 	 */
+
 
 	/**
 	 * Shift_JIS-2004 の変換マップ作成用クラス
@@ -2006,7 +2009,7 @@
 			 * 変換マップを作成
 			 *
 			 *
-			 * @returns {Object<number, number|Array<number>>}
+			 * @returns {Object<number, number|number[]>}
 			 */
 			const getSJIS2004ToUnicodeMap = function () {
 				/**
@@ -2016,7 +2019,7 @@
 				 *
 				 * 参考：JIS X 0213 - Wikipedia (2019/1/1)
 				 * https://ja.wikipedia.org/wiki/JIS_X_0213
-				 * @type {Object<number, number|Array<number>>}
+				 * @type {Object<number, number|number[]>}
 				 */
 				// prettier-ignore
 				const sjis2004_to_unicode_map = {
@@ -2313,7 +2316,7 @@
 			 * 変換マップ
 			 * - 2文字に変換される場合もあるので注意
 			 *
-			 * @returns {Object<number, number|Array<number>>}
+			 * @returns {Object<number, number|number[]>}
 			 */
 			const sjis2004_to_unicode_map = getSJIS2004ToUnicodeMap();
 
@@ -2324,7 +2327,7 @@
 			 *
 			 * メモ：今回は使っていませんが、以下の文献も参考になるかもしれません。
 			 * ftp://www.unicode.org/Public/MAPPINGS/OBSOLETE/EASTASIA/JIS/JIS0208.TXT
-			 * @type {Object<number, number>}
+			 * @type {Record<number, number>}
 			 */
 			// prettier-ignore
 			const sjis2004_to_unicode_map_2 = {
@@ -2359,7 +2362,7 @@
 
 			/**
 			 * 逆引きマップ作成。重複がある場合は、小さい数値を優先させる。
-			 * @type {Object<number, number>}
+			 * @type {Record<number, number>}
 			 */
 			const unicode_to_sjis2004_map = {};
 			for (const key in sjis2004_to_unicode_map) {
@@ -2384,7 +2387,7 @@
 		}
 
 		/**
-		 * @returns {Object<number, number|Array<number>>}
+		 * @returns {Record<number, number|number[]>}
 		 */
 		static SJIS2004_TO_UNICODE() {
 			SJIS2004MAP.init();
@@ -2392,7 +2395,7 @@
 		}
 
 		/**
-		 * @returns {Object<number, number>}
+		 * @returns {Record<number, number>}
 		 */
 		static UNICODE_TO_SJIS2004() {
 			SJIS2004MAP.init();
@@ -2408,13 +2411,13 @@
 
 	/**
 	 * 変換用マップ
-	 * @type {Object<number, number|Array<number>>}
+	 * @type {Record<number, number|number[]>}
 	 */
 	SJIS2004MAP.sjis2004_to_unicode_map = null;
 
 	/**
 	 * 変換用マップ
-	 * @type {Object<number, number>}
+	 * @type {Record<number, number>}
 	 */
 	SJIS2004MAP.unicode_to_sjis2004_map = null;
 
@@ -2425,8 +2428,8 @@
 	class SJIS2004 {
 		/**
 		 * Unicode のコードから Shift_JIS-2004 のコードに変換
-		 * @param {Number} unicode_codepoint - Unicode のコードポイント
-		 * @returns {Number} Shift_JIS-2004 のコードポイント (存在しない場合は undefined)
+		 * @param {number} unicode_codepoint - Unicode のコードポイント
+		 * @returns {number} Shift_JIS-2004 のコードポイント (存在しない場合は undefined)
 		 */
 		static toSJIS2004FromUnicode(unicode_codepoint) {
 			return SJIS2004MAP.UNICODE_TO_SJIS2004()[unicode_codepoint];
@@ -2434,8 +2437,8 @@
 
 		/**
 		 * Shift_JIS-2004 のコードから Unicode のコードに変換
-		 * @param {Number} sjis2004_codepoint - Shift_JIS-2004 のコードポイント
-		 * @returns {number|Array<number>} Unicode のコードポイント (存在しない場合は undefined)
+		 * @param {number} sjis2004_codepoint - Shift_JIS-2004 のコードポイント
+		 * @returns {number|number[]} Unicode のコードポイント (存在しない場合は undefined)
 		 */
 		static toUnicodeFromSJIS2004(sjis2004_codepoint) {
 			return SJIS2004MAP.SJIS2004_TO_UNICODE()[sjis2004_codepoint];
@@ -2443,8 +2446,8 @@
 
 		/**
 		 * 文字列を Shift_JIS-2004 の配列に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {Array<number>} Shift_JIS-2004 のデータが入った配列
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {number[]} Shift_JIS-2004 のデータが入った配列
 		 */
 		static toSJIS2004Array(text) {
 			return SJIS.toSJISArray(text, SJIS2004MAP.UNICODE_TO_SJIS2004());
@@ -2453,8 +2456,8 @@
 		/**
 		 * 文字列を Shift_JIS-2004 のバイナリ配列に変換
 		 * - 日本語文字は2バイトとして、配列も2つ分、使用します。
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {Array<number>} Shift_JIS-2004 のデータが入ったバイナリ配列
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {number[]} Shift_JIS-2004 のデータが入ったバイナリ配列
 		 */
 		static toSJIS2004Binary(text) {
 			return SJIS.toSJISBinary(text, SJIS2004MAP.UNICODE_TO_SJIS2004());
@@ -2462,8 +2465,8 @@
 
 		/**
 		 * Shift_JIS-2004 の配列から文字列に変換
-		 * @param {Array<number>} sjis2004 - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {number[]} sjis2004 - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static fromSJIS2004Array(sjis2004) {
 			return SJIS.fromSJISArray(sjis2004, SJIS2004MAP.SJIS2004_TO_UNICODE());
@@ -2472,7 +2475,7 @@
 		/**
 		 * 指定した文字から Shift_JIS-2004 上の面区点番号に変換
 		 * - 2文字以上を指定した場合は、1文字目のみを変換する
-		 * @param {String} text - 変換したいテキスト
+		 * @param {string} text - 変換したいテキスト
 		 * @returns {import("./SJIS.js").MenKuTen} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 		 */
 		static toMenKuTen(text) {
@@ -2486,7 +2489,7 @@
 		/**
 		 * Shift_JIS-2004 上の面区点番号から文字列に変換
 		 * @param {import("./SJIS.js").MenKuTen|string} menkuten - 面区点番号
-		 * @returns {String} 変換後のテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static fromMenKuTen(menkuten) {
 			const code = SJIS.toUnicodeCodeFromKuTen(menkuten, SJIS2004MAP.SJIS2004_TO_UNICODE());
@@ -2503,6 +2506,7 @@
 	 * LICENSE:
 	 *  The MIT license https://opensource.org/licenses/MIT
 	 */
+
 
 	/**
 	 * eucJP-ms の変換マップ作成用クラス
@@ -2521,7 +2525,7 @@
 			/**
 			 * 変換マップ
 			 * CP932のIBM拡張文字の一部は、eucJP-msのG3の83区から84区に配列されている。
-			 * @type {Object<number, number>}
+			 * @type {Record<number, number>}
 			 */
 			// prettier-ignore
 			const eucjpms_to_cp932_map = {
@@ -2542,7 +2546,7 @@
 			};
 
 			/**
-			 * @type {Object<number, number>}
+			 * @type {Record<number, number>}
 			 */
 			const cp932_to_eucjpms_map = {};
 
@@ -2556,7 +2560,7 @@
 		}
 
 		/**
-		 * @returns {Object<number, number>}
+		 * @returns {Record<number, number>}
 		 */
 		static CP932_TO_EUCJPMS() {
 			EUCJPMSMAP.init();
@@ -2564,7 +2568,7 @@
 		}
 
 		/**
-		 * @returns {Object<number, number>}
+		 * @returns {Record<number, number>}
 		 */
 		static EUCJPMS_TO_CP932() {
 			EUCJPMSMAP.init();
@@ -2580,13 +2584,13 @@
 
 	/**
 	 * 変換用マップ
-	 * @type {Object<number, number>}
+	 * @type {Record<number, number>}
 	 */
 	EUCJPMSMAP.cp932_to_eucjpms_map = null;
 
 	/**
 	 * 変換用マップ
-	 * @type {Object<number, number>}
+	 * @type {Record<number, number>}
 	 */
 	EUCJPMSMAP.eucjpms_to_cp932_map = null;
 
@@ -2598,8 +2602,8 @@
 		/**
 		 * 文字列を eucJP-ms のバイナリ配列に変換。変換できない文字は "?" に変換される。
 		 * - 日本語文字は2バイトとして、配列も2つ分、使用します。
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {Array<number>} eucJP-ms のデータが入ったバイナリ配列
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {number[]} eucJP-ms のデータが入ったバイナリ配列
 		 */
 		static toEUCJPMSBinary(text) {
 			const sjis_array = CP932.toCP932Array(text);
@@ -2643,8 +2647,8 @@
 
 		/**
 		 * eucJP-ms の配列から文字列に変換
-		 * @param {Array<number>} eucjp - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {number[]} eucjp - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static fromEUCJPMSBinary(eucjp) {
 			const sjis_array = [];
@@ -2726,6 +2730,7 @@
 	 *  The MIT license https://opensource.org/licenses/MIT
 	 */
 
+
 	/**
 	 * EUC-JIS-2004 を扱うクラス
 	 * @ignore
@@ -2733,8 +2738,8 @@
 	class EUCJIS2004 {
 		/**
 		 * 文字列を EUC-JIS-2004 のバイナリ配列に変換。変換できない文字は "?" に変換される。
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {Array<number>} EUC-JIS-2004 のデータが入ったバイナリ配列
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {number[]} EUC-JIS-2004 のデータが入ったバイナリ配列
 		 */
 		static toEUCJIS2004Binary(text) {
 			const sjis_array = SJIS2004.toSJIS2004Array(text);
@@ -2780,8 +2785,8 @@
 
 		/**
 		 * EUC-JIS-2004 の配列から文字列に変換
-		 * @param {Array<number>} eucjp - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {number[]} eucjp - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static fromEUCJIS2004Binary(eucjp) {
 			const sjis_array = [];
@@ -2859,6 +2864,7 @@
 	 *  The MIT license https://opensource.org/licenses/MIT
 	 */
 
+
 	/**
 	 * Encode用のツールクラス
 	 * @ignore
@@ -2866,8 +2872,8 @@
 	class EncodeTools {
 		/**
 		 * キャラセット名の正規化
-		 * @param {String} charset
-		 * @returns {String}
+		 * @param {string} charset
+		 * @returns {string}
 		 */
 		static normalizeCharSetName(charset) {
 			let x1, x2;
@@ -2910,7 +2916,7 @@
 
 		/**
 		 * 同一の種別の文字列の重なりをカウントする
-		 * @param {Array<number>} utf32_array
+		 * @param {number[]} utf32_array
 		 * @returns {number}
 		 */
 		static countWord(utf32_array) {
@@ -2978,10 +2984,10 @@
 	class Encode {
 		/**
 		 * 文字列からバイナリ配列にエンコードする
-		 * @param {String} text - 変換したいテキスト
-		 * @param {String} charset - キャラセット(UTF-8/16/32,Shift_JIS,Windows-31J,Shift_JIS-2004,EUC-JP,EUC-JP-2004)
+		 * @param {string} text - 変換したいテキスト
+		 * @param {string} charset - キャラセット(UTF-8/16/32,Shift_JIS,Windows-31J,Shift_JIS-2004,EUC-JP,EUC-JP-2004)
 		 * @param {boolean} [is_with_bom=true] - BOMをつけるかどうか
-		 * @returns {Array<number>} バイナリ配列(失敗時はnull)
+		 * @returns {number[]} バイナリ配列(失敗時はnull)
 		 */
 		static encode(text, charset, is_with_bom) {
 			const ncharset = charset ? EncodeTools.normalizeCharSetName(charset) : "autodetect";
@@ -3002,9 +3008,9 @@
 
 		/**
 		 * バイナリ配列から文字列にデコードする
-		 * @param {Array<number>} binary - 変換したいバイナリ配列
-		 * @param {String} [charset="autodetect"] - キャラセット(UTF-8/16/32,Shift_JIS,Windows-31J,Shift_JIS-2004,EUC-JP,EUC-JP-2004)
-		 * @returns {String} 変換した文字列（失敗したらnull）
+		 * @param {number[]} binary - 変換したいバイナリ配列
+		 * @param {string} [charset="autodetect"] - キャラセット(UTF-8/16/32,Shift_JIS,Windows-31J,Shift_JIS-2004,EUC-JP,EUC-JP-2004)
+		 * @returns {string} 変換した文字列（失敗したらnull）
 		 */
 		static decode(binary, charset) {
 			const ncharset = charset ? EncodeTools.normalizeCharSetName(charset) : "autodetect";
@@ -3095,6 +3101,7 @@
 	 *  The MIT license https://opensource.org/licenses/MIT
 	 */
 
+
 	/**
 	 * 日本語を扱うクラス
 	 * @ignore
@@ -3102,8 +3109,8 @@
 	class Japanese {
 		/**
 		 * カタカナをひらがなに変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toHiragana(text) {
 			/**
@@ -3118,8 +3125,8 @@
 
 		/**
 		 * ひらがなをカタカナに変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toKatakana(text) {
 			/**
@@ -3134,8 +3141,8 @@
 
 		/**
 		 * スペースを半角に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toHalfWidthSpace(text) {
 			// prettier-ignore
@@ -3144,8 +3151,8 @@
 
 		/**
 		 * スペースを全角に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toFullWidthSpace(text) {
 			// prettier-ignore
@@ -3154,8 +3161,8 @@
 
 		/**
 		 * 英数記号を半角に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toHalfWidthAsciiCode(text) {
 			let out = text;
@@ -3175,8 +3182,8 @@
 
 		/**
 		 * 英数記号を全角に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toFullWidthAsciiCode(text) {
 			let out = text;
@@ -3196,8 +3203,8 @@
 
 		/**
 		 * アルファベットを半角に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toHalfWidthAlphabet(text) {
 			/**
@@ -3212,8 +3219,8 @@
 
 		/**
 		 * アルファベットを全角に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toFullWidthAlphabet(text) {
 			/**
@@ -3228,8 +3235,8 @@
 
 		/**
 		 * 数値を半角に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toHalfWidthNumber(text) {
 			/**
@@ -3244,8 +3251,8 @@
 
 		/**
 		 * 数値を全角に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toFullWidthNumber(text) {
 			/**
@@ -3260,8 +3267,8 @@
 
 		/**
 		 * カタカナを半角に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toHalfWidthKana(text) {
 			/**
@@ -3383,12 +3390,12 @@
 
 		/**
 		 * カタカナを全角に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toFullWidthKana(text) {
 			/**
-			 * @type {Object<number, number>}
+			 * @type {Record<number, number>}
 			 */
 			// prettier-ignore
 			const map = {
@@ -3491,8 +3498,8 @@
 
 		/**
 		 * 半角に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toHalfWidth(text) {
 			return Japanese.toHalfWidthKana(Japanese.toHalfWidthAsciiCode(text));
@@ -3500,8 +3507,8 @@
 
 		/**
 		 * 全角に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toFullWidth(text) {
 			return Japanese.toFullWidthKana(Japanese.toFullWidthAsciiCode(text));
@@ -3509,8 +3516,8 @@
 
 		/**
 		 * ローマ字からひらがなに変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toHiraganaFromRomaji(text) {
 			/**
@@ -3757,8 +3764,8 @@
 
 		/**
 		 * ローマ字からカタカナに変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toKatakanaFromRomaji(text) {
 			return Japanese.toKatakana(Japanese.toHiraganaFromRomaji(text));
@@ -3766,8 +3773,8 @@
 
 		/**
 		 * ひらがなからローマ字に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toRomajiFromHiragana(text) {
 			/**
@@ -4022,8 +4029,8 @@
 
 		/**
 		 * カタカナからローマ字に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toRomajiFromKatakana(text) {
 			return Japanese.toRomajiFromHiragana(Japanese.toHiragana(text));
@@ -4034,8 +4041,8 @@
 		 * - 0幅 ... 結合文字, 異体字セレクタ, スキントーン修飾子, タグ文字, ゼロ幅スペース, ゼロ幅非接合子, ゼロ幅接合子, 単語結合子
 		 * - 1幅 ... ASCII文字, 半角カタカナ
 		 * - 2幅 ... 上記以外
-		 * @param {Number} cp 調査するコードポイント
-		 * @returns {Number} 文字の横幅
+		 * @param {number} cp 調査するコードポイント
+		 * @returns {number} 文字の横幅
 		 */
 		static getWidthFromCodePoint(cp) {
 			if (Unicode.isGraphemeComponentFromCodePoint(cp) || Unicode.isZeroWidthCharacterFromCodePoint(cp)) {
@@ -4053,8 +4060,8 @@
 		 * - 0幅 ... 結合文字, 異体字セレクタ, スキントーン修飾子, タグ文字, ゼロ幅スペース, ゼロ幅非接合子, ゼロ幅接合子, 単語結合子
 		 * - 1幅 ... ASCII文字, 半角カタカナ
 		 * - 2幅 ... 上記以外
-		 * @param {String} text - カウントしたいテキスト
-		 * @returns {Number} 文字の横幅
+		 * @param {string} text - カウントしたいテキスト
+		 * @returns {number} 文字の横幅
 		 */
 		static getWidth(text) {
 			const utf32_array = Unicode.toUTF32Array(text);
@@ -4074,13 +4081,13 @@
 
 		/**
 		 * 文字幅を考慮して文字列を文字の配列に変換する
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {Array<Array<number>>} UTF32(コードポイント)の配列が入った配列
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {Array<number[]>} UTF32(コードポイント)の配列が入った配列
 		 */
 		static toMojiArrayFromString(text) {
 			const utf32 = Unicode.toUTF32Array(text);
 			/**
-			 * @type {Array<Array<number>>}
+			 * @type {Array<number[]>}
 			 */
 			const mojiarray = [];
 			let moji = [];
@@ -4103,12 +4110,12 @@
 
 		/**
 		 * 結合した文字を考慮して文字の配列を文字列に変換する
-		 * @param {Array<Array<number>>} mojiarray - UTF32(コードポイント)の配列が入った配列
+		 * @param {Array<number[]>} mojiarray - UTF32(コードポイント)の配列が入った配列
 		 * @returns {string} UTF32(コードポイント)の配列が入った配列
 		 */
 		static toStringFromMojiArray(mojiarray) {
 			/**
-			 * @type {Array<number>}
+			 * @type {number[]}
 			 */
 			const utf32 = [];
 			for (let i = 0; i < mojiarray.length; i++) {
@@ -4124,17 +4131,17 @@
 		 * - 0幅 ... 結合文字, 異体字セレクタ, スキントーン修飾子, タグ文字, ゼロ幅スペース, ゼロ幅非接合子, ゼロ幅接合子, 単語結合子
 		 * - 1幅 ... ASCII文字, 半角カタカナ
 		 * - 2幅 ... 上記以外
-		 * @param {String} text - 切り出したいテキスト
-		 * @param {Number} offset - 切り出し位置
-		 * @param {Number} size - 切り出す長さ
-		 * @returns {String} 切り出したテキスト
+		 * @param {string} text - 切り出したいテキスト
+		 * @param {number} offset - 切り出し位置
+		 * @param {number} size - 切り出す長さ
+		 * @returns {string} 切り出したテキスト
 		 * @ignore
 		 */
 		static cutTextForWidth(text, offset, size) {
 			const moji_array = Japanese.toMojiArrayFromString(text);
 			const SPACE = [0x20]; // ' '
 			/**
-			 * @type {Array<Array<number>>}
+			 * @type {Array<number[]>}
 			 */
 			const output = [];
 			let is_target = false;
@@ -4185,51 +4192,52 @@
 	 *  The MIT license https://opensource.org/licenses/MIT
 	 */
 
+
 	/**
 	 * 1981年より前に常用漢字とされているか
-	 * @type {Object<number, number>}
+	 * @type {Record<number, number>}
 	 * @ignore
 	 */
 	let joyokanji_before_1981_map = null;
 
 	/**
 	 * 1981年時点で追加された常用漢字か
-	 * @type {Object<number, number>}
+	 * @type {Record<number, number>}
 	 * @ignore
 	 */
 	let joyokanji_add_1981_map = null;
 
 	/**
 	 * 2010年時点で追加された常用漢字か
-	 * @type {Object<number, number>}
+	 * @type {Record<number, number>}
 	 * @ignore
 	 */
 	let joyokanji_add_2010_map = null;
 
 	/**
 	 * 2010年時点で削除された常用漢字か
-	 * @type {Object<number, number>}
+	 * @type {Record<number, number>}
 	 * @ignore
 	 */
 	let joyokanji_delete_2010_map = null;
 
 	/**
 	 * 2017年時点で常用漢字でかつ人名用漢字か
-	 * @type {Object<number, number>}
+	 * @type {Record<number, number>}
 	 * @ignore
 	 */
 	let jinmeiyokanji_joyokanji_isetai_2017_map = null;
 
 	/**
 	 * 2017年時点で常用漢字でないが人名用漢字か（異性体なし）
-	 * @type {Object<number, number>}
+	 * @type {Record<number, number>}
 	 * @ignore
 	 */
 	let jinmeiyokanji_notjoyokanji_2017_map = null;
 
 	/**
 	 * 2017年時点で異性体がある人名漢字
-	 * @type {Object<number, number>}
+	 * @type {Record<number, number>}
 	 * @ignore
 	 */
 	let jinmeiyokanji_notjoyokanji_isetai_2017_map = null;
@@ -4251,12 +4259,12 @@
 			/**
 			 * 文字列から、UTF32の存在マップを作成
 			 * @param {string} string_data
-			 * @returns {Object<number, number>}
+			 * @returns {Record<number, number>}
 			 */
 			const createMap = function (string_data) {
 				const utf32_array = Unicode.toUTF32Array(string_data);
 				/**
-				 * @type {Object<number, number>}
+				 * @type {Record<number, number>}
 				 */
 				const map = {};
 				for (const key in utf32_array) {
@@ -4473,7 +4481,7 @@
 	class MojiAnalizerTools {
 		/**
 		 * 指定したコードポイントの漢字は1981年より前に常用漢字とされているか判定する
-		 * @param {Number} unicode_codepoint - Unicodeのコードポイント
+		 * @param {number} unicode_codepoint - Unicodeのコードポイント
 		 * @returns {boolean} 判定結果
 		 */
 		static isJoyoKanjiBefore1981(unicode_codepoint) {
@@ -4483,7 +4491,7 @@
 
 		/**
 		 * 指定したコードポイントの漢字は1981年時点で常用漢字かを判定する
-		 * @param {Number} unicode_codepoint - Unicodeのコードポイント
+		 * @param {number} unicode_codepoint - Unicodeのコードポイント
 		 * @returns {boolean} 判定結果
 		 */
 		static isJoyoKanji1981(unicode_codepoint) {
@@ -4494,7 +4502,7 @@
 
 		/**
 		 * 指定したコードポイントの漢字は2010年時点で常用漢字かを判定する
-		 * @param {Number} unicode_codepoint - Unicodeのコードポイント
+		 * @param {number} unicode_codepoint - Unicodeのコードポイント
 		 * @returns {boolean} 判定結果
 		 */
 		static isJoyoKanji2010(unicode_codepoint) {
@@ -4509,7 +4517,7 @@
 
 		/**
 		 * 指定したコードポイントの漢字は2017年時点で人名漢字でのみ存在するかを判定する
-		 * @param {Number} unicode_codepoint - Unicodeのコードポイント
+		 * @param {number} unicode_codepoint - Unicodeのコードポイント
 		 * @returns {boolean} 判定結果
 		 */
 		static isOnlyJinmeiyoKanji2017(unicode_codepoint) {
@@ -4528,7 +4536,7 @@
 
 		/**
 		 * 指定したコードポイントの漢字は2017年時点で人名漢字で許可されているかを判定する
-		 * @param {Number} unicode_codepoint - Unicodeのコードポイント
+		 * @param {number} unicode_codepoint - Unicodeのコードポイント
 		 * @returns {boolean} 判定結果
 		 */
 		static isJinmeiyoKanji2017(unicode_codepoint) {
@@ -4540,7 +4548,7 @@
 
 		/**
 		 * 指定したコードポイントの漢字は本ソースコードの最新の時点で常用漢字かを判定する
-		 * @param {Number} unicode_codepoint - Unicodeのコードポイント
+		 * @param {number} unicode_codepoint - Unicodeのコードポイント
 		 * @returns {boolean} 判定結果
 		 */
 		static isJoyoKanji(unicode_codepoint) {
@@ -4549,7 +4557,7 @@
 
 		/**
 		 * 指定したコードポイントの漢字は本ソースコードの最新の時点で人名漢字でのみ存在するかを判定する
-		 * @param {Number} unicode_codepoint - Unicodeのコードポイント
+		 * @param {number} unicode_codepoint - Unicodeのコードポイント
 		 * @returns {boolean} 判定結果
 		 */
 		static isOnlyJinmeiyoKanji(unicode_codepoint) {
@@ -4558,7 +4566,7 @@
 
 		/**
 		 * 指定したコードポイントの漢字は本ソースコードの最新の時点で人名漢字で許可されているかを判定する
-		 * @param {Number} unicode_codepoint - Unicodeのコードポイント
+		 * @param {number} unicode_codepoint - Unicodeのコードポイント
 		 * @returns {boolean} 判定結果
 		 */
 		static isJinmeiyoKanji(unicode_codepoint) {
@@ -4573,18 +4581,16 @@
 	 * @property {import("../encode/SJIS.js").MenKuTen} menkuten 面区点 コード
 	 * @property {number} cp932_code CP932(Windows-31J) コード
 	 * @property {number} sjis2004_code Shift_JIS-2004 コード
-	 * @property {Array<number>} utf8_array UTF-8 配列
-	 * @property {Array<number>} utf16_array UTF-16 配列
-	 * @property {Array<number>} utf32_array UTF-32 配列
-	 * @property {Array<number>} cp932_array CP932(Windows-31J) バイト配列
-	 * @property {Array<number>} sjis2004_array Shift_JIS-2004 コード バイト配列
-	 * @property {Array<number>} shift_jis_array Shift_JIS バイト配列
-	 * @property {Array<number>} iso2022jp_array ISO-2022-JP バイト配列
-	 * @property {Array<number>} eucjpms_array eucJP-ms バイト配列
-	 * @property {Array<number>} eucjis2004_array EUC-JP-2004 バイト配列
-	 */
-
-	/**
+	 * @property {number[]} utf8_array UTF-8 配列
+	 * @property {number[]} utf16_array UTF-16 配列
+	 * @property {number[]} utf32_array UTF-32 配列
+	 * @property {number[]} cp932_array CP932(Windows-31J) バイト配列
+	 * @property {number[]} sjis2004_array Shift_JIS-2004 コード バイト配列
+	 * @property {number[]} shift_jis_array Shift_JIS バイト配列
+	 * @property {number[]} iso2022jp_array ISO-2022-JP バイト配列
+	 * @property {number[]} eucjpms_array eucJP-ms バイト配列
+	 * @property {number[]} eucjis2004_array EUC-JP-2004 バイト配列
+	 * 
 	 * 文字の種別情報
 	 * @typedef {Object} MojiTypeData
 	 * @property {boolean} is_regular_sjis Shift_JIS に登録された文字
@@ -4615,9 +4621,7 @@
 	 * @property {boolean} is_variation_selector 異体字セレクタ
 	 * @property {boolean} is_skin_tone_modifier スキントーン修飾子
 	 * @property {boolean} is_tag_character タグ文字
-	 */
-
-	/**
+	 * 
 	 * 文字の種別情報
 	 * @typedef {Object} MojiData
 	 * @property {MojiEncodeData} encode 文字のエンコード情報
@@ -4705,7 +4709,7 @@
 
 		/**
 		 * 指定した1つのUTF-32 コードポイントに関して、解析を行い情報を返します
-		 * @param {Number} unicode_codepoint - UTF-32 のコードポイント
+		 * @param {number} unicode_codepoint - UTF-32 のコードポイント
 		 * @returns {MojiData} 文字の情報がつまったオブジェクト
 		 */
 		static getMojiData(unicode_codepoint) {
@@ -4877,8 +4881,8 @@
 	class ComparatorTool {
 		/**
 		 * 文字列の揺れを除去し正規化します。
-		 * @param {String} string_data - 正規化したいテキスト
-		 * @returns {String} 正規化後のテキスト
+		 * @param {string} string_data - 正規化したいテキスト
+		 * @returns {string} 正規化後のテキスト
 		 */
 		static toNormalizeString(string_data) {
 			let normalize_text = null;
@@ -4898,7 +4902,7 @@
 		/**
 		 * ASCIIコードが半角数値かどうかを判定する
 		 * @param {number} string_number - ASCIIコード
-		 * @returns {Boolean} 数値ならTRUE
+		 * @returns {boolean} 数値ならTRUE
 		 */
 		static isNumberAscii(string_number) {
 			const ASCII_0 = 0x30;
@@ -4908,7 +4912,7 @@
 
 		/**
 		 * ASCIIコード配列の中で指定した位置から数値が何バイト続くか
-		 * @param {Array<number>} string_number_array - ASCIIコードの配列
+		 * @param {number[]} string_number_array - ASCIIコードの配列
 		 * @param {number} offset - どの位置から調べるか
 		 * @returns {number} 数値ならTRUE
 		 */
@@ -4923,10 +4927,10 @@
 
 		/**
 		 * ASCIIコード配列の中の指定した位置にある数値データ同士をCompareする
-		 * @param {Array<number>} t1 - ASCIIコードの配列（比較元）
+		 * @param {number[]} t1 - ASCIIコードの配列（比較元）
 		 * @param {number} t1off - どの位置から調べるか
 		 * @param {number} t1size - 調べるサイズ
-		 * @param {Array<number>} t2 - ASCIIコードの配列（比較先）
+		 * @param {number[]} t2 - ASCIIコードの配列（比較先）
 		 * @param {number} t2off - どの位置から調べるか
 		 * @param {number} t2size - 調べるサイズ
 		 * @returns {number} Compare結果
@@ -4984,8 +4988,8 @@
 
 		/**
 		 * ASCIIコード配列の同士をCompareする
-		 * @param {Array<number>} t1 - ASCIIコードの配列（比較元）
-		 * @param {Array<number>} t2 - ASCIIコードの配列（比較先）
+		 * @param {number[]} t1 - ASCIIコードの配列（比較元）
+		 * @param {number[]} t2 - ASCIIコードの配列（比較先）
 		 * @returns {number} Compare結果
 		 */
 		static compareText(t1, t2) {
@@ -5099,7 +5103,7 @@
 	 * - sortの引数で利用できます
 	 * @ignore
 	 */
-	const StringComparator = {
+	const stringComparator = {
 		/**
 		 * 2つの文字列を比較する関数
 		 * @type {function(any, any): number}
@@ -5125,6 +5129,7 @@
 	 *  The MIT license https://opensource.org/licenses/MIT
 	 */
 
+
 	/**
 	 * 日本語を扱うための様々な機能を提供します
 	 */
@@ -5135,10 +5140,10 @@
 
 		/**
 		 * 文字列からバイナリ配列にエンコードする
-		 * @param {String} text - 変換したいテキスト
-		 * @param {String} charset - キャラセット(UTF-8/16/32,Shift_JIS,Windows-31J,Shift_JIS-2004,EUC-JP,EUC-JP-2004)
+		 * @param {string} text - 変換したいテキスト
+		 * @param {string} charset - キャラセット(UTF-8/16/32,Shift_JIS,Windows-31J,Shift_JIS-2004,EUC-JP,EUC-JP-2004)
 		 * @param {boolean} [is_with_bom=false] - BOMをつけるかどうか
-		 * @returns {Array<number>} バイナリ配列(失敗時はnull)
+		 * @returns {number[]} バイナリ配列(失敗時はnull)
 		 */
 		static encode(text, charset, is_with_bom) {
 			return Encode.encode(text, charset, is_with_bom);
@@ -5146,9 +5151,9 @@
 
 		/**
 		 * バイナリ配列から文字列にデコードする
-		 * @param {Array<number>} binary - 変換したいバイナリ配列
-		 * @param {String} [charset="autodetect"] - キャラセット(UTF-8/16/32,Shift_JIS,Windows-31J,Shift_JIS-2004,EUC-JP,EUC-JP-2004)
-		 * @returns {String} 変換した文字列（失敗したらnull）
+		 * @param {number[]} binary - 変換したいバイナリ配列
+		 * @param {string} [charset="autodetect"] - キャラセット(UTF-8/16/32,Shift_JIS,Windows-31J,Shift_JIS-2004,EUC-JP,EUC-JP-2004)
+		 * @returns {string} 変換した文字列（失敗したらnull）
 		 */
 		static decode(binary, charset) {
 			return Encode.decode(binary, charset);
@@ -5160,9 +5165,9 @@
 
 		/**
 		 * サロゲートペア対応のコードポイント取得
-		 * @param {String} text - 対象テキスト
-		 * @param {Number} [index = 0] - インデックス
-		 * @returns {Number} コードポイント
+		 * @param {string} text - 対象テキスト
+		 * @param {number} [index = 0] - インデックス
+		 * @returns {number} コードポイント
 		 */
 		static codePointAt(text, index) {
 			return Unicode.codePointAt(text, index);
@@ -5170,8 +5175,8 @@
 
 		/**
 		 * コードポイントの数値データを文字列に変換
-		 * @param {...(number|Array<number>)} codepoint - 変換したいコードポイントの数値配列、又は数値を並べた可変引数
-		 * @returns {String} 変換後のテキスト
+		 * @param {...(number|number[])} codepoint - 変換したいコードポイントの数値配列、又は数値を並べた可変引数
+		 * @returns {string} 変換後のテキスト
 		 */
 		static fromCodePoint(codepoint) {
 			if (codepoint instanceof Array) {
@@ -5187,10 +5192,10 @@
 
 		/**
 		 * コードポイント換算で文字列数をカウント
-		 * @param {String} text - 対象テキスト
-		 * @param {Number} [beginIndex=0] - 最初のインデックス（省略可）
-		 * @param {Number} [endIndex] - 最後のインデックス（ここは含めない）（省略可）
-		 * @returns {Number} 文字数
+		 * @param {string} text - 対象テキスト
+		 * @param {number} [beginIndex=0] - 最初のインデックス（省略可）
+		 * @param {number} [endIndex] - 最後のインデックス（ここは含めない）（省略可）
+		 * @returns {number} 文字数
 		 */
 		static codePointCount(text, beginIndex, endIndex) {
 			return Unicode.codePointCount(text, beginIndex, endIndex);
@@ -5198,8 +5203,8 @@
 
 		/**
 		 * 文字列をUTF32(コードポイント)の配列に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {Array<number>} UTF32(コードポイント)のデータが入った配列
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {number[]} UTF32(コードポイント)のデータが入った配列
 		 */
 		static toUTF32Array(text) {
 			return Unicode.toUTF32Array(text);
@@ -5207,8 +5212,8 @@
 
 		/**
 		 * UTF32の配列から文字列に変換
-		 * @param {Array<number>} utf32 - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {number[]} utf32 - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static fromUTF32Array(utf32) {
 			return Unicode.fromUTF32Array(utf32);
@@ -5216,8 +5221,8 @@
 
 		/**
 		 * 文字列をUTF16の配列に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {Array<number>} UTF16のデータが入った配列
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {number[]} UTF16のデータが入った配列
 		 */
 		static toUTF16Array(text) {
 			return Unicode.toUTF16Array(text);
@@ -5225,8 +5230,8 @@
 
 		/**
 		 * UTF16の配列から文字列に変換
-		 * @param {Array<number>} utf16 - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {number[]} utf16 - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static fromUTF16Array(utf16) {
 			return Unicode.fromUTF16Array(utf16);
@@ -5234,8 +5239,8 @@
 
 		/**
 		 * 文字列をUTF8の配列に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {Array<number>} UTF8のデータが入った配列
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {number[]} UTF8のデータが入った配列
 		 */
 		static toUTF8Array(text) {
 			return Unicode.toUTF8Array(text);
@@ -5243,8 +5248,8 @@
 
 		/**
 		 * UTF8の配列から文字列に変換
-		 * @param {Array<number>} utf8 - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {number[]} utf8 - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static fromUTF8Array(utf8) {
 			return Unicode.fromUTF8Array(utf8);
@@ -5256,8 +5261,8 @@
 
 		/**
 		 * 結合した文字を考慮して文字列を文字の配列に変換する
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {Array<Array<number>>} UTF32(コードポイント)の配列が入った配列
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {Array<number[]>} UTF32(コードポイント)の配列が入った配列
 		 */
 		static toMojiArrayFromString(text) {
 			return Japanese.toMojiArrayFromString(text);
@@ -5265,7 +5270,7 @@
 
 		/**
 		 * 結合した文字を考慮して文字の配列を文字列に変換する
-		 * @param {Array<Array<number>>} mojiarray - UTF32(コードポイント)の配列が入った配列
+		 * @param {Array<number[]>} mojiarray - UTF32(コードポイント)の配列が入った配列
 		 * @returns {string} UTF32(コードポイント)の配列が入った配列
 		 */
 		static toStringFromMojiArray(mojiarray) {
@@ -5280,10 +5285,10 @@
 		 * 指定したテキストを切り出す
 		 * - 単位はコードポイントの文字数
 		 * - 結合文字, 異体字セレクタ, スキントーン修飾子, タグ文字を考慮しません
-		 * @param {String} text - 切り出したいテキスト
-		 * @param {Number} offset - 切り出し位置
-		 * @param {Number} size - 切り出す長さ
-		 * @returns {String} 切り出したテキスト
+		 * @param {string} text - 切り出したいテキスト
+		 * @param {number} offset - 切り出し位置
+		 * @param {number} size - 切り出す長さ
+		 * @returns {string} 切り出したテキスト
 		 */
 		static cutTextForCodePoint(text, offset, size) {
 			return Unicode.cutTextForCodePoint(text, offset, size);
@@ -5294,8 +5299,8 @@
 		 * - 0幅 ... 結合文字, 異体字セレクタ, スキントーン修飾子, タグ文字, ゼロ幅スペース, ゼロ幅非接合子, ゼロ幅接合子, 単語結合子
 		 * - 1幅 ... ASCII文字, 半角カタカナ
 		 * - 2幅 ... 上記以外
-		 * @param {String} text - カウントしたいテキスト
-		 * @returns {Number} 文字の横幅
+		 * @param {string} text - カウントしたいテキスト
+		 * @returns {number} 文字の横幅
 		 */
 		static getWidth(text) {
 			return Japanese.getWidth(text);
@@ -5306,10 +5311,10 @@
 		 * - 0幅 ... 結合文字, 異体字セレクタ, スキントーン修飾子, タグ文字, ゼロ幅スペース, ゼロ幅非接合子, ゼロ幅接合子, 単語結合子
 		 * - 1幅 ... ASCII文字, 半角カタカナ
 		 * - 2幅 ... 上記以外
-		 * @param {String} text - 切り出したいテキスト
-		 * @param {Number} offset - 切り出し位置
-		 * @param {Number} size - 切り出す長さ
-		 * @returns {String} 切り出したテキスト
+		 * @param {string} text - 切り出したいテキスト
+		 * @param {number} offset - 切り出し位置
+		 * @param {number} size - 切り出す長さ
+		 * @returns {string} 切り出したテキスト
 		 */
 		static cutTextForWidth(text, offset, size) {
 			return Japanese.cutTextForWidth(text, offset, size);
@@ -5322,7 +5327,7 @@
 		/**
 		 * 指定した文字から Windows-31J 上の区点番号に変換
 		 * - 2文字以上を指定した場合は、1文字目のみを変換する
-		 * @param {String} text - 変換したいテキスト
+		 * @param {string} text - 変換したいテキスト
 		 * @returns {import("./encode/SJIS.js").MenKuTen} 区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 		 */
 		static toKuTen(text) {
@@ -5332,7 +5337,7 @@
 		/**
 		 * Windows-31J 上の区点番号から文字列に変換
 		 * @param {import("./encode/SJIS.js").MenKuTen|string} kuten - 区点番号
-		 * @returns {String} 変換後のテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static fromKuTen(kuten) {
 			return CP932.fromKuTen(kuten);
@@ -5341,7 +5346,7 @@
 		/**
 		 * 指定した文字から Shift_JIS-2004 上の面区点番号に変換
 		 * - 2文字以上を指定した場合は、1文字目のみを変換する
-		 * @param {String} text - 変換したいテキスト
+		 * @param {string} text - 変換したいテキスト
 		 * @returns {import("./encode/SJIS.js").MenKuTen} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 		 */
 		static toMenKuTen(text) {
@@ -5351,7 +5356,7 @@
 		/**
 		 * Shift_JIS-2004 上の面区点番号から文字列に変換
 		 * @param {import("./encode/SJIS.js").MenKuTen|string} menkuten - 面区点番号
-		 * @returns {String} 変換後のテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static fromMenKuTen(menkuten) {
 			return SJIS2004.fromMenKuTen(menkuten);
@@ -5363,8 +5368,8 @@
 
 		/**
 		 * カタカナをひらがなに変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toHiragana(text) {
 			return Japanese.toHiragana(text);
@@ -5372,8 +5377,8 @@
 
 		/**
 		 * ひらがなをカタカナに変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toKatakana(text) {
 			return Japanese.toKatakana(text);
@@ -5381,8 +5386,8 @@
 
 		/**
 		 * スペースを半角に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toHalfWidthSpace(text) {
 			return Japanese.toHalfWidthSpace(text);
@@ -5390,8 +5395,8 @@
 
 		/**
 		 * スペースを全角に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toFullWidthSpace(text) {
 			return Japanese.toFullWidthSpace(text);
@@ -5399,8 +5404,8 @@
 
 		/**
 		 * 英数記号を半角に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toHalfWidthAsciiCode(text) {
 			return Japanese.toHalfWidthAsciiCode(text);
@@ -5408,8 +5413,8 @@
 
 		/**
 		 * 英数記号を全角に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toFullWidthAsciiCode(text) {
 			return Japanese.toFullWidthAsciiCode(text);
@@ -5417,8 +5422,8 @@
 
 		/**
 		 * アルファベットを半角に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toHalfWidthAlphabet(text) {
 			return Japanese.toHalfWidthAlphabet(text);
@@ -5426,8 +5431,8 @@
 
 		/**
 		 * アルファベットを全角に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toFullWidthAlphabet(text) {
 			return Japanese.toFullWidthAlphabet(text);
@@ -5435,8 +5440,8 @@
 
 		/**
 		 * 数値を半角に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toHalfWidthNumber(text) {
 			return Japanese.toHalfWidthNumber(text);
@@ -5444,8 +5449,8 @@
 
 		/**
 		 * 数値を全角に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toFullWidthNumber(text) {
 			return Japanese.toFullWidthNumber(text);
@@ -5453,8 +5458,8 @@
 
 		/**
 		 * カタカナを半角に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toHalfWidthKana(text) {
 			return Japanese.toHalfWidthKana(text);
@@ -5462,8 +5467,8 @@
 
 		/**
 		 * カタカナを全角に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toFullWidthKana(text) {
 			return Japanese.toFullWidthKana(text);
@@ -5471,8 +5476,8 @@
 
 		/**
 		 * 半角に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toHalfWidth(text) {
 			return Japanese.toHalfWidth(text);
@@ -5480,8 +5485,8 @@
 
 		/**
 		 * 全角に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toFullWidth(text) {
 			return Japanese.toFullWidth(text);
@@ -5489,8 +5494,8 @@
 
 		/**
 		 * ローマ字からひらがなに変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toHiraganaFromRomaji(text) {
 			return Japanese.toHiraganaFromRomaji(text);
@@ -5498,8 +5503,8 @@
 
 		/**
 		 * ローマ字からカタカナに変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toKatakanaFromRomaji(text) {
 			return Japanese.toKatakanaFromRomaji(text);
@@ -5507,8 +5512,8 @@
 
 		/**
 		 * ひらがなからローマ字に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toRomajiFromHiragana(text) {
 			return Japanese.toRomajiFromHiragana(text);
@@ -5516,8 +5521,8 @@
 
 		/**
 		 * カタカナからローマ字に変換
-		 * @param {String} text - 変換したいテキスト
-		 * @returns {String} 変換後のテキスト
+		 * @param {string} text - 変換したいテキスト
+		 * @returns {string} 変換後のテキスト
 		 */
 		static toRomajiFromKatakana(text) {
 			return Japanese.toRomajiFromKatakana(text);
@@ -5529,7 +5534,7 @@
 
 		/**
 		 * 指定した1つのUTF-32 コードポイントに関して、解析を行い情報を返します
-		 * @param {Number} unicode_codepoint - UTF-32 のコードポイント
+		 * @param {number} unicode_codepoint - UTF-32 のコードポイント
 		 * @returns {import("./tools/MojiAnalyzer.js").MojiData} 文字の情報がつまったオブジェクト
 		 */
 		static getMojiData(unicode_codepoint) {
@@ -5549,7 +5554,7 @@
 		 * @returns {number} Compare結果
 		 */
 		static compareToForDefault(a, b) {
-			return StringComparator.DEFAULT(a, b);
+			return stringComparator.DEFAULT(a, b);
 		}
 
 		/**
@@ -5562,7 +5567,7 @@
 		 * @returns {number} Compare結果
 		 */
 		static compareToForNatural(a, b) {
-			return StringComparator.NATURAL(a, b);
+			return stringComparator.NATURAL(a, b);
 		}
 	}
 

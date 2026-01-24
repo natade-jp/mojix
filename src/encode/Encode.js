@@ -21,8 +21,8 @@ import EUCJIS2004 from "./EUCJIS2004.js";
 class EncodeTools {
 	/**
 	 * キャラセット名の正規化
-	 * @param {String} charset
-	 * @returns {String}
+	 * @param {string} charset
+	 * @returns {string}
 	 */
 	static normalizeCharSetName(charset) {
 		let x1, x2;
@@ -65,7 +65,7 @@ class EncodeTools {
 
 	/**
 	 * 同一の種別の文字列の重なりをカウントする
-	 * @param {Array<number>} utf32_array
+	 * @param {number[]} utf32_array
 	 * @returns {number}
 	 */
 	static countWord(utf32_array) {
@@ -133,10 +133,10 @@ class EncodeTools {
 export default class Encode {
 	/**
 	 * 文字列からバイナリ配列にエンコードする
-	 * @param {String} text - 変換したいテキスト
-	 * @param {String} charset - キャラセット(UTF-8/16/32,Shift_JIS,Windows-31J,Shift_JIS-2004,EUC-JP,EUC-JP-2004)
+	 * @param {string} text - 変換したいテキスト
+	 * @param {string} charset - キャラセット(UTF-8/16/32,Shift_JIS,Windows-31J,Shift_JIS-2004,EUC-JP,EUC-JP-2004)
 	 * @param {boolean} [is_with_bom=true] - BOMをつけるかどうか
-	 * @returns {Array<number>} バイナリ配列(失敗時はnull)
+	 * @returns {number[]} バイナリ配列(失敗時はnull)
 	 */
 	static encode(text, charset, is_with_bom) {
 		const ncharset = charset ? EncodeTools.normalizeCharSetName(charset) : "autodetect";
@@ -157,9 +157,9 @@ export default class Encode {
 
 	/**
 	 * バイナリ配列から文字列にデコードする
-	 * @param {Array<number>} binary - 変換したいバイナリ配列
-	 * @param {String} [charset="autodetect"] - キャラセット(UTF-8/16/32,Shift_JIS,Windows-31J,Shift_JIS-2004,EUC-JP,EUC-JP-2004)
-	 * @returns {String} 変換した文字列（失敗したらnull）
+	 * @param {number[]} binary - 変換したいバイナリ配列
+	 * @param {string} [charset="autodetect"] - キャラセット(UTF-8/16/32,Shift_JIS,Windows-31J,Shift_JIS-2004,EUC-JP,EUC-JP-2004)
+	 * @returns {string} 変換した文字列（失敗したらnull）
 	 */
 	static decode(binary, charset) {
 		const ncharset = charset ? EncodeTools.normalizeCharSetName(charset) : "autodetect";

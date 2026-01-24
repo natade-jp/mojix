@@ -9,7 +9,7 @@ const getTestCharacterMap = function () {
 	 * 参考：WideCharToMultiByte
 	 * メモ：今回は使っていないが、以下の文献も参考になるかもしれません。
 	 * ftp://www.unicode.org/Public/MAPPINGS/OBSOLETE/EASTASIA/JIS/JIS0208.TXT
-	 * @type {Object<number, number>}
+	 * @type {Record<number, number>}
 	 */
 	// prettier-ignore
 	const cp932_to_unicode_map = {
@@ -1243,7 +1243,7 @@ const getTestCharacterMap = function () {
 
 	/**
 	 * 重複された CP932 のコード
-	 * @type {Array<number>}
+	 * @type {number[]}
 	 */
 	// prettier-ignore
 	const duplicate_map_array = [
@@ -1275,12 +1275,12 @@ const getTestCharacterMap = function () {
 	];
 
 	/**
-	 * @type {Object<number, number>}
+	 * @type {Record<number, number>}
 	 */
 	const duplicate_map = {};
 
 	/**
-	 * @type {Object<number, number>}
+	 * @type {Record<number, number>}
 	 */
 	const unicode_to_cp932_map = {};
 
@@ -1377,7 +1377,7 @@ const equalsArray = function (x, y) {
 
 /**
  * @param {string} function_name
- * @param {Object<number, number>} map
+ * @param {Record<number, number>} map
  */
 const testCharacterMap = function (function_name, map) {
 	let is_test = true;

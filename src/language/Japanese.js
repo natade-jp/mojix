@@ -17,8 +17,8 @@ import Unicode from "../encode/Unicode.js";
 export default class Japanese {
 	/**
 	 * カタカナをひらがなに変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toHiragana(text) {
 		/**
@@ -33,8 +33,8 @@ export default class Japanese {
 
 	/**
 	 * ひらがなをカタカナに変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toKatakana(text) {
 		/**
@@ -49,8 +49,8 @@ export default class Japanese {
 
 	/**
 	 * スペースを半角に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toHalfWidthSpace(text) {
 		// prettier-ignore
@@ -59,8 +59,8 @@ export default class Japanese {
 
 	/**
 	 * スペースを全角に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toFullWidthSpace(text) {
 		// prettier-ignore
@@ -69,8 +69,8 @@ export default class Japanese {
 
 	/**
 	 * 英数記号を半角に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toHalfWidthAsciiCode(text) {
 		let out = text;
@@ -90,8 +90,8 @@ export default class Japanese {
 
 	/**
 	 * 英数記号を全角に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toFullWidthAsciiCode(text) {
 		let out = text;
@@ -111,8 +111,8 @@ export default class Japanese {
 
 	/**
 	 * アルファベットを半角に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toHalfWidthAlphabet(text) {
 		/**
@@ -127,8 +127,8 @@ export default class Japanese {
 
 	/**
 	 * アルファベットを全角に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toFullWidthAlphabet(text) {
 		/**
@@ -143,8 +143,8 @@ export default class Japanese {
 
 	/**
 	 * 数値を半角に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toHalfWidthNumber(text) {
 		/**
@@ -159,8 +159,8 @@ export default class Japanese {
 
 	/**
 	 * 数値を全角に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toFullWidthNumber(text) {
 		/**
@@ -175,8 +175,8 @@ export default class Japanese {
 
 	/**
 	 * カタカナを半角に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toHalfWidthKana(text) {
 		/**
@@ -298,12 +298,12 @@ export default class Japanese {
 
 	/**
 	 * カタカナを全角に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toFullWidthKana(text) {
 		/**
-		 * @type {Object<number, number>}
+		 * @type {Record<number, number>}
 		 */
 		// prettier-ignore
 		const map = {
@@ -406,8 +406,8 @@ export default class Japanese {
 
 	/**
 	 * 半角に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toHalfWidth(text) {
 		return Japanese.toHalfWidthKana(Japanese.toHalfWidthAsciiCode(text));
@@ -415,8 +415,8 @@ export default class Japanese {
 
 	/**
 	 * 全角に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toFullWidth(text) {
 		return Japanese.toFullWidthKana(Japanese.toFullWidthAsciiCode(text));
@@ -424,8 +424,8 @@ export default class Japanese {
 
 	/**
 	 * ローマ字からひらがなに変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toHiraganaFromRomaji(text) {
 		/**
@@ -672,8 +672,8 @@ export default class Japanese {
 
 	/**
 	 * ローマ字からカタカナに変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toKatakanaFromRomaji(text) {
 		return Japanese.toKatakana(Japanese.toHiraganaFromRomaji(text));
@@ -681,8 +681,8 @@ export default class Japanese {
 
 	/**
 	 * ひらがなからローマ字に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toRomajiFromHiragana(text) {
 		/**
@@ -937,8 +937,8 @@ export default class Japanese {
 
 	/**
 	 * カタカナからローマ字に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toRomajiFromKatakana(text) {
 		return Japanese.toRomajiFromHiragana(Japanese.toHiragana(text));
@@ -949,8 +949,8 @@ export default class Japanese {
 	 * - 0幅 ... 結合文字, 異体字セレクタ, スキントーン修飾子, タグ文字, ゼロ幅スペース, ゼロ幅非接合子, ゼロ幅接合子, 単語結合子
 	 * - 1幅 ... ASCII文字, 半角カタカナ
 	 * - 2幅 ... 上記以外
-	 * @param {Number} cp 調査するコードポイント
-	 * @returns {Number} 文字の横幅
+	 * @param {number} cp 調査するコードポイント
+	 * @returns {number} 文字の横幅
 	 */
 	static getWidthFromCodePoint(cp) {
 		if (Unicode.isGraphemeComponentFromCodePoint(cp) || Unicode.isZeroWidthCharacterFromCodePoint(cp)) {
@@ -968,8 +968,8 @@ export default class Japanese {
 	 * - 0幅 ... 結合文字, 異体字セレクタ, スキントーン修飾子, タグ文字, ゼロ幅スペース, ゼロ幅非接合子, ゼロ幅接合子, 単語結合子
 	 * - 1幅 ... ASCII文字, 半角カタカナ
 	 * - 2幅 ... 上記以外
-	 * @param {String} text - カウントしたいテキスト
-	 * @returns {Number} 文字の横幅
+	 * @param {string} text - カウントしたいテキスト
+	 * @returns {number} 文字の横幅
 	 */
 	static getWidth(text) {
 		const utf32_array = Unicode.toUTF32Array(text);
@@ -989,13 +989,13 @@ export default class Japanese {
 
 	/**
 	 * 文字幅を考慮して文字列を文字の配列に変換する
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {Array<Array<number>>} UTF32(コードポイント)の配列が入った配列
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {Array<number[]>} UTF32(コードポイント)の配列が入った配列
 	 */
 	static toMojiArrayFromString(text) {
 		const utf32 = Unicode.toUTF32Array(text);
 		/**
-		 * @type {Array<Array<number>>}
+		 * @type {Array<number[]>}
 		 */
 		const mojiarray = [];
 		let moji = [];
@@ -1018,12 +1018,12 @@ export default class Japanese {
 
 	/**
 	 * 結合した文字を考慮して文字の配列を文字列に変換する
-	 * @param {Array<Array<number>>} mojiarray - UTF32(コードポイント)の配列が入った配列
+	 * @param {Array<number[]>} mojiarray - UTF32(コードポイント)の配列が入った配列
 	 * @returns {string} UTF32(コードポイント)の配列が入った配列
 	 */
 	static toStringFromMojiArray(mojiarray) {
 		/**
-		 * @type {Array<number>}
+		 * @type {number[]}
 		 */
 		const utf32 = [];
 		for (let i = 0; i < mojiarray.length; i++) {
@@ -1039,17 +1039,17 @@ export default class Japanese {
 	 * - 0幅 ... 結合文字, 異体字セレクタ, スキントーン修飾子, タグ文字, ゼロ幅スペース, ゼロ幅非接合子, ゼロ幅接合子, 単語結合子
 	 * - 1幅 ... ASCII文字, 半角カタカナ
 	 * - 2幅 ... 上記以外
-	 * @param {String} text - 切り出したいテキスト
-	 * @param {Number} offset - 切り出し位置
-	 * @param {Number} size - 切り出す長さ
-	 * @returns {String} 切り出したテキスト
+	 * @param {string} text - 切り出したいテキスト
+	 * @param {number} offset - 切り出し位置
+	 * @param {number} size - 切り出す長さ
+	 * @returns {string} 切り出したテキスト
 	 * @ignore
 	 */
 	static cutTextForWidth(text, offset, size) {
 		const moji_array = Japanese.toMojiArrayFromString(text);
 		const SPACE = [0x20]; // ' '
 		/**
-		 * @type {Array<Array<number>>}
+		 * @type {Array<number[]>}
 		 */
 		const output = [];
 		let is_target = false;

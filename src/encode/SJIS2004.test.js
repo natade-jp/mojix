@@ -8,7 +8,7 @@ const getTestCharacterMap = function () {
 	 *
 	 * 参考：JIS X 0213 - Wikipedia (2019/1/1)
 	 * https://ja.wikipedia.org/wiki/JIS_X_0213
-	 * @type {Object<number, number|Array<number>>}
+	 * @type {Object<number, number|number[]>}
 	 */
 	// prettier-ignore
 	const sjis2004_to_unicode_map = {
@@ -1454,7 +1454,7 @@ const getTestCharacterMap = function () {
 	 *
 	 * メモ：今回は使っていませんが、以下の文献も参考になるかもしれません。
 	 * ftp://www.unicode.org/Public/MAPPINGS/OBSOLETE/EASTASIA/JIS/JIS0208.TXT
-	 * @type {Object<number, number>}
+	 * @type {Record<number, number>}
 	 */
 	const sjis2004_to_unicode_map_2 = {
 		0x8143: 0xFF0C, 0x8144: 0xFF0E, 0x8146: 0xFF1A, 0x8147: 0xFF1B, 0x8148: 0xFF1F, 0x8149: 0xFF01, 0x814C: 0x00B4, 0x814D: 0xFF40, 
@@ -1488,7 +1488,7 @@ const getTestCharacterMap = function () {
 
 	/**
 	 * 逆引きマップ作成。重複がある場合は、小さい数値を優先させる。
-	 * @type {Object<number, number>}
+	 * @type {Record<number, number>}
 	 */
 	const unicode_to_sjis2004_map = {};
 	for (const key in sjis2004_to_unicode_map) {
@@ -1553,7 +1553,7 @@ const equalsArray = function (x, y) {
 
 /**
  * @param {string} function_name
- * @param {Object<number, number|Array<number>>} map
+ * @param {Object<number, number|number[]>} map
  */
 const testCharacterMap = function (function_name, map) {
 	let is_test = true;
@@ -1563,7 +1563,7 @@ const testCharacterMap = function (function_name, map) {
 		const key_number = parseFloat(key);
 
 		/**
-		 * @type {number|Array<number>}
+		 * @type {number|number[]}
 		 */
 		const x = func(key_number);
 		const y = map[key];

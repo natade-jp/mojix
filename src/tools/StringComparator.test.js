@@ -1,7 +1,7 @@
 import StringComparator from "./StringComparator.js";
 
 /**
- * @param {Array} x
+ * @param {string[]} x
  * @returns {string}
  */
 const toStringFromArray = function (x) {
@@ -9,8 +9,8 @@ const toStringFromArray = function (x) {
 };
 
 /**
- * @param {Array} x
- * @param {Array} y
+ * @param {string[]} x
+ * @param {string[]} y
  * @returns {boolean}
  */
 const equalsArray = function (x, y) {
@@ -29,8 +29,8 @@ let test_count = 0;
 
 /**
  * @param {*} operator
- * @param {Array} x
- * @param {Array} y
+ * @param {string[]} x
+ * @param {string[]} y
  */
 const testSort = function (operator, x, y) {
 	test_count++;

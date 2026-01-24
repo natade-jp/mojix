@@ -26,9 +26,9 @@ import Unicode from "./Unicode.js";
 export default class SJIS {
 	/**
 	 * 文字列を Shift_JIS の配列に変換。変換できない文字は "?" に変換される。
-	 * @param {String} text - 変換したいテキスト
-	 * @param {Object<number, number>} unicode_to_sjis - Unicode から Shift_JIS への変換マップ
-	 * @returns {Array<number>} Shift_JIS のデータが入った配列
+	 * @param {string} text - 変換したいテキスト
+	 * @param {Record<number, number>} unicode_to_sjis - Unicode から Shift_JIS への変換マップ
+	 * @returns {number[]} Shift_JIS のデータが入った配列
 	 * @ignore
 	 */
 	static toSJISArray(text, unicode_to_sjis) {
@@ -50,9 +50,9 @@ export default class SJIS {
 	/**
 	 * 文字列を Shift_JIS のバイナリ配列に変換。変換できない文字は "?" に変換される。
 	 * - 日本語文字は2バイトとして、配列も2つ分、使用します。
-	 * @param {String} text - 変換したいテキスト
-	 * @param {Object<number, number>} unicode_to_sjis - Unicode から Shift_JIS への変換マップ
-	 * @returns {Array<number>} Shift_JIS のデータが入ったバイナリ配列
+	 * @param {string} text - 変換したいテキスト
+	 * @param {Record<number, number>} unicode_to_sjis - Unicode から Shift_JIS への変換マップ
+	 * @returns {number[]} Shift_JIS のデータが入ったバイナリ配列
 	 * @ignore
 	 */
 	static toSJISBinary(text, unicode_to_sjis) {
@@ -71,9 +71,9 @@ export default class SJIS {
 
 	/**
 	 * SJISの配列から文字列に変換
-	 * @param {Array<number>} sjis - 変換したいテキスト
-	 * @param {Object<number, number|Array<number>>} sjis_to_unicode - Shift_JIS から Unicode への変換マップ
-	 * @returns {String} 変換後のテキスト
+	 * @param {number[]} sjis - 変換したいテキスト
+	 * @param {Record<number, number|number[]>} sjis_to_unicode - Shift_JIS から Unicode への変換マップ
+	 * @returns {string} 変換後のテキスト
 	 * @ignore
 	 */
 	static fromSJISArray(sjis, sjis_to_unicode) {
@@ -83,7 +83,7 @@ export default class SJIS {
 		for (let i = 0; i < sjis.length; i++) {
 			let x = sjis[i];
 			/**
-			 * @type {number|Array<number>}
+			 * @type {number|number[]}
 			 */
 			let y = [];
 			if (x >= 0x100) {
@@ -91,6 +91,7 @@ export default class SJIS {
 				y = map[x];
 			} else {
 				// 2バイト文字かのチェック
+				// prettier-ignore
 				if ((0x81 <= x && x <= 0x9F) || (0xE0 <= x && x <= 0xFC)) {
 					x <<= 8;
 					i++;
@@ -121,9 +122,9 @@ export default class SJIS {
 
 	/**
 	 * 指定したコードポイントの文字から Shift_JIS 上の符号化数値に変換
-	 * @param {Number} unicode_codepoint - Unicodeのコードポイント
-	 * @param {Object<number, number>} unicode_to_sjis - Unicode から Shift_JIS への変換マップ
-	 * @returns {Number} 符号化数値(変換できない場合はnullとなる)
+	 * @param {number} unicode_codepoint - Unicodeのコードポイント
+	 * @param {Record<number, number>} unicode_to_sjis - Unicode から Shift_JIS への変換マップ
+	 * @returns {number} 符号化数値(変換できない場合はnullとなる)
 	 * @ignore
 	 */
 	static toSJISCodeFromUnicode(unicode_codepoint, unicode_to_sjis) {
@@ -137,7 +138,7 @@ export default class SJIS {
 
 	/**
 	 * 指定した Shift_JIS-2004 のコードから面区点番号に変換
-	 * @param {Number} sjis_code - Shift_JIS-2004 のコードポイント
+	 * @param {number} sjis_code - Shift_JIS-2004 のコードポイント
 	 * @returns {MenKuTen} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 	 */
 	static toMenKuTenFromSJIS2004Code(sjis_code) {
@@ -161,40 +162,53 @@ export default class SJIS {
 			men = 1;
 			// 区の計算方法の切り替え
 			// 63区から、0x9F→0xE0に飛ぶ
+			// prettier-ignore
 			if (s1 < 0xE0) {
+				// prettier-ignore
 				s1 = s1 - 0x81;
 			} else {
+				// prettier-ignore
 				s1 = s1 - 0xC1;
 			}
 		} else {
 			// ※2面は第4水準のみ
 			men = 2;
 			// 2面1区 ～ 2面8区
+			// prettier-ignore
 			if (((s1 === 0xF0 || s1 === 0xF2) && s2 < 0x9F) || s1 === 0xF1) {
+				// prettier-ignore
 				s1 = s1 - 0xF0;
 			}
 			// 2面12区 ～ 2面15区
+			// prettier-ignore
 			else if ((s1 === 0xF4 && s2 < 0x9F) || s1 < 0xF4) {
+				// prettier-ignore
 				s1 = s1 - 0xED;
 			}
 			// 2面78区 ～ 2面94区
 			else {
+				// prettier-ignore
 				s1 = s1 - 0xCE;
 			}
 		}
 
 		// 区情報の位置判定
+		// prettier-ignore
 		if (s2 < 0x9F) {
 			ku = s1 * 2 + 1;
 			// 点情報の計算方法の切り替え
 			// 0x7Fが欠番のため「+1」を除去
+			// prettier-ignore
 			if (s2 < 0x80) {
+				// prettier-ignore
 				s2 = s2 - 0x40 + 1;
 			} else {
+				// prettier-ignore
 				s2 = s2 - 0x40;
 			}
 		} else {
 			ku = s1 * 2 + 2;
+			// prettier-ignore
 			s2 = s2 - 0x9F + 1;
 		}
 
@@ -211,8 +225,8 @@ export default class SJIS {
 
 	/**
 	 * 指定したコードポイントの文字から Shift_JIS-2004 上の面区点番号に変換
-	 * @param {Number} unicode_codepoint - Unicodeのコードポイント
-	 * @param {Object<number, number>} unicode_to_sjis - Unicode から Shift_JIS-2004 への変換マップ
+	 * @param {number} unicode_codepoint - Unicodeのコードポイント
+	 * @param {Record<number, number>} unicode_to_sjis - Unicode から Shift_JIS-2004 への変換マップ
 	 * @returns {MenKuTen} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 	 * @ignore
 	 */
@@ -227,7 +241,7 @@ export default class SJIS {
 	/**
 	 * 指定した面区点番号から Shift_JIS-2004 コードに変換
 	 * @param {MenKuTen|string} menkuten - 面区点番号（面が省略された場合は、1とみなす）
-	 * @returns {Number} Shift_JIS-2004 のコードポイント(存在しない場合はnullを返す)
+	 * @returns {number} Shift_JIS-2004 のコードポイント(存在しない場合はnullを返す)
 	 */
 	static toSJIS2004CodeFromMenKuTen(menkuten) {
 		let m = null,
@@ -265,7 +279,7 @@ export default class SJIS {
 		let s2 = -1;
 
 		/**
-		 * @type {Object<number, number>}
+		 * @type {Record<number, number>}
 		 */
 		const kmap = { 1: 1, 3: 1, 4: 1, 5: 1, 8: 1, 12: 1, 13: 1, 14: 1, 15: 1 };
 
@@ -309,8 +323,8 @@ export default class SJIS {
 	/**
 	 * 指定した面区点番号から Unicode コードポイントに変換
 	 * @param {MenKuTen|string} menkuten - 面区点番号
-	 * @param {Object<number, number|Array<number>>} sjis_to_unicode - Shift_JIS-2004 から Unicode への変換マップ
-	 * @returns {Array<number>} UTF-32の配列(存在しない場合はnullを返す)
+	 * @param {Object<number, number|number[]>} sjis_to_unicode - Shift_JIS-2004 から Unicode への変換マップ
+	 * @returns {number[]} UTF-32の配列(存在しない場合はnullを返す)
 	 * @ignore
 	 */
 	static toUnicodeCodeFromMenKuTen(menkuten, sjis_to_unicode) {
@@ -331,7 +345,7 @@ export default class SJIS {
 
 	/**
 	 * 指定した Shift_JIS のコードから区点番号に変換
-	 * @param {Number} sjis_code - Shift_JIS のコードポイント
+	 * @param {number} sjis_code - Shift_JIS のコードポイント
 	 * @returns {MenKuTen} 区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 	 */
 	static toKuTenFromSJISCode(sjis_code) {
@@ -351,6 +365,7 @@ export default class SJIS {
 
 		// 区の計算方法の切り替え
 		// 63区から、0x9F→0xE0に飛ぶ
+		// prettier-ignore
 		if (s1 < 0xE0) {
 			s1 = s1 - 0x81;
 		} else {
@@ -358,17 +373,22 @@ export default class SJIS {
 		}
 
 		// 区情報の位置判定
+		// prettier-ignore
 		if (s2 < 0x9F) {
 			ku = s1 * 2 + 1;
 			// 点情報の計算方法の切り替え
 			// 0x7Fが欠番のため「+1」を除去
+			// prettier-ignore
 			if (s2 < 0x80) {
+				// prettier-ignore
 				s2 = s2 - 0x40 + 1;
 			} else {
+				// prettier-ignore
 				s2 = s2 - 0x40;
 			}
 		} else {
 			ku = s1 * 2 + 2;
+			// prettier-ignore
 			s2 = s2 - 0x9F + 1;
 		}
 
@@ -385,8 +405,8 @@ export default class SJIS {
 
 	/**
 	 * 指定したコードポイントの文字から Shift_JIS 上の面区点番号に変換
-	 * @param {Number} unicode_codepoint - Unicodeのコードポイント
-	 * @param {Object<number, number>} unicode_to_sjis - Unicode から Shift_JIS への変換マップ
+	 * @param {number} unicode_codepoint - Unicodeのコードポイント
+	 * @param {Record<number, number>} unicode_to_sjis - Unicode から Shift_JIS への変換マップ
 	 * @returns {MenKuTen} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 	 * @ignore
 	 */
@@ -401,7 +421,7 @@ export default class SJIS {
 	/**
 	 * 指定した面区点番号／区点番号から Shift_JIS コードに変換
 	 * @param {MenKuTen|string} kuten - 面区点番号／区点番号
-	 * @returns {Number} Shift_JIS のコードポイント(存在しない場合はnullを返す)
+	 * @returns {number} Shift_JIS のコードポイント(存在しない場合はnullを返す)
 	 */
 	static toSJISCodeFromKuTen(kuten) {
 		// 1～94区まで存在しているため面句点変換用で流用可能。
@@ -413,8 +433,8 @@ export default class SJIS {
 	/**
 	 * 指定した区点番号から Unicode コードポイントに変換
 	 * @param {MenKuTen|string} kuten - 区点番号
-	 * @param {Object<number, number|Array<number>>} sjis_to_unicode - Shift_JIS から Unicode への変換マップ
-	 * @returns {Array<number>} UTF-32の配列(存在しない場合はnullを返す)
+	 * @param {Object<number, number|number[]>} sjis_to_unicode - Shift_JIS から Unicode への変換マップ
+	 * @returns {number[]} UTF-32の配列(存在しない場合はnullを返す)
 	 * @ignore
 	 */
 	static toUnicodeCodeFromKuTen(kuten, sjis_to_unicode) {
@@ -435,8 +455,8 @@ export default class SJIS {
 
 	/**
 	 * Shift_JIS のコードポイントからJIS漢字水準（JIS Chinese character standard）に変換
-	 * @param {Number} sjis_code - Shift_JIS-2004 のコードポイント
-	 * @returns {Number} -1...変換不可, 0...水準なし, 1...第1水準, ...
+	 * @param {number} sjis_code - Shift_JIS-2004 のコードポイント
+	 * @returns {number} -1...変換不可, 0...水準なし, 1...第1水準, ...
 	 */
 	static toJISKanjiSuijunFromSJISCode(sjis_code) {
 		if (!sjis_code) {
@@ -491,9 +511,9 @@ export default class SJIS {
 
 	/**
 	 * Unicode のコードポイントからJIS漢字水準（JIS Chinese character standard）に変換
-	 * @param {Number} unicode_codepoint - Unicodeのコードポイント
-	 * @param {Object<number, number>} unicode_to_sjis - Unicode から Shift_JIS への変換マップ
-	 * @returns {Number} -1...変換不可, 0...水準なし, 1...第1水準, ...
+	 * @param {number} unicode_codepoint - Unicodeのコードポイント
+	 * @param {Record<number, number>} unicode_to_sjis - Unicode から Shift_JIS への変換マップ
+	 * @returns {number} -1...変換不可, 0...水準なし, 1...第1水準, ...
 	 * @ignore
 	 */
 	static toJISKanjiSuijunFromUnicode(unicode_codepoint, unicode_to_sjis) {
@@ -507,7 +527,7 @@ export default class SJIS {
 	/**
 	 * 指定した面区点番号から Shift_JIS の仕様上、正規な物か判定
 	 * @param {MenKuTen|string} menkuten - 面区点番号（面が省略された場合は、1とみなす）
-	 * @returns {Boolean} 正規なデータは true, 不正なデータは false
+	 * @returns {boolean} 正規なデータは true, 不正なデータは false
 	 */
 	static isRegularMenKuten(menkuten) {
 		let m, k, t;
@@ -535,7 +555,7 @@ export default class SJIS {
 		}
 
 		/**
-		 * @type {Object<number, number>}
+		 * @type {Record<number, number>}
 		 */
 		const kmap = { 1: 1, 3: 1, 4: 1, 5: 1, 8: 1, 12: 1, 13: 1, 14: 1, 15: 1 };
 		if (m === 1) {

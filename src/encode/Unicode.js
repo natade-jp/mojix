@@ -10,7 +10,7 @@
 
 /**
  * 制御文字マップ
- * @type {Object<number, string>}
+ * @type {Record<number, string>}
  * @ignore
  */
 let control_charcter_map = null;
@@ -27,7 +27,7 @@ let toBlockNameFromUnicode = null;
  * @type {(codepoint: number, annotate?: boolean) => (string|null)}
  * @ignore
  */
-let getVariationSelectorsNumberFromCodePoint = null;
+let getVariationSelectorsnumberFromCodePoint = null;
 
 /**
  * コードポイントからタグ文字の判定をする
@@ -173,35 +173,35 @@ export default class Unicode {
 			"Khmer", "Mongolian", "Unified Canadian Aboriginal Syllabics Extended", "Limbu", "Tai Le", "New Tai Lue", "Khmer Symbols", "Buginese", 
 			"Tai Tham", "Combining Diacritical Marks Extended", "Balinese", "Sundanese", "Batak", "Lepcha", "Ol Chiki", "Cyrillic Extended-C", 
 			"Georgian Extended", "Sundanese Supplement", "Vedic Extensions", "Phonetic Extensions", "Phonetic Extensions Supplement", "Combining Diacritical Marks Supplement", "Latin Extended Additional", "Greek Extended", 
-			"General Punctuation", "Superscripts and Subscripts", "Currency Symbols", "Combining Diacritical Marks for Symbols", "Letterlike Symbols", "Number Forms", "Arrows", "Mathematical Operators", 
+			"General Punctuation", "Superscripts and Subscripts", "Currency Symbols", "Combining Diacritical Marks for Symbols", "Letterlike Symbols", "number Forms", "Arrows", "Mathematical Operators", 
 			"Miscellaneous Technical", "Control Pictures", "Optical Character Recognition", "Enclosed Alphanumerics", "Box Drawing", "Block Elements", "Geometric Shapes", "Miscellaneous Symbols", 
 			"Dingbats", "Miscellaneous Mathematical Symbols-A", "Supplemental Arrows-A", "Braille Patterns", "Supplemental Arrows-B", "Miscellaneous Mathematical Symbols-B", "Supplemental Mathematical Operators", "Miscellaneous Symbols and Arrows", 
 			"Glagolitic", "Latin Extended-C", "Coptic", "Georgian Supplement", "Tifinagh", "Ethiopic Extended", "Cyrillic Extended-A", "Supplemental Punctuation", 
 			"CJK Radicals Supplement", "Kangxi Radicals", "Ideographic Description Characters", "CJK Symbols and Punctuation", "Hiragana", "Katakana", "Bopomofo", "Hangul Compatibility Jamo", 
 			"Kanbun", "Bopomofo Extended", "CJK Strokes", "Katakana Phonetic Extensions", "Enclosed CJK Letters and Months", "CJK Compatibility", "CJK Unified Ideographs Extension A", "Yijing Hexagram Symbols", 
 			"CJK Unified Ideographs", "Yi Syllables", "Yi Radicals", "Lisu", "Vai", "Cyrillic Extended-B", "Bamum", "Modifier Tone Letters", 
-			"Latin Extended-D", "Syloti Nagri", "Common Indic Number Forms", "Phags-pa", "Saurashtra", "Devanagari Extended", "Kayah Li", "Rejang", 
+			"Latin Extended-D", "Syloti Nagri", "Common Indic number Forms", "Phags-pa", "Saurashtra", "Devanagari Extended", "Kayah Li", "Rejang", 
 			"Hangul Jamo Extended-A", "Javanese", "Myanmar Extended-B", "Cham", "Myanmar Extended-A", "Tai Viet", "Meetei Mayek Extensions", "Ethiopic Extended-A", 
 			"Latin Extended-E", "Cherokee Supplement", "Meetei Mayek", "Hangul Syllables", "Hangul Jamo Extended-B", "High Surrogates", "High Private Use Surrogates", "Low Surrogates", 
 			"Private Use Area", "CJK Compatibility Ideographs", "Alphabetic Presentation Forms", "Arabic Presentation Forms-A", "Variation Selectors", "Vertical Forms", "Combining Half Marks", "CJK Compatibility Forms", 
-			"Small Form Variants", "Arabic Presentation Forms-B", "Halfwidth and Fullwidth Forms", "Specials", "Linear B Syllabary", "Linear B Ideograms", "Aegean Numbers", "Ancient Greek Numbers", 
-			"Ancient Symbols", "Phaistos Disc", "Lycian", "Carian", "Coptic Epact Numbers", "Old Italic", "Gothic", "Old Permic", 
+			"Small Form Variants", "Arabic Presentation Forms-B", "Halfwidth and Fullwidth Forms", "Specials", "Linear B Syllabary", "Linear B Ideograms", "Aegean numbers", "Ancient Greek numbers", 
+			"Ancient Symbols", "Phaistos Disc", "Lycian", "Carian", "Coptic Epact numbers", "Old Italic", "Gothic", "Old Permic", 
 			"Ugaritic", "Old Persian", "Deseret", "Shavian", "Osmanya", "Osage", "Elbasan", "Caucasian Albanian", 
 			"Vithkuqi", "Linear A", "Latin Extended-F", "Cypriot Syllabary", "Imperial Aramaic", "Palmyrene", "Nabataean", "Hatran", 
 			"Phoenician", "Lydian", "Meroitic Hieroglyphs", "Meroitic Cursive", "Kharoshthi", "Old South Arabian", "Old North Arabian", "Manichaean", 
 			"Avestan", "Inscriptional Parthian", "Inscriptional Pahlavi", "Psalter Pahlavi", "Old Turkic", "Old Hungarian", "Hanifi Rohingya", "Rumi Numeral Symbols", 
 			"Yezidi", "Arabic Extended-C", "Old Sogdian", "Sogdian", "Old Uyghur", "Chorasmian", "Elymaic", "Brahmi", 
-			"Kaithi", "Sora Sompeng", "Chakma", "Mahajani", "Sharada", "Sinhala Archaic Numbers", "Khojki", "Multani", 
+			"Kaithi", "Sora Sompeng", "Chakma", "Mahajani", "Sharada", "Sinhala Archaic numbers", "Khojki", "Multani", 
 			"Khudawadi", "Grantha", "Newa", "Tirhuta", "Siddham", "Modi", "Mongolian Supplement", "Takri", 
 			"Ahom", "Dogra", "Warang Citi", "Dives Akuru", "Nandinagari", "Zanabazar Square", "Soyombo", "Unified Canadian Aboriginal Syllabics Extended-A", 
 			"Pau Cin Hau", "Devanagari Extended-A", "Bhaiksuki", "Marchen", "Masaram Gondi", "Gunjala Gondi", "Makasar", "Kawi", 
-			"Lisu Supplement", "Tamil Supplement", "Cuneiform", "Cuneiform Numbers and Punctuation", "Early Dynastic Cuneiform", "Cypro-Minoan", "Egyptian Hieroglyphs", "Egyptian Hieroglyph Format Controls", 
+			"Lisu Supplement", "Tamil Supplement", "Cuneiform", "Cuneiform numbers and Punctuation", "Early Dynastic Cuneiform", "Cypro-Minoan", "Egyptian Hieroglyphs", "Egyptian Hieroglyph Format Controls", 
 			"Anatolian Hieroglyphs", "Bamum Supplement", "Mro", "Tangsa", "Bassa Vah", "Pahawh Hmong", "Medefaidrin", "Miao", 
 			"Ideographic Symbols and Punctuation", "Tangut", "Tangut Components", "Khitan Small Script", "Tangut Supplement", "Kana Extended-B", "Kana Supplement", "Kana Extended-A", 
 			"Small Kana Extension", "Nushu", "Duployan", "Shorthand Format Controls", "Znamenny Musical Notation", "Byzantine Musical Symbols", "Musical Symbols", "Ancient Greek Musical Notation", 
 			"Kaktovik Numerals", "Mayan Numerals", "Tai Xuan Jing Symbols", "Counting Rod Numerals", "Mathematical Alphanumeric Symbols", "Sutton SignWriting", "Latin Extended-G", "Glagolitic Supplement", 
 			"Cyrillic Extended-D", "Nyiakeng Puachue Hmong", "Toto", "Wancho", "Nag Mundari", "Ethiopic Extended-B", "Mende Kikakui", "Adlam", 
-			"Indic Siyaq Numbers", "Ottoman Siyaq Numbers", "Arabic Mathematical Alphabetic Symbols", "Mahjong Tiles", "Domino Tiles", "Playing Cards", "Enclosed Alphanumeric Supplement", "Enclosed Ideographic Supplement", 
+			"Indic Siyaq numbers", "Ottoman Siyaq numbers", "Arabic Mathematical Alphabetic Symbols", "Mahjong Tiles", "Domino Tiles", "Playing Cards", "Enclosed Alphanumeric Supplement", "Enclosed Ideographic Supplement", 
 			"Miscellaneous Symbols and Pictographs", "Emoticons", "Ornamental Dingbats", "Transport and Map Symbols", "Alchemical Symbols", "Geometric Shapes Extended", "Supplemental Arrows-C", "Supplemental Symbols and Pictographs", 
 			"Chess Symbols", "Symbols and Pictographs Extended-A", "Symbols for Legacy Computing", "CJK Unified Ideographs Extension B", "CJK Unified Ideographs Extension C", "CJK Unified Ideographs Extension D", "CJK Unified Ideographs Extension E", "CJK Unified Ideographs Extension F", "CJK Unified Ideographs Extension I", 
 			"CJK Compatibility Ideographs Supplement", "CJK Unified Ideographs Extension G", "CJK Unified Ideographs Extension H", "CJK Unified Ideographs Extension J", "Tags", "Variation Selectors Supplement", "Supplementary Private Use Area-A", "Supplementary Private Use Area-B"
@@ -235,7 +235,7 @@ export default class Unicode {
 		/**
 		 * コードポイントからUnicodeのブロック名に変換する
 		 * 変換できない場合は "-" を返す
-		 * @param {Number} codepoint - コードポイント
+		 * @param {number} codepoint - コードポイント
 		 * @returns {string}
 		 */
 		toBlockNameFromUnicode = function (codepoint) {
@@ -249,11 +249,11 @@ export default class Unicode {
 
 		/**
 		 * コードポイントから異体字セレクタの判定
-		 * @param {Number} codepoint - コードポイント
+		 * @param {number} codepoint - コードポイント
 		 * @param {boolean} [annotate = false] - 注釈をつけるか否か
 		 * @returns {string|null} 確認結果(異体字セレクタではない場合はNULLを返す)
 		 */
-		getVariationSelectorsNumberFromCodePoint = function (codepoint, annotate) {
+		getVariationSelectorsnumberFromCodePoint = function (codepoint, annotate) {
 			// モンゴル自由字形選択子 U+180B〜U+180D (3個)
 			// prettier-ignore
 			if (0x180B <= codepoint && codepoint <= 0x180D) {
@@ -283,7 +283,7 @@ export default class Unicode {
 
 		/**
 		 * コードポイントからタグ文字の判定
-		 * @param {Number} codepoint - コードポイント
+		 * @param {number} codepoint - コードポイント
 		 * @returns {string|null} 確認結果(タグ文字ではない場合はNULLを返す)
 		 */
 		getTagCharacterFromCodePoint = function (codepoint) {
@@ -306,9 +306,9 @@ export default class Unicode {
 
 	/**
 	 * 上位のサロゲートペアの判定
-	 * @param {String} text - 対象テキスト
-	 * @param {Number} index - インデックス
-	 * @returns {Boolean} 確認結果
+	 * @param {string} text - 対象テキスト
+	 * @param {number} index - インデックス
+	 * @returns {boolean} 確認結果
 	 */
 	static isHighSurrogateAt(text, index) {
 		const ch = text.charCodeAt(index);
@@ -318,9 +318,9 @@ export default class Unicode {
 
 	/**
 	 * 下位のサロゲートペアの判定
-	 * @param {String} text - 対象テキスト
-	 * @param {Number} index - インデックス
-	 * @returns {Boolean} 確認結果
+	 * @param {string} text - 対象テキスト
+	 * @param {number} index - インデックス
+	 * @returns {boolean} 確認結果
 	 */
 	static isLowSurrogateAt(text, index) {
 		const ch = text.charCodeAt(index);
@@ -330,9 +330,9 @@ export default class Unicode {
 
 	/**
 	 * サロゲートペアの判定
-	 * @param {String} text - 対象テキスト
-	 * @param {Number} index - インデックス
-	 * @returns {Boolean} 確認結果
+	 * @param {string} text - 対象テキスト
+	 * @param {number} index - インデックス
+	 * @returns {boolean} 確認結果
 	 */
 	static isSurrogatePairAt(text, index) {
 		const ch = text.charCodeAt(index);
@@ -342,9 +342,9 @@ export default class Unicode {
 
 	/**
 	 * サロゲートペア対応のコードポイント取得
-	 * @param {String} text - 対象テキスト
-	 * @param {Number} [index = 0] - インデックス
-	 * @returns {Number} コードポイント
+	 * @param {string} text - 対象テキスト
+	 * @param {number} [index = 0] - インデックス
+	 * @returns {number} コードポイント
 	 */
 	static codePointAt(text, index) {
 		const index_ = index !== undefined ? index : 0;
@@ -360,9 +360,9 @@ export default class Unicode {
 
 	/**
 	 * インデックスの前にあるコードポイント
-	 * @param {String} text - 対象テキスト
-	 * @param {Number} index - インデックス
-	 * @returns {Number} コードポイント
+	 * @param {string} text - 対象テキスト
+	 * @param {number} index - インデックス
+	 * @returns {number} コードポイント
 	 */
 	static codePointBefore(text, index) {
 		if (!Unicode.isLowSurrogateAt(text, index - 1)) {
@@ -374,10 +374,10 @@ export default class Unicode {
 
 	/**
 	 * コードポイント換算で文字列数をカウント
-	 * @param {String} text - 対象テキスト
-	 * @param {Number} [beginIndex=0] - 最初のインデックス（省略可）
-	 * @param {Number} [endIndex] - 最後のインデックス（ここは含めない）（省略可）
-	 * @returns {Number} 文字数
+	 * @param {string} text - 対象テキスト
+	 * @param {number} [beginIndex=0] - 最初のインデックス（省略可）
+	 * @param {number} [endIndex] - 最後のインデックス（ここは含めない）（省略可）
+	 * @returns {number} 文字数
 	 */
 	static codePointCount(text, beginIndex, endIndex) {
 		if (beginIndex === undefined) {
@@ -398,10 +398,10 @@ export default class Unicode {
 
 	/**
 	 * コードポイント換算で文字列配列の位置を計算
-	 * @param {String} text - 対象テキスト
-	 * @param {Number} index - オフセット
-	 * @param {Number} codePointOffset - ずらすコードポイント数
-	 * @returns {Number} ずらしたインデックス
+	 * @param {string} text - 対象テキスト
+	 * @param {number} index - オフセット
+	 * @param {number} codePointOffset - ずらすコードポイント数
+	 * @returns {number} ずらしたインデックス
 	 */
 	static offsetByCodePoints(text, index, codePointOffset) {
 		let count = 0;
@@ -435,16 +435,16 @@ export default class Unicode {
 
 	/**
 	 * コードポイントの数値データをUTF16の配列に変換
-	 * @param {...(number|Array<number>)} codepoint - 変換したいUTF-32の配列、又はコードポイントを並べた可変引数
-	 * @returns {Array<number>} 変換後のテキスト
+	 * @param {...(number|number[])} codepoint - 変換したいUTF-32の配列、又はコードポイントを並べた可変引数
+	 * @returns {number[]} 変換後のテキスト
 	 */
 	static toUTF16ArrayFromCodePoint() {
 		/**
-		 * @type {Array<number>}
+		 * @type {number[]}
 		 */
 		const utf16_array = [];
 		/**
-		 * @type {Array<number>}
+		 * @type {number[]}
 		 */
 		let codepoint_array = [];
 		if (arguments[0].length) {
@@ -472,8 +472,8 @@ export default class Unicode {
 
 	/**
 	 * コードポイントの数値データを文字列に変換
-	 * @param {...(number|Array<number>)} codepoint - 変換したいコードポイントの数値配列、又は数値を並べた可変引数
-	 * @returns {String} 変換後のテキスト
+	 * @param {...(number|number[])} codepoint - 変換したいコードポイントの数値配列、又は数値を並べた可変引数
+	 * @returns {string} 変換後のテキスト
 	 */
 	static fromCodePoint(codepoint) {
 		let utf16_array = null;
@@ -495,8 +495,8 @@ export default class Unicode {
 
 	/**
 	 * 文字列をUTF32(コードポイント)の配列に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {Array<number>} UTF32(コードポイント)のデータが入った配列
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {number[]} UTF32(コードポイント)のデータが入った配列
 	 */
 	static toUTF32Array(text) {
 		const utf32 = [];
@@ -508,8 +508,8 @@ export default class Unicode {
 
 	/**
 	 * UTF32の配列から文字列に変換
-	 * @param {Array<number>} utf32 - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {number[]} utf32 - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static fromUTF32Array(utf32) {
 		return Unicode.fromCodePoint(utf32);
@@ -517,8 +517,8 @@ export default class Unicode {
 
 	/**
 	 * 文字列をUTF16の配列に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {Array<number>} UTF16のデータが入った配列
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {number[]} UTF16のデータが入った配列
 	 */
 	static toUTF16Array(text) {
 		const utf16 = [];
@@ -530,8 +530,8 @@ export default class Unicode {
 
 	/**
 	 * UTF16の配列から文字列に変換
-	 * @param {Array<number>} utf16 - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {number[]} utf16 - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static fromUTF16Array(utf16) {
 		const text = [];
@@ -543,8 +543,8 @@ export default class Unicode {
 
 	/**
 	 * 文字列をUTF8の配列に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {Array<number>} UTF8のデータが入った配列
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {number[]} UTF8のデータが入った配列
 	 */
 	static toUTF8Array(text) {
 		return Unicode.toUTFBinaryFromCodePoint(Unicode.toUTF32Array(text), "utf-8", false);
@@ -552,8 +552,8 @@ export default class Unicode {
 
 	/**
 	 * UTF8の配列から文字列に変換
-	 * @param {Array<number>} utf8 - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {number[]} utf8 - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static fromUTF8Array(utf8) {
 		return Unicode.fromCodePoint(Unicode.toCodePointFromUTFBinary(utf8, "utf-8"));
@@ -562,10 +562,10 @@ export default class Unicode {
 	/**
 	 * 指定したテキストを切り出す
 	 * - 単位は文字数
-	 * @param {String} text - 切り出したいテキスト
-	 * @param {Number} offset - 切り出し位置
-	 * @param {Number} size - 切り出す長さ
-	 * @returns {String} 切り出したテキスト
+	 * @param {string} text - 切り出したいテキスト
+	 * @param {number} offset - 切り出し位置
+	 * @param {number} size - 切り出す長さ
+	 * @returns {string} 切り出したテキスト
 	 */
 	static cutTextForCodePoint(text, offset, size) {
 		const utf32 = Unicode.toUTF32Array(text);
@@ -578,7 +578,7 @@ export default class Unicode {
 
 	/**
 	 * UTFのバイナリ配列からバイトオーダーマーク(BOM)を調査する
-	 * @param {Array<number>} utfbinary - 調査するバイナリ配列
+	 * @param {number[]} utfbinary - 調査するバイナリ配列
 	 * @returns {string} 符号化形式(不明時はnull)
 	 */
 	static getCharsetFromBOM(utfbinary) {
@@ -613,9 +613,9 @@ export default class Unicode {
 
 	/**
 	 * UTFのバイナリ配列からコードポイントに変換
-	 * @param {Array<number>} binary - 変換したいバイナリ配列
-	 * @param {String} [charset] - UTFの種類（省略した場合はBOM付きを期待する）
-	 * @returns {Array<number>} コードポイントの配列(失敗時はnull)
+	 * @param {number[]} binary - 変換したいバイナリ配列
+	 * @param {string} [charset] - UTFの種類（省略した場合はBOM付きを期待する）
+	 * @returns {number[]} コードポイントの配列(失敗時はnull)
 	 */
 	static toCodePointFromUTFBinary(binary, charset) {
 		const utf32_array = [];
@@ -728,10 +728,10 @@ export default class Unicode {
 
 	/**
 	 * UTF32配列からバイナリ配列に変換
-	 * @param {Array<number>} utf32_array - 変換したいUTF-32配列
-	 * @param {String} charset - UTFの種類
+	 * @param {number[]} utf32_array - 変換したいUTF-32配列
+	 * @param {string} charset - UTFの種類
 	 * @param {boolean} [is_with_bom=true] - BOMをつけるかどうか
-	 * @returns {Array<number>} バイナリ配列(失敗時はnull)
+	 * @returns {number[]} バイナリ配列(失敗時はnull)
 	 */
 	static toUTFBinaryFromCodePoint(utf32_array, charset, is_with_bom) {
 		let is_with_bom_ = is_with_bom !== undefined ? is_with_bom : true;
@@ -740,7 +740,7 @@ export default class Unicode {
 			is_with_bom_ = true;
 		}
 		/**
-		 * @type {Array<number>}
+		 * @type {number[]}
 		 */
 		const binary = [];
 		// UTF-8
@@ -869,7 +869,7 @@ export default class Unicode {
 	/**
 	 * コードポイントからUnicodeのブロック名に変換する
 	 * 変換できない場合は "-" を返す
-	 * @param {Number} codepoint - コードポイント
+	 * @param {number} codepoint - コードポイント
 	 * @returns {string}
 	 */
 	static toBlockNameFromUnicode(codepoint) {
@@ -880,14 +880,14 @@ export default class Unicode {
 	/**
 	 * コードポイントから制御文字名に変換する
 	 * 変換できない場合は null を返す
-	 * @param {Number} codepoint - コードポイント
+	 * @param {number} codepoint - コードポイント
 	 * @returns {string}
 	 */
 	static toControlCharcterName(codepoint) {
 		Unicode.init();
 
 		// 異体字セレクタの確認を行い、異体字セレクタ用の制御文字(FVS, VSx)を返す
-		const info_variation_selectors_number = getVariationSelectorsNumberFromCodePoint(codepoint);
+		const info_variation_selectors_number = getVariationSelectorsnumberFromCodePoint(codepoint);
 		if (info_variation_selectors_number !== null) {
 			return info_variation_selectors_number;
 		}
@@ -911,7 +911,7 @@ export default class Unicode {
 	 * - タグ文字（TAG CHARACTER）
 	 * - ゼロ幅接合子
 	 *
-	 * @param {Number} codepoint - コードポイント
+	 * @param {number} codepoint - コードポイント
 	 * @returns {boolean} 確認結果
 	 */
 	static isGraphemeComponentFromCodePoint(codepoint) {
@@ -930,7 +930,7 @@ export default class Unicode {
 	 *
 	 * 含まれるもの:
 	 * - ゼロ幅スペース, ゼロ幅非接合子, ゼロ幅接合子, 単語結合子
-	 * @param {Number} codepoint - コードポイント
+	 * @param {number} codepoint - コードポイント
 	 * @returns {boolean} 確認結果
 	 */
 	static isZeroWidthCharacterFromCodePoint(codepoint) {
@@ -945,7 +945,7 @@ export default class Unicode {
 
 	/**
 	 * コードポイントから結合文字の判定
-	 * @param {Number} codepoint - コードポイント
+	 * @param {number} codepoint - コードポイント
 	 * @returns {boolean} 確認結果
 	 */
 	static isCombiningMarkFromCodePoint(codepoint) {
@@ -984,7 +984,7 @@ export default class Unicode {
 
 	/**
 	 * コードポイントから異体字セレクタの判定
-	 * @param {Number} codepoint - コードポイント
+	 * @param {number} codepoint - コードポイント
 	 * @returns {boolean} 確認結果
 	 */
 	static isVariationSelectorFromCodePoint(codepoint) {
@@ -1003,7 +1003,7 @@ export default class Unicode {
 
 	/**
 	 * コードポイントからスキントーン修飾子の判定
-	 * @param {Number} codepoint - コードポイント
+	 * @param {number} codepoint - コードポイント
 	 * @returns {boolean} 確認結果
 	 */
 	static isEmojiModifierFromCodePoint(codepoint) {
@@ -1016,7 +1016,7 @@ export default class Unicode {
 
 	/**
 	 * コードポイントからタグ文字の判定
-	 * @param {Number} codepoint - コードポイント
+	 * @param {number} codepoint - コードポイント
 	 * @returns {boolean} 確認結果
 	 */
 	static isTagCharacterFromCodePoint(codepoint) {

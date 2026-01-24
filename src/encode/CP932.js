@@ -26,7 +26,7 @@ class CP932MAP {
 		CP932MAP.is_initmap = true;
 
 		/**
-		 * @returns {Object<number, number>}
+		 * @returns {Record<number, number>}
 		 */
 		const getCp932ToUnicodeMap = function () {
 
@@ -37,7 +37,7 @@ class CP932MAP {
 			 * 参考：WideCharToMultiByte
 			 * メモ：今回は使っていないが、以下の文献も参考になるかもしれません。
 			 * ftp://www.unicode.org/Public/MAPPINGS/OBSOLETE/EASTASIA/JIS/JIS0208.TXT
-			 * @type {Object<number, number>}
+			 * @type {Record<number, number>}
 			 */
 			// prettier-ignore
 			const cp932_to_unicode_map = {
@@ -182,13 +182,13 @@ class CP932MAP {
 
 		/**
 		 * CP932 変換マップ
-		 * @type {Object<number, number>}
+		 * @type {Record<number, number>}
 		 */
 		const cp932_to_unicode_map = getCp932ToUnicodeMap();
 
 		/**
 		 * 重複された CP932 のコード
-		 * @type {Array<number>}
+		 * @type {number[]}
 		 */
 		// prettier-ignore
 		const duplicate_map_array = [
@@ -220,12 +220,12 @@ class CP932MAP {
 		];
 
 		/**
-		 * @type {Object<number, number>}
+		 * @type {Record<number, number>}
 		 */
 		const duplicate_map = {};
 
 		/**
-		 * @type {Object<number, number>}
+		 * @type {Record<number, number>}
 		 */
 		const unicode_to_cp932_map = {};
 
@@ -270,7 +270,7 @@ class CP932MAP {
 	}
 
 	/**
-	 * @returns {Object<number, number>}
+	 * @returns {Record<number, number>}
 	 */
 	static CP932_TO_UNICODE() {
 		CP932MAP.init();
@@ -278,7 +278,7 @@ class CP932MAP {
 	}
 
 	/**
-	 * @returns {Object<number, number>}
+	 * @returns {Record<number, number>}
 	 */
 	static UNICODE_TO_CP932() {
 		CP932MAP.init();
@@ -294,13 +294,13 @@ CP932MAP.is_initmap = false;
 
 /**
  * 変換用マップ
- * @type {Object<number, number>}
+ * @type {Record<number, number>}
  */
 CP932MAP.cp932_to_unicode_map = null;
 
 /**
  * 変換用マップ
- * @type {Object<number, number>}
+ * @type {Record<number, number>}
  */
 CP932MAP.unicode_to_cp932_map = null;
 
@@ -311,8 +311,8 @@ CP932MAP.unicode_to_cp932_map = null;
 export default class CP932 {
 	/**
 	 * Unicode のコードから CP932 のコードに変換
-	 * @param {Number} unicode_codepoint - Unicode のコードポイント
-	 * @returns {Number} CP932 のコードポイント (存在しない場合は undefined)
+	 * @param {number} unicode_codepoint - Unicode のコードポイント
+	 * @returns {number} CP932 のコードポイント (存在しない場合は undefined)
 	 */
 	static toCP932FromUnicode(unicode_codepoint) {
 		return CP932MAP.UNICODE_TO_CP932()[unicode_codepoint];
@@ -320,8 +320,8 @@ export default class CP932 {
 
 	/**
 	 * CP932 のコードから Unicode のコードに変換
-	 * @param {Number} cp932_codepoint - CP932 のコードポイント
-	 * @returns {Number} Unicode のコードポイント (存在しない場合は undefined)
+	 * @param {number} cp932_codepoint - CP932 のコードポイント
+	 * @returns {number} Unicode のコードポイント (存在しない場合は undefined)
 	 */
 	static toUnicodeFromCP932(cp932_codepoint) {
 		return CP932MAP.CP932_TO_UNICODE()[cp932_codepoint];
@@ -329,8 +329,8 @@ export default class CP932 {
 
 	/**
 	 * 文字列を CP932 の配列に変換。変換できない文字は "?" に変換される。
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {Array<number>} CP932 のデータが入った配列
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {number[]} CP932 のデータが入った配列
 	 */
 	static toCP932Array(text) {
 		return SJIS.toSJISArray(text, CP932MAP.UNICODE_TO_CP932());
@@ -339,8 +339,8 @@ export default class CP932 {
 	/**
 	 * 文字列を CP932 のバイナリ配列に変換。変換できない文字は "?" に変換される。
 	 * - 日本語文字は2バイトとして、配列も2つ分、使用します。
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {Array<number>} CP932 のデータが入ったバイナリ配列
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {number[]} CP932 のデータが入ったバイナリ配列
 	 */
 	static toCP932Binary(text) {
 		return SJIS.toSJISBinary(text, CP932MAP.UNICODE_TO_CP932());
@@ -348,8 +348,8 @@ export default class CP932 {
 
 	/**
 	 * CP932 の配列から文字列に変換
-	 * @param {Array<number>} cp932 - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {number[]} cp932 - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static fromCP932Array(cp932) {
 		return SJIS.fromSJISArray(cp932, CP932MAP.CP932_TO_UNICODE());
@@ -358,7 +358,7 @@ export default class CP932 {
 	/**
 	 * 指定した文字から Windows-31J 上の区点番号に変換
 	 * - 2文字以上を指定した場合は、1文字目のみを変換する
-	 * @param {String} text - 変換したいテキスト
+	 * @param {string} text - 変換したいテキスト
 	 * @returns {import("./SJIS.js").MenKuTen} 区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 	 */
 	static toKuTen(text) {
@@ -372,7 +372,7 @@ export default class CP932 {
 	/**
 	 * Windows-31J 上の区点番号から文字列に変換
 	 * @param {import("./SJIS.js").MenKuTen|string} kuten - 区点番号
-	 * @returns {String} 変換後のテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static fromKuTen(kuten) {
 		const code = SJIS.toUnicodeCodeFromKuTen(kuten, CP932MAP.CP932_TO_UNICODE());

@@ -3,8 +3,8 @@
 /* eslint-disable */
 
 /**
- * @param {Array} x
- * @param {Array} y
+ * @param {number[]} x
+ * @param {number[]} y
  * @returns {boolean}
  */
 const equalsArray = function (x, y) {

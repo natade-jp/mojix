@@ -26,10 +26,10 @@ export default class Mojix {
 
 	/**
 	 * 文字列からバイナリ配列にエンコードする
-	 * @param {String} text - 変換したいテキスト
-	 * @param {String} charset - キャラセット(UTF-8/16/32,Shift_JIS,Windows-31J,Shift_JIS-2004,EUC-JP,EUC-JP-2004)
+	 * @param {string} text - 変換したいテキスト
+	 * @param {string} charset - キャラセット(UTF-8/16/32,Shift_JIS,Windows-31J,Shift_JIS-2004,EUC-JP,EUC-JP-2004)
 	 * @param {boolean} [is_with_bom=false] - BOMをつけるかどうか
-	 * @returns {Array<number>} バイナリ配列(失敗時はnull)
+	 * @returns {number[]} バイナリ配列(失敗時はnull)
 	 */
 	static encode(text, charset, is_with_bom) {
 		return Encode.encode(text, charset, is_with_bom);
@@ -37,9 +37,9 @@ export default class Mojix {
 
 	/**
 	 * バイナリ配列から文字列にデコードする
-	 * @param {Array<number>} binary - 変換したいバイナリ配列
-	 * @param {String} [charset="autodetect"] - キャラセット(UTF-8/16/32,Shift_JIS,Windows-31J,Shift_JIS-2004,EUC-JP,EUC-JP-2004)
-	 * @returns {String} 変換した文字列（失敗したらnull）
+	 * @param {number[]} binary - 変換したいバイナリ配列
+	 * @param {string} [charset="autodetect"] - キャラセット(UTF-8/16/32,Shift_JIS,Windows-31J,Shift_JIS-2004,EUC-JP,EUC-JP-2004)
+	 * @returns {string} 変換した文字列（失敗したらnull）
 	 */
 	static decode(binary, charset) {
 		return Encode.decode(binary, charset);
@@ -51,9 +51,9 @@ export default class Mojix {
 
 	/**
 	 * サロゲートペア対応のコードポイント取得
-	 * @param {String} text - 対象テキスト
-	 * @param {Number} [index = 0] - インデックス
-	 * @returns {Number} コードポイント
+	 * @param {string} text - 対象テキスト
+	 * @param {number} [index = 0] - インデックス
+	 * @returns {number} コードポイント
 	 */
 	static codePointAt(text, index) {
 		return Unicode.codePointAt(text, index);
@@ -61,8 +61,8 @@ export default class Mojix {
 
 	/**
 	 * コードポイントの数値データを文字列に変換
-	 * @param {...(number|Array<number>)} codepoint - 変換したいコードポイントの数値配列、又は数値を並べた可変引数
-	 * @returns {String} 変換後のテキスト
+	 * @param {...(number|number[])} codepoint - 変換したいコードポイントの数値配列、又は数値を並べた可変引数
+	 * @returns {string} 変換後のテキスト
 	 */
 	static fromCodePoint(codepoint) {
 		if (codepoint instanceof Array) {
@@ -78,10 +78,10 @@ export default class Mojix {
 
 	/**
 	 * コードポイント換算で文字列数をカウント
-	 * @param {String} text - 対象テキスト
-	 * @param {Number} [beginIndex=0] - 最初のインデックス（省略可）
-	 * @param {Number} [endIndex] - 最後のインデックス（ここは含めない）（省略可）
-	 * @returns {Number} 文字数
+	 * @param {string} text - 対象テキスト
+	 * @param {number} [beginIndex=0] - 最初のインデックス（省略可）
+	 * @param {number} [endIndex] - 最後のインデックス（ここは含めない）（省略可）
+	 * @returns {number} 文字数
 	 */
 	static codePointCount(text, beginIndex, endIndex) {
 		return Unicode.codePointCount(text, beginIndex, endIndex);
@@ -89,8 +89,8 @@ export default class Mojix {
 
 	/**
 	 * 文字列をUTF32(コードポイント)の配列に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {Array<number>} UTF32(コードポイント)のデータが入った配列
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {number[]} UTF32(コードポイント)のデータが入った配列
 	 */
 	static toUTF32Array(text) {
 		return Unicode.toUTF32Array(text);
@@ -98,8 +98,8 @@ export default class Mojix {
 
 	/**
 	 * UTF32の配列から文字列に変換
-	 * @param {Array<number>} utf32 - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {number[]} utf32 - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static fromUTF32Array(utf32) {
 		return Unicode.fromUTF32Array(utf32);
@@ -107,8 +107,8 @@ export default class Mojix {
 
 	/**
 	 * 文字列をUTF16の配列に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {Array<number>} UTF16のデータが入った配列
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {number[]} UTF16のデータが入った配列
 	 */
 	static toUTF16Array(text) {
 		return Unicode.toUTF16Array(text);
@@ -116,8 +116,8 @@ export default class Mojix {
 
 	/**
 	 * UTF16の配列から文字列に変換
-	 * @param {Array<number>} utf16 - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {number[]} utf16 - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static fromUTF16Array(utf16) {
 		return Unicode.fromUTF16Array(utf16);
@@ -125,8 +125,8 @@ export default class Mojix {
 
 	/**
 	 * 文字列をUTF8の配列に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {Array<number>} UTF8のデータが入った配列
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {number[]} UTF8のデータが入った配列
 	 */
 	static toUTF8Array(text) {
 		return Unicode.toUTF8Array(text);
@@ -134,8 +134,8 @@ export default class Mojix {
 
 	/**
 	 * UTF8の配列から文字列に変換
-	 * @param {Array<number>} utf8 - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {number[]} utf8 - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static fromUTF8Array(utf8) {
 		return Unicode.fromUTF8Array(utf8);
@@ -147,8 +147,8 @@ export default class Mojix {
 
 	/**
 	 * 結合した文字を考慮して文字列を文字の配列に変換する
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {Array<Array<number>>} UTF32(コードポイント)の配列が入った配列
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {Array<number[]>} UTF32(コードポイント)の配列が入った配列
 	 */
 	static toMojiArrayFromString(text) {
 		return Japanese.toMojiArrayFromString(text);
@@ -156,7 +156,7 @@ export default class Mojix {
 
 	/**
 	 * 結合した文字を考慮して文字の配列を文字列に変換する
-	 * @param {Array<Array<number>>} mojiarray - UTF32(コードポイント)の配列が入った配列
+	 * @param {Array<number[]>} mojiarray - UTF32(コードポイント)の配列が入った配列
 	 * @returns {string} UTF32(コードポイント)の配列が入った配列
 	 */
 	static toStringFromMojiArray(mojiarray) {
@@ -171,10 +171,10 @@ export default class Mojix {
 	 * 指定したテキストを切り出す
 	 * - 単位はコードポイントの文字数
 	 * - 結合文字, 異体字セレクタ, スキントーン修飾子, タグ文字を考慮しません
-	 * @param {String} text - 切り出したいテキスト
-	 * @param {Number} offset - 切り出し位置
-	 * @param {Number} size - 切り出す長さ
-	 * @returns {String} 切り出したテキスト
+	 * @param {string} text - 切り出したいテキスト
+	 * @param {number} offset - 切り出し位置
+	 * @param {number} size - 切り出す長さ
+	 * @returns {string} 切り出したテキスト
 	 */
 	static cutTextForCodePoint(text, offset, size) {
 		return Unicode.cutTextForCodePoint(text, offset, size);
@@ -185,8 +185,8 @@ export default class Mojix {
 	 * - 0幅 ... 結合文字, 異体字セレクタ, スキントーン修飾子, タグ文字, ゼロ幅スペース, ゼロ幅非接合子, ゼロ幅接合子, 単語結合子
 	 * - 1幅 ... ASCII文字, 半角カタカナ
 	 * - 2幅 ... 上記以外
-	 * @param {String} text - カウントしたいテキスト
-	 * @returns {Number} 文字の横幅
+	 * @param {string} text - カウントしたいテキスト
+	 * @returns {number} 文字の横幅
 	 */
 	static getWidth(text) {
 		return Japanese.getWidth(text);
@@ -197,10 +197,10 @@ export default class Mojix {
 	 * - 0幅 ... 結合文字, 異体字セレクタ, スキントーン修飾子, タグ文字, ゼロ幅スペース, ゼロ幅非接合子, ゼロ幅接合子, 単語結合子
 	 * - 1幅 ... ASCII文字, 半角カタカナ
 	 * - 2幅 ... 上記以外
-	 * @param {String} text - 切り出したいテキスト
-	 * @param {Number} offset - 切り出し位置
-	 * @param {Number} size - 切り出す長さ
-	 * @returns {String} 切り出したテキスト
+	 * @param {string} text - 切り出したいテキスト
+	 * @param {number} offset - 切り出し位置
+	 * @param {number} size - 切り出す長さ
+	 * @returns {string} 切り出したテキスト
 	 */
 	static cutTextForWidth(text, offset, size) {
 		return Japanese.cutTextForWidth(text, offset, size);
@@ -213,7 +213,7 @@ export default class Mojix {
 	/**
 	 * 指定した文字から Windows-31J 上の区点番号に変換
 	 * - 2文字以上を指定した場合は、1文字目のみを変換する
-	 * @param {String} text - 変換したいテキスト
+	 * @param {string} text - 変換したいテキスト
 	 * @returns {import("./encode/SJIS.js").MenKuTen} 区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 	 */
 	static toKuTen(text) {
@@ -223,7 +223,7 @@ export default class Mojix {
 	/**
 	 * Windows-31J 上の区点番号から文字列に変換
 	 * @param {import("./encode/SJIS.js").MenKuTen|string} kuten - 区点番号
-	 * @returns {String} 変換後のテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static fromKuTen(kuten) {
 		return CP932.fromKuTen(kuten);
@@ -232,7 +232,7 @@ export default class Mojix {
 	/**
 	 * 指定した文字から Shift_JIS-2004 上の面区点番号に変換
 	 * - 2文字以上を指定した場合は、1文字目のみを変換する
-	 * @param {String} text - 変換したいテキスト
+	 * @param {string} text - 変換したいテキスト
 	 * @returns {import("./encode/SJIS.js").MenKuTen} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 	 */
 	static toMenKuTen(text) {
@@ -242,7 +242,7 @@ export default class Mojix {
 	/**
 	 * Shift_JIS-2004 上の面区点番号から文字列に変換
 	 * @param {import("./encode/SJIS.js").MenKuTen|string} menkuten - 面区点番号
-	 * @returns {String} 変換後のテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static fromMenKuTen(menkuten) {
 		return SJIS2004.fromMenKuTen(menkuten);
@@ -254,8 +254,8 @@ export default class Mojix {
 
 	/**
 	 * カタカナをひらがなに変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toHiragana(text) {
 		return Japanese.toHiragana(text);
@@ -263,8 +263,8 @@ export default class Mojix {
 
 	/**
 	 * ひらがなをカタカナに変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toKatakana(text) {
 		return Japanese.toKatakana(text);
@@ -272,8 +272,8 @@ export default class Mojix {
 
 	/**
 	 * スペースを半角に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toHalfWidthSpace(text) {
 		return Japanese.toHalfWidthSpace(text);
@@ -281,8 +281,8 @@ export default class Mojix {
 
 	/**
 	 * スペースを全角に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toFullWidthSpace(text) {
 		return Japanese.toFullWidthSpace(text);
@@ -290,8 +290,8 @@ export default class Mojix {
 
 	/**
 	 * 英数記号を半角に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toHalfWidthAsciiCode(text) {
 		return Japanese.toHalfWidthAsciiCode(text);
@@ -299,8 +299,8 @@ export default class Mojix {
 
 	/**
 	 * 英数記号を全角に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toFullWidthAsciiCode(text) {
 		return Japanese.toFullWidthAsciiCode(text);
@@ -308,8 +308,8 @@ export default class Mojix {
 
 	/**
 	 * アルファベットを半角に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toHalfWidthAlphabet(text) {
 		return Japanese.toHalfWidthAlphabet(text);
@@ -317,8 +317,8 @@ export default class Mojix {
 
 	/**
 	 * アルファベットを全角に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toFullWidthAlphabet(text) {
 		return Japanese.toFullWidthAlphabet(text);
@@ -326,8 +326,8 @@ export default class Mojix {
 
 	/**
 	 * 数値を半角に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toHalfWidthNumber(text) {
 		return Japanese.toHalfWidthNumber(text);
@@ -335,8 +335,8 @@ export default class Mojix {
 
 	/**
 	 * 数値を全角に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toFullWidthNumber(text) {
 		return Japanese.toFullWidthNumber(text);
@@ -344,8 +344,8 @@ export default class Mojix {
 
 	/**
 	 * カタカナを半角に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toHalfWidthKana(text) {
 		return Japanese.toHalfWidthKana(text);
@@ -353,8 +353,8 @@ export default class Mojix {
 
 	/**
 	 * カタカナを全角に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toFullWidthKana(text) {
 		return Japanese.toFullWidthKana(text);
@@ -362,8 +362,8 @@ export default class Mojix {
 
 	/**
 	 * 半角に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toHalfWidth(text) {
 		return Japanese.toHalfWidth(text);
@@ -371,8 +371,8 @@ export default class Mojix {
 
 	/**
 	 * 全角に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toFullWidth(text) {
 		return Japanese.toFullWidth(text);
@@ -380,8 +380,8 @@ export default class Mojix {
 
 	/**
 	 * ローマ字からひらがなに変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toHiraganaFromRomaji(text) {
 		return Japanese.toHiraganaFromRomaji(text);
@@ -389,8 +389,8 @@ export default class Mojix {
 
 	/**
 	 * ローマ字からカタカナに変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toKatakanaFromRomaji(text) {
 		return Japanese.toKatakanaFromRomaji(text);
@@ -398,8 +398,8 @@ export default class Mojix {
 
 	/**
 	 * ひらがなからローマ字に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toRomajiFromHiragana(text) {
 		return Japanese.toRomajiFromHiragana(text);
@@ -407,8 +407,8 @@ export default class Mojix {
 
 	/**
 	 * カタカナからローマ字に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static toRomajiFromKatakana(text) {
 		return Japanese.toRomajiFromKatakana(text);
@@ -420,7 +420,7 @@ export default class Mojix {
 
 	/**
 	 * 指定した1つのUTF-32 コードポイントに関して、解析を行い情報を返します
-	 * @param {Number} unicode_codepoint - UTF-32 のコードポイント
+	 * @param {number} unicode_codepoint - UTF-32 のコードポイント
 	 * @returns {import("./tools/MojiAnalyzer.js").MojiData} 文字の情報がつまったオブジェクト
 	 */
 	static getMojiData(unicode_codepoint) {

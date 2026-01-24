@@ -18,8 +18,8 @@ import SJIS2004 from "./SJIS2004.js";
 export default class EUCJIS2004 {
 	/**
 	 * 文字列を EUC-JIS-2004 のバイナリ配列に変換。変換できない文字は "?" に変換される。
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {Array<number>} EUC-JIS-2004 のデータが入ったバイナリ配列
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {number[]} EUC-JIS-2004 のデータが入ったバイナリ配列
 	 */
 	static toEUCJIS2004Binary(text) {
 		const sjis_array = SJIS2004.toSJIS2004Array(text);
@@ -65,8 +65,8 @@ export default class EUCJIS2004 {
 
 	/**
 	 * EUC-JIS-2004 の配列から文字列に変換
-	 * @param {Array<number>} eucjp - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {number[]} eucjp - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static fromEUCJIS2004Binary(eucjp) {
 		const sjis_array = [];

@@ -29,7 +29,7 @@ class SJIS2004MAP {
 		 * 変換マップを作成
 		 *
 		 *
-		 * @returns {Object<number, number|Array<number>>}
+		 * @returns {Object<number, number|number[]>}
 		 */
 		const getSJIS2004ToUnicodeMap = function () {
 			/**
@@ -39,7 +39,7 @@ class SJIS2004MAP {
 			 *
 			 * 参考：JIS X 0213 - Wikipedia (2019/1/1)
 			 * https://ja.wikipedia.org/wiki/JIS_X_0213
-			 * @type {Object<number, number|Array<number>>}
+			 * @type {Object<number, number|number[]>}
 			 */
 			// prettier-ignore
 			const sjis2004_to_unicode_map = {
@@ -336,7 +336,7 @@ class SJIS2004MAP {
 		 * 変換マップ
 		 * - 2文字に変換される場合もあるので注意
 		 *
-		 * @returns {Object<number, number|Array<number>>}
+		 * @returns {Object<number, number|number[]>}
 		 */
 		const sjis2004_to_unicode_map = getSJIS2004ToUnicodeMap();
 
@@ -347,7 +347,7 @@ class SJIS2004MAP {
 		 *
 		 * メモ：今回は使っていませんが、以下の文献も参考になるかもしれません。
 		 * ftp://www.unicode.org/Public/MAPPINGS/OBSOLETE/EASTASIA/JIS/JIS0208.TXT
-		 * @type {Object<number, number>}
+		 * @type {Record<number, number>}
 		 */
 		// prettier-ignore
 		const sjis2004_to_unicode_map_2 = {
@@ -382,7 +382,7 @@ class SJIS2004MAP {
 
 		/**
 		 * 逆引きマップ作成。重複がある場合は、小さい数値を優先させる。
-		 * @type {Object<number, number>}
+		 * @type {Record<number, number>}
 		 */
 		const unicode_to_sjis2004_map = {};
 		for (const key in sjis2004_to_unicode_map) {
@@ -407,7 +407,7 @@ class SJIS2004MAP {
 	}
 
 	/**
-	 * @returns {Object<number, number|Array<number>>}
+	 * @returns {Record<number, number|number[]>}
 	 */
 	static SJIS2004_TO_UNICODE() {
 		SJIS2004MAP.init();
@@ -415,7 +415,7 @@ class SJIS2004MAP {
 	}
 
 	/**
-	 * @returns {Object<number, number>}
+	 * @returns {Record<number, number>}
 	 */
 	static UNICODE_TO_SJIS2004() {
 		SJIS2004MAP.init();
@@ -431,13 +431,13 @@ SJIS2004MAP.is_initmap = false;
 
 /**
  * 変換用マップ
- * @type {Object<number, number|Array<number>>}
+ * @type {Record<number, number|number[]>}
  */
 SJIS2004MAP.sjis2004_to_unicode_map = null;
 
 /**
  * 変換用マップ
- * @type {Object<number, number>}
+ * @type {Record<number, number>}
  */
 SJIS2004MAP.unicode_to_sjis2004_map = null;
 
@@ -448,8 +448,8 @@ SJIS2004MAP.unicode_to_sjis2004_map = null;
 export default class SJIS2004 {
 	/**
 	 * Unicode のコードから Shift_JIS-2004 のコードに変換
-	 * @param {Number} unicode_codepoint - Unicode のコードポイント
-	 * @returns {Number} Shift_JIS-2004 のコードポイント (存在しない場合は undefined)
+	 * @param {number} unicode_codepoint - Unicode のコードポイント
+	 * @returns {number} Shift_JIS-2004 のコードポイント (存在しない場合は undefined)
 	 */
 	static toSJIS2004FromUnicode(unicode_codepoint) {
 		return SJIS2004MAP.UNICODE_TO_SJIS2004()[unicode_codepoint];
@@ -457,8 +457,8 @@ export default class SJIS2004 {
 
 	/**
 	 * Shift_JIS-2004 のコードから Unicode のコードに変換
-	 * @param {Number} sjis2004_codepoint - Shift_JIS-2004 のコードポイント
-	 * @returns {number|Array<number>} Unicode のコードポイント (存在しない場合は undefined)
+	 * @param {number} sjis2004_codepoint - Shift_JIS-2004 のコードポイント
+	 * @returns {number|number[]} Unicode のコードポイント (存在しない場合は undefined)
 	 */
 	static toUnicodeFromSJIS2004(sjis2004_codepoint) {
 		return SJIS2004MAP.SJIS2004_TO_UNICODE()[sjis2004_codepoint];
@@ -466,8 +466,8 @@ export default class SJIS2004 {
 
 	/**
 	 * 文字列を Shift_JIS-2004 の配列に変換
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {Array<number>} Shift_JIS-2004 のデータが入った配列
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {number[]} Shift_JIS-2004 のデータが入った配列
 	 */
 	static toSJIS2004Array(text) {
 		return SJIS.toSJISArray(text, SJIS2004MAP.UNICODE_TO_SJIS2004());
@@ -476,8 +476,8 @@ export default class SJIS2004 {
 	/**
 	 * 文字列を Shift_JIS-2004 のバイナリ配列に変換
 	 * - 日本語文字は2バイトとして、配列も2つ分、使用します。
-	 * @param {String} text - 変換したいテキスト
-	 * @returns {Array<number>} Shift_JIS-2004 のデータが入ったバイナリ配列
+	 * @param {string} text - 変換したいテキスト
+	 * @returns {number[]} Shift_JIS-2004 のデータが入ったバイナリ配列
 	 */
 	static toSJIS2004Binary(text) {
 		return SJIS.toSJISBinary(text, SJIS2004MAP.UNICODE_TO_SJIS2004());
@@ -485,8 +485,8 @@ export default class SJIS2004 {
 
 	/**
 	 * Shift_JIS-2004 の配列から文字列に変換
-	 * @param {Array<number>} sjis2004 - 変換したいテキスト
-	 * @returns {String} 変換後のテキスト
+	 * @param {number[]} sjis2004 - 変換したいテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static fromSJIS2004Array(sjis2004) {
 		return SJIS.fromSJISArray(sjis2004, SJIS2004MAP.SJIS2004_TO_UNICODE());
@@ -495,7 +495,7 @@ export default class SJIS2004 {
 	/**
 	 * 指定した文字から Shift_JIS-2004 上の面区点番号に変換
 	 * - 2文字以上を指定した場合は、1文字目のみを変換する
-	 * @param {String} text - 変換したいテキスト
+	 * @param {string} text - 変換したいテキスト
 	 * @returns {import("./SJIS.js").MenKuTen} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 	 */
 	static toMenKuTen(text) {
@@ -509,7 +509,7 @@ export default class SJIS2004 {
 	/**
 	 * Shift_JIS-2004 上の面区点番号から文字列に変換
 	 * @param {import("./SJIS.js").MenKuTen|string} menkuten - 面区点番号
-	 * @returns {String} 変換後のテキスト
+	 * @returns {string} 変換後のテキスト
 	 */
 	static fromMenKuTen(menkuten) {
 		const code = SJIS.toUnicodeCodeFromKuTen(menkuten, SJIS2004MAP.SJIS2004_TO_UNICODE());
