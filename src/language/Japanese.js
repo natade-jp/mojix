@@ -1,9 +1,9 @@
 ﻿/**
  * The script is part of Mojix.
- * 
+ *
  * AUTHOR:
  *  natade (http://twitter.com/natadea)
- * 
+ *
  * LICENSE:
  *  The MIT license https://opensource.org/licenses/MIT
  */
@@ -15,7 +15,6 @@ import Unicode from "../encode/Unicode.js";
  * @ignore
  */
 export default class Japanese {
-
 	/**
 	 * カタカナをひらがなに変換
 	 * @param {String} text - 変換したいテキスト
@@ -23,12 +22,12 @@ export default class Japanese {
 	 */
 	static toHiragana(text) {
 		/**
-		 * @param {string} ch 
+		 * @param {string} ch
 		 */
-		const func = function(ch) {
-			return(String.fromCharCode(ch.charCodeAt(0) - 0x0060));
+		const func = function (ch) {
+			return String.fromCharCode(ch.charCodeAt(0) - 0x0060);
 		};
-		return (text.replace(/[\u30A1-\u30F6]/g, func));
+		return text.replace(/[\u30A1-\u30F6]/g, func);
 	}
 
 	/**
@@ -38,32 +37,32 @@ export default class Japanese {
 	 */
 	static toKatakana(text) {
 		/**
-		 * @param {string} ch 
+		 * @param {string} ch
 		 */
-		const func = function(ch) {
-			return(String.fromCharCode(ch.charCodeAt(0) + 0x0060));
+		const func = function (ch) {
+			return String.fromCharCode(ch.charCodeAt(0) + 0x0060);
 		};
-		return (text.replace(/[\u3041-\u3096]/g, func));
+		return text.replace(/[\u3041-\u3096]/g, func);
 	}
-	
+
 	/**
 	 * スペースを半角に変換
 	 * @param {String} text - 変換したいテキスト
 	 * @returns {String} 変換後のテキスト
 	 */
 	static toHalfWidthSpace(text) {
-		return (text.replace(/\u3000/g, String.fromCharCode(0x0020)));
+		return text.replace(/\u3000/g, String.fromCharCode(0x0020));
 	}
-	
+
 	/**
 	 * スペースを全角に変換
 	 * @param {String} text - 変換したいテキスト
 	 * @returns {String} 変換後のテキスト
 	 */
 	static toFullWidthSpace(text) {
-		return (text.replace(/\u0020/g, String.fromCharCode(0x3000)));
+		return text.replace(/\u0020/g, String.fromCharCode(0x3000));
 	}
-	
+
 	/**
 	 * 英数記号を半角に変換
 	 * @param {String} text - 変換したいテキスト
@@ -71,19 +70,19 @@ export default class Japanese {
 	 */
 	static toHalfWidthAsciiCode(text) {
 		let out = text;
-		out = out.replace(/\u3000/g, "\u0020");				//全角スペース
-		out = out.replace(/[\u2018-\u201B]/g, "\u0027");	//シングルクォーテーション
-		out = out.replace(/[\u201C-\u201F]/g, "\u0022");	//ダブルクォーテーション
+		out = out.replace(/\u3000/g, "\u0020"); //全角スペース
+		out = out.replace(/[\u2018-\u201B]/g, "\u0027"); //シングルクォーテーション
+		out = out.replace(/[\u201C-\u201F]/g, "\u0022"); //ダブルクォーテーション
 		/**
-		 * @param {string} ch 
+		 * @param {string} ch
 		 */
-		const func = function(ch) {
+		const func = function (ch) {
 			const code = ch.charCodeAt(0);
-			return (String.fromCharCode(code - 0xFEE0));
+			return String.fromCharCode(code - 0xfee0);
 		};
-		return (out.replace(/[\uFF01-\uFF5E]/g, func));
+		return out.replace(/[\uFF01-\uFF5E]/g, func);
 	}
-	
+
 	/**
 	 * 英数記号を全角に変換
 	 * @param {String} text - 変換したいテキスト
@@ -91,19 +90,19 @@ export default class Japanese {
 	 */
 	static toFullWidthAsciiCode(text) {
 		let out = text;
-		out = out.replace(/\u0020/g, "\u3000");	//全角スペース
-		out = out.replace(/\u0022/g, "\u201D");	//ダブルクォーテーション
-		out = out.replace(/\u0027/g, "\u2019");	//アポストロフィー
+		out = out.replace(/\u0020/g, "\u3000"); //全角スペース
+		out = out.replace(/\u0022/g, "\u201D"); //ダブルクォーテーション
+		out = out.replace(/\u0027/g, "\u2019"); //アポストロフィー
 		/**
-		 * @param {string} ch 
+		 * @param {string} ch
 		 */
-		const func = function(ch) {
+		const func = function (ch) {
 			const code = ch.charCodeAt(0);
-			return (String.fromCharCode(code + 0xFEE0));
+			return String.fromCharCode(code + 0xfee0);
 		};
-		return (out.replace(/[\u0020-\u007E]/g, func));
+		return out.replace(/[\u0020-\u007E]/g, func);
 	}
-	
+
 	/**
 	 * アルファベットを半角に変換
 	 * @param {String} text - 変換したいテキスト
@@ -111,14 +110,14 @@ export default class Japanese {
 	 */
 	static toHalfWidthAlphabet(text) {
 		/**
-		 * @param {string} ch 
+		 * @param {string} ch
 		 */
-		const func = function(ch) {
-			return (String.fromCharCode(ch.charCodeAt(0) - 0xFEE0));
+		const func = function (ch) {
+			return String.fromCharCode(ch.charCodeAt(0) - 0xfee0);
 		};
-		return (text.replace(/[\uFF21-\uFF3A\uFF41-\uFF5A]/g, func));
+		return text.replace(/[\uFF21-\uFF3A\uFF41-\uFF5A]/g, func);
 	}
-	
+
 	/**
 	 * アルファベットを全角に変換
 	 * @param {String} text - 変換したいテキスト
@@ -126,14 +125,14 @@ export default class Japanese {
 	 */
 	static toFullWidthAlphabet(text) {
 		/**
-		 * @param {string} ch 
+		 * @param {string} ch
 		 */
-		const func = function(ch) {
-			return (String.fromCharCode(ch.charCodeAt(0) + 0xFEE0));
+		const func = function (ch) {
+			return String.fromCharCode(ch.charCodeAt(0) + 0xfee0);
 		};
-		return (text.replace(/[A-Za-z]/g, func));
+		return text.replace(/[A-Za-z]/g, func);
 	}
-	
+
 	/**
 	 * 数値を半角に変換
 	 * @param {String} text - 変換したいテキスト
@@ -141,14 +140,14 @@ export default class Japanese {
 	 */
 	static toHalfWidthNumber(text) {
 		/**
-		 * @param {string} ch 
+		 * @param {string} ch
 		 */
-		const func = function(ch) {
-			return(String.fromCharCode(ch.charCodeAt(0) - 0xFEE0));
+		const func = function (ch) {
+			return String.fromCharCode(ch.charCodeAt(0) - 0xfee0);
 		};
-		return (text.replace(/[\uFF10-\uFF19]/g, func));
+		return text.replace(/[\uFF10-\uFF19]/g, func);
 	}
-	
+
 	/**
 	 * 数値を全角に変換
 	 * @param {String} text - 変換したいテキスト
@@ -156,14 +155,14 @@ export default class Japanese {
 	 */
 	static toFullWidthNumber(text) {
 		/**
-		 * @param {string} ch 
+		 * @param {string} ch
 		 */
-		const func = function(ch) {
-			return(String.fromCharCode(ch.charCodeAt(0) + 0xFEE0));
+		const func = function (ch) {
+			return String.fromCharCode(ch.charCodeAt(0) + 0xfee0);
 		};
-		return (text.replace(/[0-9]/g, func));
+		return text.replace(/[0-9]/g, func);
 	}
-	
+
 	/**
 	 * カタカナを半角に変換
 	 * @param {String} text - 変換したいテキスト
@@ -173,6 +172,7 @@ export default class Japanese {
 		/**
 		 * @type {Object<number, string>}
 		 */
+		// prettier-ignore
 		const map = {
 			0x3001	:	"\uFF64"	,	//	､
 			0x3002	:	"\uFF61"	,	//	。	｡
@@ -274,17 +274,16 @@ export default class Japanese {
 			0x30FC	:	"\uFF70"		//	ー	ｰ
 		};
 		/**
-		 * @param {string} ch 
+		 * @param {string} ch
 		 */
-		const func = function(ch) {
-			if(ch.length === 1) {
-				return(map[ch.charCodeAt(0)]);
-			}
-			else {
-				return(map[ch.charCodeAt(0)] + map[ch.charCodeAt(1)]);
+		const func = function (ch) {
+			if (ch.length === 1) {
+				return map[ch.charCodeAt(0)];
+			} else {
+				return map[ch.charCodeAt(0)] + map[ch.charCodeAt(1)];
 			}
 		};
-		return (text.replace(/[\u3001\u3002\u300C\u300D\u309B\u309C\u30A1-\u30FC][\u309B\u309C]?/g, func));
+		return text.replace(/[\u3001\u3002\u300C\u300D\u309B\u309C\u30A1-\u30FC][\u309B\u309C]?/g, func);
 	}
 
 	/**
@@ -296,6 +295,7 @@ export default class Japanese {
 		/**
 		 * @type {Object<number, number>}
 		 */
+		// prettier-ignore
 		const map = {
 			0xFF61	:	0x3002	,	//	。	｡
 			0xFF62	:	0x300C	,	//	「	｢
@@ -362,41 +362,38 @@ export default class Japanese {
 			0xFF9F	:	0x309C		//	゜	ﾟ
 		};
 		/**
-		 * @param {string} str 
+		 * @param {string} str
 		 */
-		const func = function(str) {
-			if(str.length === 1) {
-				return (String.fromCharCode(map[str.charCodeAt(0)]));
-			}
-			else {
+		const func = function (str) {
+			if (str.length === 1) {
+				return String.fromCharCode(map[str.charCodeAt(0)]);
+			} else {
 				const next = str.charCodeAt(1);
-				const ch   = str.charCodeAt(0);
-				if(next === 0xFF9E) {
+				const ch = str.charCodeAt(0);
+				if (next === 0xff9e) {
 					// Shift-JISにない濁点（ヷ、ヸ、ヹ、ヺ）は意図的に無視
 					// ヴ
-					if (ch === 0xFF73) {
-						return (String.fromCharCode(0x3094));
+					if (ch === 0xff73) {
+						return String.fromCharCode(0x3094);
 					}
 					// ガ-ド、バ-ボ
-					else if(
-						((0xFF76 <= ch) && (ch <= 0xFF84)) ||
-						((0xFF8A <= ch) && (ch <= 0xFF8E))	) {
-						return (String.fromCharCode(map[ch] + 1));
+					else if ((0xff76 <= ch && ch <= 0xff84) || (0xff8a <= ch && ch <= 0xff8e)) {
+						return String.fromCharCode(map[ch] + 1);
 					}
 				}
 				// 半濁点
-				else if(next === 0xFF9F) {
+				else if (next === 0xff9f) {
 					// パ-ポ
-					if((0xFF8A <= ch) && (ch <= 0xFF8E)) {
-						return (String.fromCharCode(map[ch] + 2));
+					if (0xff8a <= ch && ch <= 0xff8e) {
+						return String.fromCharCode(map[ch] + 2);
 					}
 				}
-				return (String.fromCharCode(map[ch]) + String.fromCharCode(map[next]));
+				return String.fromCharCode(map[ch]) + String.fromCharCode(map[next]);
 			}
 		};
-		return (text.replace(/[\uFF61-\uFF9F][\uFF9E\uFF9F]?/g, func));
+		return text.replace(/[\uFF61-\uFF9F][\uFF9E\uFF9F]?/g, func);
 	}
-	
+
 	/**
 	 * 半角に変換
 	 * @param {String} text - 変換したいテキスト
@@ -405,7 +402,7 @@ export default class Japanese {
 	static toHalfWidth(text) {
 		return Japanese.toHalfWidthKana(Japanese.toHalfWidthAsciiCode(text));
 	}
-	
+
 	/**
 	 * 全角に変換
 	 * @param {String} text - 変換したいテキスト
@@ -426,6 +423,7 @@ export default class Japanese {
 		 * .y[aiuoe] は除いている
 		 * @type {Object<string, string>}
 		 */
+		// prettier-ignore
 		const map = {
 			"a" : "あ" ,
 			"i" : "い" ,
@@ -604,6 +602,7 @@ export default class Japanese {
 		 * ya, yi, yu, ye, yo
 		 * @type {Object<string, string>}
 		 */
+		// prettier-ignore
 		const y_komoji_map = {
 			"a" : "ゃ",
 			"i" : "ぃ",
@@ -612,43 +611,42 @@ export default class Japanese {
 			"o" : "ょ"
 		};
 		/**
-		 * @param {string} str 
+		 * @param {string} str
 		 */
-		const func = function(str) {
+		const func = function (str) {
 			const output = [];
 			let y_komoji = null;
 			let romaji = str.toLowerCase();
-			if(romaji.length > 2) {
+			if (romaji.length > 2) {
 				// 同じ文字の繰り返しなら「っ」に変更
-				if(romaji.charCodeAt(0) === romaji.charCodeAt(1)) {
+				if (romaji.charCodeAt(0) === romaji.charCodeAt(1)) {
 					// ただし繰り返し文字がnの場合は「ん」として扱う
-					if(romaji.substring(0, 1) === "n") {
+					if (romaji.substring(0, 1) === "n") {
 						output.push("ん");
 						romaji = romaji.substring(2);
-					}
-					else {
+					} else {
 						output.push("っ");
 						romaji = romaji.substring(1);
 					}
 				}
 			}
-			if(romaji.length === 3) {
+			if (romaji.length === 3) {
 				const char_1 = romaji.substring(0, 1);
 				const char_2 = romaji.substring(1, 2);
 				// 2文字目がyで始まる場合（ただし、lya, xya などを除く）は
 				// 小文字リストから選んで、最後に小文字をつける
 				// sya -> si につけかえて辞書から探す
-				if((char_2 === "y") && (char_1 !== "l") && (char_1 !== "x")) {
+				if (char_2 === "y" && char_1 !== "l" && char_1 !== "x") {
 					y_komoji = y_komoji_map[romaji.substring(2)];
 					romaji = romaji.substring(0, 1) + "i";
 				}
 			}
 			const data = map[romaji];
-			if(!data) {
+			if (!data) {
 				return str;
 			}
 			output.push(data);
-			if(y_komoji) {
+			if (y_komoji) {
 				output.push(y_komoji);
 			}
 			return output.join("");
@@ -658,6 +656,7 @@ export default class Japanese {
 		// [xl]?(gw|ch|cch|sh|ssh|ts|tts|th|tth)?[aiuoe] ... yを使用しない文字
 		// nn? ... ん
 		// [?!-] ... 記号
+		// prettier-ignore
 		return (text.replace(/([xl]?[kgsztdnhbpmyrwlxvqfj])(\1)?y?[aiuoe]|[xl]?([gqstf]w|ch|cch|sh|ssh|ts|tts|th|tth)?[aiuoe]|nn?|[?!-.,]/gi, func));
 	}
 
@@ -680,6 +679,7 @@ export default class Japanese {
 		 * ひらがなからローマ字への変換マップ
 		 * @type {Object<string, string>}
 		 */
+		// prettier-ignore
 		const map = {
 			"あ" : "a" ,
 			"い" : "i" ,
@@ -865,6 +865,7 @@ export default class Japanese {
 		/**
 		 * @type {Object<string, string>}
 		 */
+		// prettier-ignore
 		const komoji_map = {
 			"ぁ" : "la",
 			"ぃ" : "li",
@@ -877,28 +878,28 @@ export default class Japanese {
 		};
 
 		/**
-		 * @param {string} str 
+		 * @param {string} str
 		 */
-		const func = function(str) {
+		const func = function (str) {
 			let tgt = str;
-			let is_xtu = false; 
+			let is_xtu = false;
 			// 1文字目に「っ」があるか
-			if(/^っ/.test(tgt)) {
+			if (/^っ/.test(tgt)) {
 				is_xtu = true;
 				tgt = tgt.replace(/^っ*/, "");
 			}
 			// 変換
 			let trans = map[tgt];
 			// 変換に失敗した場合は
-			if(!trans) {
-				if(trans.length === 1) {
+			if (!trans) {
+				if (trans.length === 1) {
 					// 1文字なのでこれ以上変換不能
 					return str;
 				}
 				const char_1 = trans.substring(0, 1);
 				const char_2 = trans.substring(1, 2);
 				// 最後の文字が小文字である
-				if(!komoji_map[char_2]) {
+				if (!komoji_map[char_2]) {
 					// これ以上変換不能
 					return str;
 				}
@@ -906,13 +907,13 @@ export default class Japanese {
 				const last_text = komoji_map[char_2];
 				// 再度変換テスト
 				trans = map[tgt];
-				if(!trans) {
+				if (!trans) {
 					// これ以上変換不能
 					return str;
 				}
 				trans += last_text;
 			}
-			if(is_xtu) {
+			if (is_xtu) {
 				trans = trans.substring(0, 1) + trans;
 			}
 			return trans;
@@ -920,6 +921,7 @@ export default class Japanese {
 		// [っ]*[あいうえおか-ぢつ-もやゆよら-ろわゐゑをんヴ][ぁぃぅぇぉゃゅょ]? ... 促音＋子音母音
 		// [ぁぃぅぇぉゃゅょゎっ] ... 小文字のみ
 		// [？！－。、] ... 記号
+		// prettier-ignore
 		return (text.replace(/[っ]*[あいうえおか-ぢつ-もやゆよら-ろわゐゑをんヴゔ][ぁぃぅぇぉゃゅょ]?|[ぁぃぅぇぉゃゅょゎっ]|[？！－。、]/g, func));
 	}
 
@@ -941,13 +943,11 @@ export default class Japanese {
 	 * @returns {Number} 文字の横幅
 	 */
 	static getWidthFromCodePoint(cp) {
-		if(Unicode.isGraphemeComponentFromCodePoint(cp) || Unicode.isZeroWidthCharacterFromCodePoint(cp)) {
+		if (Unicode.isGraphemeComponentFromCodePoint(cp) || Unicode.isZeroWidthCharacterFromCodePoint(cp)) {
 			return 0;
-		}
-		else if((cp < 0x80) || ((0xFF61 <= cp) && (cp < 0xFFA0))) {
+		} else if (cp < 0x80 || (0xff61 <= cp && cp < 0xffa0)) {
 			return 1;
-		}
-		else {
+		} else {
 			return 2;
 		}
 	}
@@ -964,12 +964,12 @@ export default class Japanese {
 		const utf32_array = Unicode.toUTF32Array(text);
 		let count = 0;
 		let isZWJ = false;
-		for(let i = 0; i < utf32_array.length; i++) {
+		for (let i = 0; i < utf32_array.length; i++) {
 			if (!isZWJ) {
 				count += Japanese.getWidthFromCodePoint(utf32_array[i]);
 			}
 			isZWJ = false;
-			if (utf32_array[i] === 0x200D) {
+			if (utf32_array[i] === 0x200d) {
 				isZWJ = true;
 			}
 		}
@@ -989,15 +989,15 @@ export default class Japanese {
 		const mojiarray = [];
 		let moji = [];
 		let isZWJ = false;
-		for(let i = 0; i < utf32.length; i++) {
+		for (let i = 0; i < utf32.length; i++) {
 			const cp = utf32[i];
-			if(!isZWJ && (i > 0) && !Unicode.isGraphemeComponentFromCodePoint(cp)) {
+			if (!isZWJ && i > 0 && !Unicode.isGraphemeComponentFromCodePoint(cp)) {
 				mojiarray.push(moji);
 				moji = [];
 			}
 			moji.push(cp);
 			isZWJ = false;
-			if (cp === 0x200D) {
+			if (cp === 0x200d) {
 				isZWJ = true;
 			}
 		}
@@ -1015,8 +1015,8 @@ export default class Japanese {
 		 * @type {Array<number>}
 		 */
 		const utf32 = [];
-		for(let i = 0; i < mojiarray.length; i++) {
-			for(let j = 0; j < mojiarray[i].length; j++) {
+		for (let i = 0; i < mojiarray.length; i++) {
+			for (let j = 0; j < mojiarray[i].length; j++) {
 				utf32.push(mojiarray[i][j]);
 			}
 		}
@@ -1036,7 +1036,7 @@ export default class Japanese {
 	 */
 	static cutTextForWidth(text, offset, size) {
 		const moji_array = Japanese.toMojiArrayFromString(text);
-		const SPACE = [ 0x20 ] ; // ' '
+		const SPACE = [0x20]; // ' '
 		/**
 		 * @type {Array<Array<number>>}
 		 */
@@ -1044,38 +1044,36 @@ export default class Japanese {
 		let is_target = false;
 		let position = 0;
 		let cut_size = size;
-		if(offset < 0) {
+		if (offset < 0) {
 			cut_size += offset;
 			offset = 0;
 		}
-		if(cut_size <= 0) {
+		if (cut_size <= 0) {
 			return "";
 		}
-		for(let i = 0; i < moji_array.length; i++) {
+		for (let i = 0; i < moji_array.length; i++) {
 			// 1文字目の横幅を取得
 			const ch = moji_array[i][0];
-			const ch_size = ((ch < 0x80) || ((0xFF61 <= ch) && (ch < 0xFFA0))) ? 1 : 2;
-			if(position >= offset) {
+			const ch_size = ch < 0x80 || (0xff61 <= ch && ch < 0xffa0) ? 1 : 2;
+			if (position >= offset) {
 				is_target = true;
-				if(cut_size >= ch_size) {
+				if (cut_size >= ch_size) {
 					output.push(moji_array[i]);
-				}
-				else {
+				} else {
 					output.push(SPACE);
 				}
 				cut_size -= ch_size;
-				if(cut_size <= 0) {
+				if (cut_size <= 0) {
 					break;
 				}
 			}
 			position += ch_size;
 			// 2バイト文字の途中をoffset指定していた場合になる。
-			if(((position - 1) >= offset) && !is_target) {
+			if (position - 1 >= offset && !is_target) {
 				cut_size--;
 				output.push(SPACE);
 			}
 		}
 		return Japanese.toStringFromMojiArray(output);
 	}
-
 }

@@ -1,16 +1,16 @@
 ﻿import CP932 from "./CP932.js";
 
-const getTestCharacterMap = function() {
-
+const getTestCharacterMap = function () {
 	/**
 	 * 変換マップ
-	 * 
-	 * 
+	 *
+	 *
 	 * 参考：WideCharToMultiByte
 	 * メモ：今回は使っていないが、以下の文献も参考になるかもしれません。
 	 * ftp://www.unicode.org/Public/MAPPINGS/OBSOLETE/EASTASIA/JIS/JIS0208.TXT
 	 * @type {Object<number, number>}
 	 */
+	// prettier-ignore
 	const cp932_to_unicode_map = {
 		0x01: 0x01, 0x02: 0x02, 0x03: 0x03, 0x04: 0x04, 0x05: 0x05, 0x06: 0x06, 0x07: 0x07, 0x08: 0x08,
 		0x09: 0x09, 0x0a: 0x0a, 0x0b: 0x0b, 0x0c: 0x0c, 0x0d: 0x0d, 0x0e: 0x0e, 0x0f: 0x0f, 0x10: 0x10,
@@ -1241,9 +1241,10 @@ const getTestCharacterMap = function() {
 	};
 
 	/**
-	* 重複された CP932 のコード
-	* @type {Array<number>}
-	*/
+	 * 重複された CP932 のコード
+	 * @type {Array<number>}
+	 */
+	// prettier-ignore
 	const duplicate_map_array = [
 		0x8790, 0x8791, 0x8792, 0x8795, 0x8796, 0x8797, 0x879a, 0x879b, 0x879c, 0xed40, 0xed41, 0xed42, 0xed43, 0xed44, 0xed45, 0xed46,
 		0xed47, 0xed48, 0xed49, 0xed4a, 0xed4b, 0xed4c, 0xed4d, 0xed4e, 0xed4f, 0xed50, 0xed51, 0xed52, 0xed53, 0xed54, 0xed55, 0xed56,
@@ -1273,24 +1274,24 @@ const getTestCharacterMap = function() {
 	];
 
 	/**
-	* @type {Object<number, number>}
-	*/
+	 * @type {Object<number, number>}
+	 */
 	const duplicate_map = {};
-	
+
 	/**
-	* @type {Object<number, number>}
-	*/
+	 * @type {Object<number, number>}
+	 */
 	const unicode_to_cp932_map = {};
 
-	for(const key in duplicate_map_array) {
+	for (const key in duplicate_map_array) {
 		duplicate_map[duplicate_map_array[key]] = 1;
 	}
-	for(const key in cp932_to_unicode_map) {
+	for (const key in cp932_to_unicode_map) {
 		// 重複登録された文字
 		// IBM拡張文字 と NEC特殊文字 と NEC選定IBM拡張文字 で
 		// マッピング先が一部重複している。
 		// WideCharToMultiByte の仕様に基づき、登録しない。
-		if(duplicate_map[key]) {
+		if (duplicate_map[key]) {
 			continue;
 		}
 		const x = cp932_to_unicode_map[key];
@@ -1319,24 +1320,24 @@ const getTestCharacterMap = function() {
 	unicode_to_cp932_map[0x2212] = 0x817c;
 
 	const CHARACTER_MAP = {
-		cp932_to_unicode_map : cp932_to_unicode_map,
-		unicode_to_cp932_map : unicode_to_cp932_map
+		cp932_to_unicode_map: cp932_to_unicode_map,
+		unicode_to_cp932_map: unicode_to_cp932_map
 	};
 
 	return CHARACTER_MAP;
-}
+};
 
 /**
- * @param {Array<?>} x 
- * @param {Array<?>} y 
+ * @param {Array<?>} x
+ * @param {Array<?>} y
  * @returns {boolean}
  */
-const equalsArray = function(x, y) {
-	if(x.length !== y.length) {
+const equalsArray = function (x, y) {
+	if (x.length !== y.length) {
 		return false;
 	}
-	for(let i = 0; i < x.length; i++) {
-		if(x[i] !== y[i]) {
+	for (let i = 0; i < x.length; i++) {
+		if (x[i] !== y[i]) {
 			return false;
 		}
 	}
@@ -1345,44 +1346,55 @@ const equalsArray = function(x, y) {
 
 {
 	const text = "ABCあいう高髙①";
-	const cp932array = [0x0041, 0x0042, 0x0043, 0x82A0, 0x82A2, 0x82A4, 0x8D82, 0xFBFC, 0x8740];
-	test("toCP932Array", () => { expect(equalsArray( CP932.toCP932Array(text), cp932array)).toBe(true); });
-	test("fromCP932Array", () => { expect(CP932.fromCP932Array(cp932array)).toBe(text); });
+	const cp932array = [0x0041, 0x0042, 0x0043, 0x82a0, 0x82a2, 0x82a4, 0x8d82, 0xfbfc, 0x8740];
+	test("toCP932Array", () => {
+		expect(equalsArray(CP932.toCP932Array(text), cp932array)).toBe(true);
+	});
+	test("fromCP932Array", () => {
+		expect(CP932.fromCP932Array(cp932array)).toBe(text);
+	});
 }
 
 {
 	const text = "ABCあいう高髙①";
-	const cp932binary = [0x41, 0x42, 0x43, 0x82, 0xA0, 0x82, 0xA2, 0x82, 0xA4, 0x8D, 0x82, 0xFB, 0xFC, 0x87, 0x40];
-	test("toCP932ArrayBinary", () => { expect(equalsArray(CP932.toCP932Binary(text), cp932binary)).toBe(true); });
-	test("fromCP932Array (binary)", () => { expect(CP932.fromCP932Array(cp932binary)).toBe(text); });
+	const cp932binary = [0x41, 0x42, 0x43, 0x82, 0xa0, 0x82, 0xa2, 0x82, 0xa4, 0x8d, 0x82, 0xfb, 0xfc, 0x87, 0x40];
+	test("toCP932ArrayBinary", () => {
+		expect(equalsArray(CP932.toCP932Binary(text), cp932binary)).toBe(true);
+	});
+	test("fromCP932Array (binary)", () => {
+		expect(CP932.fromCP932Array(cp932binary)).toBe(text);
+	});
 }
 
 {
-	test("toKuTen", () => { expect(CP932.toKuTen("髙").text).toBe("118-94"); });
-	test("fromKuTen", () => { expect(CP932.fromKuTen("118-94")).toBe("髙"); });
+	test("toKuTen", () => {
+		expect(CP932.toKuTen("髙").text).toBe("118-94");
+	});
+	test("fromKuTen", () => {
+		expect(CP932.fromKuTen("118-94")).toBe("髙");
+	});
 }
 
 /**
- * @param {string} function_name 
+ * @param {string} function_name
  * @param {Object<number, number>} map
  */
-const testCharacterMap = function(function_name, map) {
+const testCharacterMap = function (function_name, map) {
 	let is_test = true;
 	// @ts-ignore
 	let func = CP932[function_name];
-	for(const key in map) {
+	for (const key in map) {
 		const key_number = parseFloat(key);
-		if(func(key_number) !== map[key]) {
+		if (func(key_number) !== map[key]) {
 			is_test = false;
 			break;
 		}
 	}
-	test(function_name + " ", () => { expect( is_test ).toBe( true ); });
+	test(function_name + " ", () => {
+		expect(is_test).toBe(true);
+	});
 };
 
 const character_map = getTestCharacterMap();
 testCharacterMap("toCP932FromUnicode", character_map.unicode_to_cp932_map);
 testCharacterMap("toUnicodeFromCP932", character_map.cp932_to_unicode_map);
-
-
-

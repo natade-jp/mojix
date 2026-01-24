@@ -1,9 +1,9 @@
 ﻿/**
  * The script is part of Mojix.
- * 
+ *
  * AUTHOR:
  *  natade (http://twitter.com/natadea)
- * 
+ *
  * LICENSE:
  *  The MIT license https://opensource.org/licenses/MIT
  */
@@ -24,7 +24,6 @@ import Unicode from "./Unicode.js";
  * @ignore
  */
 export default class SJIS {
-
 	/**
 	 * 文字列を Shift_JIS の配列に変換。変換できない文字は "?" に変換される。
 	 * @param {String} text - 変換したいテキスト
@@ -37,12 +36,11 @@ export default class SJIS {
 		const utf32 = Unicode.toUTF32Array(text);
 		const sjis = [];
 		const ng = "?".charCodeAt(0);
-		for(let i = 0; i < utf32.length; i++) {
+		for (let i = 0; i < utf32.length; i++) {
 			const map_bin = map[utf32[i]];
-			if(map_bin) {
+			if (map_bin) {
 				sjis.push(map_bin);
-			}
-			else {
+			} else {
 				sjis.push(ng);
 			}
 		}
@@ -60,13 +58,12 @@ export default class SJIS {
 	static toSJISBinary(text, unicode_to_sjis) {
 		const sjis = SJIS.toSJISArray(text, unicode_to_sjis);
 		const sjisbin = [];
-		for(let i = 0; i < sjis.length; i++) {
-			if(sjis[i] < 0x100) {
+		for (let i = 0; i < sjis.length; i++) {
+			if (sjis[i] < 0x100) {
 				sjisbin.push(sjis[i]);
-			}
-			else {
+			} else {
 				sjisbin.push(sjis[i] >> 8);
-				sjisbin.push(sjis[i] & 0xFF);
+				sjisbin.push(sjis[i] & 0xff);
 			}
 		}
 		return sjisbin;
@@ -83,33 +80,31 @@ export default class SJIS {
 		const map = sjis_to_unicode;
 		const utf16 = [];
 		const ng = "?".charCodeAt(0);
-		for(let i = 0; i < sjis.length; i++) {
+		for (let i = 0; i < sjis.length; i++) {
 			let x = sjis[i];
 			/**
 			 * @type {number|Array<number>}
 			 */
 			let y = [];
-			if(x >= 0x100) {
+			if (x >= 0x100) {
 				// すでに1つの変数にまとめられている
 				y = map[x];
-			}
-			else {
+			} else {
 				// 2バイト文字かのチェック
-				if( ((0x81 <= x) && (x <= 0x9F)) || ((0xE0 <= x) && (x <= 0xFC)) ) {
+				if ((0x81 <= x && x <= 0x9f) || (0xe0 <= x && x <= 0xfc)) {
 					x <<= 8;
 					i++;
 					x |= sjis[i];
 					y = map[x];
-				}
-				else {
+				} else {
 					y = map[x];
 				}
 			}
-			if(y) {
+			if (y) {
 				// 配列なら配列を結合
 				// ※ Unicodeの結合文字の可能性があるため
-				if(y instanceof Array) {
-					for(let j = 0; j < y.length; j++) {
+				if (y instanceof Array) {
+					for (let j = 0; j < y.length; j++) {
 						utf16.push(y[j]);
 					}
 				}
@@ -117,8 +112,7 @@ export default class SJIS {
 				else {
 					utf16.push(y);
 				}
-			}
-			else {
+			} else {
 				utf16.push(ng);
 			}
 		}
@@ -133,7 +127,7 @@ export default class SJIS {
 	 * @ignore
 	 */
 	static toSJISCodeFromUnicode(unicode_codepoint, unicode_to_sjis) {
-		if(!unicode_to_sjis[unicode_codepoint]) {
+		if (!unicode_to_sjis[unicode_codepoint]) {
 			return null;
 		}
 		const utf16_text = Unicode.fromUTF32Array([unicode_codepoint]);
@@ -147,63 +141,59 @@ export default class SJIS {
 	 * @returns {MenKuTen} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 	 */
 	static toMenKuTenFromSJIS2004Code(sjis_code) {
-		if(!sjis_code) {
+		if (!sjis_code) {
 			return null;
 		}
 		const x = sjis_code;
-		if(x < 0x100) {
+		if (x < 0x100) {
 			return null;
 		}
 		// アルゴリズムは面区点番号表からリバースエンジニアリング
 
 		let s1 = x >> 8;
-		let s2 = x & 0xFF;
+		let s2 = x & 0xff;
 		let men = 0;
 		let ku = 0;
 		let ten = 0;
 
 		// 面情報の位置判定
-		if(s1 < 0xF0) {
+		if (s1 < 0xf0) {
 			men = 1;
 			// 区の計算方法の切り替え
 			// 63区から、0x9F→0xE0に飛ぶ
-			if(s1 < 0xE0) {
+			if (s1 < 0xe0) {
 				s1 = s1 - 0x81;
+			} else {
+				s1 = s1 - 0xc1;
 			}
-			else {
-				s1 = s1 - 0xC1;
-			}
-		}
-		else {
+		} else {
 			// ※2面は第4水準のみ
 			men = 2;
 			// 2面1区 ～ 2面8区
-			if((((s1 === 0xF0) || (s1 === 0xF2)) && (s2 < 0x9F)) || (s1 === 0xF1)) {
-				s1 = s1 - 0xF0;
+			if (((s1 === 0xf0 || s1 === 0xf2) && s2 < 0x9f) || s1 === 0xf1) {
+				s1 = s1 - 0xf0;
 			}
 			// 2面12区 ～ 2面15区
-			else if(((s1 === 0xF4) && (s2 < 0x9F)) || (s1 < 0xF4)) {
-				s1 = s1 - 0xED;
+			else if ((s1 === 0xf4 && s2 < 0x9f) || s1 < 0xf4) {
+				s1 = s1 - 0xed;
 			}
 			// 2面78区 ～ 2面94区
 			else {
-				s1 = s1 - 0xCE;
+				s1 = s1 - 0xce;
 			}
 		}
 
 		// 区情報の位置判定
-		if(s2 < 0x9f) {
+		if (s2 < 0x9f) {
 			ku = s1 * 2 + 1;
 			// 点情報の計算方法の切り替え
 			// 0x7Fが欠番のため「+1」を除去
-			if(s2 < 0x80) {
+			if (s2 < 0x80) {
 				s2 = s2 - 0x40 + 1;
-			}
-			else {
+			} else {
 				s2 = s2 - 0x40;
 			}
-		}
-		else {
+		} else {
 			ku = s1 * 2 + 2;
 			s2 = s2 - 0x9f + 1;
 		}
@@ -212,10 +202,10 @@ export default class SJIS {
 		ten = s2;
 
 		return {
-			text : "" + men + "-" + ku + "-" + ten,
-			men : men,
-			ku : ku,
-			ten : ten
+			text: "" + men + "-" + ku + "-" + ten,
+			men: men,
+			ku: ku,
+			ten: ten
 		};
 	}
 
@@ -227,48 +217,47 @@ export default class SJIS {
 	 * @ignore
 	 */
 	static toMenKuTenFromUnicode(unicode_codepoint, unicode_to_sjis) {
-		if(!unicode_to_sjis[unicode_codepoint]) {
+		if (!unicode_to_sjis[unicode_codepoint]) {
 			return null;
 		}
 		const x = SJIS.toSJISCodeFromUnicode(unicode_codepoint, unicode_to_sjis);
 		return SJIS.toMenKuTenFromSJIS2004Code(x);
 	}
-	
+
 	/**
 	 * 指定した面区点番号から Shift_JIS-2004 コードに変換
 	 * @param {MenKuTen|string} menkuten - 面区点番号（面が省略された場合は、1とみなす）
 	 * @returns {Number} Shift_JIS-2004 のコードポイント(存在しない場合はnullを返す)
 	 */
 	static toSJIS2004CodeFromMenKuTen(menkuten) {
-		let m = null, k = null, t = null;
+		let m = null,
+			k = null,
+			t = null;
 		let text = null;
-		if(menkuten instanceof Object) {
-			if(menkuten.text && (typeof menkuten.text === "string")) {
+		if (menkuten instanceof Object) {
+			if (menkuten.text && typeof menkuten.text === "string") {
 				text = menkuten.text;
-			}
-			else if((menkuten.ku) && (menkuten.ten)) {
+			} else if (menkuten.ku && menkuten.ten) {
 				m = menkuten.men ? menkuten.men : 1;
 				k = menkuten.ku;
 				t = menkuten.ten;
 			}
-		}
-		else  if((typeof menkuten === "string")) {
+		} else if (typeof menkuten === "string") {
 			text = menkuten;
 		}
-		if(text) {
+		if (text) {
 			const strmkt = text.split("-");
-			if(strmkt.length === 3) {
+			if (strmkt.length === 3) {
 				m = parseInt(strmkt[0], 10);
 				k = parseInt(strmkt[1], 10);
 				t = parseInt(strmkt[2], 10);
-			}
-			else if(strmkt.length === 2) {
+			} else if (strmkt.length === 2) {
 				m = 1;
 				k = parseInt(strmkt[0], 10);
 				t = parseInt(strmkt[1], 10);
 			}
 		}
-		if(!m || !k || !t) {
+		if (!m || !k || !t) {
 			throw "IllegalArgumentException";
 		}
 
@@ -278,7 +267,7 @@ export default class SJIS {
 		/**
 		 * @type {Object<number, number>}
 		 */
-		const kmap = {1:1,3:1,4:1,5:1,8:1,12:1,13:1,14:1,15:1};
+		const kmap = { 1: 1, 3: 1, 4: 1, 5: 1, 8: 1, 12: 1, 13: 1, 14: 1, 15: 1 };
 
 		// 参考
 		// 2019/1/1 Shift JIS - Wikipedia
@@ -287,41 +276,36 @@ export default class SJIS {
 		// 区や点の判定部分は、通常94までであるため、正確にはkやtは <=94 とするべき。
 		// しかし、Shift_JIS範囲外（IBM拡張漢字）でも利用されるため制限を取り払っている。
 
-		if(m === 1) {
-			if((1 <= k) && (k <= 62)) {
+		if (m === 1) {
+			if (1 <= k && k <= 62) {
 				s1 = Math.floor((k + 257) / 2);
-			}
-			else if(63 <= k) {
+			} else if (63 <= k) {
 				s1 = Math.floor((k + 385) / 2);
 			}
-		}
-		else if(m === 2) {
-			if(kmap[k]) {
-				s1 = Math.floor((k + 479) / 2) - (Math.floor(k / 8) * 3);
-			}
-			else if(78 <= k) {
+		} else if (m === 2) {
+			if (kmap[k]) {
+				s1 = Math.floor((k + 479) / 2) - Math.floor(k / 8) * 3;
+			} else if (78 <= k) {
 				s1 = Math.floor((k + 411) / 2);
 			}
 		}
 
-		if((k % 2) === 1) {
-			if((1 <= t) && (t <= 63)) {
+		if (k % 2 === 1) {
+			if (1 <= t && t <= 63) {
 				s2 = t + 63;
-			}
-			else if(64 <= t) {
+			} else if (64 <= t) {
 				s2 = t + 64;
 			}
-		}
-		else {
+		} else {
 			s2 = t + 158;
 		}
 
-		if((s1 === -1) || (s2 === -1)) {
+		if (s1 === -1 || s2 === -1) {
 			return null;
 		}
 		return (s1 << 8) | s2;
 	}
-	
+
 	/**
 	 * 指定した面区点番号から Unicode コードポイントに変換
 	 * @param {MenKuTen|string} menkuten - 面区点番号
@@ -331,17 +315,16 @@ export default class SJIS {
 	 */
 	static toUnicodeCodeFromMenKuTen(menkuten, sjis_to_unicode) {
 		const sjis_code = SJIS.toSJIS2004CodeFromMenKuTen(menkuten);
-		if(!sjis_code) {
+		if (!sjis_code) {
 			return null;
 		}
 		const unicode = sjis_to_unicode[sjis_code];
-		if(!unicode) {
+		if (!unicode) {
 			return null;
 		}
-		if(unicode instanceof Array) {
+		if (unicode instanceof Array) {
 			return unicode;
-		}
-		else {
+		} else {
 			return [unicode];
 		}
 	}
@@ -352,42 +335,39 @@ export default class SJIS {
 	 * @returns {MenKuTen} 区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 	 */
 	static toKuTenFromSJISCode(sjis_code) {
-		if(!sjis_code) {
+		if (!sjis_code) {
 			return null;
 		}
 		const x = sjis_code;
-		if(x < 0x100) {
+		if (x < 0x100) {
 			return null;
 		}
 		// アルゴリズムは区点番号表からリバースエンジニアリング
 
 		let s1 = x >> 8;
-		let s2 = x & 0xFF;
+		let s2 = x & 0xff;
 		let ku = 0;
 		let ten = 0;
 
 		// 区の計算方法の切り替え
 		// 63区から、0x9F→0xE0に飛ぶ
-		if(s1 < 0xE0) {
+		if (s1 < 0xe0) {
 			s1 = s1 - 0x81;
-		}
-		else {
-			s1 = s1 - 0xC1;
+		} else {
+			s1 = s1 - 0xc1;
 		}
 
 		// 区情報の位置判定
-		if(s2 < 0x9f) {
+		if (s2 < 0x9f) {
 			ku = s1 * 2 + 1;
 			// 点情報の計算方法の切り替え
 			// 0x7Fが欠番のため「+1」を除去
-			if(s2 < 0x80) {
+			if (s2 < 0x80) {
 				s2 = s2 - 0x40 + 1;
-			}
-			else {
+			} else {
 				s2 = s2 - 0x40;
 			}
-		}
-		else {
+		} else {
 			ku = s1 * 2 + 2;
 			s2 = s2 - 0x9f + 1;
 		}
@@ -396,13 +376,13 @@ export default class SJIS {
 		ten = s2;
 
 		return {
-			text : ku + "-" + ten,
-			men : 1,
-			ku : ku,
-			ten : ten
+			text: ku + "-" + ten,
+			men: 1,
+			ku: ku,
+			ten: ten
 		};
 	}
-	
+
 	/**
 	 * 指定したコードポイントの文字から Shift_JIS 上の面区点番号に変換
 	 * @param {Number} unicode_codepoint - Unicodeのコードポイント
@@ -411,7 +391,7 @@ export default class SJIS {
 	 * @ignore
 	 */
 	static toKuTenFromUnicode(unicode_codepoint, unicode_to_sjis) {
-		if(!unicode_to_sjis[unicode_codepoint]) {
+		if (!unicode_to_sjis[unicode_codepoint]) {
 			return null;
 		}
 		const x = SJIS.toSJISCodeFromUnicode(unicode_codepoint, unicode_to_sjis);
@@ -429,7 +409,7 @@ export default class SJIS {
 		// 今回、toSJIS2004CodeFromMenKuTenでは区の範囲チェックをしないため問題なし。
 		return SJIS.toSJIS2004CodeFromMenKuTen(kuten);
 	}
-	
+
 	/**
 	 * 指定した区点番号から Unicode コードポイントに変換
 	 * @param {MenKuTen|string} kuten - 区点番号
@@ -439,17 +419,16 @@ export default class SJIS {
 	 */
 	static toUnicodeCodeFromKuTen(kuten, sjis_to_unicode) {
 		const sjis_code = SJIS.toSJISCodeFromKuTen(kuten);
-		if(!sjis_code) {
+		if (!sjis_code) {
 			return null;
 		}
 		const unicode = sjis_to_unicode[sjis_code];
-		if(!unicode) {
+		if (!unicode) {
 			return null;
 		}
-		if(unicode instanceof Array) {
+		if (unicode instanceof Array) {
 			return unicode;
-		}
-		else {
+		} else {
 			return [unicode];
 		}
 	}
@@ -460,53 +439,51 @@ export default class SJIS {
 	 * @returns {Number} -1...変換不可, 0...水準なし, 1...第1水準, ...
 	 */
 	static toJISKanjiSuijunFromSJISCode(sjis_code) {
-		if(!sjis_code) {
+		if (!sjis_code) {
 			return 0;
 		}
 		const menkuten = SJIS.toMenKuTenFromSJIS2004Code(sjis_code);
 		// アルゴリズムはJIS漢字一覧表からリバースエンジニアリング
-		if(!menkuten) {
+		if (!menkuten) {
 			return 0;
 		}
 		// 2面は第4水準
-		if(menkuten.men > 1) {
+		if (menkuten.men > 1) {
 			return 4;
 		}
 		// 1面は第1～3水準
-		if(menkuten.ku < 14) {
+		if (menkuten.ku < 14) {
 			// 14区より小さいと非漢字
 			return 0;
 		}
-		if(menkuten.ku < 16) {
+		if (menkuten.ku < 16) {
 			// 14区と15区は第3水準
 			return 3;
 		}
-		if(menkuten.ku < 47) {
+		if (menkuten.ku < 47) {
 			return 1;
 		}
 		// 47区には、第1水準と第3水準が混じる
-		if(menkuten.ku === 47) {
-			if(menkuten.ten < 52) {
+		if (menkuten.ku === 47) {
+			if (menkuten.ten < 52) {
 				return 1;
-			}
-			else {
+			} else {
 				return 3;
 			}
 		}
-		if(menkuten.ku < 84) {
+		if (menkuten.ku < 84) {
 			return 2;
 		}
 		// 84区には、第2水準と第3水準が混じる
-		if(menkuten.ku === 84) {
-			if(menkuten.ten < 7) {
+		if (menkuten.ku === 84) {
+			if (menkuten.ten < 7) {
 				return 2;
-			}
-			else {
+			} else {
 				return 3;
 			}
 		}
 		// 残り94区まで第3水準
-		if(menkuten.ku < 95) {
+		if (menkuten.ku < 95) {
 			return 3;
 		}
 		return 0;
@@ -520,7 +497,7 @@ export default class SJIS {
 	 * @ignore
 	 */
 	static toJISKanjiSuijunFromUnicode(unicode_codepoint, unicode_to_sjis) {
-		if(!unicode_to_sjis[unicode_codepoint]) {
+		if (!unicode_to_sjis[unicode_codepoint]) {
 			return -1;
 		}
 		const x = SJIS.toSJISCodeFromUnicode(unicode_codepoint, unicode_to_sjis);
@@ -536,56 +513,49 @@ export default class SJIS {
 		let m, k, t;
 
 		// 引数のテスト
-		if(menkuten instanceof Object) {
+		if (menkuten instanceof Object) {
 			m = menkuten.men ? menkuten.men : 1;
 			k = menkuten.ku;
 			t = menkuten.ten;
-		}
-		else if(typeof menkuten === "string") {
+		} else if (typeof menkuten === "string") {
 			const strmkt = menkuten.split("-");
-			if(strmkt.length === 3) {
+			if (strmkt.length === 3) {
 				m = parseInt(strmkt[0], 10);
 				k = parseInt(strmkt[1], 10);
 				t = parseInt(strmkt[2], 10);
-			}
-			else if(strmkt.length === 2) {
+			} else if (strmkt.length === 2) {
 				m = 1;
 				k = parseInt(strmkt[0], 10);
 				t = parseInt(strmkt[1], 10);
-			}
-			else {
+			} else {
 				return false;
 			}
-		}
-		else {
+		} else {
 			return false;
 		}
 
 		/**
 		 * @type {Object<number, number>}
 		 */
-		const kmap = {1:1,3:1,4:1,5:1,8:1,12:1,13:1,14:1,15:1};
-		if(m === 1) {
+		const kmap = { 1: 1, 3: 1, 4: 1, 5: 1, 8: 1, 12: 1, 13: 1, 14: 1, 15: 1 };
+		if (m === 1) {
 			// 1面は1-94区まで存在
-			if(!((1 <= k) && (k <= 94))) {
+			if (!(1 <= k && k <= 94)) {
 				return false;
 			}
-		}
-		else if(m === 2) {
+		} else if (m === 2) {
 			// 2面は、1,3,4,5,8,12,13,14,15,78-94区まで存在
-			if(!((kmap[k]) || ((78 <= k) && (k <= 94)))) {
+			if (!(kmap[k] || (78 <= k && k <= 94))) {
 				return false;
 			}
-		}
-		else {
+		} else {
 			// 面が不正
 			return false;
 		}
 		// 点は1-94点まで存在
-		if(!((1 <= t) && (t <= 94))) {
+		if (!(1 <= t && t <= 94)) {
 			return false;
 		}
 		return true;
 	}
-
 }

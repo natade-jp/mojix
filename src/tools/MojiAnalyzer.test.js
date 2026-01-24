@@ -8,42 +8,44 @@ let test_count = 0;
  * @param {string} operator
  * @param {boolean} result
  */
-const testType  = function(text, operator, result) {
+const testType = function (text, operator, result) {
 	test_count++;
 
 	let text_cp = 0;
 	if (typeof text === "string") {
 		text_cp = Unicode.codePointAt(text);
-	}
-	else {
+	} else {
 		text_cp = text;
 	}
 	const data = MojiAnalyzer.getMojiData(text_cp);
 	// @ts-ignore
 	const y = data.type[operator];
 	const testname = operator + " " + test_count;
-	test(testname, () => { expect(y).toBe(result); });
+	test(testname, () => {
+		expect(y).toBe(result);
+	});
 };
 
 /**
  * @param {string} text
  * @param {string} kuten
  */
-const testKuTen  = function(text, kuten) {
+const testKuTen = function (text, kuten) {
 	test_count++;
 	const data = MojiAnalyzer.getMojiData(Unicode.codePointAt(text));
 	/**
 	 * @type {boolean}
 	 */
 	let result;
-	if(kuten) {
+	if (kuten) {
 		result = data.encode.kuten.text === kuten;
-	}
-	else {
+	} else {
 		result = data.encode.kuten === null;
 	}
 	const testname = "testKuTen " + test_count;
-	test(testname, () => { expect(result).toBe(true); });
+	test(testname, () => {
+		expect(result).toBe(true);
+	});
 };
 
 /**
@@ -51,29 +53,29 @@ const testKuTen  = function(text, kuten) {
  * @param {string} menkuten
  * @param {number} [suijun]
  */
-const testMenKuTen  = function(text, menkuten, suijun) {
+const testMenKuTen = function (text, menkuten, suijun) {
 	test_count++;
 	const data = MojiAnalyzer.getMojiData(Unicode.codePointAt(text));
 	/**
 	 * @type {boolean}
 	 */
 	let result;
-	if(menkuten) {
+	if (menkuten) {
 		result = data.encode.menkuten.text === menkuten;
-	}
-	else {
+	} else {
 		result = data.encode.menkuten === null;
 	}
-	if(suijun) {
-		result = result && (suijun === data.type.kanji_suijun);
+	if (suijun) {
+		result = result && suijun === data.type.kanji_suijun;
 	}
 	const testname = "testMenKuTen " + test_count;
-	test(testname, () => { expect(result).toBe(true); });
+	test(testname, () => {
+		expect(result).toBe(true);
+	});
 };
 
 test_count = 0;
 {
-
 	testType("高", "is_joyo_kanji", true);
 	testType("髙", "is_joyo_kanji", false);
 	testType("渾", "is_jinmeiyo_kanji", true);
@@ -81,7 +83,7 @@ test_count = 0;
 	testType("髙", "is_IBM_extended_character", true);
 	testType("①", "is_NEC_selection_IBM_extended_character", false);
 	testType("①", "is_NEC_special_character", true);
-	
+
 	testType("​", "is_control_charcter", true);
 	testType("a", "is_control_charcter", false);
 	testType("高", "is_kanji", true);
@@ -175,4 +177,3 @@ test_count = 0;
 	testMenKuTen("蜅", "2-87-48", 4);
 	testMenKuTen("𪚲", "2-94-86", 4);
 }
-

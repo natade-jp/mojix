@@ -1,9 +1,9 @@
 ﻿/**
  * The script is part of Mojix.
- * 
+ *
  * AUTHOR:
  *  natade (http://twitter.com/natadea)
- * 
+ *
  * LICENSE:
  *  The MIT license https://opensource.org/licenses/MIT
  */
@@ -16,7 +16,6 @@ import SJIS2004 from "./SJIS2004.js";
  * @ignore
  */
 export default class EUCJIS2004 {
-
 	/**
 	 * 文字列を EUC-JIS-2004 のバイナリ配列に変換。変換できない文字は "?" に変換される。
 	 * @param {String} text - 変換したいテキスト
@@ -26,34 +25,31 @@ export default class EUCJIS2004 {
 		const sjis_array = SJIS2004.toSJIS2004Array(text);
 		const bin = [];
 		const ng = "?".charCodeAt(0);
-		const SS2 = 0x8E; // C1制御文字 シングルシフト2
-		const SS3 = 0x8F; // C1制御文字 シングルシフト3
-		for(let i = 0; i < sjis_array.length; i++) {
+		const SS2 = 0x8e; // C1制御文字 シングルシフト2
+		const SS3 = 0x8f; // C1制御文字 シングルシフト3
+		for (let i = 0; i < sjis_array.length; i++) {
 			const code = sjis_array[i];
 			const kuten = SJIS.toMenKuTenFromSJIS2004Code(code);
-			if(code < 0x80) {
+			if (code < 0x80) {
 				// G0 ASCII
 				bin.push(code);
-			}
-			else if(code < 0xE0) {
+			} else if (code < 0xe0) {
 				// G2 半角カタカナ
 				bin.push(SS2);
 				bin.push(code);
-			}
-			else {
-				// G1 と G3 を切り替える 
-				if(kuten.men === 2) {
+			} else {
+				// G1 と G3 を切り替える
+				if (kuten.men === 2) {
 					// シングルシフト SS3 で G3 を呼び出す。
 					// G3 は JIS X 0213:2004 の2面を表す
 					bin.push(SS3);
 				}
-				if(kuten.ku <= 94) {
+				if (kuten.ku <= 94) {
 					// 区点は94まで利用できる。
 					// つまり、最大でも 94 + 0xA0 = 0xFE となり 0xFF 以上にならない
-					bin.push(kuten.ku + 0xA0);
-					bin.push(kuten.ten + 0xA0);
-				}
-				else {
+					bin.push(kuten.ku + 0xa0);
+					bin.push(kuten.ten + 0xa0);
+				} else {
 					bin.push(ng);
 				}
 			}
@@ -69,26 +65,26 @@ export default class EUCJIS2004 {
 	static fromEUCJIS2004Binary(eucjp) {
 		const sjis_array = [];
 		const ng = "?".charCodeAt(0);
-		const SS2 = 0x8E; // C1制御文字 シングルシフト2
-		const SS3 = 0x8F; // C1制御文字 シングルシフト3
-		for(let i = 0; i < eucjp.length; i++) {
+		const SS2 = 0x8e; // C1制御文字 シングルシフト2
+		const SS3 = 0x8f; // C1制御文字 シングルシフト3
+		for (let i = 0; i < eucjp.length; i++) {
 			let x1, x2;
 			x1 = eucjp[i];
 			// ASCII
-			if(x1 < 0x80) {
+			if (x1 < 0x80) {
 				sjis_array.push(x1);
 				continue;
 			}
-			if(i >= eucjp.length - 1) {
+			if (i >= eucjp.length - 1) {
 				// 文字が足りない
 				break;
 			}
 			let men = 1;
 			{
 				// 3バイト読み込み(G3)
-				if(x1 === SS3) {
+				if (x1 === SS3) {
 					// 文字が足りない
-					if(i >= eucjp.length - 2) {
+					if (i >= eucjp.length - 2) {
 						break;
 					}
 					// シングルシフト SS3 で G3 を呼び出す。
@@ -105,26 +101,24 @@ export default class EUCJIS2004 {
 				}
 			}
 			// 半角カタカナ
-			if(x1 === SS2) {
+			if (x1 === SS2) {
 				sjis_array.push(x2);
 				continue;
 			}
 
-			if((0xA1 <= x1) && (x1 <= 0xFE) && (0xA1 <= x2) && (x2 <= 0xFE)) {
+			if (0xa1 <= x1 && x1 <= 0xfe && 0xa1 <= x2 && x2 <= 0xfe) {
 				// EUC-JIS-2000 JIS X 0213:2004 の2面に対応
 				// 日本語
 				const kuten = {
-					men : men,
-					ku : x1 - 0xA0,
-					ten : x2 - 0xA0
+					men: men,
+					ku: x1 - 0xa0,
+					ten: x2 - 0xa0
 				};
 				sjis_array.push(SJIS.toSJIS2004CodeFromMenKuTen(kuten));
-			}
-			else {
+			} else {
 				sjis_array.push(ng);
 			}
 		}
 		return SJIS2004.fromSJIS2004Array(sjis_array);
 	}
-
 }

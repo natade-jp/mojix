@@ -1,9 +1,9 @@
 ﻿/**
  * The script is part of Mojix.
- * 
+ *
  * AUTHOR:
  *  natade (http://twitter.com/natadea)
- * 
+ *
  * LICENSE:
  *  The MIT license https://opensource.org/licenses/MIT
  */
@@ -20,7 +20,6 @@ import SJIS2004 from "./encode/SJIS2004.js";
  * 日本語を扱うための様々な機能を提供します
  */
 export default class Mojix {
-
 	// ---------------------------------
 	// 文字列のエンコードとデコードを扱う関数
 	// ---------------------------------
@@ -49,7 +48,7 @@ export default class Mojix {
 	// ---------------------------------
 	// Unicode を扱う関数群
 	// ---------------------------------
-	
+
 	/**
 	 * サロゲートペア対応のコードポイント取得
 	 * @param {String} text - 対象テキスト
@@ -66,12 +65,11 @@ export default class Mojix {
 	 * @returns {String} 変換後のテキスト
 	 */
 	static fromCodePoint(codepoint) {
-		if(codepoint instanceof Array) {
+		if (codepoint instanceof Array) {
 			return Unicode.fromCodePoint(codepoint);
-		}
-		else {
+		} else {
 			const codepoint_array = [];
-			for(let i = 0;i < arguments.length;i++) {
+			for (let i = 0; i < arguments.length; i++) {
 				codepoint_array[i] = arguments[i];
 			}
 			return Unicode.fromCodePoint(codepoint_array);
@@ -208,7 +206,6 @@ export default class Mojix {
 		return Japanese.cutTextForWidth(text, offset, size);
 	}
 
-	
 	// ---------------------------------
 	// 面区点コードの変換用
 	// ---------------------------------
@@ -222,7 +219,7 @@ export default class Mojix {
 	static toKuTen(text) {
 		return CP932.toKuTen(text);
 	}
-	
+
 	/**
 	 * Windows-31J 上の区点番号から文字列に変換
 	 * @param {import("./encode/SJIS.js").MenKuTen|string} kuten - 区点番号
@@ -241,7 +238,7 @@ export default class Mojix {
 	static toMenKuTen(text) {
 		return SJIS2004.toMenKuTen(text);
 	}
-	
+
 	/**
 	 * Shift_JIS-2004 上の面区点番号から文字列に変換
 	 * @param {import("./encode/SJIS.js").MenKuTen|string} menkuten - 面区点番号
@@ -272,7 +269,7 @@ export default class Mojix {
 	static toKatakana(text) {
 		return Japanese.toKatakana(text);
 	}
-	
+
 	/**
 	 * スペースを半角に変換
 	 * @param {String} text - 変換したいテキスト
@@ -281,7 +278,7 @@ export default class Mojix {
 	static toHalfWidthSpace(text) {
 		return Japanese.toHalfWidthSpace(text);
 	}
-	
+
 	/**
 	 * スペースを全角に変換
 	 * @param {String} text - 変換したいテキスト
@@ -290,7 +287,7 @@ export default class Mojix {
 	static toFullWidthSpace(text) {
 		return Japanese.toFullWidthSpace(text);
 	}
-	
+
 	/**
 	 * 英数記号を半角に変換
 	 * @param {String} text - 変換したいテキスト
@@ -299,7 +296,7 @@ export default class Mojix {
 	static toHalfWidthAsciiCode(text) {
 		return Japanese.toHalfWidthAsciiCode(text);
 	}
-	
+
 	/**
 	 * 英数記号を全角に変換
 	 * @param {String} text - 変換したいテキスト
@@ -308,7 +305,7 @@ export default class Mojix {
 	static toFullWidthAsciiCode(text) {
 		return Japanese.toFullWidthAsciiCode(text);
 	}
-	
+
 	/**
 	 * アルファベットを半角に変換
 	 * @param {String} text - 変換したいテキスト
@@ -317,7 +314,7 @@ export default class Mojix {
 	static toHalfWidthAlphabet(text) {
 		return Japanese.toHalfWidthAlphabet(text);
 	}
-	
+
 	/**
 	 * アルファベットを全角に変換
 	 * @param {String} text - 変換したいテキスト
@@ -326,7 +323,7 @@ export default class Mojix {
 	static toFullWidthAlphabet(text) {
 		return Japanese.toFullWidthAlphabet(text);
 	}
-	
+
 	/**
 	 * 数値を半角に変換
 	 * @param {String} text - 変換したいテキスト
@@ -335,7 +332,7 @@ export default class Mojix {
 	static toHalfWidthNumber(text) {
 		return Japanese.toHalfWidthNumber(text);
 	}
-	
+
 	/**
 	 * 数値を全角に変換
 	 * @param {String} text - 変換したいテキスト
@@ -344,7 +341,7 @@ export default class Mojix {
 	static toFullWidthNumber(text) {
 		return Japanese.toFullWidthNumber(text);
 	}
-	
+
 	/**
 	 * カタカナを半角に変換
 	 * @param {String} text - 変換したいテキスト
@@ -362,7 +359,7 @@ export default class Mojix {
 	static toFullWidthKana(text) {
 		return Japanese.toFullWidthKana(text);
 	}
-	
+
 	/**
 	 * 半角に変換
 	 * @param {String} text - 変換したいテキスト
@@ -371,7 +368,7 @@ export default class Mojix {
 	static toHalfWidth(text) {
 		return Japanese.toHalfWidth(text);
 	}
-	
+
 	/**
 	 * 全角に変換
 	 * @param {String} text - 変換したいテキスト
@@ -437,7 +434,7 @@ export default class Mojix {
 	/**
 	 * 2つの文字列を比較する関数
 	 * - sortの引数で利用できます
-	 * 
+	 *
 	 * @param {any} a - 比較元
 	 * @param {any} b - 比較先
 	 * @returns {number} Compare結果
@@ -445,12 +442,12 @@ export default class Mojix {
 	static compareToForDefault(a, b) {
 		return StringComparator.DEFAULT(a, b);
 	}
-	
+
 	/**
 	 * 2つの文字列を自然順ソートで比較する関数
 	 * - sortの引数で利用できます
 	 * - 入力引数は文字列化して比較します
-	 * 
+	 *
 	 * @param {any} a - 比較元
 	 * @param {any} b - 比較先
 	 * @returns {number} Compare結果
@@ -458,5 +455,4 @@ export default class Mojix {
 	static compareToForNatural(a, b) {
 		return StringComparator.NATURAL(a, b);
 	}
-
 }

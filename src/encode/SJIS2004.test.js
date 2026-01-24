@@ -1,16 +1,16 @@
 ﻿import SJIS2004 from "./SJIS2004.js";
 
-const getTestCharacterMap = function() {
-
+const getTestCharacterMap = function () {
 	/**
 	 * 変換マップ
 	 * - 2文字に変換される場合もあるので注意
-	 * 
-	 * 
+	 *
+	 *
 	 * 参考：JIS X 0213 - Wikipedia (2019/1/1)
 	 * https://ja.wikipedia.org/wiki/JIS_X_0213
 	 * @type {Object<number, number|Array<number>>}
 	 */
+	// prettier-ignore
 	const sjis2004_to_unicode_map = {
 		// ASCII コード部分は CP932 を参考
 		0x00: 0x00, 
@@ -1451,11 +1451,12 @@ const getTestCharacterMap = function() {
 	 * 全角用の文字がある場合は、全角へ変換できるようにする。
 	 * 以下のリストは、上記のマッピングデータのUnicodeのコードポイントが0x100未満のデータを抜き出して、
 	 * 全角になっていない部分をCP932を参考に直したものです。
-	 * 
+	 *
 	 * メモ：今回は使っていませんが、以下の文献も参考になるかもしれません。
 	 * ftp://www.unicode.org/Public/MAPPINGS/OBSOLETE/EASTASIA/JIS/JIS0208.TXT
 	 * @type {Object<number, number>}
 	 */
+	// prettier-ignore
 	const sjis2004_to_unicode_map_2 = {
 		0x8143: 0xff0c, 0x8144: 0xff0e, 0x8146: 0xff1a, 0x8147: 0xff1b, 0x8148: 0xff1f, 0x8149: 0xff01, 0x814c: 0x00b4, 0x814d: 0xff40, 
 		0x814e: 0x00a8, 0x814f: 0xff3e, 0x8151: 0xff3f, 0x815e: 0xff0f, 0x815f: 0xff3c, 0x8162: 0xff5c, 0x8169: 0xff08, 0x816a: 0xff09, 
@@ -1482,7 +1483,7 @@ const getTestCharacterMap = function() {
 	// ～,0x8160,0x81b0,0x007e,0xff5e
 
 	// マップデータを上書きする
-	for(const key in sjis2004_to_unicode_map_2) {
+	for (const key in sjis2004_to_unicode_map_2) {
 		sjis2004_to_unicode_map[key] = sjis2004_to_unicode_map_2[key];
 	}
 
@@ -1491,16 +1492,15 @@ const getTestCharacterMap = function() {
 	 * @type {Object<number, number>}
 	 */
 	const unicode_to_sjis2004_map = {};
-	for(const key in sjis2004_to_unicode_map) {
+	for (const key in sjis2004_to_unicode_map) {
 		const x = sjis2004_to_unicode_map[key];
 		const key_num = parseInt(key, 10);
-		if(!(x instanceof Array)) {
-			if(unicode_to_sjis2004_map[x]) {
-				if(x > key_num) {
+		if (!(x instanceof Array)) {
+			if (unicode_to_sjis2004_map[x]) {
+				if (x > key_num) {
 					unicode_to_sjis2004_map[x] = key_num;
 				}
-			}
-			else {
+			} else {
 				unicode_to_sjis2004_map[x] = key_num;
 			}
 		}
@@ -1510,24 +1510,24 @@ const getTestCharacterMap = function() {
 	unicode_to_sjis2004_map[0xa5] = 0x5c;
 
 	const CHARACTER_MAP = {
-		sjis2004_to_unicode_map : sjis2004_to_unicode_map,
-		unicode_to_sjis2004_map : unicode_to_sjis2004_map
+		sjis2004_to_unicode_map: sjis2004_to_unicode_map,
+		unicode_to_sjis2004_map: unicode_to_sjis2004_map
 	};
 
 	return CHARACTER_MAP;
 };
 
 /**
- * @param {Array<?>} x 
- * @param {Array<?>} y 
+ * @param {Array<?>} x
+ * @param {Array<?>} y
  * @returns {boolean}
  */
-const equalsArray = function(x, y) {
-	if(x.length !== y.length) {
+const equalsArray = function (x, y) {
+	if (x.length !== y.length) {
 		return false;
 	}
-	for(let i = 0; i < x.length; i++) {
-		if(x[i] !== y[i]) {
+	for (let i = 0; i < x.length; i++) {
+		if (x[i] !== y[i]) {
 			return false;
 		}
 	}
@@ -1535,32 +1535,46 @@ const equalsArray = function(x, y) {
 };
 
 {
-	const text		= "圡①靁";
+	const text = "圡①靁";
+	// prettier-ignore
 	const sjis2004	= [0x8862, 0x8740, 0xFB9A];
-	test("toSJIS2004Array 1", () => { expect(equalsArray(SJIS2004.toSJIS2004Array(text), sjis2004)).toBe(true); });
-	test("fromSJIS2004Array 1", () => { expect(SJIS2004.fromSJIS2004Array(sjis2004)).toBe(text); });
+	test("toSJIS2004Array 1", () => {
+		expect(equalsArray(SJIS2004.toSJIS2004Array(text), sjis2004)).toBe(true);
+	});
+	test("fromSJIS2004Array 1", () => {
+		expect(SJIS2004.fromSJIS2004Array(sjis2004)).toBe(text);
+	});
 }
 {
-	const text		= "謹𪘂麵";
+	const text = "謹𪘂麵";
+	// prettier-ignore
 	const sjis2004	= [0xEEAE, 0xFCEE, 0xEFEE];
-	test("toSJIS2004Array 2", () => { expect(equalsArray(SJIS2004.toSJIS2004Array(text), sjis2004)).toBe(true); });
-	test("fromSJIS2004Array 2", () => { expect(SJIS2004.fromSJIS2004Array(sjis2004)).toBe(text); });
+	test("toSJIS2004Array 2", () => {
+		expect(equalsArray(SJIS2004.toSJIS2004Array(text), sjis2004)).toBe(true);
+	});
+	test("fromSJIS2004Array 2", () => {
+		expect(SJIS2004.fromSJIS2004Array(sjis2004)).toBe(text);
+	});
 }
 
 {
-	test("toMenKuTen", () => { expect(SJIS2004.toMenKuTen("𪘂").text).toBe("2-94-80"); });
-	test("fromMenKuTen", () => { expect(SJIS2004.fromMenKuTen("2-94-80")).toBe("𪘂"); });
+	test("toMenKuTen", () => {
+		expect(SJIS2004.toMenKuTen("𪘂").text).toBe("2-94-80");
+	});
+	test("fromMenKuTen", () => {
+		expect(SJIS2004.fromMenKuTen("2-94-80")).toBe("𪘂");
+	});
 }
 
 /**
- * @param {string} function_name 
+ * @param {string} function_name
  * @param {Object<number, number|Array<number>>} map
  */
-const testCharacterMap = function(function_name, map) {
+const testCharacterMap = function (function_name, map) {
 	let is_test = true;
 	// @ts-ignore
 	let func = SJIS2004[function_name];
-	for(const key in map) {
+	for (const key in map) {
 		const key_number = parseFloat(key);
 
 		/**
@@ -1569,43 +1583,40 @@ const testCharacterMap = function(function_name, map) {
 		const x = func(key_number);
 		const y = map[key];
 
-		if(Array.isArray(x)) {
-			if(Array.isArray(y)) {
-				if(x.length !== y.length) {
+		if (Array.isArray(x)) {
+			if (Array.isArray(y)) {
+				if (x.length !== y.length) {
 					is_test = false;
-				}
-				else {
-					for(let i = 0; i < x.length; i++) {
-						if(x[i] !== y[i]) {
+				} else {
+					for (let i = 0; i < x.length; i++) {
+						if (x[i] !== y[i]) {
 							is_test = false;
 						}
 					}
 				}
-			}
-			else {
+			} else {
 				is_test = false;
 			}
-		}
-		else {
-			if(Array.isArray(y)) {
+		} else {
+			if (Array.isArray(y)) {
 				is_test = false;
-			}
-			else {
-				if(x !== y) {
+			} else {
+				if (x !== y) {
 					is_test = false;
 				}
 			}
 		}
 
-		if(!is_test) {
+		if (!is_test) {
 			break;
 		}
 	}
-	test(function_name + " ", () => { expect( is_test ).toBe( true ); });
+	test(function_name + " ", () => {
+		expect(is_test).toBe(true);
+	});
 };
 
 const character_map = getTestCharacterMap();
 
 testCharacterMap("toSJIS2004FromUnicode", character_map.unicode_to_sjis2004_map);
 testCharacterMap("toUnicodeFromSJIS2004", character_map.sjis2004_to_unicode_map);
-

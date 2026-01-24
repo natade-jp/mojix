@@ -1,9 +1,9 @@
 ﻿/**
  * The script is part of Mojix.
- * 
+ *
  * AUTHOR:
  *  natade (http://twitter.com/natadea)
- * 
+ *
  * LICENSE:
  *  The MIT license https://opensource.org/licenses/MIT
  */
@@ -16,12 +16,11 @@ import CP932 from "./CP932.js";
  * @ignore
  */
 class EUCJPMSMAP {
-
 	/**
 	 * 変換マップを初期化
 	 */
 	static init() {
-		if(EUCJPMSMAP.is_initmap) {
+		if (EUCJPMSMAP.is_initmap) {
 			return;
 		}
 		EUCJPMSMAP.is_initmap = true;
@@ -31,6 +30,7 @@ class EUCJPMSMAP {
 		 * CP932のIBM拡張文字の一部は、eucJP-msのG3の83区から84区に配列されている。
 		 * @type {Object<number, number>}
 		 */
+		// prettier-ignore
 		const eucjpms_to_cp932_map = {
 			0xf3f3: 0xfa40, 0xf3f4: 0xfa41, 0xf3f5: 0xfa42, 0xf3f6: 0xfa43, 0xf3f7: 0xfa44,
 			0xf3f8: 0xfa45, 0xf3f9: 0xfa46, 0xf3fa: 0xfa47, 0xf3fb: 0xfa48, 0xf3fc: 0xfa49, 0xf3fd: 0x8754, 0xf3fe: 0x8755,
@@ -52,8 +52,8 @@ class EUCJPMSMAP {
 		 * @type {Object<number, number>}
 		 */
 		const cp932_to_eucjpms_map = {};
-		
-		for(const key in eucjpms_to_cp932_map) {
+
+		for (const key in eucjpms_to_cp932_map) {
 			const x = eucjpms_to_cp932_map[key];
 			cp932_to_eucjpms_map[x] = parseInt(key, 10);
 		}
@@ -61,7 +61,7 @@ class EUCJPMSMAP {
 		EUCJPMSMAP.cp932_to_eucjpms_map = cp932_to_eucjpms_map;
 		EUCJPMSMAP.eucjpms_to_cp932_map = eucjpms_to_cp932_map;
 	}
-	
+
 	/**
 	 * @returns {Object<number, number>}
 	 */
@@ -69,7 +69,7 @@ class EUCJPMSMAP {
 		EUCJPMSMAP.init();
 		return EUCJPMSMAP.cp932_to_eucjpms_map;
 	}
-	
+
 	/**
 	 * @returns {Object<number, number>}
 	 */
@@ -77,7 +77,6 @@ class EUCJPMSMAP {
 		EUCJPMSMAP.init();
 		return EUCJPMSMAP.eucjpms_to_cp932_map;
 	}
-
 }
 
 /**
@@ -103,7 +102,6 @@ EUCJPMSMAP.eucjpms_to_cp932_map = null;
  * @ignore
  */
 export default class EUCJPMS {
-
 	/**
 	 * 文字列を eucJP-ms のバイナリ配列に変換。変換できない文字は "?" に変換される。
 	 * - 日本語文字は2バイトとして、配列も2つ分、使用します。
@@ -114,28 +112,25 @@ export default class EUCJPMS {
 		const sjis_array = CP932.toCP932Array(text);
 		const bin = [];
 		const map = EUCJPMSMAP.CP932_TO_EUCJPMS();
-		const SS2 = 0x8E; // C1制御文字 シングルシフト2
-		const SS3 = 0x8F; // C1制御文字 シングルシフト3
-		for(let i = 0; i < sjis_array.length; i++) {
+		const SS2 = 0x8e; // C1制御文字 シングルシフト2
+		const SS3 = 0x8f; // C1制御文字 シングルシフト3
+		for (let i = 0; i < sjis_array.length; i++) {
 			const code = sjis_array[i];
 			const kuten = SJIS.toKuTenFromSJISCode(code);
-			if(code < 0x80) {
+			if (code < 0x80) {
 				// G0 ASCII
 				bin.push(code);
-			}
-			else if(code < 0xE0) {
+			} else if (code < 0xe0) {
 				// G2 半角カタカナ
 				bin.push(SS2);
 				bin.push(code);
-			}
-			else {
+			} else {
 				const eucjpms_code = map[code];
-				if(!eucjpms_code) {
-					// G1 
-					bin.push(kuten.ku + 0xA0);
-					bin.push(kuten.ten + 0xA0);
-				}
-				else {
+				if (!eucjpms_code) {
+					// G1
+					bin.push(kuten.ku + 0xa0);
+					bin.push(kuten.ten + 0xa0);
+				} else {
 					// シングルシフト SS3 で G3 を呼び出す。
 					// G3 は、eucJP-ms の場合 IBM拡張文字 を表す。
 					bin.push(SS3);
@@ -156,36 +151,35 @@ export default class EUCJPMS {
 		const sjis_array = [];
 		const ng = "?".charCodeAt(0);
 		const map = EUCJPMSMAP.EUCJPMS_TO_CP932();
-		const SS2 = 0x8E; // C1制御文字 シングルシフト2
-		const SS3 = 0x8F; // C1制御文字 シングルシフト3
-		for(let i = 0; i < eucjp.length; i++) {
+		const SS2 = 0x8e; // C1制御文字 シングルシフト2
+		const SS3 = 0x8f; // C1制御文字 シングルシフト3
+		for (let i = 0; i < eucjp.length; i++) {
 			let x1, x2;
 			x1 = eucjp[i];
 			// ASCII
-			if(x1 < 0x80) {
+			if (x1 < 0x80) {
 				sjis_array.push(x1);
 				continue;
 			}
-			if(i >= eucjp.length - 1) {
+			if (i >= eucjp.length - 1) {
 				// 文字が足りない
 				break;
 			}
 			{
 				// 3バイト読み込み(G3)
-				if(x1 === SS3) {
+				if (x1 === SS3) {
 					// 文字が足りない
-					if(i >= eucjp.length - 2) {
+					if (i >= eucjp.length - 2) {
 						break;
 					}
 					x1 = eucjp[i + 1];
 					x2 = eucjp[i + 2];
 					// シングルシフト SS3 で G3 を呼び出す。
 					// G3 は、eucJP-ms の場合 IBM拡張文字 を表す。
-					const nec_code = map[(x1 << 8 | x2)];
-					if(nec_code) {
+					const nec_code = map[(x1 << 8) | x2];
+					if (nec_code) {
 						sjis_array.push(nec_code);
-					}
-					else {
+					} else {
 						sjis_array.push(ng);
 					}
 					i += 2;
@@ -198,25 +192,22 @@ export default class EUCJPMS {
 				}
 			}
 			// 半角カタカナ
-			if(x1 === SS2) {
+			if (x1 === SS2) {
 				sjis_array.push(x2);
 				continue;
 			}
 
 			// 日本語
-			if((0xA1 <= x1) && (x1 <= 0xFE) && (0xA1 <= x2) && (x2 <= 0xFE)) {
+			if (0xa1 <= x1 && x1 <= 0xfe && 0xa1 <= x2 && x2 <= 0xfe) {
 				const kuten = {
-					ku : x1 - 0xA0,
-					ten : x2 - 0xA0
+					ku: x1 - 0xa0,
+					ten: x2 - 0xa0
 				};
 				sjis_array.push(SJIS.toSJISCodeFromKuTen(kuten));
-			}
-			else {
+			} else {
 				sjis_array.push(ng);
 			}
 		}
 		return CP932.fromCP932Array(sjis_array);
 	}
-
-
 }

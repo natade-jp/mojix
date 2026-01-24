@@ -3,101 +3,164 @@ import Japanese from "./Japanese.js";
 let test_count = 0;
 
 /**
- * @param {*} operator 
- * @param {*} x 
- * @param {*} y 
+ * @param {*} operator
+ * @param {*} x
+ * @param {*} y
  */
-const testOperator1  = function(operator, x, y) {
+const testOperator1 = function (operator, x, y) {
 	test_count++;
 	// @ts-ignore
 	const out = Japanese[operator](x);
 	const testname = operator + " " + test_count + " " + operator + "(" + x + ") = " + out + " === " + y;
-	test(testname, () => { expect(out === y).toBe(true); });
+	test(testname, () => {
+		expect(out === y).toBe(true);
+	});
 };
 
 test_count = 0;
+// prettier-ignore
 testOperator1("toFullWidthAsciiCode", "１２３456　ＡＢＣdef ", "１２３４５６　ＡＢＣｄｅｆ　");
+// prettier-ignore
 testOperator1("toHalfWidthAsciiCode", "１２３456　ＡＢＣdef ", "123456 ABCdef ");
+// prettier-ignore
 testOperator1("toFullWidthAlphabet", "１２３456　ＡＢＣdef ", "１２３456　ＡＢＣｄｅｆ ");
+// prettier-ignore
 testOperator1("toHalfWidthAlphabet", "１２３456　ＡＢＣdef ", "１２３456　ABCdef ");
+// prettier-ignore
 testOperator1("toFullWidthNumber", "１２３456　ＡＢＣdef ", "１２３４５６　ＡＢＣdef ");
+// prettier-ignore
 testOperator1("toHalfWidthNumber", "１２３456　ＡＢＣdef ", "123456　ＡＢＣdef ");
 
+// prettier-ignore
 testOperator1("toKatakana", "あおカコｶﾞｺﾞﾊﾞﾎﾞﾊﾟﾎﾟバビブベボ", "アオカコｶﾞｺﾞﾊﾞﾎﾞﾊﾟﾎﾟバビブベボ");
+// prettier-ignore
 testOperator1("toHiragana", "あおカコｶﾞｺﾞﾊﾞﾎﾞﾊﾟﾎﾟバビブベボ", "あおかこｶﾞｺﾞﾊﾞﾎﾞﾊﾟﾎﾟばびぶべぼ");
+// prettier-ignore
 testOperator1("toFullWidthKana", "あおカコｶﾞｺﾞﾊﾞﾎﾞﾊﾟﾎﾟバビブベボ", "あおカコガゴバボパポバビブベボ");
+// prettier-ignore
 testOperator1("toHalfWidthKana", "あおカコｶﾞｺﾞﾊﾞﾎﾞﾊﾟﾎﾟバビブベボ", "あおｶｺｶﾞｺﾞﾊﾞﾎﾞﾊﾟﾎﾟﾊﾞﾋﾞﾌﾞﾍﾞﾎﾞ");
 
+// prettier-ignore
 testOperator1("toFullWidth", "0123abcABCｱｲｳ!!０１２３ａｂｃＡＢＣあいうアイウ！！", "０１２３ａｂｃＡＢＣアイウ！！０１２３ａｂｃＡＢＣあいうアイウ！！");
+// prettier-ignore
 testOperator1("toHalfWidth", "0123abcABCｱｲｳ!!０１２３ａｂｃＡＢＣあいうアイウ！！", "0123abcABCｱｲｳ!!0123abcABCあいうｱｲｳ!!");
 
+// prettier-ignore
 testOperator1("toHiraganaFromRomaji", "aiueo!konnnichiwa-!waha-!jaja-n!", "あいうえお！こんにちわー！わはー！じゃじゃーん！");
+// prettier-ignore
 testOperator1("toKatakanaFromRomaji", "aiueo!konnnichiwa-!waha-!jaja-n!", "アイウエオ！コンニチワー！ワハー！ジャジャーン！");
 
+// prettier-ignore
 testOperator1("toHiraganaFromRomaji", "kyapi-nn!shi!chi!tsu!tha!xtsu!ltu!xxa!", "きゃぴーん！し！ち！つ！ちゃ！っ！っ！っぁ！");
+// prettier-ignore
 testOperator1("toKatakanaFromRomaji", "kyapi-nn!shi!chi!tsu!tha!xtsu!ltu!xxa!", "キャピーン！シ！チ！ツ！チャ！ッ！ッ！ッァ！");
+// prettier-ignore
 testOperator1("toHiraganaFromRomaji", "gwagwigwugwegwo", "ぐぁぐぃぐぅぐぇぐぉ");
+// prettier-ignore
 testOperator1("toHiraganaFromRomaji", "pyapyipyupyepyo", "ぴゃぴぃぴゅぴぇぴょ");
+// prettier-ignore
 testOperator1("toHiraganaFromRomaji", "kakkoii", "かっこいい");
+// prettier-ignore
 testOperator1("toHiraganaFromRomaji", "onnatsu", "おんあつ");
+// prettier-ignore
 testOperator1("toKatakanaFromRomaji", "myougonichi", "ミョウゴニチ");
+// prettier-ignore
 testOperator1("toKatakanaFromRomaji", "tsatwugua", "ツァトゥグア");
 
+// prettier-ignore
 testOperator1("toRomajiFromHiragana", "こんにちわ", "konnichiwa");
+// prettier-ignore
 testOperator1("toRomajiFromHiragana", "ぐぁぐぃぐぅぐぇぐぉ", "gwagwigwugwegwo");
+// prettier-ignore
 testOperator1("toRomajiFromHiragana", "ぴゃぴぃぴゅぴぇぴょ", "pyapyipyupyepyo");
+// prettier-ignore
 testOperator1("toRomajiFromHiragana", "かっこいい", "kakkoii");
+// prettier-ignore
 testOperator1("toRomajiFromKatakana", "ミョウゴニチ", "myougonichi");
 
 {
+	// prettier-ignore
 	test("getWidth", () => { expect(Japanese.getWidth("ABCあいう高髙①")).toBe(15); });
 	// 結合文字
+	// prettier-ignore
 	test("getWidth", () => { expect(Japanese.getWidth("Åström")).toBe(6); });
+	// prettier-ignore
 	test("getWidth", () => { expect(Japanese.getWidth("あ゙")).toBe(2); });
 	// 異体字セレクタ
+	// prettier-ignore
 	test("getWidth", () => { expect(Japanese.getWidth("禰豆子")).toBe(6); });
+	// prettier-ignore
 	test("getWidth", () => { expect(Japanese.getWidth("襧豆子")).toBe(6); });
+	// prettier-ignore
 	test("getWidth", () => { expect(Japanese.getWidth("禰󠄀豆子")).toBe(6); });
 	// スキントーン修飾子
+	// prettier-ignore
 	test("getWidth", () => { expect(Japanese.getWidth("👍🏻👍🏼👍🏽👍🏾👍🏿")).toBe(10); });
 	// タグ文字
+	// prettier-ignore
 	test("getWidth", () => { expect(Japanese.getWidth("🏴󠁫󠁨󠀱󠀰󠁿🏴󠁫󠁨󠀱󠀱󠁿🏴󠁫󠁨󠀱󠀳󠁿")).toBe(6); });
 	// ゼロ幅接合子
+	// prettier-ignore
 	test("getWidth", () => { expect(Japanese.getWidth("🧑🏻‍❤️‍💋‍🧑🏼🧑🏻‍❤️‍💋‍🧑🏼🧑🏻‍❤️‍💋‍🧑🏼")).toBe(6); });
 }
 
 {
+	// prettier-ignore
 	test("toMojiArrayFromString", () => { expect(Japanese.toMojiArrayFromString("ABCあいう高髙①").length).toBe(9); });
+	// prettier-ignore
 	test("toMojiArrayFromString", () => { expect(Japanese.toMojiArrayFromString("Åström").length).toBe(6); });
+	// prettier-ignore
 	test("toMojiArrayFromString", () => { expect(Japanese.toMojiArrayFromString("あ゙").length).toBe(1); });
+	// prettier-ignore
 	test("toMojiArrayFromString", () => { expect(Japanese.toMojiArrayFromString("禰豆子").length).toBe(3); });
+	// prettier-ignore
 	test("toMojiArrayFromString", () => { expect(Japanese.toMojiArrayFromString("襧豆子").length).toBe(3); });
+	// prettier-ignore
 	test("toMojiArrayFromString", () => { expect(Japanese.toMojiArrayFromString("禰󠄀豆子").length).toBe(3); });
+	// prettier-ignore
 	test("toMojiArrayFromString", () => { expect(Japanese.toMojiArrayFromString("👍🏻👍🏼👍🏽👍🏾👍🏿").length).toBe(5); });
+	// prettier-ignore
 	test("toMojiArrayFromString", () => { expect(Japanese.toMojiArrayFromString("🏴󠁫󠁨󠀱󠀰󠁿🏴󠁫󠁨󠀱󠀱󠁿🏴󠁫󠁨󠀱󠀳󠁿").length).toBe(3); });
+	// prettier-ignore
 	test("toMojiArrayFromString", () => { expect(Japanese.toMojiArrayFromString("🧑🏻‍❤️‍💋‍🧑🏼🧑🏻‍❤️‍💋‍🧑🏼🧑🏻‍❤️‍💋‍🧑🏼").length).toBe(3); });
 }
 
 {
 	const text = "ABCあいう高髙①";
+	// prettier-ignore
 	test("cutTextForWidth  1", () => { expect(Japanese.cutTextForWidth(text,-1, 5)).toBe("ABC "); });
+	// prettier-ignore
 	test("cutTextForWidth  2", () => { expect(Japanese.cutTextForWidth(text, 0, 5)).toBe("ABCあ"); });
+	// prettier-ignore
 	test("cutTextForWidth  3", () => { expect(Japanese.cutTextForWidth(text, 1, 5)).toBe("BCあ "); });
+	// prettier-ignore
 	test("cutTextForWidth  4", () => { expect(Japanese.cutTextForWidth(text, 2, 5)).toBe("Cあい"); });
+	// prettier-ignore
 	test("cutTextForWidth  5", () => { expect(Japanese.cutTextForWidth(text, 3, 5)).toBe("あい "); });
+	// prettier-ignore
 	test("cutTextForWidth  6", () => { expect(Japanese.cutTextForWidth(text, 4, 5)).toBe(" いう"); });
+	// prettier-ignore
 	test("cutTextForWidth  7", () => { expect(Japanese.cutTextForWidth(text, 5, 5)).toBe("いう "); });
+	// prettier-ignore
 	test("cutTextForWidth  8", () => { expect(Japanese.cutTextForWidth(text, 6, 5)).toBe(" う高"); });
+	// prettier-ignore
 	test("cutTextForWidth  9", () => { expect(Japanese.cutTextForWidth(text, 7, 5)).toBe("う高 "); });
+	// prettier-ignore
 	test("cutTextForWidth 10", () => { expect(Japanese.cutTextForWidth(text, 8, 5)).toBe(" 高髙"); });
+	// prettier-ignore
 	test("cutTextForWidth 11", () => { expect(Japanese.cutTextForWidth(text, 9, 5)).toBe("高髙 "); });
+	// prettier-ignore
 	test("cutTextForWidth 12", () => { expect(Japanese.cutTextForWidth(text,10, 5)).toBe(" 髙①"); });
+	// prettier-ignore
 	test("cutTextForWidth 13", () => { expect(Japanese.cutTextForWidth(text,11, 5)).toBe("髙①"); });
 }
 
 {
 	const text = "Åあ゙禰󠄀";
+	// prettier-ignore
 	test("cutTextForWidth Ex1", () => { expect(Japanese.cutTextForWidth(text, 0, 3)).toBe("Åあ゙"); });
+	// prettier-ignore
 	test("cutTextForWidth Ex2", () => { expect(Japanese.cutTextForWidth(text, 1, 3)).toBe("あ゙ "); });
+	// prettier-ignore
 	test("cutTextForWidth Ex3", () => { expect(Japanese.cutTextForWidth(text, 2, 3)).toBe(" 禰󠄀"); });
 }
