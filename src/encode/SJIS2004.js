@@ -12,6 +12,10 @@ import Unicode from "./Unicode.js";
 import SJIS from "./SJIS.js";
 
 /**
+ * @typedef {import('./SJIS.js').MenKuTen} MenKuTen
+ */
+
+/**
  * Shift_JIS-2004 の変換マップ作成用クラス
  * @ignore
  */
@@ -496,7 +500,7 @@ export default class SJIS2004 {
 	 * 指定した文字から Shift_JIS-2004 上の面区点番号に変換
 	 * - 2文字以上を指定した場合は、1文字目のみを変換する
 	 * @param {string} text - 変換したいテキスト
-	 * @returns {import("./SJIS.js").MenKuTen} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
+	 * @returns {MenKuTen} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 	 */
 	static toMenKuTen(text) {
 		if (text.length === 0) {
@@ -508,7 +512,7 @@ export default class SJIS2004 {
 
 	/**
 	 * Shift_JIS-2004 上の面区点番号から文字列に変換
-	 * @param {import("./SJIS.js").MenKuTen|string} menkuten - 面区点番号
+	 * @param {MenKuTen|string} menkuten - 面区点番号
 	 * @returns {string} 変換後のテキスト
 	 */
 	static fromMenKuTen(menkuten) {

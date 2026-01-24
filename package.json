@@ -80,6 +80,7 @@
 		"jest": "^30.2.0",
 		"ntfile": "^2.0.0",
 		"rollup": "^4.56.0",
+		"rollup-plugin-dts": "^6.3.0",
 		"typescript": "^5.9.3"
 	}
 }

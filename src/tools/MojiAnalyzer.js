@@ -16,6 +16,10 @@ import EUCJPMS from "../encode/EUCJPMS.js";
 import EUCJIS2004 from "../encode/EUCJIS2004.js";
 
 /**
+ * @typedef {import('../encode/SJIS.js').MenKuTen} MenKuTen
+ */
+
+/**
  * 1981年より前に常用漢字とされているか
  * @type {Record<number, number>}
  * @ignore
@@ -399,8 +403,8 @@ class MojiAnalizerTools {
 /**
  * 文字のエンコード情報
  * @typedef {Object} MojiEncodeData
- * @property {import("../encode/SJIS.js").MenKuTen} kuten 区点 コード
- * @property {import("../encode/SJIS.js").MenKuTen} menkuten 面区点 コード
+ * @property {MenKuTen} kuten 区点 コード
+ * @property {MenKuTen} menkuten 面区点 コード
  * @property {number} cp932_code CP932(Windows-31J) コード
  * @property {number} sjis2004_code Shift_JIS-2004 コード
  * @property {number[]} utf8_array UTF-8 配列

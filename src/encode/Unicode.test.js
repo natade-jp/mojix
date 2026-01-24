@@ -1,8 +1,8 @@
 ﻿import Unicode from "./Unicode.js";
 
 /**
- * @param {Array} x
- * @param {Array} y
+ * @param {string[]|number[]} x
+ * @param {string[]|number[]} y
  * @returns {boolean}
  */
 const equalsArray = function (x, y) {
@@ -32,7 +32,7 @@ const equalsArray = function (x, y) {
 {
 	/**
 	 * @param {string} x
-	 * @returns {Array<string>}
+	 * @returns {string[]}
 	 */
 	const toWord = function (x) {
 		const ret = [];

@@ -13,7 +13,9 @@ import terser from "@rollup/plugin-terser";
 const createData = function (moduleName, input_name, output_name, format, isUglify) {
 	const data = {};
 	data.output = {};
-	data.output.name = moduleName;
+	if (format === "umd" || format === "iife") {
+		data.output.name = moduleName;
+	}
 	data.output.file = output_name;
 	data.output.format = format;
 	data.input = input_name;
