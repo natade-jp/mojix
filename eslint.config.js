@@ -110,7 +110,7 @@ export default [
 			"unicorn/prefer-string-slice": "error",
 			"unicorn/prefer-includes": "error",
 			"unicorn/no-useless-undefined": "error"
-			
+
 			// printWidth: 120 相当
 			// "max-len": ["warn", { code: 120, ignoreUrls: true, ignoreStrings: true, ignoreTemplateLiterals: true }]
 		}

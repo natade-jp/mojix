@@ -108,9 +108,8 @@ export default class SJIS {
 					for (let j = 0; j < y.length; j++) {
 						utf16.push(y[j]);
 					}
-				}
+				} else {
 				// 値しかない場合は値を結合
-				else {
 					utf16.push(y);
 				}
 			} else {
@@ -173,20 +172,18 @@ export default class SJIS {
 		} else {
 			// ※2面は第4水準のみ
 			men = 2;
-			// 2面1区 ～ 2面8区
 			// prettier-ignore
 			if (((s1 === 0xF0 || s1 === 0xF2) && s2 < 0x9F) || s1 === 0xF1) {
+				// 2面1区 ～ 2面8区
 				// prettier-ignore
 				s1 = s1 - 0xF0;
-			}
-			// 2面12区 ～ 2面15区
 			// prettier-ignore
-			else if ((s1 === 0xF4 && s2 < 0x9F) || s1 < 0xF4) {
+			} else if ((s1 === 0xF4 && s2 < 0x9F) || s1 < 0xF4) {
+				// 2面12区 ～ 2面15区
 				// prettier-ignore
 				s1 = s1 - 0xED;
-			}
-			// 2面78区 ～ 2面94区
-			else {
+			} else {
+				// 2面78区 ～ 2面94区
 				// prettier-ignore
 				s1 = s1 - 0xCE;
 			}

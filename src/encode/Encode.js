@@ -78,40 +78,32 @@ class EncodeTools {
 			// prettier-ignore
 			if ((0x41 <= ch && ch <= 0x5A) || (0x61 <= ch && ch <= 0x6A)) {
 				type = 1;
-			}
-			// 0-9
 			// prettier-ignore
-			else if (0x30 <= ch && ch <= 0x39) {
+			} else if (0x30 <= ch && ch <= 0x39) {
+				// 0-9
 				type = 2;
-			}
-			// ぁ-ん
 			// prettier-ignore
-			else if (0x3041 <= ch && ch <= 0x3093) {
+			} else if (0x3041 <= ch && ch <= 0x3093) {
+				// ぁ-ん
 				type = 3;
-			}
-			// ァ-ン
 			// prettier-ignore
-			else if (0x30A1 <= ch && ch <= 0x30F3) {
+			} else if (0x30A1 <= ch && ch <= 0x30F3) {
+				// ァ-ン
 				type = 4;
-			}
-			// 全角英字
 			// prettier-ignore
-			else if ((0xFF21 <= ch && ch <= 0xFF3A) || (0xFF41 <= ch && ch <= 0xFF5A)) {
+			} else if ((0xFF21 <= ch && ch <= 0xFF3A) || (0xFF41 <= ch && ch <= 0xFF5A)) {
+				// 全角英字
 				type = 5;
-			}
-			// 全角数値
-			// prettier-ignore
-			else if (0xFF10 <= ch && ch <= 0xFF19) {
+			} else if (0xFF10 <= ch && ch <= 0xFF19) {
+				// 全角数値
 				type = 6;
-			}
+			// prettier-ignore
+			} else if (0xFF61 <= ch && ch < 0xFFA0) {
 			// 半角カタカナ
-			// prettier-ignore
-			else if (0xFF61 <= ch && ch < 0xFFA0) {
 				type = 7;
-			}
-			// CJK統合漢字拡張A - CJK統合漢字, 追加漢字面
 			// prettier-ignore
-			else if ((0x3400 <= ch && ch < 0xA000) || (0x20000 <= ch && ch < 0x2FA20)) {
+			} else if ((0x3400 <= ch && ch < 0xA000) || (0x20000 <= ch && ch < 0x2FA20)) {
+				// CJK統合漢字拡張A - CJK統合漢字, 追加漢字面
 				type = 8;
 			} else {
 				old_type = -1;

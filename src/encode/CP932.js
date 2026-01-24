@@ -33,7 +33,7 @@ class CP932MAP {
 		 * @returns {Record<number, number>}
 		 */
 		const getCp932ToUnicodeMap = function () {
-
+			/* eslint-disable object-property-newline */
 			/**
 			 * 1バイトの変換マップ
 			 *
@@ -71,6 +71,7 @@ class CP932MAP {
 				0xD8: 0xFF98, 0xD9: 0xFF99, 0xDA: 0xFF9A, 0xDB: 0xFF9B, 0xDC: 0xFF9C, 0xDD: 0xFF9D, 0xDE: 0xFF9E, 0xDF: 0xFF9F,
 				0xFD: 0xF8F1, 0xFE: 0xF8F2, 0xFF: 0xF8F3
 			};
+			/* eslint-enable object-property-newline */
 
 			/**
 			 * 2バイト文字（0x8140-0xffff）の変換マップ作成用の文字列
@@ -133,8 +134,6 @@ class CP932MAP {
 				"涖涬淏淸淲淼渹湜渧渼溿澈澵濵瀅瀇瀨炅炫焏焄煜煆煇凞燁燾犱犾猤猪獷玽珉珖珣珒琇珵琦琪琩琮瑢璉璟甁畯皂皜皞皛皦益睆劯砡硎硤硺礰礼神1祥禔福禛竑竧靖竫箞精絈絜綷綠緖繒罇羡羽茁荢荿菇菶葈蒴蕓蕙蕫﨟薰蘒﨡蠇裵訒訷詹誧誾諟諸諶譓譿賰賴贒赶﨣軏﨤逸遧郞都鄕鄧釚釗釞釭釮釤釥鈆鈐鈊鈺鉀鈼鉎鉙鉑鈹鉧銧鉷鉸鋧鋗鋙鋐﨧鋕鋠鋓錥錡鋻﨨錞鋿錝錂鍰鍗鎤鏆鏞鏸鐱鑅鑈閒隆﨩隝隯霳霻靃靍靏靑靕顗顥飯飼餧館馞驎髙67",
 				"髜魵魲鮏鮱鮻鰀鵰鵫鶴鸙黑"
 			].join("");
-
-			 
 
 			/*
 			上の変換マップ作成用の文字列は数値が入った変換マップのコードから作成している

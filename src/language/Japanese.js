@@ -382,19 +382,17 @@ export default class Japanese {
 				const ch = str.charCodeAt(0);
 				if (next === 0xFF9E) {
 					// Shift-JISにない濁点（ヷ、ヸ、ヹ、ヺ）は意図的に無視
-					// ヴ
 					if (ch === 0xFF73) {
+						// ヴ
 						return String.fromCharCode(0x3094);
-					}
-					// ガ-ド、バ-ボ
-					else if ((0xFF76 <= ch && ch <= 0xFF84) || (0xFF8A <= ch && ch <= 0xFF8E)) {
+					} else if ((0xFF76 <= ch && ch <= 0xFF84) || (0xFF8A <= ch && ch <= 0xFF8E)) {
+						// ガ-ド、バ-ボ
 						return String.fromCharCode(map[ch] + 1);
 					}
-				}
-				// 半濁点
-				else if (next === 0xFF9F) {
-					// パ-ポ
+				} else if (next === 0xFF9F) {
+					// 半濁点
 					if (0xFF8A <= ch && ch <= 0xFF8E) {
+					// パ-ポ
 						return String.fromCharCode(map[ch] + 2);
 					}
 				}
@@ -606,7 +604,7 @@ export default class Japanese {
 			"?": "？",
 			"!": "！",
 			",": "、",
-			".": "。" 
+			".": "。"
 		};
 		/**
 		 * ya, yi, yu, ye, yo
@@ -631,24 +629,24 @@ export default class Japanese {
 				// 同じ文字の繰り返しなら「っ」に変更
 				if (romaji.charCodeAt(0) === romaji.charCodeAt(1)) {
 					// ただし繰り返し文字がnの場合は「ん」として扱う
-					if (romaji.substring(0, 1) === "n") {
+					if (romaji.slice(0, 1) === "n") {
 						output.push("ん");
-						romaji = romaji.substring(2);
+						romaji = romaji.slice(2);
 					} else {
 						output.push("っ");
-						romaji = romaji.substring(1);
+						romaji = romaji.slice(1);
 					}
 				}
 			}
 			if (romaji.length === 3) {
-				const char_1 = romaji.substring(0, 1);
-				const char_2 = romaji.substring(1, 2);
+				const char_1 = romaji.slice(0, 1);
+				const char_2 = romaji.slice(1, 2);
 				// 2文字目がyで始まる場合（ただし、lya, xya などを除く）は
 				// 小文字リストから選んで、最後に小文字をつける
 				// sya -> si につけかえて辞書から探す
 				if (char_2 === "y" && char_1 !== "l" && char_1 !== "x") {
-					y_komoji = y_komoji_map[romaji.substring(2)];
-					romaji = romaji.substring(0, 1) + "i";
+					y_komoji = y_komoji_map[romaji.slice(2)];
+					romaji = romaji.slice(0, 1) + "i";
 				}
 			}
 			const data = map[romaji];
@@ -869,7 +867,7 @@ export default class Japanese {
 			"？": "?",
 			"！": "!",
 			"、": ",",
-			"。": "." 
+			"。": "."
 		};
 
 		/**
@@ -906,8 +904,8 @@ export default class Japanese {
 					// 1文字なのでこれ以上変換不能
 					return str;
 				}
-				const char_1 = trans.substring(0, 1);
-				const char_2 = trans.substring(1, 2);
+				const char_1 = trans.slice(0, 1);
+				const char_2 = trans.slice(1, 2);
 				// 最後の文字が小文字である
 				if (!komoji_map[char_2]) {
 					// これ以上変換不能
@@ -924,7 +922,7 @@ export default class Japanese {
 				trans += last_text;
 			}
 			if (is_xtu) {
-				trans = trans.substring(0, 1) + trans;
+				trans = trans.slice(0, 1) + trans;
 			}
 			return trans;
 		};

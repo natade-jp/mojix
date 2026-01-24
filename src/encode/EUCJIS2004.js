@@ -78,9 +78,9 @@ export default class EUCJIS2004 {
 		for (let i = 0; i < eucjp.length; i++) {
 			let x1, x2;
 			x1 = eucjp[i];
-			// ASCII
 			// prettier-ignore
 			if (x1 < 0x80) {
+				// ASCII
 				sjis_array.push(x1);
 				continue;
 			}
@@ -90,10 +90,10 @@ export default class EUCJIS2004 {
 			}
 			let men = 1;
 			{
-				// 3バイト読み込み(G3)
 				if (x1 === SS3) {
-					// 文字が足りない
+					// 3バイト読み込み(G3)
 					if (i >= eucjp.length - 2) {
+						// 文字が足りない
 						break;
 					}
 					// シングルシフト SS3 で G3 を呼び出す。
@@ -102,15 +102,14 @@ export default class EUCJIS2004 {
 					x1 = eucjp[i + 1];
 					x2 = eucjp[i + 2];
 					i += 2;
-				}
-				// 2バイト読み込み
-				else {
+				} else {
+					// 2バイト読み込み
 					x2 = eucjp[i + 1];
 					i += 1;
 				}
 			}
-			// 半角カタカナ
 			if (x1 === SS2) {
+				// 半角カタカナ
 				sjis_array.push(x2);
 				continue;
 			}

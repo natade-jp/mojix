@@ -164,46 +164,46 @@ export default class Unicode {
 
 		// prettier-ignore
 		const unicode_blockname_array = [
-			"Basic Latin", "Latin-1 Supplement", "Latin Extended-A", "Latin Extended-B", "IPA Extensions", "Spacing Modifier Letters", "Combining Diacritical Marks", "Greek and Coptic", 
-			"Cyrillic", "Cyrillic Supplement", "Armenian", "Hebrew", "Arabic", "Syriac", "Arabic Supplement", "Thaana", 
-			"NKo", "Samaritan", "Mandaic", "Syriac Supplement", "Arabic Extended-B", "Arabic Extended-A", "Devanagari", "Bengali", 
-			"Gurmukhi", "Gujarati", "Oriya", "Tamil", "Telugu", "Kannada", "Malayalam", "Sinhala", 
-			"Thai", "Lao", "Tibetan", "Myanmar", "Georgian", "Hangul Jamo", "Ethiopic", "Ethiopic Supplement", 
-			"Cherokee", "Unified Canadian Aboriginal Syllabics", "Ogham", "Runic", "Tagalog", "Hanunoo", "Buhid", "Tagbanwa", 
-			"Khmer", "Mongolian", "Unified Canadian Aboriginal Syllabics Extended", "Limbu", "Tai Le", "New Tai Lue", "Khmer Symbols", "Buginese", 
-			"Tai Tham", "Combining Diacritical Marks Extended", "Balinese", "Sundanese", "Batak", "Lepcha", "Ol Chiki", "Cyrillic Extended-C", 
-			"Georgian Extended", "Sundanese Supplement", "Vedic Extensions", "Phonetic Extensions", "Phonetic Extensions Supplement", "Combining Diacritical Marks Supplement", "Latin Extended Additional", "Greek Extended", 
-			"General Punctuation", "Superscripts and Subscripts", "Currency Symbols", "Combining Diacritical Marks for Symbols", "Letterlike Symbols", "number Forms", "Arrows", "Mathematical Operators", 
-			"Miscellaneous Technical", "Control Pictures", "Optical Character Recognition", "Enclosed Alphanumerics", "Box Drawing", "Block Elements", "Geometric Shapes", "Miscellaneous Symbols", 
-			"Dingbats", "Miscellaneous Mathematical Symbols-A", "Supplemental Arrows-A", "Braille Patterns", "Supplemental Arrows-B", "Miscellaneous Mathematical Symbols-B", "Supplemental Mathematical Operators", "Miscellaneous Symbols and Arrows", 
-			"Glagolitic", "Latin Extended-C", "Coptic", "Georgian Supplement", "Tifinagh", "Ethiopic Extended", "Cyrillic Extended-A", "Supplemental Punctuation", 
-			"CJK Radicals Supplement", "Kangxi Radicals", "Ideographic Description Characters", "CJK Symbols and Punctuation", "Hiragana", "Katakana", "Bopomofo", "Hangul Compatibility Jamo", 
-			"Kanbun", "Bopomofo Extended", "CJK Strokes", "Katakana Phonetic Extensions", "Enclosed CJK Letters and Months", "CJK Compatibility", "CJK Unified Ideographs Extension A", "Yijing Hexagram Symbols", 
-			"CJK Unified Ideographs", "Yi Syllables", "Yi Radicals", "Lisu", "Vai", "Cyrillic Extended-B", "Bamum", "Modifier Tone Letters", 
-			"Latin Extended-D", "Syloti Nagri", "Common Indic number Forms", "Phags-pa", "Saurashtra", "Devanagari Extended", "Kayah Li", "Rejang", 
-			"Hangul Jamo Extended-A", "Javanese", "Myanmar Extended-B", "Cham", "Myanmar Extended-A", "Tai Viet", "Meetei Mayek Extensions", "Ethiopic Extended-A", 
-			"Latin Extended-E", "Cherokee Supplement", "Meetei Mayek", "Hangul Syllables", "Hangul Jamo Extended-B", "High Surrogates", "High Private Use Surrogates", "Low Surrogates", 
-			"Private Use Area", "CJK Compatibility Ideographs", "Alphabetic Presentation Forms", "Arabic Presentation Forms-A", "Variation Selectors", "Vertical Forms", "Combining Half Marks", "CJK Compatibility Forms", 
-			"Small Form Variants", "Arabic Presentation Forms-B", "Halfwidth and Fullwidth Forms", "Specials", "Linear B Syllabary", "Linear B Ideograms", "Aegean numbers", "Ancient Greek numbers", 
-			"Ancient Symbols", "Phaistos Disc", "Lycian", "Carian", "Coptic Epact numbers", "Old Italic", "Gothic", "Old Permic", 
-			"Ugaritic", "Old Persian", "Deseret", "Shavian", "Osmanya", "Osage", "Elbasan", "Caucasian Albanian", 
-			"Vithkuqi", "Linear A", "Latin Extended-F", "Cypriot Syllabary", "Imperial Aramaic", "Palmyrene", "Nabataean", "Hatran", 
-			"Phoenician", "Lydian", "Meroitic Hieroglyphs", "Meroitic Cursive", "Kharoshthi", "Old South Arabian", "Old North Arabian", "Manichaean", 
-			"Avestan", "Inscriptional Parthian", "Inscriptional Pahlavi", "Psalter Pahlavi", "Old Turkic", "Old Hungarian", "Hanifi Rohingya", "Rumi Numeral Symbols", 
-			"Yezidi", "Arabic Extended-C", "Old Sogdian", "Sogdian", "Old Uyghur", "Chorasmian", "Elymaic", "Brahmi", 
-			"Kaithi", "Sora Sompeng", "Chakma", "Mahajani", "Sharada", "Sinhala Archaic numbers", "Khojki", "Multani", 
-			"Khudawadi", "Grantha", "Newa", "Tirhuta", "Siddham", "Modi", "Mongolian Supplement", "Takri", 
-			"Ahom", "Dogra", "Warang Citi", "Dives Akuru", "Nandinagari", "Zanabazar Square", "Soyombo", "Unified Canadian Aboriginal Syllabics Extended-A", 
-			"Pau Cin Hau", "Devanagari Extended-A", "Bhaiksuki", "Marchen", "Masaram Gondi", "Gunjala Gondi", "Makasar", "Kawi", 
-			"Lisu Supplement", "Tamil Supplement", "Cuneiform", "Cuneiform numbers and Punctuation", "Early Dynastic Cuneiform", "Cypro-Minoan", "Egyptian Hieroglyphs", "Egyptian Hieroglyph Format Controls", 
-			"Anatolian Hieroglyphs", "Bamum Supplement", "Mro", "Tangsa", "Bassa Vah", "Pahawh Hmong", "Medefaidrin", "Miao", 
-			"Ideographic Symbols and Punctuation", "Tangut", "Tangut Components", "Khitan Small Script", "Tangut Supplement", "Kana Extended-B", "Kana Supplement", "Kana Extended-A", 
-			"Small Kana Extension", "Nushu", "Duployan", "Shorthand Format Controls", "Znamenny Musical Notation", "Byzantine Musical Symbols", "Musical Symbols", "Ancient Greek Musical Notation", 
-			"Kaktovik Numerals", "Mayan Numerals", "Tai Xuan Jing Symbols", "Counting Rod Numerals", "Mathematical Alphanumeric Symbols", "Sutton SignWriting", "Latin Extended-G", "Glagolitic Supplement", 
-			"Cyrillic Extended-D", "Nyiakeng Puachue Hmong", "Toto", "Wancho", "Nag Mundari", "Ethiopic Extended-B", "Mende Kikakui", "Adlam", 
-			"Indic Siyaq numbers", "Ottoman Siyaq numbers", "Arabic Mathematical Alphabetic Symbols", "Mahjong Tiles", "Domino Tiles", "Playing Cards", "Enclosed Alphanumeric Supplement", "Enclosed Ideographic Supplement", 
-			"Miscellaneous Symbols and Pictographs", "Emoticons", "Ornamental Dingbats", "Transport and Map Symbols", "Alchemical Symbols", "Geometric Shapes Extended", "Supplemental Arrows-C", "Supplemental Symbols and Pictographs", 
-			"Chess Symbols", "Symbols and Pictographs Extended-A", "Symbols for Legacy Computing", "CJK Unified Ideographs Extension B", "CJK Unified Ideographs Extension C", "CJK Unified Ideographs Extension D", "CJK Unified Ideographs Extension E", "CJK Unified Ideographs Extension F", "CJK Unified Ideographs Extension I", 
+			"Basic Latin", "Latin-1 Supplement", "Latin Extended-A", "Latin Extended-B", "IPA Extensions", "Spacing Modifier Letters", "Combining Diacritical Marks", "Greek and Coptic",
+			"Cyrillic", "Cyrillic Supplement", "Armenian", "Hebrew", "Arabic", "Syriac", "Arabic Supplement", "Thaana",
+			"NKo", "Samaritan", "Mandaic", "Syriac Supplement", "Arabic Extended-B", "Arabic Extended-A", "Devanagari", "Bengali",
+			"Gurmukhi", "Gujarati", "Oriya", "Tamil", "Telugu", "Kannada", "Malayalam", "Sinhala",
+			"Thai", "Lao", "Tibetan", "Myanmar", "Georgian", "Hangul Jamo", "Ethiopic", "Ethiopic Supplement",
+			"Cherokee", "Unified Canadian Aboriginal Syllabics", "Ogham", "Runic", "Tagalog", "Hanunoo", "Buhid", "Tagbanwa",
+			"Khmer", "Mongolian", "Unified Canadian Aboriginal Syllabics Extended", "Limbu", "Tai Le", "New Tai Lue", "Khmer Symbols", "Buginese",
+			"Tai Tham", "Combining Diacritical Marks Extended", "Balinese", "Sundanese", "Batak", "Lepcha", "Ol Chiki", "Cyrillic Extended-C",
+			"Georgian Extended", "Sundanese Supplement", "Vedic Extensions", "Phonetic Extensions", "Phonetic Extensions Supplement", "Combining Diacritical Marks Supplement", "Latin Extended Additional", "Greek Extended",
+			"General Punctuation", "Superscripts and Subscripts", "Currency Symbols", "Combining Diacritical Marks for Symbols", "Letterlike Symbols", "number Forms", "Arrows", "Mathematical Operators",
+			"Miscellaneous Technical", "Control Pictures", "Optical Character Recognition", "Enclosed Alphanumerics", "Box Drawing", "Block Elements", "Geometric Shapes", "Miscellaneous Symbols",
+			"Dingbats", "Miscellaneous Mathematical Symbols-A", "Supplemental Arrows-A", "Braille Patterns", "Supplemental Arrows-B", "Miscellaneous Mathematical Symbols-B", "Supplemental Mathematical Operators", "Miscellaneous Symbols and Arrows",
+			"Glagolitic", "Latin Extended-C", "Coptic", "Georgian Supplement", "Tifinagh", "Ethiopic Extended", "Cyrillic Extended-A", "Supplemental Punctuation",
+			"CJK Radicals Supplement", "Kangxi Radicals", "Ideographic Description Characters", "CJK Symbols and Punctuation", "Hiragana", "Katakana", "Bopomofo", "Hangul Compatibility Jamo",
+			"Kanbun", "Bopomofo Extended", "CJK Strokes", "Katakana Phonetic Extensions", "Enclosed CJK Letters and Months", "CJK Compatibility", "CJK Unified Ideographs Extension A", "Yijing Hexagram Symbols",
+			"CJK Unified Ideographs", "Yi Syllables", "Yi Radicals", "Lisu", "Vai", "Cyrillic Extended-B", "Bamum", "Modifier Tone Letters",
+			"Latin Extended-D", "Syloti Nagri", "Common Indic number Forms", "Phags-pa", "Saurashtra", "Devanagari Extended", "Kayah Li", "Rejang",
+			"Hangul Jamo Extended-A", "Javanese", "Myanmar Extended-B", "Cham", "Myanmar Extended-A", "Tai Viet", "Meetei Mayek Extensions", "Ethiopic Extended-A",
+			"Latin Extended-E", "Cherokee Supplement", "Meetei Mayek", "Hangul Syllables", "Hangul Jamo Extended-B", "High Surrogates", "High Private Use Surrogates", "Low Surrogates",
+			"Private Use Area", "CJK Compatibility Ideographs", "Alphabetic Presentation Forms", "Arabic Presentation Forms-A", "Variation Selectors", "Vertical Forms", "Combining Half Marks", "CJK Compatibility Forms",
+			"Small Form Variants", "Arabic Presentation Forms-B", "Halfwidth and Fullwidth Forms", "Specials", "Linear B Syllabary", "Linear B Ideograms", "Aegean numbers", "Ancient Greek numbers",
+			"Ancient Symbols", "Phaistos Disc", "Lycian", "Carian", "Coptic Epact numbers", "Old Italic", "Gothic", "Old Permic",
+			"Ugaritic", "Old Persian", "Deseret", "Shavian", "Osmanya", "Osage", "Elbasan", "Caucasian Albanian",
+			"Vithkuqi", "Linear A", "Latin Extended-F", "Cypriot Syllabary", "Imperial Aramaic", "Palmyrene", "Nabataean", "Hatran",
+			"Phoenician", "Lydian", "Meroitic Hieroglyphs", "Meroitic Cursive", "Kharoshthi", "Old South Arabian", "Old North Arabian", "Manichaean",
+			"Avestan", "Inscriptional Parthian", "Inscriptional Pahlavi", "Psalter Pahlavi", "Old Turkic", "Old Hungarian", "Hanifi Rohingya", "Rumi Numeral Symbols",
+			"Yezidi", "Arabic Extended-C", "Old Sogdian", "Sogdian", "Old Uyghur", "Chorasmian", "Elymaic", "Brahmi",
+			"Kaithi", "Sora Sompeng", "Chakma", "Mahajani", "Sharada", "Sinhala Archaic numbers", "Khojki", "Multani",
+			"Khudawadi", "Grantha", "Newa", "Tirhuta", "Siddham", "Modi", "Mongolian Supplement", "Takri",
+			"Ahom", "Dogra", "Warang Citi", "Dives Akuru", "Nandinagari", "Zanabazar Square", "Soyombo", "Unified Canadian Aboriginal Syllabics Extended-A",
+			"Pau Cin Hau", "Devanagari Extended-A", "Bhaiksuki", "Marchen", "Masaram Gondi", "Gunjala Gondi", "Makasar", "Kawi",
+			"Lisu Supplement", "Tamil Supplement", "Cuneiform", "Cuneiform numbers and Punctuation", "Early Dynastic Cuneiform", "Cypro-Minoan", "Egyptian Hieroglyphs", "Egyptian Hieroglyph Format Controls",
+			"Anatolian Hieroglyphs", "Bamum Supplement", "Mro", "Tangsa", "Bassa Vah", "Pahawh Hmong", "Medefaidrin", "Miao",
+			"Ideographic Symbols and Punctuation", "Tangut", "Tangut Components", "Khitan Small Script", "Tangut Supplement", "Kana Extended-B", "Kana Supplement", "Kana Extended-A",
+			"Small Kana Extension", "Nushu", "Duployan", "Shorthand Format Controls", "Znamenny Musical Notation", "Byzantine Musical Symbols", "Musical Symbols", "Ancient Greek Musical Notation",
+			"Kaktovik Numerals", "Mayan Numerals", "Tai Xuan Jing Symbols", "Counting Rod Numerals", "Mathematical Alphanumeric Symbols", "Sutton SignWriting", "Latin Extended-G", "Glagolitic Supplement",
+			"Cyrillic Extended-D", "Nyiakeng Puachue Hmong", "Toto", "Wancho", "Nag Mundari", "Ethiopic Extended-B", "Mende Kikakui", "Adlam",
+			"Indic Siyaq numbers", "Ottoman Siyaq numbers", "Arabic Mathematical Alphabetic Symbols", "Mahjong Tiles", "Domino Tiles", "Playing Cards", "Enclosed Alphanumeric Supplement", "Enclosed Ideographic Supplement",
+			"Miscellaneous Symbols and Pictographs", "Emoticons", "Ornamental Dingbats", "Transport and Map Symbols", "Alchemical Symbols", "Geometric Shapes Extended", "Supplemental Arrows-C", "Supplemental Symbols and Pictographs",
+			"Chess Symbols", "Symbols and Pictographs Extended-A", "Symbols for Legacy Computing", "CJK Unified Ideographs Extension B", "CJK Unified Ideographs Extension C", "CJK Unified Ideographs Extension D", "CJK Unified Ideographs Extension E", "CJK Unified Ideographs Extension F", "CJK Unified Ideographs Extension I",
 			"CJK Compatibility Ideographs Supplement", "CJK Unified Ideographs Extension G", "CJK Unified Ideographs Extension H", "CJK Unified Ideographs Extension J", "Tags", "Variation Selectors Supplement", "Supplementary Private Use Area-A", "Supplementary Private Use Area-B"
 		];
 
@@ -254,27 +254,26 @@ export default class Unicode {
 		 * @returns {string|null} 確認結果(異体字セレクタではない場合はNULLを返す)
 		 */
 		getVariationSelectorsnumberFromCodePoint = function (codepoint, annotate) {
-			// モンゴル自由字形選択子 U+180B〜U+180D (3個)
 			// prettier-ignore
 			if (0x180B <= codepoint && codepoint <= 0x180D) {
+				// モンゴル自由字形選択子 U+180B〜U+180D (3個)
 				// prettier-ignore
 				return "FVS" + (codepoint - 0x180B + 1);
 			}
-			// SVSで利用される異体字セレクタ U+FE00〜U+FE0F (VS1～VS16) (16個)
 			// prettier-ignore
 			if (0xFE00 <= codepoint && codepoint <= 0xFE0F) {
+				// SVSで利用される異体字セレクタ U+FE00〜U+FE0F (VS1～VS16) (16個)
 				// prettier-ignore
 				const n = codepoint - 0xFE00 + 1;
-				if (!annotate) return "VS" + n;
+				if (!annotate) { return "VS" + n; }
 				// prettier-ignore
-				if (codepoint === 0xFE0E) return "VS15 (text)";
+				if (codepoint === 0xFE0E) { return "VS15 (text)"; }
 				// prettier-ignore
-				if (codepoint === 0xFE0F) return "VS16 (emoji)";
+				if (codepoint === 0xFE0F) { return "VS16 (emoji)"; }
 				return "VS" + n;
-			}
-			// IVSで利用される異体字セレクタ U+E0100〜U+E01EF (VS17～VS256) (240個)
 			// prettier-ignore
-			else if (0xE0100 <= codepoint && codepoint <= 0xE01EF) {
+			} else if (0xE0100 <= codepoint && codepoint <= 0xE01EF) {
+				// IVSで利用される異体字セレクタ U+E0100〜U+E01EF (VS17～VS256) (240個)
 				// prettier-ignore
 				return "VS" + (codepoint - 0xE0100 + 17);
 			}
@@ -637,8 +636,8 @@ export default class Unicode {
 		if (!charset_for_bom && !charset) {
 			return null;
 		}
-		// UTF-8
 		if (/utf-?8n?/i.test(check_charset)) {
+			// UTF-8
 			let size = 0;
 			let write = 0;
 			for (let i = offset; i < binary.length; i++) {
@@ -672,19 +671,17 @@ export default class Unicode {
 				}
 			}
 			return utf32_array;
-		}
-		// UTF-16
-		else if (/utf-?16/i.test(check_charset)) {
+		} else if (/utf-?16/i.test(check_charset)) {
+			// UTF-16
 			// UTF-16 につめる
 			const utf16 = [];
-			// UTF-16BE
 			if (/utf-?16(be)/i.test(check_charset)) {
+				// UTF-16BE
 				for (let i = offset; i < binary.length; i += 2) {
 					utf16.push((binary[i] << 8) | binary[i + 1]);
 				}
-			}
-			// UTF-16LE
-			else if (/utf-?16(le)?/i.test(check_charset)) {
+			} else if (/utf-?16(le)?/i.test(check_charset)) {
+				// UTF-16LE
 				for (let i = offset; i < binary.length; i += 2) {
 					utf16.push(binary[i] | (binary[i + 1] << 8));
 				}
@@ -705,18 +702,16 @@ export default class Unicode {
 				}
 			}
 			return utf32_array;
-		}
-		// UTF-32
-		else {
-			// UTF-32BE
+		} else {
+			// UTF-32
 			if (/utf-?32(be)/i.test(check_charset)) {
+				// UTF-32BE
 				for (let i = offset; i < binary.length; i += 4) {
 					utf32_array.push((binary[i] << 24) | (binary[i + 1] << 16) | (binary[i + 2] << 8) | binary[i + 3]);
 				}
 				return utf32_array;
-			}
-			// UTF-32LE
-			else if (/utf-?32(le)?/i.test(check_charset)) {
+			} else if (/utf-?32(le)?/i.test(check_charset)) {
+				// UTF-32LE
 				for (let i = offset; i < binary.length; i += 4) {
 					utf32_array.push(binary[i] | (binary[i + 1] << 8) | (binary[i + 2] << 16) | (binary[i + 3] << 24));
 				}
@@ -796,13 +791,12 @@ export default class Unicode {
 				}
 			}
 			return binary;
-		}
-		// UTF-16
-		else if (/utf-?16/i.test(charset)) {
+		} else if (/utf-?16/i.test(charset)) {
+			// UTF-16
 			// UTF-16 に詰め替える
 			const utf16_array = Unicode.toUTF16ArrayFromCodePoint(utf32_array);
-			// UTF-16BE
 			if (/utf-?16(be)/i.test(charset)) {
+				// UTF-16BE
 				// bom をつける
 				if (is_with_bom_) {
 					binary.push(0xFE);
@@ -812,9 +806,8 @@ export default class Unicode {
 					binary.push(utf16_array[i] >> 8);
 					binary.push(utf16_array[i] & 0xFF);
 				}
-			}
-			// UTF-16LE
-			else if (/utf-?16(le)?/i.test(charset)) {
+			} else if (/utf-?16(le)?/i.test(charset)) {
+				// UTF-16LE
 				// bom をつける
 				if (is_with_bom_) {
 					binary.push(0xFF);
@@ -826,11 +819,10 @@ export default class Unicode {
 				}
 			}
 			return binary;
-		}
-		// UTF-32
-		else if (/utf-?32/i.test(charset)) {
-			// UTF-32BE
+		} else if (/utf-?32/i.test(charset)) {
+			// UTF-32
 			if (/utf-?32(be)/i.test(charset)) {
+				// UTF-32BE
 				// bom をつける
 				if (is_with_bom_) {
 					binary.push(0x00);
@@ -844,9 +836,8 @@ export default class Unicode {
 					binary.push((utf32_array[i] >> 8) & 0xFF);
 					binary.push(utf32_array[i] & 0xFF);
 				}
-			}
-			// UTF-32LE
-			else if (/utf-?32(le)?/i.test(charset)) {
+			} else if (/utf-?32(le)?/i.test(charset)) {
+				// UTF-32LE
 				// bom をつける
 				if (is_with_bom_) {
 					binary.push(0xFF);
@@ -917,11 +908,11 @@ export default class Unicode {
 	static isGraphemeComponentFromCodePoint(codepoint) {
 		// prettier-ignore
 		return (
-			Unicode.isCombiningMarkFromCodePoint(codepoint) || // 結合文字
-			Unicode.isVariationSelectorFromCodePoint(codepoint) || // 異体字セレクタ
-			Unicode.isEmojiModifierFromCodePoint(codepoint) || // スキントーン修飾子
-			Unicode.isTagCharacterFromCodePoint(codepoint) || // タグ文字
-			codepoint === 0x200D // ZWJ (ZERO WIDTH JOINER) ゼロ幅接合子
+			Unicode.isCombiningMarkFromCodePoint(codepoint) // 結合文字
+			|| Unicode.isVariationSelectorFromCodePoint(codepoint) // 異体字セレクタ
+			|| Unicode.isEmojiModifierFromCodePoint(codepoint) // スキントーン修飾子
+			|| Unicode.isTagCharacterFromCodePoint(codepoint) // タグ文字
+			|| codepoint === 0x200D // ZWJ (ZERO WIDTH JOINER) ゼロ幅接合子
 		);
 	}
 
@@ -936,10 +927,10 @@ export default class Unicode {
 	static isZeroWidthCharacterFromCodePoint(codepoint) {
 		// prettier-ignore
 		return (
-			codepoint === 0x200B || // ZWSP (ZERO WIDTH SPACE) ゼロ幅スペース
-			codepoint === 0x200C || // ZWNJ (ZERO WIDTH NON-JOINER) ゼロ幅非接合子
-			codepoint === 0x200D || // ZWJ (ZERO WIDTH JOINER) ゼロ幅接合子
-			codepoint === 0x2060 // WJ (WORD JOINER) 単語結合子
+			codepoint === 0x200B // ZWSP (ZERO WIDTH SPACE) ゼロ幅スペース
+			|| codepoint === 0x200C // ZWNJ (ZERO WIDTH NON-JOINER) ゼロ幅非接合子
+			|| codepoint === 0x200D // ZWJ (ZERO WIDTH JOINER) ゼロ幅接合子
+			|| codepoint === 0x2060 // WJ (WORD JOINER) 単語結合子
 		);
 	}
 
@@ -961,24 +952,24 @@ export default class Unicode {
 			return (
 				// Combining Diacritical Marks
 				// prettier-ignore
-				(0x0300 <= codepoint && codepoint <= 0x036F) ||
+				(0x0300 <= codepoint && codepoint <= 0x036F)
 				// Combining Diacritical Marks Extended
 				// prettier-ignore
-				(0x1AB0 <= codepoint && codepoint <= 0x1AFF) ||
+				|| (0x1AB0 <= codepoint && codepoint <= 0x1AFF)
 				// Combining Diacritical Marks Supplement
 				// prettier-ignore
-				(0x1DC0 <= codepoint && codepoint <= 0x1DFF) ||
+				|| (0x1DC0 <= codepoint && codepoint <= 0x1DFF)
 				// Combining Diacritical Marks for Symbols
 				// prettier-ignore
-				(0x20D0 <= codepoint && codepoint <= 0x20FF) ||
+				|| (0x20D0 <= codepoint && codepoint <= 0x20FF)
 				// 日本語に含まれる2種類の文字
 				// COMBINING VOICED SOUND MARK
 				// COMBINING SEMI-VOICED SOUND MARK
 				// prettier-ignore
-				(0x3099 <= codepoint && codepoint <= 0x309A) ||
+				|| (0x3099 <= codepoint && codepoint <= 0x309A)
 				// Combining Half Marks
 				// prettier-ignore
-				(0xFE20 <= codepoint && codepoint <= 0xFE2F)
+				|| (0xFE20 <= codepoint && codepoint <= 0xFE2F)
 			);
 		}
 	}
@@ -992,13 +983,13 @@ export default class Unicode {
 		return (
 			// モンゴル自由字形選択子 U+180B〜U+180D (3個)
 			// prettier-ignore
-			(0x180B <= codepoint && codepoint <= 0x180D) ||
+			(0x180B <= codepoint && codepoint <= 0x180D)
 			// SVSで利用される異体字セレクタ U+FE00〜U+FE0F (VS1～VS16) (16個)
 			// prettier-ignore
-			(0xFE00 <= codepoint && codepoint <= 0xFE0F) ||
+			|| (0xFE00 <= codepoint && codepoint <= 0xFE0F)
 			// IVSで利用される異体字セレクタ U+E0100〜U+E01EF (VS17～VS256) (240個)
 			// prettier-ignore
-			(0xE0100 <= codepoint && codepoint <= 0xE01EF)
+			|| (0xE0100 <= codepoint && codepoint <= 0xE01EF)
 		);
 	}
 

@@ -354,9 +354,9 @@ class MojiAnalizerTools {
 		const jinmeiyokanji_notjoyokanji_map = MOJI_CHAR_MAP.JINMEIYOKANJI_NOTJOYOKANJI_2017();
 		const jinmeiyokanji_notjoyokanji_isetai_map = MOJI_CHAR_MAP.JINMEIYOKANJI_NOTJOYOKANJI_ISETAI_2017();
 		return (
-			!!jinmeiyokanji_joyokanji_isetai_map[unicode_codepoint] ||
-			!!jinmeiyokanji_notjoyokanji_map[unicode_codepoint] ||
-			!!jinmeiyokanji_notjoyokanji_isetai_map[unicode_codepoint]
+			!!jinmeiyokanji_joyokanji_isetai_map[unicode_codepoint]
+			|| !!jinmeiyokanji_notjoyokanji_map[unicode_codepoint]
+			|| !!jinmeiyokanji_notjoyokanji_isetai_map[unicode_codepoint]
 		);
 	}
 
@@ -367,8 +367,8 @@ class MojiAnalizerTools {
 	 */
 	static isJinmeiyoKanji2017(unicode_codepoint) {
 		return (
-			MojiAnalizerTools.isJoyoKanji2010(unicode_codepoint) ||
-			MojiAnalizerTools.isOnlyJinmeiyoKanji2017(unicode_codepoint)
+			MojiAnalizerTools.isJoyoKanji2010(unicode_codepoint)
+			|| MojiAnalizerTools.isOnlyJinmeiyoKanji2017(unicode_codepoint)
 		);
 	}
 
@@ -416,7 +416,7 @@ class MojiAnalizerTools {
  * @property {number[]} iso2022jp_array ISO-2022-JP バイト配列
  * @property {number[]} eucjpms_array eucJP-ms バイト配列
  * @property {number[]} eucjis2004_array EUC-JP-2004 バイト配列
- * 
+ *
  * 文字の種別情報
  * @typedef {Object} MojiTypeData
  * @property {boolean} is_regular_sjis Shift_JIS に登録された文字
@@ -447,7 +447,7 @@ class MojiAnalizerTools {
  * @property {boolean} is_variation_selector 異体字セレクタ
  * @property {boolean} is_skin_tone_modifier スキントーン修飾子
  * @property {boolean} is_tag_character タグ文字
- * 
+ *
  * 文字の種別情報
  * @typedef {Object} MojiData
  * @property {MojiEncodeData} encode 文字のエンコード情報

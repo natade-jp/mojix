@@ -25,6 +25,7 @@ class EUCJPMSMAP {
 		}
 		EUCJPMSMAP.is_initmap = true;
 
+		/* eslint-disable object-property-newline */
 		/**
 		 * 変換マップ
 		 * CP932のIBM拡張文字の一部は、eucJP-msのG3の83区から84区に配列されている。
@@ -47,6 +48,7 @@ class EUCJPMSMAP {
 			0xF4F0: 0xFBDA, 0xF4F1: 0xFBE8, 0xF4F2: 0xFBE9, 0xF4F3: 0xFBEA, 0xF4F4: 0xFBEE, 0xF4F5: 0xFBF0, 0xF4F6: 0xFBF2, 0xF4F7: 0xFBF6,
 			0xF4F8: 0xFBF7, 0xF4F9: 0xFBF9, 0xF4FA: 0xFBFA, 0xF4FB: 0xFBFC, 0xF4FC: 0xFC42, 0xF4FD: 0xFC49, 0xF4FE: 0xFC4B
 		};
+		/* eslint-enable object-property-newline */
 
 		/**
 		 * @type {Record<number, number>}
@@ -175,10 +177,10 @@ export default class EUCJPMS {
 				break;
 			}
 			{
-				// 3バイト読み込み(G3)
 				if (x1 === SS3) {
-					// 文字が足りない
+				// 3バイト読み込み(G3)
 					if (i >= eucjp.length - 2) {
+						// 文字が足りない
 						break;
 					}
 					x1 = eucjp[i + 1];
@@ -193,9 +195,8 @@ export default class EUCJPMS {
 					}
 					i += 2;
 					continue;
-				}
-				// 2バイト読み込み
-				else {
+				} else {
+					// 2バイト読み込み
 					x2 = eucjp[i + 1];
 					i += 1;
 				}

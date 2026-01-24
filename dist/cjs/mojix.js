@@ -166,46 +166,46 @@ class Unicode {
 
 		// prettier-ignore
 		const unicode_blockname_array = [
-			"Basic Latin", "Latin-1 Supplement", "Latin Extended-A", "Latin Extended-B", "IPA Extensions", "Spacing Modifier Letters", "Combining Diacritical Marks", "Greek and Coptic", 
-			"Cyrillic", "Cyrillic Supplement", "Armenian", "Hebrew", "Arabic", "Syriac", "Arabic Supplement", "Thaana", 
-			"NKo", "Samaritan", "Mandaic", "Syriac Supplement", "Arabic Extended-B", "Arabic Extended-A", "Devanagari", "Bengali", 
-			"Gurmukhi", "Gujarati", "Oriya", "Tamil", "Telugu", "Kannada", "Malayalam", "Sinhala", 
-			"Thai", "Lao", "Tibetan", "Myanmar", "Georgian", "Hangul Jamo", "Ethiopic", "Ethiopic Supplement", 
-			"Cherokee", "Unified Canadian Aboriginal Syllabics", "Ogham", "Runic", "Tagalog", "Hanunoo", "Buhid", "Tagbanwa", 
-			"Khmer", "Mongolian", "Unified Canadian Aboriginal Syllabics Extended", "Limbu", "Tai Le", "New Tai Lue", "Khmer Symbols", "Buginese", 
-			"Tai Tham", "Combining Diacritical Marks Extended", "Balinese", "Sundanese", "Batak", "Lepcha", "Ol Chiki", "Cyrillic Extended-C", 
-			"Georgian Extended", "Sundanese Supplement", "Vedic Extensions", "Phonetic Extensions", "Phonetic Extensions Supplement", "Combining Diacritical Marks Supplement", "Latin Extended Additional", "Greek Extended", 
-			"General Punctuation", "Superscripts and Subscripts", "Currency Symbols", "Combining Diacritical Marks for Symbols", "Letterlike Symbols", "number Forms", "Arrows", "Mathematical Operators", 
-			"Miscellaneous Technical", "Control Pictures", "Optical Character Recognition", "Enclosed Alphanumerics", "Box Drawing", "Block Elements", "Geometric Shapes", "Miscellaneous Symbols", 
-			"Dingbats", "Miscellaneous Mathematical Symbols-A", "Supplemental Arrows-A", "Braille Patterns", "Supplemental Arrows-B", "Miscellaneous Mathematical Symbols-B", "Supplemental Mathematical Operators", "Miscellaneous Symbols and Arrows", 
-			"Glagolitic", "Latin Extended-C", "Coptic", "Georgian Supplement", "Tifinagh", "Ethiopic Extended", "Cyrillic Extended-A", "Supplemental Punctuation", 
-			"CJK Radicals Supplement", "Kangxi Radicals", "Ideographic Description Characters", "CJK Symbols and Punctuation", "Hiragana", "Katakana", "Bopomofo", "Hangul Compatibility Jamo", 
-			"Kanbun", "Bopomofo Extended", "CJK Strokes", "Katakana Phonetic Extensions", "Enclosed CJK Letters and Months", "CJK Compatibility", "CJK Unified Ideographs Extension A", "Yijing Hexagram Symbols", 
-			"CJK Unified Ideographs", "Yi Syllables", "Yi Radicals", "Lisu", "Vai", "Cyrillic Extended-B", "Bamum", "Modifier Tone Letters", 
-			"Latin Extended-D", "Syloti Nagri", "Common Indic number Forms", "Phags-pa", "Saurashtra", "Devanagari Extended", "Kayah Li", "Rejang", 
-			"Hangul Jamo Extended-A", "Javanese", "Myanmar Extended-B", "Cham", "Myanmar Extended-A", "Tai Viet", "Meetei Mayek Extensions", "Ethiopic Extended-A", 
-			"Latin Extended-E", "Cherokee Supplement", "Meetei Mayek", "Hangul Syllables", "Hangul Jamo Extended-B", "High Surrogates", "High Private Use Surrogates", "Low Surrogates", 
-			"Private Use Area", "CJK Compatibility Ideographs", "Alphabetic Presentation Forms", "Arabic Presentation Forms-A", "Variation Selectors", "Vertical Forms", "Combining Half Marks", "CJK Compatibility Forms", 
-			"Small Form Variants", "Arabic Presentation Forms-B", "Halfwidth and Fullwidth Forms", "Specials", "Linear B Syllabary", "Linear B Ideograms", "Aegean numbers", "Ancient Greek numbers", 
-			"Ancient Symbols", "Phaistos Disc", "Lycian", "Carian", "Coptic Epact numbers", "Old Italic", "Gothic", "Old Permic", 
-			"Ugaritic", "Old Persian", "Deseret", "Shavian", "Osmanya", "Osage", "Elbasan", "Caucasian Albanian", 
-			"Vithkuqi", "Linear A", "Latin Extended-F", "Cypriot Syllabary", "Imperial Aramaic", "Palmyrene", "Nabataean", "Hatran", 
-			"Phoenician", "Lydian", "Meroitic Hieroglyphs", "Meroitic Cursive", "Kharoshthi", "Old South Arabian", "Old North Arabian", "Manichaean", 
-			"Avestan", "Inscriptional Parthian", "Inscriptional Pahlavi", "Psalter Pahlavi", "Old Turkic", "Old Hungarian", "Hanifi Rohingya", "Rumi Numeral Symbols", 
-			"Yezidi", "Arabic Extended-C", "Old Sogdian", "Sogdian", "Old Uyghur", "Chorasmian", "Elymaic", "Brahmi", 
-			"Kaithi", "Sora Sompeng", "Chakma", "Mahajani", "Sharada", "Sinhala Archaic numbers", "Khojki", "Multani", 
-			"Khudawadi", "Grantha", "Newa", "Tirhuta", "Siddham", "Modi", "Mongolian Supplement", "Takri", 
-			"Ahom", "Dogra", "Warang Citi", "Dives Akuru", "Nandinagari", "Zanabazar Square", "Soyombo", "Unified Canadian Aboriginal Syllabics Extended-A", 
-			"Pau Cin Hau", "Devanagari Extended-A", "Bhaiksuki", "Marchen", "Masaram Gondi", "Gunjala Gondi", "Makasar", "Kawi", 
-			"Lisu Supplement", "Tamil Supplement", "Cuneiform", "Cuneiform numbers and Punctuation", "Early Dynastic Cuneiform", "Cypro-Minoan", "Egyptian Hieroglyphs", "Egyptian Hieroglyph Format Controls", 
-			"Anatolian Hieroglyphs", "Bamum Supplement", "Mro", "Tangsa", "Bassa Vah", "Pahawh Hmong", "Medefaidrin", "Miao", 
-			"Ideographic Symbols and Punctuation", "Tangut", "Tangut Components", "Khitan Small Script", "Tangut Supplement", "Kana Extended-B", "Kana Supplement", "Kana Extended-A", 
-			"Small Kana Extension", "Nushu", "Duployan", "Shorthand Format Controls", "Znamenny Musical Notation", "Byzantine Musical Symbols", "Musical Symbols", "Ancient Greek Musical Notation", 
-			"Kaktovik Numerals", "Mayan Numerals", "Tai Xuan Jing Symbols", "Counting Rod Numerals", "Mathematical Alphanumeric Symbols", "Sutton SignWriting", "Latin Extended-G", "Glagolitic Supplement", 
-			"Cyrillic Extended-D", "Nyiakeng Puachue Hmong", "Toto", "Wancho", "Nag Mundari", "Ethiopic Extended-B", "Mende Kikakui", "Adlam", 
-			"Indic Siyaq numbers", "Ottoman Siyaq numbers", "Arabic Mathematical Alphabetic Symbols", "Mahjong Tiles", "Domino Tiles", "Playing Cards", "Enclosed Alphanumeric Supplement", "Enclosed Ideographic Supplement", 
-			"Miscellaneous Symbols and Pictographs", "Emoticons", "Ornamental Dingbats", "Transport and Map Symbols", "Alchemical Symbols", "Geometric Shapes Extended", "Supplemental Arrows-C", "Supplemental Symbols and Pictographs", 
-			"Chess Symbols", "Symbols and Pictographs Extended-A", "Symbols for Legacy Computing", "CJK Unified Ideographs Extension B", "CJK Unified Ideographs Extension C", "CJK Unified Ideographs Extension D", "CJK Unified Ideographs Extension E", "CJK Unified Ideographs Extension F", "CJK Unified Ideographs Extension I", 
+			"Basic Latin", "Latin-1 Supplement", "Latin Extended-A", "Latin Extended-B", "IPA Extensions", "Spacing Modifier Letters", "Combining Diacritical Marks", "Greek and Coptic",
+			"Cyrillic", "Cyrillic Supplement", "Armenian", "Hebrew", "Arabic", "Syriac", "Arabic Supplement", "Thaana",
+			"NKo", "Samaritan", "Mandaic", "Syriac Supplement", "Arabic Extended-B", "Arabic Extended-A", "Devanagari", "Bengali",
+			"Gurmukhi", "Gujarati", "Oriya", "Tamil", "Telugu", "Kannada", "Malayalam", "Sinhala",
+			"Thai", "Lao", "Tibetan", "Myanmar", "Georgian", "Hangul Jamo", "Ethiopic", "Ethiopic Supplement",
+			"Cherokee", "Unified Canadian Aboriginal Syllabics", "Ogham", "Runic", "Tagalog", "Hanunoo", "Buhid", "Tagbanwa",
+			"Khmer", "Mongolian", "Unified Canadian Aboriginal Syllabics Extended", "Limbu", "Tai Le", "New Tai Lue", "Khmer Symbols", "Buginese",
+			"Tai Tham", "Combining Diacritical Marks Extended", "Balinese", "Sundanese", "Batak", "Lepcha", "Ol Chiki", "Cyrillic Extended-C",
+			"Georgian Extended", "Sundanese Supplement", "Vedic Extensions", "Phonetic Extensions", "Phonetic Extensions Supplement", "Combining Diacritical Marks Supplement", "Latin Extended Additional", "Greek Extended",
+			"General Punctuation", "Superscripts and Subscripts", "Currency Symbols", "Combining Diacritical Marks for Symbols", "Letterlike Symbols", "number Forms", "Arrows", "Mathematical Operators",
+			"Miscellaneous Technical", "Control Pictures", "Optical Character Recognition", "Enclosed Alphanumerics", "Box Drawing", "Block Elements", "Geometric Shapes", "Miscellaneous Symbols",
+			"Dingbats", "Miscellaneous Mathematical Symbols-A", "Supplemental Arrows-A", "Braille Patterns", "Supplemental Arrows-B", "Miscellaneous Mathematical Symbols-B", "Supplemental Mathematical Operators", "Miscellaneous Symbols and Arrows",
+			"Glagolitic", "Latin Extended-C", "Coptic", "Georgian Supplement", "Tifinagh", "Ethiopic Extended", "Cyrillic Extended-A", "Supplemental Punctuation",
+			"CJK Radicals Supplement", "Kangxi Radicals", "Ideographic Description Characters", "CJK Symbols and Punctuation", "Hiragana", "Katakana", "Bopomofo", "Hangul Compatibility Jamo",
+			"Kanbun", "Bopomofo Extended", "CJK Strokes", "Katakana Phonetic Extensions", "Enclosed CJK Letters and Months", "CJK Compatibility", "CJK Unified Ideographs Extension A", "Yijing Hexagram Symbols",
+			"CJK Unified Ideographs", "Yi Syllables", "Yi Radicals", "Lisu", "Vai", "Cyrillic Extended-B", "Bamum", "Modifier Tone Letters",
+			"Latin Extended-D", "Syloti Nagri", "Common Indic number Forms", "Phags-pa", "Saurashtra", "Devanagari Extended", "Kayah Li", "Rejang",
+			"Hangul Jamo Extended-A", "Javanese", "Myanmar Extended-B", "Cham", "Myanmar Extended-A", "Tai Viet", "Meetei Mayek Extensions", "Ethiopic Extended-A",
+			"Latin Extended-E", "Cherokee Supplement", "Meetei Mayek", "Hangul Syllables", "Hangul Jamo Extended-B", "High Surrogates", "High Private Use Surrogates", "Low Surrogates",
+			"Private Use Area", "CJK Compatibility Ideographs", "Alphabetic Presentation Forms", "Arabic Presentation Forms-A", "Variation Selectors", "Vertical Forms", "Combining Half Marks", "CJK Compatibility Forms",
+			"Small Form Variants", "Arabic Presentation Forms-B", "Halfwidth and Fullwidth Forms", "Specials", "Linear B Syllabary", "Linear B Ideograms", "Aegean numbers", "Ancient Greek numbers",
+			"Ancient Symbols", "Phaistos Disc", "Lycian", "Carian", "Coptic Epact numbers", "Old Italic", "Gothic", "Old Permic",
+			"Ugaritic", "Old Persian", "Deseret", "Shavian", "Osmanya", "Osage", "Elbasan", "Caucasian Albanian",
+			"Vithkuqi", "Linear A", "Latin Extended-F", "Cypriot Syllabary", "Imperial Aramaic", "Palmyrene", "Nabataean", "Hatran",
+			"Phoenician", "Lydian", "Meroitic Hieroglyphs", "Meroitic Cursive", "Kharoshthi", "Old South Arabian", "Old North Arabian", "Manichaean",
+			"Avestan", "Inscriptional Parthian", "Inscriptional Pahlavi", "Psalter Pahlavi", "Old Turkic", "Old Hungarian", "Hanifi Rohingya", "Rumi Numeral Symbols",
+			"Yezidi", "Arabic Extended-C", "Old Sogdian", "Sogdian", "Old Uyghur", "Chorasmian", "Elymaic", "Brahmi",
+			"Kaithi", "Sora Sompeng", "Chakma", "Mahajani", "Sharada", "Sinhala Archaic numbers", "Khojki", "Multani",
+			"Khudawadi", "Grantha", "Newa", "Tirhuta", "Siddham", "Modi", "Mongolian Supplement", "Takri",
+			"Ahom", "Dogra", "Warang Citi", "Dives Akuru", "Nandinagari", "Zanabazar Square", "Soyombo", "Unified Canadian Aboriginal Syllabics Extended-A",
+			"Pau Cin Hau", "Devanagari Extended-A", "Bhaiksuki", "Marchen", "Masaram Gondi", "Gunjala Gondi", "Makasar", "Kawi",
+			"Lisu Supplement", "Tamil Supplement", "Cuneiform", "Cuneiform numbers and Punctuation", "Early Dynastic Cuneiform", "Cypro-Minoan", "Egyptian Hieroglyphs", "Egyptian Hieroglyph Format Controls",
+			"Anatolian Hieroglyphs", "Bamum Supplement", "Mro", "Tangsa", "Bassa Vah", "Pahawh Hmong", "Medefaidrin", "Miao",
+			"Ideographic Symbols and Punctuation", "Tangut", "Tangut Components", "Khitan Small Script", "Tangut Supplement", "Kana Extended-B", "Kana Supplement", "Kana Extended-A",
+			"Small Kana Extension", "Nushu", "Duployan", "Shorthand Format Controls", "Znamenny Musical Notation", "Byzantine Musical Symbols", "Musical Symbols", "Ancient Greek Musical Notation",
+			"Kaktovik Numerals", "Mayan Numerals", "Tai Xuan Jing Symbols", "Counting Rod Numerals", "Mathematical Alphanumeric Symbols", "Sutton SignWriting", "Latin Extended-G", "Glagolitic Supplement",
+			"Cyrillic Extended-D", "Nyiakeng Puachue Hmong", "Toto", "Wancho", "Nag Mundari", "Ethiopic Extended-B", "Mende Kikakui", "Adlam",
+			"Indic Siyaq numbers", "Ottoman Siyaq numbers", "Arabic Mathematical Alphabetic Symbols", "Mahjong Tiles", "Domino Tiles", "Playing Cards", "Enclosed Alphanumeric Supplement", "Enclosed Ideographic Supplement",
+			"Miscellaneous Symbols and Pictographs", "Emoticons", "Ornamental Dingbats", "Transport and Map Symbols", "Alchemical Symbols", "Geometric Shapes Extended", "Supplemental Arrows-C", "Supplemental Symbols and Pictographs",
+			"Chess Symbols", "Symbols and Pictographs Extended-A", "Symbols for Legacy Computing", "CJK Unified Ideographs Extension B", "CJK Unified Ideographs Extension C", "CJK Unified Ideographs Extension D", "CJK Unified Ideographs Extension E", "CJK Unified Ideographs Extension F", "CJK Unified Ideographs Extension I",
 			"CJK Compatibility Ideographs Supplement", "CJK Unified Ideographs Extension G", "CJK Unified Ideographs Extension H", "CJK Unified Ideographs Extension J", "Tags", "Variation Selectors Supplement", "Supplementary Private Use Area-A", "Supplementary Private Use Area-B"
 		];
 
@@ -256,27 +256,26 @@ class Unicode {
 		 * @returns {string|null} 確認結果(異体字セレクタではない場合はNULLを返す)
 		 */
 		getVariationSelectorsnumberFromCodePoint = function (codepoint, annotate) {
-			// モンゴル自由字形選択子 U+180B〜U+180D (3個)
 			// prettier-ignore
 			if (0x180B <= codepoint && codepoint <= 0x180D) {
+				// モンゴル自由字形選択子 U+180B〜U+180D (3個)
 				// prettier-ignore
 				return "FVS" + (codepoint - 0x180B + 1);
 			}
-			// SVSで利用される異体字セレクタ U+FE00〜U+FE0F (VS1～VS16) (16個)
 			// prettier-ignore
 			if (0xFE00 <= codepoint && codepoint <= 0xFE0F) {
+				// SVSで利用される異体字セレクタ U+FE00〜U+FE0F (VS1～VS16) (16個)
 				// prettier-ignore
 				const n = codepoint - 0xFE00 + 1;
-				if (!annotate) return "VS" + n;
+				if (!annotate) { return "VS" + n; }
 				// prettier-ignore
-				if (codepoint === 0xFE0E) return "VS15 (text)";
+				if (codepoint === 0xFE0E) { return "VS15 (text)"; }
 				// prettier-ignore
-				if (codepoint === 0xFE0F) return "VS16 (emoji)";
+				if (codepoint === 0xFE0F) { return "VS16 (emoji)"; }
 				return "VS" + n;
-			}
-			// IVSで利用される異体字セレクタ U+E0100〜U+E01EF (VS17～VS256) (240個)
 			// prettier-ignore
-			else if (0xE0100 <= codepoint && codepoint <= 0xE01EF) {
+			} else if (0xE0100 <= codepoint && codepoint <= 0xE01EF) {
+				// IVSで利用される異体字セレクタ U+E0100〜U+E01EF (VS17～VS256) (240個)
 				// prettier-ignore
 				return "VS" + (codepoint - 0xE0100 + 17);
 			}
@@ -639,8 +638,8 @@ class Unicode {
 		if (!charset_for_bom && !charset) {
 			return null;
 		}
-		// UTF-8
 		if (/utf-?8n?/i.test(check_charset)) {
+			// UTF-8
 			let size = 0;
 			let write = 0;
 			for (let i = offset; i < binary.length; i++) {
@@ -674,19 +673,17 @@ class Unicode {
 				}
 			}
 			return utf32_array;
-		}
-		// UTF-16
-		else if (/utf-?16/i.test(check_charset)) {
+		} else if (/utf-?16/i.test(check_charset)) {
+			// UTF-16
 			// UTF-16 につめる
 			const utf16 = [];
-			// UTF-16BE
 			if (/utf-?16(be)/i.test(check_charset)) {
+				// UTF-16BE
 				for (let i = offset; i < binary.length; i += 2) {
 					utf16.push((binary[i] << 8) | binary[i + 1]);
 				}
-			}
-			// UTF-16LE
-			else if (/utf-?16(le)?/i.test(check_charset)) {
+			} else if (/utf-?16(le)?/i.test(check_charset)) {
+				// UTF-16LE
 				for (let i = offset; i < binary.length; i += 2) {
 					utf16.push(binary[i] | (binary[i + 1] << 8));
 				}
@@ -707,18 +704,16 @@ class Unicode {
 				}
 			}
 			return utf32_array;
-		}
-		// UTF-32
-		else {
-			// UTF-32BE
+		} else {
+			// UTF-32
 			if (/utf-?32(be)/i.test(check_charset)) {
+				// UTF-32BE
 				for (let i = offset; i < binary.length; i += 4) {
 					utf32_array.push((binary[i] << 24) | (binary[i + 1] << 16) | (binary[i + 2] << 8) | binary[i + 3]);
 				}
 				return utf32_array;
-			}
-			// UTF-32LE
-			else if (/utf-?32(le)?/i.test(check_charset)) {
+			} else if (/utf-?32(le)?/i.test(check_charset)) {
+				// UTF-32LE
 				for (let i = offset; i < binary.length; i += 4) {
 					utf32_array.push(binary[i] | (binary[i + 1] << 8) | (binary[i + 2] << 16) | (binary[i + 3] << 24));
 				}
@@ -798,13 +793,12 @@ class Unicode {
 				}
 			}
 			return binary;
-		}
-		// UTF-16
-		else if (/utf-?16/i.test(charset)) {
+		} else if (/utf-?16/i.test(charset)) {
+			// UTF-16
 			// UTF-16 に詰め替える
 			const utf16_array = Unicode.toUTF16ArrayFromCodePoint(utf32_array);
-			// UTF-16BE
 			if (/utf-?16(be)/i.test(charset)) {
+				// UTF-16BE
 				// bom をつける
 				if (is_with_bom_) {
 					binary.push(0xFE);
@@ -814,9 +808,8 @@ class Unicode {
 					binary.push(utf16_array[i] >> 8);
 					binary.push(utf16_array[i] & 0xFF);
 				}
-			}
-			// UTF-16LE
-			else if (/utf-?16(le)?/i.test(charset)) {
+			} else if (/utf-?16(le)?/i.test(charset)) {
+				// UTF-16LE
 				// bom をつける
 				if (is_with_bom_) {
 					binary.push(0xFF);
@@ -828,11 +821,10 @@ class Unicode {
 				}
 			}
 			return binary;
-		}
-		// UTF-32
-		else if (/utf-?32/i.test(charset)) {
-			// UTF-32BE
+		} else if (/utf-?32/i.test(charset)) {
+			// UTF-32
 			if (/utf-?32(be)/i.test(charset)) {
+				// UTF-32BE
 				// bom をつける
 				if (is_with_bom_) {
 					binary.push(0x00);
@@ -846,9 +838,8 @@ class Unicode {
 					binary.push((utf32_array[i] >> 8) & 0xFF);
 					binary.push(utf32_array[i] & 0xFF);
 				}
-			}
-			// UTF-32LE
-			else if (/utf-?32(le)?/i.test(charset)) {
+			} else if (/utf-?32(le)?/i.test(charset)) {
+				// UTF-32LE
 				// bom をつける
 				if (is_with_bom_) {
 					binary.push(0xFF);
@@ -919,11 +910,11 @@ class Unicode {
 	static isGraphemeComponentFromCodePoint(codepoint) {
 		// prettier-ignore
 		return (
-			Unicode.isCombiningMarkFromCodePoint(codepoint) || // 結合文字
-			Unicode.isVariationSelectorFromCodePoint(codepoint) || // 異体字セレクタ
-			Unicode.isEmojiModifierFromCodePoint(codepoint) || // スキントーン修飾子
-			Unicode.isTagCharacterFromCodePoint(codepoint) || // タグ文字
-			codepoint === 0x200D // ZWJ (ZERO WIDTH JOINER) ゼロ幅接合子
+			Unicode.isCombiningMarkFromCodePoint(codepoint) // 結合文字
+			|| Unicode.isVariationSelectorFromCodePoint(codepoint) // 異体字セレクタ
+			|| Unicode.isEmojiModifierFromCodePoint(codepoint) // スキントーン修飾子
+			|| Unicode.isTagCharacterFromCodePoint(codepoint) // タグ文字
+			|| codepoint === 0x200D // ZWJ (ZERO WIDTH JOINER) ゼロ幅接合子
 		);
 	}
 
@@ -938,10 +929,10 @@ class Unicode {
 	static isZeroWidthCharacterFromCodePoint(codepoint) {
 		// prettier-ignore
 		return (
-			codepoint === 0x200B || // ZWSP (ZERO WIDTH SPACE) ゼロ幅スペース
-			codepoint === 0x200C || // ZWNJ (ZERO WIDTH NON-JOINER) ゼロ幅非接合子
-			codepoint === 0x200D || // ZWJ (ZERO WIDTH JOINER) ゼロ幅接合子
-			codepoint === 0x2060 // WJ (WORD JOINER) 単語結合子
+			codepoint === 0x200B // ZWSP (ZERO WIDTH SPACE) ゼロ幅スペース
+			|| codepoint === 0x200C // ZWNJ (ZERO WIDTH NON-JOINER) ゼロ幅非接合子
+			|| codepoint === 0x200D // ZWJ (ZERO WIDTH JOINER) ゼロ幅接合子
+			|| codepoint === 0x2060 // WJ (WORD JOINER) 単語結合子
 		);
 	}
 
@@ -963,24 +954,24 @@ class Unicode {
 			return (
 				// Combining Diacritical Marks
 				// prettier-ignore
-				(0x0300 <= codepoint && codepoint <= 0x036F) ||
+				(0x0300 <= codepoint && codepoint <= 0x036F)
 				// Combining Diacritical Marks Extended
 				// prettier-ignore
-				(0x1AB0 <= codepoint && codepoint <= 0x1AFF) ||
+				|| (0x1AB0 <= codepoint && codepoint <= 0x1AFF)
 				// Combining Diacritical Marks Supplement
 				// prettier-ignore
-				(0x1DC0 <= codepoint && codepoint <= 0x1DFF) ||
+				|| (0x1DC0 <= codepoint && codepoint <= 0x1DFF)
 				// Combining Diacritical Marks for Symbols
 				// prettier-ignore
-				(0x20D0 <= codepoint && codepoint <= 0x20FF) ||
+				|| (0x20D0 <= codepoint && codepoint <= 0x20FF)
 				// 日本語に含まれる2種類の文字
 				// COMBINING VOICED SOUND MARK
 				// COMBINING SEMI-VOICED SOUND MARK
 				// prettier-ignore
-				(0x3099 <= codepoint && codepoint <= 0x309A) ||
+				|| (0x3099 <= codepoint && codepoint <= 0x309A)
 				// Combining Half Marks
 				// prettier-ignore
-				(0xFE20 <= codepoint && codepoint <= 0xFE2F)
+				|| (0xFE20 <= codepoint && codepoint <= 0xFE2F)
 			);
 		}
 	}
@@ -994,13 +985,13 @@ class Unicode {
 		return (
 			// モンゴル自由字形選択子 U+180B〜U+180D (3個)
 			// prettier-ignore
-			(0x180B <= codepoint && codepoint <= 0x180D) ||
+			(0x180B <= codepoint && codepoint <= 0x180D)
 			// SVSで利用される異体字セレクタ U+FE00〜U+FE0F (VS1～VS16) (16個)
 			// prettier-ignore
-			(0xFE00 <= codepoint && codepoint <= 0xFE0F) ||
+			|| (0xFE00 <= codepoint && codepoint <= 0xFE0F)
 			// IVSで利用される異体字セレクタ U+E0100〜U+E01EF (VS17～VS256) (240個)
 			// prettier-ignore
-			(0xE0100 <= codepoint && codepoint <= 0xE01EF)
+			|| (0xE0100 <= codepoint && codepoint <= 0xE01EF)
 		);
 	}
 
@@ -1145,9 +1136,8 @@ class SJIS {
 					for (let j = 0; j < y.length; j++) {
 						utf16.push(y[j]);
 					}
-				}
+				} else {
 				// 値しかない場合は値を結合
-				else {
 					utf16.push(y);
 				}
 			} else {
@@ -1210,20 +1200,18 @@ class SJIS {
 		} else {
 			// ※2面は第4水準のみ
 			men = 2;
-			// 2面1区 ～ 2面8区
 			// prettier-ignore
 			if (((s1 === 0xF0 || s1 === 0xF2) && s2 < 0x9F) || s1 === 0xF1) {
+				// 2面1区 ～ 2面8区
 				// prettier-ignore
 				s1 = s1 - 0xF0;
-			}
-			// 2面12区 ～ 2面15区
 			// prettier-ignore
-			else if ((s1 === 0xF4 && s2 < 0x9F) || s1 < 0xF4) {
+			} else if ((s1 === 0xF4 && s2 < 0x9F) || s1 < 0xF4) {
+				// 2面12区 ～ 2面15区
 				// prettier-ignore
 				s1 = s1 - 0xED;
-			}
-			// 2面78区 ～ 2面94区
-			else {
+			} else {
+				// 2面78区 ～ 2面94区
 				// prettier-ignore
 				s1 = s1 - 0xCE;
 			}
@@ -1650,7 +1638,7 @@ class CP932MAP {
 		 * @returns {Record<number, number>}
 		 */
 		const getCp932ToUnicodeMap = function () {
-
+			/* eslint-disable object-property-newline */
 			/**
 			 * 1バイトの変換マップ
 			 *
@@ -1688,6 +1676,7 @@ class CP932MAP {
 				0xD8: 0xFF98, 0xD9: 0xFF99, 0xDA: 0xFF9A, 0xDB: 0xFF9B, 0xDC: 0xFF9C, 0xDD: 0xFF9D, 0xDE: 0xFF9E, 0xDF: 0xFF9F,
 				0xFD: 0xF8F1, 0xFE: 0xF8F2, 0xFF: 0xF8F3
 			};
+			/* eslint-enable object-property-newline */
 
 			/**
 			 * 2バイト文字（0x8140-0xffff）の変換マップ作成用の文字列
@@ -1750,8 +1739,6 @@ class CP932MAP {
 				"涖涬淏淸淲淼渹湜渧渼溿澈澵濵瀅瀇瀨炅炫焏焄煜煆煇凞燁燾犱犾猤猪獷玽珉珖珣珒琇珵琦琪琩琮瑢璉璟甁畯皂皜皞皛皦益睆劯砡硎硤硺礰礼神1祥禔福禛竑竧靖竫箞精絈絜綷綠緖繒罇羡羽茁荢荿菇菶葈蒴蕓蕙蕫﨟薰蘒﨡蠇裵訒訷詹誧誾諟諸諶譓譿賰賴贒赶﨣軏﨤逸遧郞都鄕鄧釚釗釞釭釮釤釥鈆鈐鈊鈺鉀鈼鉎鉙鉑鈹鉧銧鉷鉸鋧鋗鋙鋐﨧鋕鋠鋓錥錡鋻﨨錞鋿錝錂鍰鍗鎤鏆鏞鏸鐱鑅鑈閒隆﨩隝隯霳霻靃靍靏靑靕顗顥飯飼餧館馞驎髙67",
 				"髜魵魲鮏鮱鮻鰀鵰鵫鶴鸙黑"
 			].join("");
-
-			 
 
 			/*
 			上の変換マップ作成用の文字列は数値が入った変換マップのコードから作成している
@@ -2037,6 +2024,7 @@ class SJIS2004MAP {
 		 * @returns {Object<number, number|number[]>}
 		 */
 		const getSJIS2004ToUnicodeMap = function () {
+			/* eslint-disable object-property-newline */
 			/**
 			 * 変換マップ
 			 * - 2文字に変換される場合もあるので注意
@@ -2049,7 +2037,7 @@ class SJIS2004MAP {
 			// prettier-ignore
 			const sjis2004_to_unicode_map = {
 				// ASCII コード部分は CP932 を参考
-				0x00: 0x00, 
+				0x00: 0x00,
 				0x01: 0x01, 0x02: 0x02, 0x03: 0x03, 0x04: 0x04, 0x05: 0x05, 0x06: 0x06, 0x07: 0x07, 0x08: 0x08,
 				0x09: 0x09, 0x0A: 0x0A, 0x0B: 0x0B, 0x0C: 0x0C, 0x0D: 0x0D, 0x0E: 0x0E, 0x0F: 0x0F, 0x10: 0x10,
 				0x11: 0x11, 0x12: 0x12, 0x13: 0x13, 0x14: 0x14, 0x15: 0x15, 0x16: 0x16, 0x17: 0x17, 0x18: 0x18,
@@ -2225,6 +2213,7 @@ class SJIS2004MAP {
 				0x8786: 0x32A5, 0x8787: 0x32A6, 0x8788: 0x32A7, 0x8789: 0x32A8, 0x878A: 0x3231, 0x878B: 0x3232, 0x878C: 0x3239, 0x878D: 0x337E,
 				0x878E: 0x337D, 0x878F: 0x337C, 0x8793: 0x222E, 0x8798: 0x221F, 0x8799: 0x22BF, 0x879D: 0x2756, 0x879E: 0x261E
 			};
+			/* eslint-enable object-property-newline */
 
 			/**
 			 * 漢字の2バイト文字（0x879f-0xffff）の変換マップ作成用の文字列
@@ -2345,6 +2334,7 @@ class SJIS2004MAP {
 		 */
 		const sjis2004_to_unicode_map = getSJIS2004ToUnicodeMap();
 
+		/* eslint-disable object-property-newline */
 		/**
 		 * 全角用の文字がある場合は、全角へ変換できるようにする。
 		 * 以下のリストは、上記のマッピングデータのUnicodeのコードポイントが0x100未満のデータを抜き出して、
@@ -2356,21 +2346,22 @@ class SJIS2004MAP {
 		 */
 		// prettier-ignore
 		const sjis2004_to_unicode_map_2 = {
-			0x8143: 0xFF0C, 0x8144: 0xFF0E, 0x8146: 0xFF1A, 0x8147: 0xFF1B, 0x8148: 0xFF1F, 0x8149: 0xFF01, 0x814C: 0x00B4, 0x814D: 0xFF40, 
-			0x814E: 0x00A8, 0x814F: 0xFF3E, 0x8151: 0xFF3F, 0x815E: 0xFF0F, 0x815F: 0xFF3C, 0x8162: 0xFF5C, 0x8169: 0xFF08, 0x816A: 0xFF09, 
-			0x816D: 0xFF3B, 0x816E: 0xFF3D, 0x816F: 0xFF5B, 0x8170: 0xFF5D, 0x817B: 0xFF0B, 0x817D: 0x00B1, 0x817E: 0x00D7, 0x8180: 0x00F7, 
-			0x8181: 0xFF1D, 0x8183: 0xFF1C, 0x8184: 0xFF1E, 0x818B: 0x00B0, 0x818F: 0xFFE5, 0x8190: 0xFF04, 0x8191: 0xFFE0, 0x8192: 0xFFE1, 
-			0x8193: 0xFF05, 0x8194: 0xFF03, 0x8195: 0xFF06, 0x8196: 0xFF0A, 0x8197: 0xFF20, 0x8198: 0x00A7, 0x81AD: 0xFF07, 0x81AE: 0xFF02, 
-			0x81AF: 0xFF0D, 0x81B0: 0xFF5E, 0x81CA: 0xFFE2, 0x81F7: 0x00B6, 0x824F: 0xFF10, 0x8250: 0xFF11, 0x8251: 0xFF12, 0x8252: 0xFF13, 
-			0x8253: 0xFF14, 0x8254: 0xFF15, 0x8255: 0xFF16, 0x8256: 0xFF17, 0x8257: 0xFF18, 0x8258: 0xFF19, 0x8260: 0xFF21, 0x8261: 0xFF22, 
-			0x8262: 0xFF23, 0x8263: 0xFF24, 0x8264: 0xFF25, 0x8265: 0xFF26, 0x8266: 0xFF27, 0x8267: 0xFF28, 0x8268: 0xFF29, 0x8269: 0xFF2A, 
-			0x826A: 0xFF2B, 0x826B: 0xFF2C, 0x826C: 0xFF2D, 0x826D: 0xFF2E, 0x826E: 0xFF2F, 0x826F: 0xFF30, 0x8270: 0xFF31, 0x8271: 0xFF32, 
-			0x8272: 0xFF33, 0x8273: 0xFF34, 0x8274: 0xFF35, 0x8275: 0xFF36, 0x8276: 0xFF37, 0x8277: 0xFF38, 0x8278: 0xFF39, 0x8279: 0xFF3A, 
-			0x8281: 0xFF41, 0x8282: 0xFF42, 0x8283: 0xFF43, 0x8284: 0xFF44, 0x8285: 0xFF45, 0x8286: 0xFF46, 0x8287: 0xFF47, 0x8288: 0xFF48, 
-			0x8289: 0xFF49, 0x828A: 0xFF4A, 0x828B: 0xFF4B, 0x828C: 0xFF4C, 0x828D: 0xFF4D, 0x828E: 0xFF4E, 0x828F: 0xFF4F, 0x8290: 0xFF50, 
-			0x8291: 0xFF51, 0x8292: 0xFF52, 0x8293: 0xFF53, 0x8294: 0xFF54, 0x8295: 0xFF55, 0x8296: 0xFF56, 0x8297: 0xFF57, 0x8298: 0xFF58, 
+			0x8143: 0xFF0C, 0x8144: 0xFF0E, 0x8146: 0xFF1A, 0x8147: 0xFF1B, 0x8148: 0xFF1F, 0x8149: 0xFF01, 0x814C: 0x00B4, 0x814D: 0xFF40,
+			0x814E: 0x00A8, 0x814F: 0xFF3E, 0x8151: 0xFF3F, 0x815E: 0xFF0F, 0x815F: 0xFF3C, 0x8162: 0xFF5C, 0x8169: 0xFF08, 0x816A: 0xFF09,
+			0x816D: 0xFF3B, 0x816E: 0xFF3D, 0x816F: 0xFF5B, 0x8170: 0xFF5D, 0x817B: 0xFF0B, 0x817D: 0x00B1, 0x817E: 0x00D7, 0x8180: 0x00F7,
+			0x8181: 0xFF1D, 0x8183: 0xFF1C, 0x8184: 0xFF1E, 0x818B: 0x00B0, 0x818F: 0xFFE5, 0x8190: 0xFF04, 0x8191: 0xFFE0, 0x8192: 0xFFE1,
+			0x8193: 0xFF05, 0x8194: 0xFF03, 0x8195: 0xFF06, 0x8196: 0xFF0A, 0x8197: 0xFF20, 0x8198: 0x00A7, 0x81AD: 0xFF07, 0x81AE: 0xFF02,
+			0x81AF: 0xFF0D, 0x81B0: 0xFF5E, 0x81CA: 0xFFE2, 0x81F7: 0x00B6, 0x824F: 0xFF10, 0x8250: 0xFF11, 0x8251: 0xFF12, 0x8252: 0xFF13,
+			0x8253: 0xFF14, 0x8254: 0xFF15, 0x8255: 0xFF16, 0x8256: 0xFF17, 0x8257: 0xFF18, 0x8258: 0xFF19, 0x8260: 0xFF21, 0x8261: 0xFF22,
+			0x8262: 0xFF23, 0x8263: 0xFF24, 0x8264: 0xFF25, 0x8265: 0xFF26, 0x8266: 0xFF27, 0x8267: 0xFF28, 0x8268: 0xFF29, 0x8269: 0xFF2A,
+			0x826A: 0xFF2B, 0x826B: 0xFF2C, 0x826C: 0xFF2D, 0x826D: 0xFF2E, 0x826E: 0xFF2F, 0x826F: 0xFF30, 0x8270: 0xFF31, 0x8271: 0xFF32,
+			0x8272: 0xFF33, 0x8273: 0xFF34, 0x8274: 0xFF35, 0x8275: 0xFF36, 0x8276: 0xFF37, 0x8277: 0xFF38, 0x8278: 0xFF39, 0x8279: 0xFF3A,
+			0x8281: 0xFF41, 0x8282: 0xFF42, 0x8283: 0xFF43, 0x8284: 0xFF44, 0x8285: 0xFF45, 0x8286: 0xFF46, 0x8287: 0xFF47, 0x8288: 0xFF48,
+			0x8289: 0xFF49, 0x828A: 0xFF4A, 0x828B: 0xFF4B, 0x828C: 0xFF4C, 0x828D: 0xFF4D, 0x828E: 0xFF4E, 0x828F: 0xFF4F, 0x8290: 0xFF50,
+			0x8291: 0xFF51, 0x8292: 0xFF52, 0x8293: 0xFF53, 0x8294: 0xFF54, 0x8295: 0xFF55, 0x8296: 0xFF56, 0x8297: 0xFF57, 0x8298: 0xFF58,
 			0x8299: 0xFF59, 0x829A: 0xFF5A
 		};
+		/* eslint-enable object-property-newline */
 
 		// 「sjis2004_to_unicode_map_2」の中の特殊な文字について
 		// 一部CP932とShift_JIS-2004とでコードが一致していない文字がある
@@ -2547,6 +2538,7 @@ class EUCJPMSMAP {
 		}
 		EUCJPMSMAP.is_initmap = true;
 
+		/* eslint-disable object-property-newline */
 		/**
 		 * 変換マップ
 		 * CP932のIBM拡張文字の一部は、eucJP-msのG3の83区から84区に配列されている。
@@ -2569,6 +2561,7 @@ class EUCJPMSMAP {
 			0xF4F0: 0xFBDA, 0xF4F1: 0xFBE8, 0xF4F2: 0xFBE9, 0xF4F3: 0xFBEA, 0xF4F4: 0xFBEE, 0xF4F5: 0xFBF0, 0xF4F6: 0xFBF2, 0xF4F7: 0xFBF6,
 			0xF4F8: 0xFBF7, 0xF4F9: 0xFBF9, 0xF4FA: 0xFBFA, 0xF4FB: 0xFBFC, 0xF4FC: 0xFC42, 0xF4FD: 0xFC49, 0xF4FE: 0xFC4B
 		};
+		/* eslint-enable object-property-newline */
 
 		/**
 		 * @type {Record<number, number>}
@@ -2697,10 +2690,10 @@ class EUCJPMS {
 				break;
 			}
 			{
-				// 3バイト読み込み(G3)
 				if (x1 === SS3) {
-					// 文字が足りない
+				// 3バイト読み込み(G3)
 					if (i >= eucjp.length - 2) {
+						// 文字が足りない
 						break;
 					}
 					x1 = eucjp[i + 1];
@@ -2715,9 +2708,8 @@ class EUCJPMS {
 					}
 					i += 2;
 					continue;
-				}
-				// 2バイト読み込み
-				else {
+				} else {
+					// 2バイト読み込み
 					x2 = eucjp[i + 1];
 					i += 1;
 				}
@@ -2823,9 +2815,9 @@ class EUCJIS2004 {
 		for (let i = 0; i < eucjp.length; i++) {
 			let x1, x2;
 			x1 = eucjp[i];
-			// ASCII
 			// prettier-ignore
 			if (x1 < 0x80) {
+				// ASCII
 				sjis_array.push(x1);
 				continue;
 			}
@@ -2835,10 +2827,10 @@ class EUCJIS2004 {
 			}
 			let men = 1;
 			{
-				// 3バイト読み込み(G3)
 				if (x1 === SS3) {
-					// 文字が足りない
+					// 3バイト読み込み(G3)
 					if (i >= eucjp.length - 2) {
+						// 文字が足りない
 						break;
 					}
 					// シングルシフト SS3 で G3 を呼び出す。
@@ -2847,15 +2839,14 @@ class EUCJIS2004 {
 					x1 = eucjp[i + 1];
 					x2 = eucjp[i + 2];
 					i += 2;
-				}
-				// 2バイト読み込み
-				else {
+				} else {
+					// 2バイト読み込み
 					x2 = eucjp[i + 1];
 					i += 1;
 				}
 			}
-			// 半角カタカナ
 			if (x1 === SS2) {
+				// 半角カタカナ
 				sjis_array.push(x2);
 				continue;
 			}
@@ -2954,40 +2945,32 @@ class EncodeTools {
 			// prettier-ignore
 			if ((0x41 <= ch && ch <= 0x5A) || (0x61 <= ch && ch <= 0x6A)) {
 				type = 1;
-			}
-			// 0-9
 			// prettier-ignore
-			else if (0x30 <= ch && ch <= 0x39) {
+			} else if (0x30 <= ch && ch <= 0x39) {
+				// 0-9
 				type = 2;
-			}
-			// ぁ-ん
 			// prettier-ignore
-			else if (0x3041 <= ch && ch <= 0x3093) {
+			} else if (0x3041 <= ch && ch <= 0x3093) {
+				// ぁ-ん
 				type = 3;
-			}
-			// ァ-ン
 			// prettier-ignore
-			else if (0x30A1 <= ch && ch <= 0x30F3) {
+			} else if (0x30A1 <= ch && ch <= 0x30F3) {
+				// ァ-ン
 				type = 4;
-			}
-			// 全角英字
 			// prettier-ignore
-			else if ((0xFF21 <= ch && ch <= 0xFF3A) || (0xFF41 <= ch && ch <= 0xFF5A)) {
+			} else if ((0xFF21 <= ch && ch <= 0xFF3A) || (0xFF41 <= ch && ch <= 0xFF5A)) {
+				// 全角英字
 				type = 5;
-			}
-			// 全角数値
-			// prettier-ignore
-			else if (0xFF10 <= ch && ch <= 0xFF19) {
+			} else if (0xFF10 <= ch && ch <= 0xFF19) {
+				// 全角数値
 				type = 6;
-			}
+			// prettier-ignore
+			} else if (0xFF61 <= ch && ch < 0xFFA0) {
 			// 半角カタカナ
-			// prettier-ignore
-			else if (0xFF61 <= ch && ch < 0xFFA0) {
 				type = 7;
-			}
-			// CJK統合漢字拡張A - CJK統合漢字, 追加漢字面
 			// prettier-ignore
-			else if ((0x3400 <= ch && ch < 0xA000) || (0x20000 <= ch && ch < 0x2FA20)) {
+			} else if ((0x3400 <= ch && ch < 0xA000) || (0x20000 <= ch && ch < 0x2FA20)) {
+				// CJK統合漢字拡張A - CJK統合漢字, 追加漢字面
 				type = 8;
 			} else {
 				old_type = -1;
@@ -3499,19 +3482,17 @@ class Japanese {
 				const ch = str.charCodeAt(0);
 				if (next === 0xFF9E) {
 					// Shift-JISにない濁点（ヷ、ヸ、ヹ、ヺ）は意図的に無視
-					// ヴ
 					if (ch === 0xFF73) {
+						// ヴ
 						return String.fromCharCode(0x3094);
-					}
-					// ガ-ド、バ-ボ
-					else if ((0xFF76 <= ch && ch <= 0xFF84) || (0xFF8A <= ch && ch <= 0xFF8E)) {
+					} else if ((0xFF76 <= ch && ch <= 0xFF84) || (0xFF8A <= ch && ch <= 0xFF8E)) {
+						// ガ-ド、バ-ボ
 						return String.fromCharCode(map[ch] + 1);
 					}
-				}
-				// 半濁点
-				else if (next === 0xFF9F) {
-					// パ-ポ
+				} else if (next === 0xFF9F) {
+					// 半濁点
 					if (0xFF8A <= ch && ch <= 0xFF8E) {
+					// パ-ポ
 						return String.fromCharCode(map[ch] + 2);
 					}
 				}
@@ -3723,7 +3704,7 @@ class Japanese {
 			"?": "？",
 			"!": "！",
 			",": "、",
-			".": "。" 
+			".": "。"
 		};
 		/**
 		 * ya, yi, yu, ye, yo
@@ -3748,24 +3729,24 @@ class Japanese {
 				// 同じ文字の繰り返しなら「っ」に変更
 				if (romaji.charCodeAt(0) === romaji.charCodeAt(1)) {
 					// ただし繰り返し文字がnの場合は「ん」として扱う
-					if (romaji.substring(0, 1) === "n") {
+					if (romaji.slice(0, 1) === "n") {
 						output.push("ん");
-						romaji = romaji.substring(2);
+						romaji = romaji.slice(2);
 					} else {
 						output.push("っ");
-						romaji = romaji.substring(1);
+						romaji = romaji.slice(1);
 					}
 				}
 			}
 			if (romaji.length === 3) {
-				const char_1 = romaji.substring(0, 1);
-				const char_2 = romaji.substring(1, 2);
+				const char_1 = romaji.slice(0, 1);
+				const char_2 = romaji.slice(1, 2);
 				// 2文字目がyで始まる場合（ただし、lya, xya などを除く）は
 				// 小文字リストから選んで、最後に小文字をつける
 				// sya -> si につけかえて辞書から探す
 				if (char_2 === "y" && char_1 !== "l" && char_1 !== "x") {
-					y_komoji = y_komoji_map[romaji.substring(2)];
-					romaji = romaji.substring(0, 1) + "i";
+					y_komoji = y_komoji_map[romaji.slice(2)];
+					romaji = romaji.slice(0, 1) + "i";
 				}
 			}
 			const data = map[romaji];
@@ -3986,7 +3967,7 @@ class Japanese {
 			"？": "?",
 			"！": "!",
 			"、": ",",
-			"。": "." 
+			"。": "."
 		};
 
 		/**
@@ -4023,8 +4004,8 @@ class Japanese {
 					// 1文字なのでこれ以上変換不能
 					return str;
 				}
-				const char_1 = trans.substring(0, 1);
-				const char_2 = trans.substring(1, 2);
+				const char_1 = trans.slice(0, 1);
+				const char_2 = trans.slice(1, 2);
 				// 最後の文字が小文字である
 				if (!komoji_map[char_2]) {
 					// これ以上変換不能
@@ -4041,7 +4022,7 @@ class Japanese {
 				trans += last_text;
 			}
 			if (is_xtu) {
-				trans = trans.substring(0, 1) + trans;
+				trans = trans.slice(0, 1) + trans;
 			}
 			return trans;
 		};
@@ -4557,9 +4538,9 @@ class MojiAnalizerTools {
 		const jinmeiyokanji_notjoyokanji_map = MOJI_CHAR_MAP.JINMEIYOKANJI_NOTJOYOKANJI_2017();
 		const jinmeiyokanji_notjoyokanji_isetai_map = MOJI_CHAR_MAP.JINMEIYOKANJI_NOTJOYOKANJI_ISETAI_2017();
 		return (
-			!!jinmeiyokanji_joyokanji_isetai_map[unicode_codepoint] ||
-			!!jinmeiyokanji_notjoyokanji_map[unicode_codepoint] ||
-			!!jinmeiyokanji_notjoyokanji_isetai_map[unicode_codepoint]
+			!!jinmeiyokanji_joyokanji_isetai_map[unicode_codepoint]
+			|| !!jinmeiyokanji_notjoyokanji_map[unicode_codepoint]
+			|| !!jinmeiyokanji_notjoyokanji_isetai_map[unicode_codepoint]
 		);
 	}
 
@@ -4570,8 +4551,8 @@ class MojiAnalizerTools {
 	 */
 	static isJinmeiyoKanji2017(unicode_codepoint) {
 		return (
-			MojiAnalizerTools.isJoyoKanji2010(unicode_codepoint) ||
-			MojiAnalizerTools.isOnlyJinmeiyoKanji2017(unicode_codepoint)
+			MojiAnalizerTools.isJoyoKanji2010(unicode_codepoint)
+			|| MojiAnalizerTools.isOnlyJinmeiyoKanji2017(unicode_codepoint)
 		);
 	}
 
@@ -4619,7 +4600,7 @@ class MojiAnalizerTools {
  * @property {number[]} iso2022jp_array ISO-2022-JP バイト配列
  * @property {number[]} eucjpms_array eucJP-ms バイト配列
  * @property {number[]} eucjis2004_array EUC-JP-2004 バイト配列
- * 
+ *
  * 文字の種別情報
  * @typedef {Object} MojiTypeData
  * @property {boolean} is_regular_sjis Shift_JIS に登録された文字
@@ -4650,7 +4631,7 @@ class MojiAnalizerTools {
  * @property {boolean} is_variation_selector 異体字セレクタ
  * @property {boolean} is_skin_tone_modifier スキントーン修飾子
  * @property {boolean} is_tag_character タグ文字
- * 
+ *
  * 文字の種別情報
  * @typedef {Object} MojiData
  * @property {MojiEncodeData} encode 文字のエンコード情報
@@ -5047,8 +5028,8 @@ class ComparatorTool {
 					return 1; //文字が後ろ
 				}
 			}
-			//両方とも数値
 			if (t1isnum) {
+				//両方とも数値
 				const t1size = ComparatorTool.getNumberAsciiLength(t1, t1off);
 				const t2size = ComparatorTool.getNumberAsciiLength(t2, t2off);
 				const r = ComparatorTool.compareNumber(t1, t1off, t1size, t2, t2off, t2size);
@@ -5057,9 +5038,8 @@ class ComparatorTool {
 				}
 				t1off += t1size;
 				t2off += t2size;
-			}
-			//両方とも文字列
-			else {
+			} else {
+				//両方とも文字列
 				if (t1[t1off] > t2[t2off]) {
 					return 1;
 				} else if (t1[t1off] < t2[t2off]) {
@@ -5068,8 +5048,8 @@ class ComparatorTool {
 				t1off++;
 				t2off++;
 			}
-			//両方ともオーバー
 			if (t1off >= l1 && t2off >= l2) {
+				//両方ともオーバー
 				//長さも等しい
 				if (l1 === l2) {
 					return 0;
@@ -5078,9 +5058,8 @@ class ComparatorTool {
 				} else {
 					return -1;
 				}
-			}
-			//片方のほうがサイズが大きい
-			else if (t2off >= l2) {
+			} else if (t2off >= l2) {
+				//片方のほうがサイズが大きい
 				//t2の方が短い
 				return 1;
 			} else if (t1off >= l1) {

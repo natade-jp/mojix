@@ -155,8 +155,8 @@ class ComparatorTool {
 					return 1; //文字が後ろ
 				}
 			}
-			//両方とも数値
 			if (t1isnum) {
+				//両方とも数値
 				const t1size = ComparatorTool.getNumberAsciiLength(t1, t1off);
 				const t2size = ComparatorTool.getNumberAsciiLength(t2, t2off);
 				const r = ComparatorTool.compareNumber(t1, t1off, t1size, t2, t2off, t2size);
@@ -165,9 +165,8 @@ class ComparatorTool {
 				}
 				t1off += t1size;
 				t2off += t2size;
-			}
-			//両方とも文字列
-			else {
+			} else {
+				//両方とも文字列
 				if (t1[t1off] > t2[t2off]) {
 					return 1;
 				} else if (t1[t1off] < t2[t2off]) {
@@ -176,8 +175,8 @@ class ComparatorTool {
 				t1off++;
 				t2off++;
 			}
-			//両方ともオーバー
 			if (t1off >= l1 && t2off >= l2) {
+				//両方ともオーバー
 				//長さも等しい
 				if (l1 === l2) {
 					return 0;
@@ -186,9 +185,8 @@ class ComparatorTool {
 				} else {
 					return -1;
 				}
-			}
-			//片方のほうがサイズが大きい
-			else if (t2off >= l2) {
+			} else if (t2off >= l2) {
+				//片方のほうがサイズが大きい
 				//t2の方が短い
 				return 1;
 			} else if (t1off >= l1) {
