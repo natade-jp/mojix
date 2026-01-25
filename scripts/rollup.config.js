@@ -52,7 +52,7 @@ const data = [];
 
 data.push(createData(banner, name, input, "./dist/umd/" + name + ".js", "umd", false));
 data.push(createData(banner, name, input, "./dist/umd/" + name + ".min.js", "umd", true));
-data.push(createData(banner, name, input, "./dist/cjs/" + name + ".js", "cjs", false));
+data.push(createData(banner, name, input, "./dist/cjs/" + name + ".cjs", "cjs", false));
 data.push(createData(banner, name, input, "./dist/esm/" + name + ".js", "esm", false));
 
 const types = {

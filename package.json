@@ -7,14 +7,14 @@
 	"license": "MIT",
 	"type": "module",
 	"source": "./src/mojix.js",
-	"main": "./dist/cjs/mojix.js",
+	"main": "./dist/cjs/mojix.cjs",
 	"module": "./dist/esm/mojix.js",
 	"types": "./dist/types/mojix.d.ts",
 	"exports": {
 		".": {
 			"types": "./dist/types/mojix.d.ts",
 			"import": "./dist/esm/mojix.js",
-			"require": "./dist/cjs/mojix.js",
+			"require": "./dist/cjs/mojix.cjs",
 			"browser": "./dist/umd/mojix.js",
 			"default": "./dist/esm/mojix.js"
 		}

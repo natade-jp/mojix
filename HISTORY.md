@@ -14,6 +14,7 @@
 
 - MojiJS から名前を変更
 - ECMAScript 3 のサポートを終了
+- `require("mojix");` 、`import("mojix")` で正しくライブラリのパスを読み込めない場合があった問題を修正
 
 ### 不具合修正
 
