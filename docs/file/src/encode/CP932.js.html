@@ -32,6 +32,8 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mojix.js~Mojix.html">Mojix</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#encode">encode</a><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MenKuTen">MenKuTen</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#tools">tools</a><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiData">MojiData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiEncodeData">MojiEncodeData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiTypeData">MojiTypeData</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -68,7 +70,8 @@ class CP932MAP {
 		 * @returns {Record&lt;number, number&gt;}
 		 */
 		const getCp932ToUnicodeMap = function () {
-
+			/* eslint-disable max-len */
+			/* eslint-disable object-property-newline */
 			/**
 			 * 1&#x30D0;&#x30A4;&#x30C8;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
 			 *
@@ -106,6 +109,8 @@ class CP932MAP {
 				0xD8: 0xFF98, 0xD9: 0xFF99, 0xDA: 0xFF9A, 0xDB: 0xFF9B, 0xDC: 0xFF9C, 0xDD: 0xFF9D, 0xDE: 0xFF9E, 0xDF: 0xFF9F,
 				0xFD: 0xF8F1, 0xFE: 0xF8F2, 0xFF: 0xF8F3
 			};
+			/* eslint-enable object-property-newline */
+			/* eslint-enable max-len */
 
 			/**
 			 * 2&#x30D0;&#x30A4;&#x30C8;&#x6587;&#x5B57;&#xFF08;0x8140-0xffff&#xFF09;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;&#x4F5C;&#x6210;&#x7528;&#x306E;&#x6587;&#x5B57;&#x5217;
@@ -169,8 +174,6 @@ class CP932MAP {
 				&quot;&#x9ADC;&#x9B75;&#x9B72;&#x9B8F;&#x9BB1;&#x9BBB;&#x9C00;&#x9D70;&#x9D6B;&#xFA2D;&#x9E19;&#x9ED1;&quot;
 			].join(&quot;&quot;);
 
-			 
-
 			/*
 			&#x4E0A;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;&#x4F5C;&#x6210;&#x7528;&#x306E;&#x6587;&#x5B57;&#x5217;&#x306F;&#x6570;&#x5024;&#x304C;&#x5165;&#x3063;&#x305F;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x304B;&#x3089;&#x4F5C;&#x6210;&#x3057;&#x3066;&#x3044;&#x308B;
 			let output = &quot;&quot;;
@@ -221,10 +224,11 @@ class CP932MAP {
 
 		/**
 		 * CP932 &#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
-		 * @type {Object&lt;number, number&gt;}
+		 * @type {Record&lt;number, number&gt;}
 		 */
 		const cp932_to_unicode_map = getCp932ToUnicodeMap();
 
+		/* eslint-disable max-len */
 		/**
 		 * &#x91CD;&#x8907;&#x3055;&#x308C;&#x305F; CP932 &#x306E;&#x30B3;&#x30FC;&#x30C9;
 		 * @type {number[]}
@@ -257,14 +261,15 @@ class CP932MAP {
 			0xEEEC, 0xEEEF, 0xEEF0, 0xEEF1, 0xEEF2, 0xEEF3, 0xEEF4, 0xEEF5, 0xEEF6, 0xEEF7, 0xEEF8, 0xEEF9, 0xEEFA, 0xEEFB, 0xEEFC, 0xFA4A,
 			0xFA4B, 0xFA4C, 0xFA4D, 0xFA4E, 0xFA4F, 0xFA50, 0xFA51, 0xFA52, 0xFA53, 0xFA54, 0xFA58, 0xFA59, 0xFA5A, 0xFA5B
 		];
+		/* eslint-enable max-len */
 
 		/**
-		 * @type {Object&lt;number, number&gt;}
+		 * @type {Record&lt;number, number&gt;}
 		 */
 		const duplicate_map = {};
 
 		/**
-		 * @type {Object&lt;number, number&gt;}
+		 * @type {Record&lt;number, number&gt;}
 		 */
 		const unicode_to_cp932_map = {};
 
@@ -398,7 +403,7 @@ export default class CP932 {
 	 * &#x6307;&#x5B9A;&#x3057;&#x305F;&#x6587;&#x5B57;&#x304B;&#x3089; Windows-31J &#x4E0A;&#x306E;&#x533A;&#x70B9;&#x756A;&#x53F7;&#x306B;&#x5909;&#x63DB;
 	 * - 2&#x6587;&#x5B57;&#x4EE5;&#x4E0A;&#x3092;&#x6307;&#x5B9A;&#x3057;&#x305F;&#x5834;&#x5408;&#x306F;&#x3001;1&#x6587;&#x5B57;&#x76EE;&#x306E;&#x307F;&#x3092;&#x5909;&#x63DB;&#x3059;&#x308B;
 	 * @param {string} text - &#x5909;&#x63DB;&#x3057;&#x305F;&#x3044;&#x30C6;&#x30AD;&#x30B9;&#x30C8;
-	 * @returns {import(&quot;./SJIS.js&quot;).MenKuTen} &#x533A;&#x70B9;&#x756A;&#x53F7;(&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#xFF08;1&#x30D0;&#x30A4;&#x30C8;&#x306E;JIS&#x30B3;&#x30FC;&#x30C9;&#x306A;&#x3069;&#xFF09;&#x306F;null&#x3092;&#x8FD4;&#x3059;)
+	 * @returns {import(&apos;./SJIS.js&apos;).MenKuTen} &#x533A;&#x70B9;&#x756A;&#x53F7;(&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#xFF08;1&#x30D0;&#x30A4;&#x30C8;&#x306E;JIS&#x30B3;&#x30FC;&#x30C9;&#x306A;&#x3069;&#xFF09;&#x306F;null&#x3092;&#x8FD4;&#x3059;)
 	 */
 	static toKuTen(text) {
 		if (text.length === 0) {
@@ -410,7 +415,7 @@ export default class CP932 {
 
 	/**
 	 * Windows-31J &#x4E0A;&#x306E;&#x533A;&#x70B9;&#x756A;&#x53F7;&#x304B;&#x3089;&#x6587;&#x5B57;&#x5217;&#x306B;&#x5909;&#x63DB;
-	 * @param {import(&quot;./SJIS.js&quot;).MenKuTen|string} kuten - &#x533A;&#x70B9;&#x756A;&#x53F7;
+	 * @param {import(&apos;./SJIS.js&apos;).MenKuTen|string} kuten - &#x533A;&#x70B9;&#x756A;&#x53F7;
 	 * @returns {string} &#x5909;&#x63DB;&#x5F8C;&#x306E;&#x30C6;&#x30AD;&#x30B9;&#x30C8;
 	 */
 	static fromKuTen(kuten) {

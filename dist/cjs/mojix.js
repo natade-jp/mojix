@@ -1619,10 +1619,6 @@ class SJIS {
 
 
 /**
- * @typedef {import('./SJIS.js').MenKuTen} MenKuTen
- */
-
-/**
  * CP932, Windows-31J の変換マップ作成用クラス
  * @ignore
  */
@@ -1973,7 +1969,7 @@ class CP932 {
 	 * 指定した文字から Windows-31J 上の区点番号に変換
 	 * - 2文字以上を指定した場合は、1文字目のみを変換する
 	 * @param {string} text - 変換したいテキスト
-	 * @returns {MenKuTen} 区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
+	 * @returns {import('./SJIS.js').MenKuTen} 区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 	 */
 	static toKuTen(text) {
 		if (text.length === 0) {
@@ -1985,7 +1981,7 @@ class CP932 {
 
 	/**
 	 * Windows-31J 上の区点番号から文字列に変換
-	 * @param {MenKuTen|string} kuten - 区点番号
+	 * @param {import('./SJIS.js').MenKuTen|string} kuten - 区点番号
 	 * @returns {string} 変換後のテキスト
 	 */
 	static fromKuTen(kuten) {
@@ -2004,10 +2000,6 @@ class CP932 {
  *  The MIT license https://opensource.org/licenses/MIT
  */
 
-
-/**
- * @typedef {import('./SJIS.js').MenKuTen} MenKuTen
- */
 
 /**
  * Shift_JIS-2004 の変換マップ作成用クラス
@@ -2502,7 +2494,7 @@ class SJIS2004 {
 	 * 指定した文字から Shift_JIS-2004 上の面区点番号に変換
 	 * - 2文字以上を指定した場合は、1文字目のみを変換する
 	 * @param {string} text - 変換したいテキスト
-	 * @returns {MenKuTen} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
+	 * @returns {import('./SJIS.js').MenKuTen} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 	 */
 	static toMenKuTen(text) {
 		if (text.length === 0) {
@@ -2514,7 +2506,7 @@ class SJIS2004 {
 
 	/**
 	 * Shift_JIS-2004 上の面区点番号から文字列に変換
-	 * @param {MenKuTen|string} menkuten - 面区点番号
+	 * @param {import('./SJIS.js').MenKuTen|string} menkuten - 面区点番号
 	 * @returns {string} 変換後のテキスト
 	 */
 	static fromMenKuTen(menkuten) {
@@ -4216,10 +4208,6 @@ class Japanese {
 
 
 /**
- * @typedef {import('../encode/SJIS.js').MenKuTen} MenKuTen
- */
-
-/**
  * 1981年より前に常用漢字とされているか
  * @type {Record<number, number>}
  * @ignore
@@ -4603,8 +4591,8 @@ class MojiAnalizerTools {
 /**
  * 文字のエンコード情報
  * @typedef {Object} MojiEncodeData
- * @property {MenKuTen} kuten 区点 コード
- * @property {MenKuTen} menkuten 面区点 コード
+ * @property {import('../encode/SJIS.js').MenKuTen} kuten 区点 コード
+ * @property {import('../encode/SJIS.js').MenKuTen} menkuten 面区点 コード
  * @property {number} cp932_code CP932(Windows-31J) コード
  * @property {number} sjis2004_code Shift_JIS-2004 コード
  * @property {number[]} utf8_array UTF-8 配列
@@ -4616,7 +4604,9 @@ class MojiAnalizerTools {
  * @property {number[]} iso2022jp_array ISO-2022-JP バイト配列
  * @property {number[]} eucjpms_array eucJP-ms バイト配列
  * @property {number[]} eucjis2004_array EUC-JP-2004 バイト配列
- *
+ */
+
+/**
  * 文字の種別情報
  * @typedef {Object} MojiTypeData
  * @property {boolean} is_regular_sjis Shift_JIS に登録された文字
@@ -4647,7 +4637,9 @@ class MojiAnalizerTools {
  * @property {boolean} is_variation_selector 異体字セレクタ
  * @property {boolean} is_skin_tone_modifier スキントーン修飾子
  * @property {boolean} is_tag_character タグ文字
- *
+ */
+
+/**
  * 文字の種別情報
  * @typedef {Object} MojiData
  * @property {MojiEncodeData} encode 文字のエンコード情報
@@ -5155,11 +5147,6 @@ const stringComparator = {
 
 
 /**
- * @typedef {import('./encode/SJIS.js').MenKuTen} MenKuTen
- * @typedef {import('./tools/MojiAnalyzer.js').MojiData} MojiData
- */
-
-/**
  * 日本語を扱うための様々な機能を提供します
  */
 class Mojix {
@@ -5359,7 +5346,7 @@ class Mojix {
 	 * 指定した文字から Windows-31J 上の区点番号に変換
 	 * - 2文字以上を指定した場合は、1文字目のみを変換する
 	 * @param {string} text - 変換したいテキスト
-	 * @returns {MenKuTen} 区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
+	 * @returns {import('./encode/SJIS.js').MenKuTen} 区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 	 */
 	static toKuTen(text) {
 		return CP932.toKuTen(text);
@@ -5367,7 +5354,7 @@ class Mojix {
 
 	/**
 	 * Windows-31J 上の区点番号から文字列に変換
-	 * @param {MenKuTen|string} kuten - 区点番号
+	 * @param {import('./encode/SJIS.js').MenKuTen|string} kuten - 区点番号
 	 * @returns {string} 変換後のテキスト
 	 */
 	static fromKuTen(kuten) {
@@ -5378,7 +5365,7 @@ class Mojix {
 	 * 指定した文字から Shift_JIS-2004 上の面区点番号に変換
 	 * - 2文字以上を指定した場合は、1文字目のみを変換する
 	 * @param {string} text - 変換したいテキスト
-	 * @returns {MenKuTen} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
+	 * @returns {import('./encode/SJIS.js').MenKuTen} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 	 */
 	static toMenKuTen(text) {
 		return SJIS2004.toMenKuTen(text);
@@ -5386,7 +5373,7 @@ class Mojix {
 
 	/**
 	 * Shift_JIS-2004 上の面区点番号から文字列に変換
-	 * @param {MenKuTen|string} menkuten - 面区点番号
+	 * @param {import('./encode/SJIS.js').MenKuTen|string} menkuten - 面区点番号
 	 * @returns {string} 変換後のテキスト
 	 */
 	static fromMenKuTen(menkuten) {
@@ -5566,7 +5553,7 @@ class Mojix {
 	/**
 	 * 指定した1つのUTF-32 コードポイントに関して、解析を行い情報を返します
 	 * @param {number} unicode_codepoint - UTF-32 のコードポイント
-	 * @returns {MojiData} 文字の情報がつまったオブジェクト
+	 * @returns {import('./tools/MojiAnalyzer.js').MojiData} 文字の情報がつまったオブジェクト
 	 */
 	static getMojiData(unicode_codepoint) {
 		return MojiAnalyzer.getMojiData(unicode_codepoint);

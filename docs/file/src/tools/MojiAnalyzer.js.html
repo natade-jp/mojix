@@ -32,6 +32,8 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mojix.js~Mojix.html">Mojix</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#encode">encode</a><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MenKuTen">MenKuTen</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#tools">tools</a><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiData">MojiData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiEncodeData">MojiEncodeData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiTypeData">MojiTypeData</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -56,49 +58,49 @@ import EUCJIS2004 from &quot;../encode/EUCJIS2004.js&quot;;
 
 /**
  * 1981&#x5E74;&#x3088;&#x308A;&#x524D;&#x306B;&#x5E38;&#x7528;&#x6F22;&#x5B57;&#x3068;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x304B;
- * @type {Object&lt;number, number&gt;}
+ * @type {Record&lt;number, number&gt;}
  * @ignore
  */
 let joyokanji_before_1981_map = null;
 
 /**
  * 1981&#x5E74;&#x6642;&#x70B9;&#x3067;&#x8FFD;&#x52A0;&#x3055;&#x308C;&#x305F;&#x5E38;&#x7528;&#x6F22;&#x5B57;&#x304B;
- * @type {Object&lt;number, number&gt;}
+ * @type {Record&lt;number, number&gt;}
  * @ignore
  */
 let joyokanji_add_1981_map = null;
 
 /**
  * 2010&#x5E74;&#x6642;&#x70B9;&#x3067;&#x8FFD;&#x52A0;&#x3055;&#x308C;&#x305F;&#x5E38;&#x7528;&#x6F22;&#x5B57;&#x304B;
- * @type {Object&lt;number, number&gt;}
+ * @type {Record&lt;number, number&gt;}
  * @ignore
  */
 let joyokanji_add_2010_map = null;
 
 /**
  * 2010&#x5E74;&#x6642;&#x70B9;&#x3067;&#x524A;&#x9664;&#x3055;&#x308C;&#x305F;&#x5E38;&#x7528;&#x6F22;&#x5B57;&#x304B;
- * @type {Object&lt;number, number&gt;}
+ * @type {Record&lt;number, number&gt;}
  * @ignore
  */
 let joyokanji_delete_2010_map = null;
 
 /**
  * 2017&#x5E74;&#x6642;&#x70B9;&#x3067;&#x5E38;&#x7528;&#x6F22;&#x5B57;&#x3067;&#x304B;&#x3064;&#x4EBA;&#x540D;&#x7528;&#x6F22;&#x5B57;&#x304B;
- * @type {Object&lt;number, number&gt;}
+ * @type {Record&lt;number, number&gt;}
  * @ignore
  */
 let jinmeiyokanji_joyokanji_isetai_2017_map = null;
 
 /**
  * 2017&#x5E74;&#x6642;&#x70B9;&#x3067;&#x5E38;&#x7528;&#x6F22;&#x5B57;&#x3067;&#x306A;&#x3044;&#x304C;&#x4EBA;&#x540D;&#x7528;&#x6F22;&#x5B57;&#x304B;&#xFF08;&#x7570;&#x6027;&#x4F53;&#x306A;&#x3057;&#xFF09;
- * @type {Object&lt;number, number&gt;}
+ * @type {Record&lt;number, number&gt;}
  * @ignore
  */
 let jinmeiyokanji_notjoyokanji_2017_map = null;
 
 /**
  * 2017&#x5E74;&#x6642;&#x70B9;&#x3067;&#x7570;&#x6027;&#x4F53;&#x304C;&#x3042;&#x308B;&#x4EBA;&#x540D;&#x6F22;&#x5B57;
- * @type {Object&lt;number, number&gt;}
+ * @type {Record&lt;number, number&gt;}
  * @ignore
  */
 let jinmeiyokanji_notjoyokanji_isetai_2017_map = null;
@@ -120,12 +122,12 @@ class MOJI_CHAR_MAP {
 		/**
 		 * &#x6587;&#x5B57;&#x5217;&#x304B;&#x3089;&#x3001;UTF32&#x306E;&#x5B58;&#x5728;&#x30DE;&#x30C3;&#x30D7;&#x3092;&#x4F5C;&#x6210;
 		 * @param {string} string_data
-		 * @returns {Object&lt;number, number&gt;}
+		 * @returns {Record&lt;number, number&gt;}
 		 */
 		const createMap = function (string_data) {
 			const utf32_array = Unicode.toUTF32Array(string_data);
 			/**
-			 * @type {Object&lt;number, number&gt;}
+			 * @type {Record&lt;number, number&gt;}
 			 */
 			const map = {};
 			for (const key in utf32_array) {
@@ -389,9 +391,9 @@ class MojiAnalizerTools {
 		const jinmeiyokanji_notjoyokanji_map = MOJI_CHAR_MAP.JINMEIYOKANJI_NOTJOYOKANJI_2017();
 		const jinmeiyokanji_notjoyokanji_isetai_map = MOJI_CHAR_MAP.JINMEIYOKANJI_NOTJOYOKANJI_ISETAI_2017();
 		return (
-			!!jinmeiyokanji_joyokanji_isetai_map[unicode_codepoint] ||
-			!!jinmeiyokanji_notjoyokanji_map[unicode_codepoint] ||
-			!!jinmeiyokanji_notjoyokanji_isetai_map[unicode_codepoint]
+			!!jinmeiyokanji_joyokanji_isetai_map[unicode_codepoint]
+			|| !!jinmeiyokanji_notjoyokanji_map[unicode_codepoint]
+			|| !!jinmeiyokanji_notjoyokanji_isetai_map[unicode_codepoint]
 		);
 	}
 
@@ -402,8 +404,8 @@ class MojiAnalizerTools {
 	 */
 	static isJinmeiyoKanji2017(unicode_codepoint) {
 		return (
-			MojiAnalizerTools.isJoyoKanji2010(unicode_codepoint) ||
-			MojiAnalizerTools.isOnlyJinmeiyoKanji2017(unicode_codepoint)
+			MojiAnalizerTools.isJoyoKanji2010(unicode_codepoint)
+			|| MojiAnalizerTools.isOnlyJinmeiyoKanji2017(unicode_codepoint)
 		);
 	}
 
@@ -438,8 +440,8 @@ class MojiAnalizerTools {
 /**
  * &#x6587;&#x5B57;&#x306E;&#x30A8;&#x30F3;&#x30B3;&#x30FC;&#x30C9;&#x60C5;&#x5831;
  * @typedef {Object} MojiEncodeData
- * @property {import(&quot;../encode/SJIS.js&quot;).MenKuTen} kuten &#x533A;&#x70B9; &#x30B3;&#x30FC;&#x30C9;
- * @property {import(&quot;../encode/SJIS.js&quot;).MenKuTen} menkuten &#x9762;&#x533A;&#x70B9; &#x30B3;&#x30FC;&#x30C9;
+ * @property {import(&apos;../encode/SJIS.js&apos;).MenKuTen} kuten &#x533A;&#x70B9; &#x30B3;&#x30FC;&#x30C9;
+ * @property {import(&apos;../encode/SJIS.js&apos;).MenKuTen} menkuten &#x9762;&#x533A;&#x70B9; &#x30B3;&#x30FC;&#x30C9;
  * @property {number} cp932_code CP932(Windows-31J) &#x30B3;&#x30FC;&#x30C9;
  * @property {number} sjis2004_code Shift_JIS-2004 &#x30B3;&#x30FC;&#x30C9;
  * @property {number[]} utf8_array UTF-8 &#x914D;&#x5217;
@@ -451,7 +453,9 @@ class MojiAnalizerTools {
  * @property {number[]} iso2022jp_array ISO-2022-JP &#x30D0;&#x30A4;&#x30C8;&#x914D;&#x5217;
  * @property {number[]} eucjpms_array eucJP-ms &#x30D0;&#x30A4;&#x30C8;&#x914D;&#x5217;
  * @property {number[]} eucjis2004_array EUC-JP-2004 &#x30D0;&#x30A4;&#x30C8;&#x914D;&#x5217;
- * 
+ */
+
+/**
  * &#x6587;&#x5B57;&#x306E;&#x7A2E;&#x5225;&#x60C5;&#x5831;
  * @typedef {Object} MojiTypeData
  * @property {boolean} is_regular_sjis Shift_JIS &#x306B;&#x767B;&#x9332;&#x3055;&#x308C;&#x305F;&#x6587;&#x5B57;
@@ -482,7 +486,9 @@ class MojiAnalizerTools {
  * @property {boolean} is_variation_selector &#x7570;&#x4F53;&#x5B57;&#x30BB;&#x30EC;&#x30AF;&#x30BF;
  * @property {boolean} is_skin_tone_modifier &#x30B9;&#x30AD;&#x30F3;&#x30C8;&#x30FC;&#x30F3;&#x4FEE;&#x98FE;&#x5B50;
  * @property {boolean} is_tag_character &#x30BF;&#x30B0;&#x6587;&#x5B57;
- * 
+ */
+
+/**
  * &#x6587;&#x5B57;&#x306E;&#x7A2E;&#x5225;&#x60C5;&#x5831;
  * @typedef {Object} MojiData
  * @property {MojiEncodeData} encode &#x6587;&#x5B57;&#x306E;&#x30A8;&#x30F3;&#x30B3;&#x30FC;&#x30C9;&#x60C5;&#x5831;

@@ -1502,7 +1502,7 @@ const getTestCharacterMap = function () {
 	for (const key in sjis2004_to_unicode_map) {
 		const x = sjis2004_to_unicode_map[key];
 		const key_num = parseInt(key, 10);
-		if (!(x instanceof Array)) {
+		if (!(Array.isArray(x))) {
 			if (unicode_to_sjis2004_map[x]) {
 				if (x > key_num) {
 					unicode_to_sjis2004_map[x] = key_num;
@@ -1525,8 +1525,9 @@ const getTestCharacterMap = function () {
 };
 
 /**
- * @param {Array<?>} x
- * @param {Array<?>} y
+ * @template T
+ * @param {T[]} x
+ * @param {T[]} y
  * @returns {boolean}
  */
 const equalsArray = function (x, y) {

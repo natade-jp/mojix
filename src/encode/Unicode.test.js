@@ -49,7 +49,7 @@ const equalsArray = function (x, y) {
 {
 	/**
 	 * @param {string} x
-	 * @returns {Array<string>}
+	 * @returns {string[]}
 	 */
 	const toWord = function (x) {
 		const ret = [];
@@ -66,7 +66,7 @@ const equalsArray = function (x, y) {
 {
 	/**
 	 * @param {string} x
-	 * @returns {Array<string>}
+	 * @returns {string[]}
 	 */
 	const toWord = function (x) {
 		const ret = [];

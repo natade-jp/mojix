@@ -32,6 +32,8 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mojix.js~Mojix.html">Mojix</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#encode">encode</a><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MenKuTen">MenKuTen</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#tools">tools</a><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiData">MojiData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiEncodeData">MojiEncodeData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiTypeData">MojiTypeData</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -342,7 +344,7 @@ export default class Japanese {
 	 */
 	static toFullWidthKana(text) {
 		/**
-		 * @type {Object&lt;number, number&gt;}
+		 * @type {Record&lt;number, number&gt;}
 		 */
 		// prettier-ignore
 		const map = {
@@ -421,19 +423,17 @@ export default class Japanese {
 				const ch = str.charCodeAt(0);
 				if (next === 0xFF9E) {
 					// Shift-JIS&#x306B;&#x306A;&#x3044;&#x6FC1;&#x70B9;&#xFF08;&#x30F7;&#x3001;&#x30F8;&#x3001;&#x30F9;&#x3001;&#x30FA;&#xFF09;&#x306F;&#x610F;&#x56F3;&#x7684;&#x306B;&#x7121;&#x8996;
-					// &#x30F4;
 					if (ch === 0xFF73) {
+						// &#x30F4;
 						return String.fromCharCode(0x3094);
-					}
-					// &#x30AC;-&#x30C9;&#x3001;&#x30D0;-&#x30DC;
-					else if ((0xFF76 &lt;= ch &amp;&amp; ch &lt;= 0xFF84) || (0xFF8A &lt;= ch &amp;&amp; ch &lt;= 0xFF8E)) {
+					} else if ((0xFF76 &lt;= ch &amp;&amp; ch &lt;= 0xFF84) || (0xFF8A &lt;= ch &amp;&amp; ch &lt;= 0xFF8E)) {
+						// &#x30AC;-&#x30C9;&#x3001;&#x30D0;-&#x30DC;
 						return String.fromCharCode(map[ch] + 1);
 					}
-				}
-				// &#x534A;&#x6FC1;&#x70B9;
-				else if (next === 0xFF9F) {
-					// &#x30D1;-&#x30DD;
+				} else if (next === 0xFF9F) {
+					// &#x534A;&#x6FC1;&#x70B9;
 					if (0xFF8A &lt;= ch &amp;&amp; ch &lt;= 0xFF8E) {
+					// &#x30D1;-&#x30DD;
 						return String.fromCharCode(map[ch] + 2);
 					}
 				}
@@ -645,7 +645,7 @@ export default class Japanese {
 			&quot;?&quot;: &quot;&#xFF1F;&quot;,
 			&quot;!&quot;: &quot;&#xFF01;&quot;,
 			&quot;,&quot;: &quot;&#x3001;&quot;,
-			&quot;.&quot;: &quot;&#x3002;&quot; 
+			&quot;.&quot;: &quot;&#x3002;&quot;
 		};
 		/**
 		 * ya, yi, yu, ye, yo
@@ -670,24 +670,24 @@ export default class Japanese {
 				// &#x540C;&#x3058;&#x6587;&#x5B57;&#x306E;&#x7E70;&#x308A;&#x8FD4;&#x3057;&#x306A;&#x3089;&#x300C;&#x3063;&#x300D;&#x306B;&#x5909;&#x66F4;
 				if (romaji.charCodeAt(0) === romaji.charCodeAt(1)) {
 					// &#x305F;&#x3060;&#x3057;&#x7E70;&#x308A;&#x8FD4;&#x3057;&#x6587;&#x5B57;&#x304C;n&#x306E;&#x5834;&#x5408;&#x306F;&#x300C;&#x3093;&#x300D;&#x3068;&#x3057;&#x3066;&#x6271;&#x3046;
-					if (romaji.substring(0, 1) === &quot;n&quot;) {
+					if (romaji.slice(0, 1) === &quot;n&quot;) {
 						output.push(&quot;&#x3093;&quot;);
-						romaji = romaji.substring(2);
+						romaji = romaji.slice(2);
 					} else {
 						output.push(&quot;&#x3063;&quot;);
-						romaji = romaji.substring(1);
+						romaji = romaji.slice(1);
 					}
 				}
 			}
 			if (romaji.length === 3) {
-				const char_1 = romaji.substring(0, 1);
-				const char_2 = romaji.substring(1, 2);
+				const char_1 = romaji.slice(0, 1);
+				const char_2 = romaji.slice(1, 2);
 				// 2&#x6587;&#x5B57;&#x76EE;&#x304C;y&#x3067;&#x59CB;&#x307E;&#x308B;&#x5834;&#x5408;&#xFF08;&#x305F;&#x3060;&#x3057;&#x3001;lya, xya &#x306A;&#x3069;&#x3092;&#x9664;&#x304F;&#xFF09;&#x306F;
 				// &#x5C0F;&#x6587;&#x5B57;&#x30EA;&#x30B9;&#x30C8;&#x304B;&#x3089;&#x9078;&#x3093;&#x3067;&#x3001;&#x6700;&#x5F8C;&#x306B;&#x5C0F;&#x6587;&#x5B57;&#x3092;&#x3064;&#x3051;&#x308B;
 				// sya -&gt; si &#x306B;&#x3064;&#x3051;&#x304B;&#x3048;&#x3066;&#x8F9E;&#x66F8;&#x304B;&#x3089;&#x63A2;&#x3059;
 				if (char_2 === &quot;y&quot; &amp;&amp; char_1 !== &quot;l&quot; &amp;&amp; char_1 !== &quot;x&quot;) {
-					y_komoji = y_komoji_map[romaji.substring(2)];
-					romaji = romaji.substring(0, 1) + &quot;i&quot;;
+					y_komoji = y_komoji_map[romaji.slice(2)];
+					romaji = romaji.slice(0, 1) + &quot;i&quot;;
 				}
 			}
 			const data = map[romaji];
@@ -700,6 +700,7 @@ export default class Japanese {
 			}
 			return output.join(&quot;&quot;);
 		};
+		/* eslint-disable max-len */
 		// &#x4E0A;&#x304B;&#x3089;&#x4E0B;&#x3078;&#x306E;&#x512A;&#x5148;&#x5EA6;&#x3067;&#x5909;&#x63DB;&#x3059;&#x308B;&#x3002;
 		// ([xl]?[kgsztdnhbpmyrwlxvqfj])(\1)?y?[aiuoe] ... y&#x304C;&#x5165;&#x308A;&#x8FBC;&#x3080;&#x53EF;&#x80FD;&#x6027;&#x304C;&#x3042;&#x308B;&#x6587;&#x5B57;&#x3002;&#x524D;&#x306E;&#x6587;&#x5B57;&#x3092;&#x7E70;&#x308A;&#x8FD4;&#x3057;&#x3066;&#x300C;tta -&gt; &#x3063;&#x305F;&#x300D;&#x306B;&#x3082;&#x5BFE;&#x5FDC;&#x3002;
 		// [xl]?(gw|ch|cch|sh|ssh|ts|tts|th|tth)?[aiuoe] ... y&#x3092;&#x4F7F;&#x7528;&#x3057;&#x306A;&#x3044;&#x6587;&#x5B57;
@@ -707,6 +708,7 @@ export default class Japanese {
 		// [?!-] ... &#x8A18;&#x53F7;
 		// prettier-ignore
 		return (text.replace(/([xl]?[kgsztdnhbpmyrwlxvqfj])(\1)?y?[aiuoe]|[xl]?([gqstf]w|ch|cch|sh|ssh|ts|tts|th|tth)?[aiuoe]|nn?|[?!-.,]/gi, func));
+		/* eslint-enable max-len */
 	}
 
 	/**
@@ -908,7 +910,7 @@ export default class Japanese {
 			&quot;&#xFF1F;&quot;: &quot;?&quot;,
 			&quot;&#xFF01;&quot;: &quot;!&quot;,
 			&quot;&#x3001;&quot;: &quot;,&quot;,
-			&quot;&#x3002;&quot;: &quot;.&quot; 
+			&quot;&#x3002;&quot;: &quot;.&quot;
 		};
 
 		/**
@@ -945,8 +947,8 @@ export default class Japanese {
 					// 1&#x6587;&#x5B57;&#x306A;&#x306E;&#x3067;&#x3053;&#x308C;&#x4EE5;&#x4E0A;&#x5909;&#x63DB;&#x4E0D;&#x80FD;
 					return str;
 				}
-				const char_1 = trans.substring(0, 1);
-				const char_2 = trans.substring(1, 2);
+				const char_1 = trans.slice(0, 1);
+				const char_2 = trans.slice(1, 2);
 				// &#x6700;&#x5F8C;&#x306E;&#x6587;&#x5B57;&#x304C;&#x5C0F;&#x6587;&#x5B57;&#x3067;&#x3042;&#x308B;
 				if (!komoji_map[char_2]) {
 					// &#x3053;&#x308C;&#x4EE5;&#x4E0A;&#x5909;&#x63DB;&#x4E0D;&#x80FD;
@@ -963,7 +965,7 @@ export default class Japanese {
 				trans += last_text;
 			}
 			if (is_xtu) {
-				trans = trans.substring(0, 1) + trans;
+				trans = trans.slice(0, 1) + trans;
 			}
 			return trans;
 		};

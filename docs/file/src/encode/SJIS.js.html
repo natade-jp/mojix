@@ -32,6 +32,8 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mojix.js~Mojix.html">Mojix</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#encode">encode</a><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MenKuTen">MenKuTen</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#tools">tools</a><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiData">MojiData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiEncodeData">MojiEncodeData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiTypeData">MojiTypeData</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -66,7 +68,7 @@ export default class SJIS {
 	/**
 	 * &#x6587;&#x5B57;&#x5217;&#x3092; Shift_JIS &#x306E;&#x914D;&#x5217;&#x306B;&#x5909;&#x63DB;&#x3002;&#x5909;&#x63DB;&#x3067;&#x304D;&#x306A;&#x3044;&#x6587;&#x5B57;&#x306F; &quot;?&quot; &#x306B;&#x5909;&#x63DB;&#x3055;&#x308C;&#x308B;&#x3002;
 	 * @param {string} text - &#x5909;&#x63DB;&#x3057;&#x305F;&#x3044;&#x30C6;&#x30AD;&#x30B9;&#x30C8;
-	 * @param {Object&lt;number, number&gt;} unicode_to_sjis - Unicode &#x304B;&#x3089; Shift_JIS &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
+	 * @param {Record&lt;number, number&gt;} unicode_to_sjis - Unicode &#x304B;&#x3089; Shift_JIS &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
 	 * @returns {number[]} Shift_JIS &#x306E;&#x30C7;&#x30FC;&#x30BF;&#x304C;&#x5165;&#x3063;&#x305F;&#x914D;&#x5217;
 	 * @ignore
 	 */
@@ -90,7 +92,7 @@ export default class SJIS {
 	 * &#x6587;&#x5B57;&#x5217;&#x3092; Shift_JIS &#x306E;&#x30D0;&#x30A4;&#x30CA;&#x30EA;&#x914D;&#x5217;&#x306B;&#x5909;&#x63DB;&#x3002;&#x5909;&#x63DB;&#x3067;&#x304D;&#x306A;&#x3044;&#x6587;&#x5B57;&#x306F; &quot;?&quot; &#x306B;&#x5909;&#x63DB;&#x3055;&#x308C;&#x308B;&#x3002;
 	 * - &#x65E5;&#x672C;&#x8A9E;&#x6587;&#x5B57;&#x306F;2&#x30D0;&#x30A4;&#x30C8;&#x3068;&#x3057;&#x3066;&#x3001;&#x914D;&#x5217;&#x3082;2&#x3064;&#x5206;&#x3001;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;&#x3002;
 	 * @param {string} text - &#x5909;&#x63DB;&#x3057;&#x305F;&#x3044;&#x30C6;&#x30AD;&#x30B9;&#x30C8;
-	 * @param {Object&lt;number, number&gt;} unicode_to_sjis - Unicode &#x304B;&#x3089; Shift_JIS &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
+	 * @param {Record&lt;number, number&gt;} unicode_to_sjis - Unicode &#x304B;&#x3089; Shift_JIS &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
 	 * @returns {number[]} Shift_JIS &#x306E;&#x30C7;&#x30FC;&#x30BF;&#x304C;&#x5165;&#x3063;&#x305F;&#x30D0;&#x30A4;&#x30CA;&#x30EA;&#x914D;&#x5217;
 	 * @ignore
 	 */
@@ -111,7 +113,7 @@ export default class SJIS {
 	/**
 	 * SJIS&#x306E;&#x914D;&#x5217;&#x304B;&#x3089;&#x6587;&#x5B57;&#x5217;&#x306B;&#x5909;&#x63DB;
 	 * @param {number[]} sjis - &#x5909;&#x63DB;&#x3057;&#x305F;&#x3044;&#x30C6;&#x30AD;&#x30B9;&#x30C8;
-	 * @param {Object&lt;number, number|number[]&gt;} sjis_to_unicode - Shift_JIS &#x304B;&#x3089; Unicode &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
+	 * @param {Record&lt;number, number|number[]&gt;} sjis_to_unicode - Shift_JIS &#x304B;&#x3089; Unicode &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
 	 * @returns {string} &#x5909;&#x63DB;&#x5F8C;&#x306E;&#x30C6;&#x30AD;&#x30B9;&#x30C8;
 	 * @ignore
 	 */
@@ -130,6 +132,7 @@ export default class SJIS {
 				y = map[x];
 			} else {
 				// 2&#x30D0;&#x30A4;&#x30C8;&#x6587;&#x5B57;&#x304B;&#x306E;&#x30C1;&#x30A7;&#x30C3;&#x30AF;
+				// prettier-ignore
 				if ((0x81 &lt;= x &amp;&amp; x &lt;= 0x9F) || (0xE0 &lt;= x &amp;&amp; x &lt;= 0xFC)) {
 					x &lt;&lt;= 8;
 					i++;
@@ -146,9 +149,8 @@ export default class SJIS {
 					for (let j = 0; j &lt; y.length; j++) {
 						utf16.push(y[j]);
 					}
-				}
+				} else {
 				// &#x5024;&#x3057;&#x304B;&#x306A;&#x3044;&#x5834;&#x5408;&#x306F;&#x5024;&#x3092;&#x7D50;&#x5408;
-				else {
 					utf16.push(y);
 				}
 			} else {
@@ -161,7 +163,7 @@ export default class SJIS {
 	/**
 	 * &#x6307;&#x5B9A;&#x3057;&#x305F;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;&#x306E;&#x6587;&#x5B57;&#x304B;&#x3089; Shift_JIS &#x4E0A;&#x306E;&#x7B26;&#x53F7;&#x5316;&#x6570;&#x5024;&#x306B;&#x5909;&#x63DB;
 	 * @param {number} unicode_codepoint - Unicode&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;
-	 * @param {Object&lt;number, number&gt;} unicode_to_sjis - Unicode &#x304B;&#x3089; Shift_JIS &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
+	 * @param {Record&lt;number, number&gt;} unicode_to_sjis - Unicode &#x304B;&#x3089; Shift_JIS &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
 	 * @returns {number} &#x7B26;&#x53F7;&#x5316;&#x6570;&#x5024;(&#x5909;&#x63DB;&#x3067;&#x304D;&#x306A;&#x3044;&#x5834;&#x5408;&#x306F;null&#x3068;&#x306A;&#x308B;)
 	 * @ignore
 	 */
@@ -200,40 +202,51 @@ export default class SJIS {
 			men = 1;
 			// &#x533A;&#x306E;&#x8A08;&#x7B97;&#x65B9;&#x6CD5;&#x306E;&#x5207;&#x308A;&#x66FF;&#x3048;
 			// 63&#x533A;&#x304B;&#x3089;&#x3001;0x9F&#x2192;0xE0&#x306B;&#x98DB;&#x3076;
+			// prettier-ignore
 			if (s1 &lt; 0xE0) {
+				// prettier-ignore
 				s1 = s1 - 0x81;
 			} else {
+				// prettier-ignore
 				s1 = s1 - 0xC1;
 			}
 		} else {
 			// &#x203B;2&#x9762;&#x306F;&#x7B2C;4&#x6C34;&#x6E96;&#x306E;&#x307F;
 			men = 2;
-			// 2&#x9762;1&#x533A; &#xFF5E; 2&#x9762;8&#x533A;
+			// prettier-ignore
 			if (((s1 === 0xF0 || s1 === 0xF2) &amp;&amp; s2 &lt; 0x9F) || s1 === 0xF1) {
+				// 2&#x9762;1&#x533A; &#xFF5E; 2&#x9762;8&#x533A;
+				// prettier-ignore
 				s1 = s1 - 0xF0;
-			}
-			// 2&#x9762;12&#x533A; &#xFF5E; 2&#x9762;15&#x533A;
-			else if ((s1 === 0xF4 &amp;&amp; s2 &lt; 0x9F) || s1 &lt; 0xF4) {
+			// prettier-ignore
+			} else if ((s1 === 0xF4 &amp;&amp; s2 &lt; 0x9F) || s1 &lt; 0xF4) {
+				// 2&#x9762;12&#x533A; &#xFF5E; 2&#x9762;15&#x533A;
+				// prettier-ignore
 				s1 = s1 - 0xED;
-			}
-			// 2&#x9762;78&#x533A; &#xFF5E; 2&#x9762;94&#x533A;
-			else {
+			} else {
+				// 2&#x9762;78&#x533A; &#xFF5E; 2&#x9762;94&#x533A;
+				// prettier-ignore
 				s1 = s1 - 0xCE;
 			}
 		}
 
 		// &#x533A;&#x60C5;&#x5831;&#x306E;&#x4F4D;&#x7F6E;&#x5224;&#x5B9A;
+		// prettier-ignore
 		if (s2 &lt; 0x9F) {
 			ku = s1 * 2 + 1;
 			// &#x70B9;&#x60C5;&#x5831;&#x306E;&#x8A08;&#x7B97;&#x65B9;&#x6CD5;&#x306E;&#x5207;&#x308A;&#x66FF;&#x3048;
 			// 0x7F&#x304C;&#x6B20;&#x756A;&#x306E;&#x305F;&#x3081;&#x300C;+1&#x300D;&#x3092;&#x9664;&#x53BB;
+			// prettier-ignore
 			if (s2 &lt; 0x80) {
+				// prettier-ignore
 				s2 = s2 - 0x40 + 1;
 			} else {
+				// prettier-ignore
 				s2 = s2 - 0x40;
 			}
 		} else {
 			ku = s1 * 2 + 2;
+			// prettier-ignore
 			s2 = s2 - 0x9F + 1;
 		}
 
@@ -251,7 +264,7 @@ export default class SJIS {
 	/**
 	 * &#x6307;&#x5B9A;&#x3057;&#x305F;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;&#x306E;&#x6587;&#x5B57;&#x304B;&#x3089; Shift_JIS-2004 &#x4E0A;&#x306E;&#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;&#x306B;&#x5909;&#x63DB;
 	 * @param {number} unicode_codepoint - Unicode&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;
-	 * @param {Object&lt;number, number&gt;} unicode_to_sjis - Unicode &#x304B;&#x3089; Shift_JIS-2004 &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
+	 * @param {Record&lt;number, number&gt;} unicode_to_sjis - Unicode &#x304B;&#x3089; Shift_JIS-2004 &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
 	 * @returns {MenKuTen} &#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;(&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#xFF08;1&#x30D0;&#x30A4;&#x30C8;&#x306E;JIS&#x30B3;&#x30FC;&#x30C9;&#x306A;&#x3069;&#xFF09;&#x306F;null&#x3092;&#x8FD4;&#x3059;)
 	 * @ignore
 	 */
@@ -304,7 +317,7 @@ export default class SJIS {
 		let s2 = -1;
 
 		/**
-		 * @type {Object&lt;number, number&gt;}
+		 * @type {Record&lt;number, number&gt;}
 		 */
 		const kmap = { 1: 1, 3: 1, 4: 1, 5: 1, 8: 1, 12: 1, 13: 1, 14: 1, 15: 1 };
 
@@ -390,6 +403,7 @@ export default class SJIS {
 
 		// &#x533A;&#x306E;&#x8A08;&#x7B97;&#x65B9;&#x6CD5;&#x306E;&#x5207;&#x308A;&#x66FF;&#x3048;
 		// 63&#x533A;&#x304B;&#x3089;&#x3001;0x9F&#x2192;0xE0&#x306B;&#x98DB;&#x3076;
+		// prettier-ignore
 		if (s1 &lt; 0xE0) {
 			s1 = s1 - 0x81;
 		} else {
@@ -397,17 +411,22 @@ export default class SJIS {
 		}
 
 		// &#x533A;&#x60C5;&#x5831;&#x306E;&#x4F4D;&#x7F6E;&#x5224;&#x5B9A;
+		// prettier-ignore
 		if (s2 &lt; 0x9F) {
 			ku = s1 * 2 + 1;
 			// &#x70B9;&#x60C5;&#x5831;&#x306E;&#x8A08;&#x7B97;&#x65B9;&#x6CD5;&#x306E;&#x5207;&#x308A;&#x66FF;&#x3048;
 			// 0x7F&#x304C;&#x6B20;&#x756A;&#x306E;&#x305F;&#x3081;&#x300C;+1&#x300D;&#x3092;&#x9664;&#x53BB;
+			// prettier-ignore
 			if (s2 &lt; 0x80) {
+				// prettier-ignore
 				s2 = s2 - 0x40 + 1;
 			} else {
+				// prettier-ignore
 				s2 = s2 - 0x40;
 			}
 		} else {
 			ku = s1 * 2 + 2;
+			// prettier-ignore
 			s2 = s2 - 0x9F + 1;
 		}
 
@@ -425,7 +444,7 @@ export default class SJIS {
 	/**
 	 * &#x6307;&#x5B9A;&#x3057;&#x305F;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;&#x306E;&#x6587;&#x5B57;&#x304B;&#x3089; Shift_JIS &#x4E0A;&#x306E;&#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;&#x306B;&#x5909;&#x63DB;
 	 * @param {number} unicode_codepoint - Unicode&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;
-	 * @param {Object&lt;number, number&gt;} unicode_to_sjis - Unicode &#x304B;&#x3089; Shift_JIS &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
+	 * @param {Record&lt;number, number&gt;} unicode_to_sjis - Unicode &#x304B;&#x3089; Shift_JIS &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
 	 * @returns {MenKuTen} &#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;(&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#xFF08;1&#x30D0;&#x30A4;&#x30C8;&#x306E;JIS&#x30B3;&#x30FC;&#x30C9;&#x306A;&#x3069;&#xFF09;&#x306F;null&#x3092;&#x8FD4;&#x3059;)
 	 * @ignore
 	 */
@@ -531,7 +550,7 @@ export default class SJIS {
 	/**
 	 * Unicode &#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;&#x304B;&#x3089;JIS&#x6F22;&#x5B57;&#x6C34;&#x6E96;&#xFF08;JIS Chinese character standard&#xFF09;&#x306B;&#x5909;&#x63DB;
 	 * @param {number} unicode_codepoint - Unicode&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;
-	 * @param {Object&lt;number, number&gt;} unicode_to_sjis - Unicode &#x304B;&#x3089; Shift_JIS &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
+	 * @param {Record&lt;number, number&gt;} unicode_to_sjis - Unicode &#x304B;&#x3089; Shift_JIS &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
 	 * @returns {number} -1...&#x5909;&#x63DB;&#x4E0D;&#x53EF;, 0...&#x6C34;&#x6E96;&#x306A;&#x3057;, 1...&#x7B2C;1&#x6C34;&#x6E96;, ...
 	 * @ignore
 	 */
@@ -574,7 +593,7 @@ export default class SJIS {
 		}
 
 		/**
-		 * @type {Object&lt;number, number&gt;}
+		 * @type {Record&lt;number, number&gt;}
 		 */
 		const kmap = { 1: 1, 3: 1, 4: 1, 5: 1, 8: 1, 12: 1, 13: 1, 14: 1, 15: 1 };
 		if (m === 1) {

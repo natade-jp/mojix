@@ -32,6 +32,8 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mojix.js~Mojix.html">Mojix</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#encode">encode</a><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MenKuTen">MenKuTen</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#tools">tools</a><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiData">MojiData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiEncodeData">MojiEncodeData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiTypeData">MojiTypeData</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -117,40 +119,32 @@ class EncodeTools {
 			// prettier-ignore
 			if ((0x41 &lt;= ch &amp;&amp; ch &lt;= 0x5A) || (0x61 &lt;= ch &amp;&amp; ch &lt;= 0x6A)) {
 				type = 1;
-			}
-			// 0-9
 			// prettier-ignore
-			else if (0x30 &lt;= ch &amp;&amp; ch &lt;= 0x39) {
+			} else if (0x30 &lt;= ch &amp;&amp; ch &lt;= 0x39) {
+				// 0-9
 				type = 2;
-			}
-			// &#x3041;-&#x3093;
 			// prettier-ignore
-			else if (0x3041 &lt;= ch &amp;&amp; ch &lt;= 0x3093) {
+			} else if (0x3041 &lt;= ch &amp;&amp; ch &lt;= 0x3093) {
+				// &#x3041;-&#x3093;
 				type = 3;
-			}
-			// &#x30A1;-&#x30F3;
 			// prettier-ignore
-			else if (0x30A1 &lt;= ch &amp;&amp; ch &lt;= 0x30F3) {
+			} else if (0x30A1 &lt;= ch &amp;&amp; ch &lt;= 0x30F3) {
+				// &#x30A1;-&#x30F3;
 				type = 4;
-			}
-			// &#x5168;&#x89D2;&#x82F1;&#x5B57;
 			// prettier-ignore
-			else if ((0xFF21 &lt;= ch &amp;&amp; ch &lt;= 0xFF3A) || (0xFF41 &lt;= ch &amp;&amp; ch &lt;= 0xFF5A)) {
+			} else if ((0xFF21 &lt;= ch &amp;&amp; ch &lt;= 0xFF3A) || (0xFF41 &lt;= ch &amp;&amp; ch &lt;= 0xFF5A)) {
+				// &#x5168;&#x89D2;&#x82F1;&#x5B57;
 				type = 5;
-			}
-			// &#x5168;&#x89D2;&#x6570;&#x5024;
-			// prettier-ignore
-			else if (0xFF10 &lt;= ch &amp;&amp; ch &lt;= 0xFF19) {
+			} else if (0xFF10 &lt;= ch &amp;&amp; ch &lt;= 0xFF19) {
+				// &#x5168;&#x89D2;&#x6570;&#x5024;
 				type = 6;
-			}
+			// prettier-ignore
+			} else if (0xFF61 &lt;= ch &amp;&amp; ch &lt; 0xFFA0) {
 			// &#x534A;&#x89D2;&#x30AB;&#x30BF;&#x30AB;&#x30CA;
-			// prettier-ignore
-			else if (0xFF61 &lt;= ch &amp;&amp; ch &lt; 0xFFA0) {
 				type = 7;
-			}
-			// CJK&#x7D71;&#x5408;&#x6F22;&#x5B57;&#x62E1;&#x5F35;A - CJK&#x7D71;&#x5408;&#x6F22;&#x5B57;, &#x8FFD;&#x52A0;&#x6F22;&#x5B57;&#x9762;
 			// prettier-ignore
-			else if ((0x3400 &lt;= ch &amp;&amp; ch &lt; 0xA000) || (0x20000 &lt;= ch &amp;&amp; ch &lt; 0x2FA20)) {
+			} else if ((0x3400 &lt;= ch &amp;&amp; ch &lt; 0xA000) || (0x20000 &lt;= ch &amp;&amp; ch &lt; 0x2FA20)) {
+				// CJK&#x7D71;&#x5408;&#x6F22;&#x5B57;&#x62E1;&#x5F35;A - CJK&#x7D71;&#x5408;&#x6F22;&#x5B57;, &#x8FFD;&#x52A0;&#x6F22;&#x5B57;&#x9762;
 				type = 8;
 			} else {
 				old_type = -1;
@@ -194,6 +188,7 @@ export default class Encode {
 		return null;
 	}
 
+	/* eslint-disable max-len */
 	/**
 	 * &#x30D0;&#x30A4;&#x30CA;&#x30EA;&#x914D;&#x5217;&#x304B;&#x3089;&#x6587;&#x5B57;&#x5217;&#x306B;&#x30C7;&#x30B3;&#x30FC;&#x30C9;&#x3059;&#x308B;
 	 * @param {number[]} binary - &#x5909;&#x63DB;&#x3057;&#x305F;&#x3044;&#x30D0;&#x30A4;&#x30CA;&#x30EA;&#x914D;&#x5217;
@@ -277,6 +272,7 @@ export default class Encode {
 		}
 		return null;
 	}
+	/* eslint-enable max-len */
 }
 </code></pre>
 

@@ -12,10 +12,6 @@ import Unicode from "./Unicode.js";
 import SJIS from "./SJIS.js";
 
 /**
- * @typedef {import('./SJIS.js').MenKuTen} MenKuTen
- */
-
-/**
  * Shift_JIS-2004 の変換マップ作成用クラス
  * @ignore
  */
@@ -400,7 +396,7 @@ class SJIS2004MAP {
 		for (const key in sjis2004_to_unicode_map) {
 			const x = sjis2004_to_unicode_map[key];
 			const key_num = parseInt(key, 10);
-			if (!(x instanceof Array)) {
+			if (!(Array.isArray(x))) {
 				if (unicode_to_sjis2004_map[x]) {
 					if (x > key_num) {
 						unicode_to_sjis2004_map[x] = key_num;
@@ -508,7 +504,7 @@ export default class SJIS2004 {
 	 * 指定した文字から Shift_JIS-2004 上の面区点番号に変換
 	 * - 2文字以上を指定した場合は、1文字目のみを変換する
 	 * @param {string} text - 変換したいテキスト
-	 * @returns {MenKuTen} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
+	 * @returns {import('./SJIS.js').MenKuTen} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 	 */
 	static toMenKuTen(text) {
 		if (text.length === 0) {
@@ -520,7 +516,7 @@ export default class SJIS2004 {
 
 	/**
 	 * Shift_JIS-2004 上の面区点番号から文字列に変換
-	 * @param {MenKuTen|string} menkuten - 面区点番号
+	 * @param {import('./SJIS.js').MenKuTen|string} menkuten - 面区点番号
 	 * @returns {string} 変換後のテキスト
 	 */
 	static fromMenKuTen(menkuten) {

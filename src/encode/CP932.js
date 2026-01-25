@@ -12,10 +12,6 @@ import Unicode from "./Unicode.js";
 import SJIS from "./SJIS.js";
 
 /**
- * @typedef {import('./SJIS.js').MenKuTen} MenKuTen
- */
-
-/**
  * CP932, Windows-31J の変換マップ作成用クラス
  * @ignore
  */
@@ -366,7 +362,7 @@ export default class CP932 {
 	 * 指定した文字から Windows-31J 上の区点番号に変換
 	 * - 2文字以上を指定した場合は、1文字目のみを変換する
 	 * @param {string} text - 変換したいテキスト
-	 * @returns {MenKuTen} 区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
+	 * @returns {import('./SJIS.js').MenKuTen} 区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 	 */
 	static toKuTen(text) {
 		if (text.length === 0) {
@@ -378,7 +374,7 @@ export default class CP932 {
 
 	/**
 	 * Windows-31J 上の区点番号から文字列に変換
-	 * @param {MenKuTen|string} kuten - 区点番号
+	 * @param {import('./SJIS.js').MenKuTen|string} kuten - 区点番号
 	 * @returns {string} 変換後のテキスト
 	 */
 	static fromKuTen(kuten) {

@@ -478,7 +478,7 @@ export default class Unicode {
 	 */
 	static fromCodePoint(codepoint) {
 		let utf16_array = null;
-		if (codepoint instanceof Array) {
+		if (Array.isArray(codepoint)) {
 			utf16_array = Unicode.toUTF16ArrayFromCodePoint(codepoint);
 		} else {
 			const codepoint_array = [];

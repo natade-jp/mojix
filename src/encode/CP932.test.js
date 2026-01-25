@@ -1337,8 +1337,9 @@ const getTestCharacterMap = function () {
 };
 
 /**
- * @param {Array<?>} x
- * @param {Array<?>} y
+ * @template T
+ * @param {T[]} x
+ * @param {T[]} y
  * @returns {boolean}
  */
 const equalsArray = function (x, y) {

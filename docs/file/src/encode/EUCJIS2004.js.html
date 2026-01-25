@@ -32,6 +32,8 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mojix.js~Mojix.html">Mojix</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#encode">encode</a><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MenKuTen">MenKuTen</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#tools">tools</a><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiData">MojiData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiEncodeData">MojiEncodeData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiTypeData">MojiTypeData</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -117,9 +119,9 @@ export default class EUCJIS2004 {
 		for (let i = 0; i &lt; eucjp.length; i++) {
 			let x1, x2;
 			x1 = eucjp[i];
-			// ASCII
 			// prettier-ignore
 			if (x1 &lt; 0x80) {
+				// ASCII
 				sjis_array.push(x1);
 				continue;
 			}
@@ -129,10 +131,10 @@ export default class EUCJIS2004 {
 			}
 			let men = 1;
 			{
-				// 3&#x30D0;&#x30A4;&#x30C8;&#x8AAD;&#x307F;&#x8FBC;&#x307F;(G3)
 				if (x1 === SS3) {
-					// &#x6587;&#x5B57;&#x304C;&#x8DB3;&#x308A;&#x306A;&#x3044;
+					// 3&#x30D0;&#x30A4;&#x30C8;&#x8AAD;&#x307F;&#x8FBC;&#x307F;(G3)
 					if (i &gt;= eucjp.length - 2) {
+						// &#x6587;&#x5B57;&#x304C;&#x8DB3;&#x308A;&#x306A;&#x3044;
 						break;
 					}
 					// &#x30B7;&#x30F3;&#x30B0;&#x30EB;&#x30B7;&#x30D5;&#x30C8; SS3 &#x3067; G3 &#x3092;&#x547C;&#x3073;&#x51FA;&#x3059;&#x3002;
@@ -141,15 +143,14 @@ export default class EUCJIS2004 {
 					x1 = eucjp[i + 1];
 					x2 = eucjp[i + 2];
 					i += 2;
-				}
-				// 2&#x30D0;&#x30A4;&#x30C8;&#x8AAD;&#x307F;&#x8FBC;&#x307F;
-				else {
+				} else {
+					// 2&#x30D0;&#x30A4;&#x30C8;&#x8AAD;&#x307F;&#x8FBC;&#x307F;
 					x2 = eucjp[i + 1];
 					i += 1;
 				}
 			}
-			// &#x534A;&#x89D2;&#x30AB;&#x30BF;&#x30AB;&#x30CA;
 			if (x1 === SS2) {
+				// &#x534A;&#x89D2;&#x30AB;&#x30BF;&#x30AB;&#x30CA;
 				sjis_array.push(x2);
 				continue;
 			}

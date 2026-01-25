@@ -32,6 +32,8 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mojix.js~Mojix.html">Mojix</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#encode">encode</a><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MenKuTen">MenKuTen</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#tools">tools</a><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiData">MojiData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiEncodeData">MojiEncodeData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiTypeData">MojiTypeData</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -194,8 +196,8 @@ class ComparatorTool {
 					return 1; //&#x6587;&#x5B57;&#x304C;&#x5F8C;&#x308D;
 				}
 			}
-			//&#x4E21;&#x65B9;&#x3068;&#x3082;&#x6570;&#x5024;
 			if (t1isnum) {
+				//&#x4E21;&#x65B9;&#x3068;&#x3082;&#x6570;&#x5024;
 				const t1size = ComparatorTool.getNumberAsciiLength(t1, t1off);
 				const t2size = ComparatorTool.getNumberAsciiLength(t2, t2off);
 				const r = ComparatorTool.compareNumber(t1, t1off, t1size, t2, t2off, t2size);
@@ -204,9 +206,8 @@ class ComparatorTool {
 				}
 				t1off += t1size;
 				t2off += t2size;
-			}
-			//&#x4E21;&#x65B9;&#x3068;&#x3082;&#x6587;&#x5B57;&#x5217;
-			else {
+			} else {
+				//&#x4E21;&#x65B9;&#x3068;&#x3082;&#x6587;&#x5B57;&#x5217;
 				if (t1[t1off] &gt; t2[t2off]) {
 					return 1;
 				} else if (t1[t1off] &lt; t2[t2off]) {
@@ -215,8 +216,8 @@ class ComparatorTool {
 				t1off++;
 				t2off++;
 			}
-			//&#x4E21;&#x65B9;&#x3068;&#x3082;&#x30AA;&#x30FC;&#x30D0;&#x30FC;
 			if (t1off &gt;= l1 &amp;&amp; t2off &gt;= l2) {
+				//&#x4E21;&#x65B9;&#x3068;&#x3082;&#x30AA;&#x30FC;&#x30D0;&#x30FC;
 				//&#x9577;&#x3055;&#x3082;&#x7B49;&#x3057;&#x3044;
 				if (l1 === l2) {
 					return 0;
@@ -225,9 +226,8 @@ class ComparatorTool {
 				} else {
 					return -1;
 				}
-			}
-			//&#x7247;&#x65B9;&#x306E;&#x307B;&#x3046;&#x304C;&#x30B5;&#x30A4;&#x30BA;&#x304C;&#x5927;&#x304D;&#x3044;
-			else if (t2off &gt;= l2) {
+			} else if (t2off &gt;= l2) {
+				//&#x7247;&#x65B9;&#x306E;&#x307B;&#x3046;&#x304C;&#x30B5;&#x30A4;&#x30BA;&#x304C;&#x5927;&#x304D;&#x3044;
 				//t2&#x306E;&#x65B9;&#x304C;&#x77ED;&#x3044;
 				return 1;
 			} else if (t1off &gt;= l1) {

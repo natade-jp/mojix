@@ -16,10 +16,6 @@ import EUCJPMS from "../encode/EUCJPMS.js";
 import EUCJIS2004 from "../encode/EUCJIS2004.js";
 
 /**
- * @typedef {import('../encode/SJIS.js').MenKuTen} MenKuTen
- */
-
-/**
  * 1981年より前に常用漢字とされているか
  * @type {Record<number, number>}
  * @ignore
@@ -403,8 +399,8 @@ class MojiAnalizerTools {
 /**
  * 文字のエンコード情報
  * @typedef {Object} MojiEncodeData
- * @property {MenKuTen} kuten 区点 コード
- * @property {MenKuTen} menkuten 面区点 コード
+ * @property {import('../encode/SJIS.js').MenKuTen} kuten 区点 コード
+ * @property {import('../encode/SJIS.js').MenKuTen} menkuten 面区点 コード
  * @property {number} cp932_code CP932(Windows-31J) コード
  * @property {number} sjis2004_code Shift_JIS-2004 コード
  * @property {number[]} utf8_array UTF-8 配列
@@ -416,7 +412,9 @@ class MojiAnalizerTools {
  * @property {number[]} iso2022jp_array ISO-2022-JP バイト配列
  * @property {number[]} eucjpms_array eucJP-ms バイト配列
  * @property {number[]} eucjis2004_array EUC-JP-2004 バイト配列
- *
+ */
+
+/**
  * 文字の種別情報
  * @typedef {Object} MojiTypeData
  * @property {boolean} is_regular_sjis Shift_JIS に登録された文字
@@ -447,7 +445,9 @@ class MojiAnalizerTools {
  * @property {boolean} is_variation_selector 異体字セレクタ
  * @property {boolean} is_skin_tone_modifier スキントーン修飾子
  * @property {boolean} is_tag_character タグ文字
- *
+ */
+
+/**
  * 文字の種別情報
  * @typedef {Object} MojiData
  * @property {MojiEncodeData} encode 文字のエンコード情報

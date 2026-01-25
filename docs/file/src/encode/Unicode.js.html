@@ -32,6 +32,8 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mojix.js~Mojix.html">Mojix</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#encode">encode</a><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MenKuTen">MenKuTen</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#tools">tools</a><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiData">MojiData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiEncodeData">MojiEncodeData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiTypeData">MojiTypeData</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -49,7 +51,7 @@
 
 /**
  * &#x5236;&#x5FA1;&#x6587;&#x5B57;&#x30DE;&#x30C3;&#x30D7;
- * @type {Object&lt;number, string&gt;}
+ * @type {Record&lt;number, string&gt;}
  * @ignore
  */
 let control_charcter_map = null;
@@ -203,49 +205,50 @@ export default class Unicode {
 
 		// prettier-ignore
 		const unicode_blockname_array = [
-			&quot;Basic Latin&quot;, &quot;Latin-1 Supplement&quot;, &quot;Latin Extended-A&quot;, &quot;Latin Extended-B&quot;, &quot;IPA Extensions&quot;, &quot;Spacing Modifier Letters&quot;, &quot;Combining Diacritical Marks&quot;, &quot;Greek and Coptic&quot;, 
-			&quot;Cyrillic&quot;, &quot;Cyrillic Supplement&quot;, &quot;Armenian&quot;, &quot;Hebrew&quot;, &quot;Arabic&quot;, &quot;Syriac&quot;, &quot;Arabic Supplement&quot;, &quot;Thaana&quot;, 
-			&quot;NKo&quot;, &quot;Samaritan&quot;, &quot;Mandaic&quot;, &quot;Syriac Supplement&quot;, &quot;Arabic Extended-B&quot;, &quot;Arabic Extended-A&quot;, &quot;Devanagari&quot;, &quot;Bengali&quot;, 
-			&quot;Gurmukhi&quot;, &quot;Gujarati&quot;, &quot;Oriya&quot;, &quot;Tamil&quot;, &quot;Telugu&quot;, &quot;Kannada&quot;, &quot;Malayalam&quot;, &quot;Sinhala&quot;, 
-			&quot;Thai&quot;, &quot;Lao&quot;, &quot;Tibetan&quot;, &quot;Myanmar&quot;, &quot;Georgian&quot;, &quot;Hangul Jamo&quot;, &quot;Ethiopic&quot;, &quot;Ethiopic Supplement&quot;, 
-			&quot;Cherokee&quot;, &quot;Unified Canadian Aboriginal Syllabics&quot;, &quot;Ogham&quot;, &quot;Runic&quot;, &quot;Tagalog&quot;, &quot;Hanunoo&quot;, &quot;Buhid&quot;, &quot;Tagbanwa&quot;, 
-			&quot;Khmer&quot;, &quot;Mongolian&quot;, &quot;Unified Canadian Aboriginal Syllabics Extended&quot;, &quot;Limbu&quot;, &quot;Tai Le&quot;, &quot;New Tai Lue&quot;, &quot;Khmer Symbols&quot;, &quot;Buginese&quot;, 
-			&quot;Tai Tham&quot;, &quot;Combining Diacritical Marks Extended&quot;, &quot;Balinese&quot;, &quot;Sundanese&quot;, &quot;Batak&quot;, &quot;Lepcha&quot;, &quot;Ol Chiki&quot;, &quot;Cyrillic Extended-C&quot;, 
-			&quot;Georgian Extended&quot;, &quot;Sundanese Supplement&quot;, &quot;Vedic Extensions&quot;, &quot;Phonetic Extensions&quot;, &quot;Phonetic Extensions Supplement&quot;, &quot;Combining Diacritical Marks Supplement&quot;, &quot;Latin Extended Additional&quot;, &quot;Greek Extended&quot;, 
-			&quot;General Punctuation&quot;, &quot;Superscripts and Subscripts&quot;, &quot;Currency Symbols&quot;, &quot;Combining Diacritical Marks for Symbols&quot;, &quot;Letterlike Symbols&quot;, &quot;number Forms&quot;, &quot;Arrows&quot;, &quot;Mathematical Operators&quot;, 
-			&quot;Miscellaneous Technical&quot;, &quot;Control Pictures&quot;, &quot;Optical Character Recognition&quot;, &quot;Enclosed Alphanumerics&quot;, &quot;Box Drawing&quot;, &quot;Block Elements&quot;, &quot;Geometric Shapes&quot;, &quot;Miscellaneous Symbols&quot;, 
-			&quot;Dingbats&quot;, &quot;Miscellaneous Mathematical Symbols-A&quot;, &quot;Supplemental Arrows-A&quot;, &quot;Braille Patterns&quot;, &quot;Supplemental Arrows-B&quot;, &quot;Miscellaneous Mathematical Symbols-B&quot;, &quot;Supplemental Mathematical Operators&quot;, &quot;Miscellaneous Symbols and Arrows&quot;, 
-			&quot;Glagolitic&quot;, &quot;Latin Extended-C&quot;, &quot;Coptic&quot;, &quot;Georgian Supplement&quot;, &quot;Tifinagh&quot;, &quot;Ethiopic Extended&quot;, &quot;Cyrillic Extended-A&quot;, &quot;Supplemental Punctuation&quot;, 
-			&quot;CJK Radicals Supplement&quot;, &quot;Kangxi Radicals&quot;, &quot;Ideographic Description Characters&quot;, &quot;CJK Symbols and Punctuation&quot;, &quot;Hiragana&quot;, &quot;Katakana&quot;, &quot;Bopomofo&quot;, &quot;Hangul Compatibility Jamo&quot;, 
-			&quot;Kanbun&quot;, &quot;Bopomofo Extended&quot;, &quot;CJK Strokes&quot;, &quot;Katakana Phonetic Extensions&quot;, &quot;Enclosed CJK Letters and Months&quot;, &quot;CJK Compatibility&quot;, &quot;CJK Unified Ideographs Extension A&quot;, &quot;Yijing Hexagram Symbols&quot;, 
-			&quot;CJK Unified Ideographs&quot;, &quot;Yi Syllables&quot;, &quot;Yi Radicals&quot;, &quot;Lisu&quot;, &quot;Vai&quot;, &quot;Cyrillic Extended-B&quot;, &quot;Bamum&quot;, &quot;Modifier Tone Letters&quot;, 
-			&quot;Latin Extended-D&quot;, &quot;Syloti Nagri&quot;, &quot;Common Indic number Forms&quot;, &quot;Phags-pa&quot;, &quot;Saurashtra&quot;, &quot;Devanagari Extended&quot;, &quot;Kayah Li&quot;, &quot;Rejang&quot;, 
-			&quot;Hangul Jamo Extended-A&quot;, &quot;Javanese&quot;, &quot;Myanmar Extended-B&quot;, &quot;Cham&quot;, &quot;Myanmar Extended-A&quot;, &quot;Tai Viet&quot;, &quot;Meetei Mayek Extensions&quot;, &quot;Ethiopic Extended-A&quot;, 
-			&quot;Latin Extended-E&quot;, &quot;Cherokee Supplement&quot;, &quot;Meetei Mayek&quot;, &quot;Hangul Syllables&quot;, &quot;Hangul Jamo Extended-B&quot;, &quot;High Surrogates&quot;, &quot;High Private Use Surrogates&quot;, &quot;Low Surrogates&quot;, 
-			&quot;Private Use Area&quot;, &quot;CJK Compatibility Ideographs&quot;, &quot;Alphabetic Presentation Forms&quot;, &quot;Arabic Presentation Forms-A&quot;, &quot;Variation Selectors&quot;, &quot;Vertical Forms&quot;, &quot;Combining Half Marks&quot;, &quot;CJK Compatibility Forms&quot;, 
-			&quot;Small Form Variants&quot;, &quot;Arabic Presentation Forms-B&quot;, &quot;Halfwidth and Fullwidth Forms&quot;, &quot;Specials&quot;, &quot;Linear B Syllabary&quot;, &quot;Linear B Ideograms&quot;, &quot;Aegean numbers&quot;, &quot;Ancient Greek numbers&quot;, 
-			&quot;Ancient Symbols&quot;, &quot;Phaistos Disc&quot;, &quot;Lycian&quot;, &quot;Carian&quot;, &quot;Coptic Epact numbers&quot;, &quot;Old Italic&quot;, &quot;Gothic&quot;, &quot;Old Permic&quot;, 
-			&quot;Ugaritic&quot;, &quot;Old Persian&quot;, &quot;Deseret&quot;, &quot;Shavian&quot;, &quot;Osmanya&quot;, &quot;Osage&quot;, &quot;Elbasan&quot;, &quot;Caucasian Albanian&quot;, 
-			&quot;Vithkuqi&quot;, &quot;Linear A&quot;, &quot;Latin Extended-F&quot;, &quot;Cypriot Syllabary&quot;, &quot;Imperial Aramaic&quot;, &quot;Palmyrene&quot;, &quot;Nabataean&quot;, &quot;Hatran&quot;, 
-			&quot;Phoenician&quot;, &quot;Lydian&quot;, &quot;Meroitic Hieroglyphs&quot;, &quot;Meroitic Cursive&quot;, &quot;Kharoshthi&quot;, &quot;Old South Arabian&quot;, &quot;Old North Arabian&quot;, &quot;Manichaean&quot;, 
-			&quot;Avestan&quot;, &quot;Inscriptional Parthian&quot;, &quot;Inscriptional Pahlavi&quot;, &quot;Psalter Pahlavi&quot;, &quot;Old Turkic&quot;, &quot;Old Hungarian&quot;, &quot;Hanifi Rohingya&quot;, &quot;Rumi Numeral Symbols&quot;, 
-			&quot;Yezidi&quot;, &quot;Arabic Extended-C&quot;, &quot;Old Sogdian&quot;, &quot;Sogdian&quot;, &quot;Old Uyghur&quot;, &quot;Chorasmian&quot;, &quot;Elymaic&quot;, &quot;Brahmi&quot;, 
-			&quot;Kaithi&quot;, &quot;Sora Sompeng&quot;, &quot;Chakma&quot;, &quot;Mahajani&quot;, &quot;Sharada&quot;, &quot;Sinhala Archaic numbers&quot;, &quot;Khojki&quot;, &quot;Multani&quot;, 
-			&quot;Khudawadi&quot;, &quot;Grantha&quot;, &quot;Newa&quot;, &quot;Tirhuta&quot;, &quot;Siddham&quot;, &quot;Modi&quot;, &quot;Mongolian Supplement&quot;, &quot;Takri&quot;, 
-			&quot;Ahom&quot;, &quot;Dogra&quot;, &quot;Warang Citi&quot;, &quot;Dives Akuru&quot;, &quot;Nandinagari&quot;, &quot;Zanabazar Square&quot;, &quot;Soyombo&quot;, &quot;Unified Canadian Aboriginal Syllabics Extended-A&quot;, 
-			&quot;Pau Cin Hau&quot;, &quot;Devanagari Extended-A&quot;, &quot;Bhaiksuki&quot;, &quot;Marchen&quot;, &quot;Masaram Gondi&quot;, &quot;Gunjala Gondi&quot;, &quot;Makasar&quot;, &quot;Kawi&quot;, 
-			&quot;Lisu Supplement&quot;, &quot;Tamil Supplement&quot;, &quot;Cuneiform&quot;, &quot;Cuneiform numbers and Punctuation&quot;, &quot;Early Dynastic Cuneiform&quot;, &quot;Cypro-Minoan&quot;, &quot;Egyptian Hieroglyphs&quot;, &quot;Egyptian Hieroglyph Format Controls&quot;, 
-			&quot;Anatolian Hieroglyphs&quot;, &quot;Bamum Supplement&quot;, &quot;Mro&quot;, &quot;Tangsa&quot;, &quot;Bassa Vah&quot;, &quot;Pahawh Hmong&quot;, &quot;Medefaidrin&quot;, &quot;Miao&quot;, 
-			&quot;Ideographic Symbols and Punctuation&quot;, &quot;Tangut&quot;, &quot;Tangut Components&quot;, &quot;Khitan Small Script&quot;, &quot;Tangut Supplement&quot;, &quot;Kana Extended-B&quot;, &quot;Kana Supplement&quot;, &quot;Kana Extended-A&quot;, 
-			&quot;Small Kana Extension&quot;, &quot;Nushu&quot;, &quot;Duployan&quot;, &quot;Shorthand Format Controls&quot;, &quot;Znamenny Musical Notation&quot;, &quot;Byzantine Musical Symbols&quot;, &quot;Musical Symbols&quot;, &quot;Ancient Greek Musical Notation&quot;, 
-			&quot;Kaktovik Numerals&quot;, &quot;Mayan Numerals&quot;, &quot;Tai Xuan Jing Symbols&quot;, &quot;Counting Rod Numerals&quot;, &quot;Mathematical Alphanumeric Symbols&quot;, &quot;Sutton SignWriting&quot;, &quot;Latin Extended-G&quot;, &quot;Glagolitic Supplement&quot;, 
-			&quot;Cyrillic Extended-D&quot;, &quot;Nyiakeng Puachue Hmong&quot;, &quot;Toto&quot;, &quot;Wancho&quot;, &quot;Nag Mundari&quot;, &quot;Ethiopic Extended-B&quot;, &quot;Mende Kikakui&quot;, &quot;Adlam&quot;, 
-			&quot;Indic Siyaq numbers&quot;, &quot;Ottoman Siyaq numbers&quot;, &quot;Arabic Mathematical Alphabetic Symbols&quot;, &quot;Mahjong Tiles&quot;, &quot;Domino Tiles&quot;, &quot;Playing Cards&quot;, &quot;Enclosed Alphanumeric Supplement&quot;, &quot;Enclosed Ideographic Supplement&quot;, 
-			&quot;Miscellaneous Symbols and Pictographs&quot;, &quot;Emoticons&quot;, &quot;Ornamental Dingbats&quot;, &quot;Transport and Map Symbols&quot;, &quot;Alchemical Symbols&quot;, &quot;Geometric Shapes Extended&quot;, &quot;Supplemental Arrows-C&quot;, &quot;Supplemental Symbols and Pictographs&quot;, 
-			&quot;Chess Symbols&quot;, &quot;Symbols and Pictographs Extended-A&quot;, &quot;Symbols for Legacy Computing&quot;, &quot;CJK Unified Ideographs Extension B&quot;, &quot;CJK Unified Ideographs Extension C&quot;, &quot;CJK Unified Ideographs Extension D&quot;, &quot;CJK Unified Ideographs Extension E&quot;, &quot;CJK Unified Ideographs Extension F&quot;, &quot;CJK Unified Ideographs Extension I&quot;, 
+			&quot;Basic Latin&quot;, &quot;Latin-1 Supplement&quot;, &quot;Latin Extended-A&quot;, &quot;Latin Extended-B&quot;, &quot;IPA Extensions&quot;, &quot;Spacing Modifier Letters&quot;, &quot;Combining Diacritical Marks&quot;, &quot;Greek and Coptic&quot;,
+			&quot;Cyrillic&quot;, &quot;Cyrillic Supplement&quot;, &quot;Armenian&quot;, &quot;Hebrew&quot;, &quot;Arabic&quot;, &quot;Syriac&quot;, &quot;Arabic Supplement&quot;, &quot;Thaana&quot;,
+			&quot;NKo&quot;, &quot;Samaritan&quot;, &quot;Mandaic&quot;, &quot;Syriac Supplement&quot;, &quot;Arabic Extended-B&quot;, &quot;Arabic Extended-A&quot;, &quot;Devanagari&quot;, &quot;Bengali&quot;,
+			&quot;Gurmukhi&quot;, &quot;Gujarati&quot;, &quot;Oriya&quot;, &quot;Tamil&quot;, &quot;Telugu&quot;, &quot;Kannada&quot;, &quot;Malayalam&quot;, &quot;Sinhala&quot;,
+			&quot;Thai&quot;, &quot;Lao&quot;, &quot;Tibetan&quot;, &quot;Myanmar&quot;, &quot;Georgian&quot;, &quot;Hangul Jamo&quot;, &quot;Ethiopic&quot;, &quot;Ethiopic Supplement&quot;,
+			&quot;Cherokee&quot;, &quot;Unified Canadian Aboriginal Syllabics&quot;, &quot;Ogham&quot;, &quot;Runic&quot;, &quot;Tagalog&quot;, &quot;Hanunoo&quot;, &quot;Buhid&quot;, &quot;Tagbanwa&quot;,
+			&quot;Khmer&quot;, &quot;Mongolian&quot;, &quot;Unified Canadian Aboriginal Syllabics Extended&quot;, &quot;Limbu&quot;, &quot;Tai Le&quot;, &quot;New Tai Lue&quot;, &quot;Khmer Symbols&quot;, &quot;Buginese&quot;,
+			&quot;Tai Tham&quot;, &quot;Combining Diacritical Marks Extended&quot;, &quot;Balinese&quot;, &quot;Sundanese&quot;, &quot;Batak&quot;, &quot;Lepcha&quot;, &quot;Ol Chiki&quot;, &quot;Cyrillic Extended-C&quot;,
+			&quot;Georgian Extended&quot;, &quot;Sundanese Supplement&quot;, &quot;Vedic Extensions&quot;, &quot;Phonetic Extensions&quot;, &quot;Phonetic Extensions Supplement&quot;, &quot;Combining Diacritical Marks Supplement&quot;, &quot;Latin Extended Additional&quot;, &quot;Greek Extended&quot;,
+			&quot;General Punctuation&quot;, &quot;Superscripts and Subscripts&quot;, &quot;Currency Symbols&quot;, &quot;Combining Diacritical Marks for Symbols&quot;, &quot;Letterlike Symbols&quot;, &quot;number Forms&quot;, &quot;Arrows&quot;, &quot;Mathematical Operators&quot;,
+			&quot;Miscellaneous Technical&quot;, &quot;Control Pictures&quot;, &quot;Optical Character Recognition&quot;, &quot;Enclosed Alphanumerics&quot;, &quot;Box Drawing&quot;, &quot;Block Elements&quot;, &quot;Geometric Shapes&quot;, &quot;Miscellaneous Symbols&quot;,
+			&quot;Dingbats&quot;, &quot;Miscellaneous Mathematical Symbols-A&quot;, &quot;Supplemental Arrows-A&quot;, &quot;Braille Patterns&quot;, &quot;Supplemental Arrows-B&quot;, &quot;Miscellaneous Mathematical Symbols-B&quot;, &quot;Supplemental Mathematical Operators&quot;, &quot;Miscellaneous Symbols and Arrows&quot;,
+			&quot;Glagolitic&quot;, &quot;Latin Extended-C&quot;, &quot;Coptic&quot;, &quot;Georgian Supplement&quot;, &quot;Tifinagh&quot;, &quot;Ethiopic Extended&quot;, &quot;Cyrillic Extended-A&quot;, &quot;Supplemental Punctuation&quot;,
+			&quot;CJK Radicals Supplement&quot;, &quot;Kangxi Radicals&quot;, &quot;Ideographic Description Characters&quot;, &quot;CJK Symbols and Punctuation&quot;, &quot;Hiragana&quot;, &quot;Katakana&quot;, &quot;Bopomofo&quot;, &quot;Hangul Compatibility Jamo&quot;,
+			&quot;Kanbun&quot;, &quot;Bopomofo Extended&quot;, &quot;CJK Strokes&quot;, &quot;Katakana Phonetic Extensions&quot;, &quot;Enclosed CJK Letters and Months&quot;, &quot;CJK Compatibility&quot;, &quot;CJK Unified Ideographs Extension A&quot;, &quot;Yijing Hexagram Symbols&quot;,
+			&quot;CJK Unified Ideographs&quot;, &quot;Yi Syllables&quot;, &quot;Yi Radicals&quot;, &quot;Lisu&quot;, &quot;Vai&quot;, &quot;Cyrillic Extended-B&quot;, &quot;Bamum&quot;, &quot;Modifier Tone Letters&quot;,
+			&quot;Latin Extended-D&quot;, &quot;Syloti Nagri&quot;, &quot;Common Indic number Forms&quot;, &quot;Phags-pa&quot;, &quot;Saurashtra&quot;, &quot;Devanagari Extended&quot;, &quot;Kayah Li&quot;, &quot;Rejang&quot;,
+			&quot;Hangul Jamo Extended-A&quot;, &quot;Javanese&quot;, &quot;Myanmar Extended-B&quot;, &quot;Cham&quot;, &quot;Myanmar Extended-A&quot;, &quot;Tai Viet&quot;, &quot;Meetei Mayek Extensions&quot;, &quot;Ethiopic Extended-A&quot;,
+			&quot;Latin Extended-E&quot;, &quot;Cherokee Supplement&quot;, &quot;Meetei Mayek&quot;, &quot;Hangul Syllables&quot;, &quot;Hangul Jamo Extended-B&quot;, &quot;High Surrogates&quot;, &quot;High Private Use Surrogates&quot;, &quot;Low Surrogates&quot;,
+			&quot;Private Use Area&quot;, &quot;CJK Compatibility Ideographs&quot;, &quot;Alphabetic Presentation Forms&quot;, &quot;Arabic Presentation Forms-A&quot;, &quot;Variation Selectors&quot;, &quot;Vertical Forms&quot;, &quot;Combining Half Marks&quot;, &quot;CJK Compatibility Forms&quot;,
+			&quot;Small Form Variants&quot;, &quot;Arabic Presentation Forms-B&quot;, &quot;Halfwidth and Fullwidth Forms&quot;, &quot;Specials&quot;, &quot;Linear B Syllabary&quot;, &quot;Linear B Ideograms&quot;, &quot;Aegean numbers&quot;, &quot;Ancient Greek numbers&quot;,
+			&quot;Ancient Symbols&quot;, &quot;Phaistos Disc&quot;, &quot;Lycian&quot;, &quot;Carian&quot;, &quot;Coptic Epact numbers&quot;, &quot;Old Italic&quot;, &quot;Gothic&quot;, &quot;Old Permic&quot;,
+			&quot;Ugaritic&quot;, &quot;Old Persian&quot;, &quot;Deseret&quot;, &quot;Shavian&quot;, &quot;Osmanya&quot;, &quot;Osage&quot;, &quot;Elbasan&quot;, &quot;Caucasian Albanian&quot;,
+			&quot;Vithkuqi&quot;, &quot;Linear A&quot;, &quot;Latin Extended-F&quot;, &quot;Cypriot Syllabary&quot;, &quot;Imperial Aramaic&quot;, &quot;Palmyrene&quot;, &quot;Nabataean&quot;, &quot;Hatran&quot;,
+			&quot;Phoenician&quot;, &quot;Lydian&quot;, &quot;Meroitic Hieroglyphs&quot;, &quot;Meroitic Cursive&quot;, &quot;Kharoshthi&quot;, &quot;Old South Arabian&quot;, &quot;Old North Arabian&quot;, &quot;Manichaean&quot;,
+			&quot;Avestan&quot;, &quot;Inscriptional Parthian&quot;, &quot;Inscriptional Pahlavi&quot;, &quot;Psalter Pahlavi&quot;, &quot;Old Turkic&quot;, &quot;Old Hungarian&quot;, &quot;Hanifi Rohingya&quot;, &quot;Rumi Numeral Symbols&quot;,
+			&quot;Yezidi&quot;, &quot;Arabic Extended-C&quot;, &quot;Old Sogdian&quot;, &quot;Sogdian&quot;, &quot;Old Uyghur&quot;, &quot;Chorasmian&quot;, &quot;Elymaic&quot;, &quot;Brahmi&quot;,
+			&quot;Kaithi&quot;, &quot;Sora Sompeng&quot;, &quot;Chakma&quot;, &quot;Mahajani&quot;, &quot;Sharada&quot;, &quot;Sinhala Archaic numbers&quot;, &quot;Khojki&quot;, &quot;Multani&quot;,
+			&quot;Khudawadi&quot;, &quot;Grantha&quot;, &quot;Newa&quot;, &quot;Tirhuta&quot;, &quot;Siddham&quot;, &quot;Modi&quot;, &quot;Mongolian Supplement&quot;, &quot;Takri&quot;,
+			&quot;Ahom&quot;, &quot;Dogra&quot;, &quot;Warang Citi&quot;, &quot;Dives Akuru&quot;, &quot;Nandinagari&quot;, &quot;Zanabazar Square&quot;, &quot;Soyombo&quot;, &quot;Unified Canadian Aboriginal Syllabics Extended-A&quot;,
+			&quot;Pau Cin Hau&quot;, &quot;Devanagari Extended-A&quot;, &quot;Bhaiksuki&quot;, &quot;Marchen&quot;, &quot;Masaram Gondi&quot;, &quot;Gunjala Gondi&quot;, &quot;Makasar&quot;, &quot;Kawi&quot;,
+			&quot;Lisu Supplement&quot;, &quot;Tamil Supplement&quot;, &quot;Cuneiform&quot;, &quot;Cuneiform numbers and Punctuation&quot;, &quot;Early Dynastic Cuneiform&quot;, &quot;Cypro-Minoan&quot;, &quot;Egyptian Hieroglyphs&quot;, &quot;Egyptian Hieroglyph Format Controls&quot;,
+			&quot;Anatolian Hieroglyphs&quot;, &quot;Bamum Supplement&quot;, &quot;Mro&quot;, &quot;Tangsa&quot;, &quot;Bassa Vah&quot;, &quot;Pahawh Hmong&quot;, &quot;Medefaidrin&quot;, &quot;Miao&quot;,
+			&quot;Ideographic Symbols and Punctuation&quot;, &quot;Tangut&quot;, &quot;Tangut Components&quot;, &quot;Khitan Small Script&quot;, &quot;Tangut Supplement&quot;, &quot;Kana Extended-B&quot;, &quot;Kana Supplement&quot;, &quot;Kana Extended-A&quot;,
+			&quot;Small Kana Extension&quot;, &quot;Nushu&quot;, &quot;Duployan&quot;, &quot;Shorthand Format Controls&quot;, &quot;Znamenny Musical Notation&quot;, &quot;Byzantine Musical Symbols&quot;, &quot;Musical Symbols&quot;, &quot;Ancient Greek Musical Notation&quot;,
+			&quot;Kaktovik Numerals&quot;, &quot;Mayan Numerals&quot;, &quot;Tai Xuan Jing Symbols&quot;, &quot;Counting Rod Numerals&quot;, &quot;Mathematical Alphanumeric Symbols&quot;, &quot;Sutton SignWriting&quot;, &quot;Latin Extended-G&quot;, &quot;Glagolitic Supplement&quot;,
+			&quot;Cyrillic Extended-D&quot;, &quot;Nyiakeng Puachue Hmong&quot;, &quot;Toto&quot;, &quot;Wancho&quot;, &quot;Nag Mundari&quot;, &quot;Ethiopic Extended-B&quot;, &quot;Mende Kikakui&quot;, &quot;Adlam&quot;,
+			&quot;Indic Siyaq numbers&quot;, &quot;Ottoman Siyaq numbers&quot;, &quot;Arabic Mathematical Alphabetic Symbols&quot;, &quot;Mahjong Tiles&quot;, &quot;Domino Tiles&quot;, &quot;Playing Cards&quot;, &quot;Enclosed Alphanumeric Supplement&quot;, &quot;Enclosed Ideographic Supplement&quot;,
+			&quot;Miscellaneous Symbols and Pictographs&quot;, &quot;Emoticons&quot;, &quot;Ornamental Dingbats&quot;, &quot;Transport and Map Symbols&quot;, &quot;Alchemical Symbols&quot;, &quot;Geometric Shapes Extended&quot;, &quot;Supplemental Arrows-C&quot;, &quot;Supplemental Symbols and Pictographs&quot;,
+			&quot;Chess Symbols&quot;, &quot;Symbols and Pictographs Extended-A&quot;, &quot;Symbols for Legacy Computing&quot;, &quot;CJK Unified Ideographs Extension B&quot;, &quot;CJK Unified Ideographs Extension C&quot;, &quot;CJK Unified Ideographs Extension D&quot;, &quot;CJK Unified Ideographs Extension E&quot;, &quot;CJK Unified Ideographs Extension F&quot;, &quot;CJK Unified Ideographs Extension I&quot;,
 			&quot;CJK Compatibility Ideographs Supplement&quot;, &quot;CJK Unified Ideographs Extension G&quot;, &quot;CJK Unified Ideographs Extension H&quot;, &quot;CJK Unified Ideographs Extension J&quot;, &quot;Tags&quot;, &quot;Variation Selectors Supplement&quot;, &quot;Supplementary Private Use Area-A&quot;, &quot;Supplementary Private Use Area-B&quot;
 		];
 
+		/* eslint-disable max-len */
 		// prettier-ignore
 		const unicode_blockaddress_array = [
 			0x007F, 0x00FF, 0x017F, 0x024F, 0x02AF, 0x02FF, 0x036F, 0x03FF, 0x04FF, 0x052F, 0x058F, 0x05FF, 0x06FF, 0x074F, 0x077F, 0x07BF,
@@ -270,6 +273,7 @@ export default class Unicode {
 			0x1F5FF, 0x1F64F, 0x1F67F, 0x1F6FF, 0x1F77F, 0x1F7FF, 0x1F8FF, 0x1F9FF, 0x1FA6F, 0x1FAFF, 0x1FBFF, 0x2A6DF, 0x2B73F, 0x2B81F, 0x2CEAF, 0x2EBEF, 0x2EE5F,
 			0x2FA1F, 0x3134F, 0x323AF, 0x3347F, 0xE007F, 0xE01EF, 0xFFFFF, 0x10FFFF
 		];
+		/* eslint-enable max-len */
 
 		/**
 		 * &#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;&#x304B;&#x3089;Unicode&#x306E;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x540D;&#x306B;&#x5909;&#x63DB;&#x3059;&#x308B;
@@ -293,27 +297,26 @@ export default class Unicode {
 		 * @returns {string|null} &#x78BA;&#x8A8D;&#x7D50;&#x679C;(&#x7570;&#x4F53;&#x5B57;&#x30BB;&#x30EC;&#x30AF;&#x30BF;&#x3067;&#x306F;&#x306A;&#x3044;&#x5834;&#x5408;&#x306F;NULL&#x3092;&#x8FD4;&#x3059;)
 		 */
 		getVariationSelectorsnumberFromCodePoint = function (codepoint, annotate) {
-			// &#x30E2;&#x30F3;&#x30B4;&#x30EB;&#x81EA;&#x7531;&#x5B57;&#x5F62;&#x9078;&#x629E;&#x5B50; U+180B&#x301C;U+180D (3&#x500B;)
 			// prettier-ignore
 			if (0x180B &lt;= codepoint &amp;&amp; codepoint &lt;= 0x180D) {
+				// &#x30E2;&#x30F3;&#x30B4;&#x30EB;&#x81EA;&#x7531;&#x5B57;&#x5F62;&#x9078;&#x629E;&#x5B50; U+180B&#x301C;U+180D (3&#x500B;)
 				// prettier-ignore
 				return &quot;FVS&quot; + (codepoint - 0x180B + 1);
 			}
-			// SVS&#x3067;&#x5229;&#x7528;&#x3055;&#x308C;&#x308B;&#x7570;&#x4F53;&#x5B57;&#x30BB;&#x30EC;&#x30AF;&#x30BF; U+FE00&#x301C;U+FE0F (VS1&#xFF5E;VS16) (16&#x500B;)
 			// prettier-ignore
 			if (0xFE00 &lt;= codepoint &amp;&amp; codepoint &lt;= 0xFE0F) {
+				// SVS&#x3067;&#x5229;&#x7528;&#x3055;&#x308C;&#x308B;&#x7570;&#x4F53;&#x5B57;&#x30BB;&#x30EC;&#x30AF;&#x30BF; U+FE00&#x301C;U+FE0F (VS1&#xFF5E;VS16) (16&#x500B;)
 				// prettier-ignore
 				const n = codepoint - 0xFE00 + 1;
-				if (!annotate) return &quot;VS&quot; + n;
+				if (!annotate) { return &quot;VS&quot; + n; }
 				// prettier-ignore
-				if (codepoint === 0xFE0E) return &quot;VS15 (text)&quot;;
+				if (codepoint === 0xFE0E) { return &quot;VS15 (text)&quot;; }
 				// prettier-ignore
-				if (codepoint === 0xFE0F) return &quot;VS16 (emoji)&quot;;
+				if (codepoint === 0xFE0F) { return &quot;VS16 (emoji)&quot;; }
 				return &quot;VS&quot; + n;
-			}
-			// IVS&#x3067;&#x5229;&#x7528;&#x3055;&#x308C;&#x308B;&#x7570;&#x4F53;&#x5B57;&#x30BB;&#x30EC;&#x30AF;&#x30BF; U+E0100&#x301C;U+E01EF (VS17&#xFF5E;VS256) (240&#x500B;)
 			// prettier-ignore
-			else if (0xE0100 &lt;= codepoint &amp;&amp; codepoint &lt;= 0xE01EF) {
+			} else if (0xE0100 &lt;= codepoint &amp;&amp; codepoint &lt;= 0xE01EF) {
+				// IVS&#x3067;&#x5229;&#x7528;&#x3055;&#x308C;&#x308B;&#x7570;&#x4F53;&#x5B57;&#x30BB;&#x30EC;&#x30AF;&#x30BF; U+E0100&#x301C;U+E01EF (VS17&#xFF5E;VS256) (240&#x500B;)
 				// prettier-ignore
 				return &quot;VS&quot; + (codepoint - 0xE0100 + 17);
 			}
@@ -676,8 +679,8 @@ export default class Unicode {
 		if (!charset_for_bom &amp;&amp; !charset) {
 			return null;
 		}
-		// UTF-8
 		if (/utf-?8n?/i.test(check_charset)) {
+			// UTF-8
 			let size = 0;
 			let write = 0;
 			for (let i = offset; i &lt; binary.length; i++) {
@@ -711,19 +714,17 @@ export default class Unicode {
 				}
 			}
 			return utf32_array;
-		}
-		// UTF-16
-		else if (/utf-?16/i.test(check_charset)) {
+		} else if (/utf-?16/i.test(check_charset)) {
+			// UTF-16
 			// UTF-16 &#x306B;&#x3064;&#x3081;&#x308B;
 			const utf16 = [];
-			// UTF-16BE
 			if (/utf-?16(be)/i.test(check_charset)) {
+				// UTF-16BE
 				for (let i = offset; i &lt; binary.length; i += 2) {
 					utf16.push((binary[i] &lt;&lt; 8) | binary[i + 1]);
 				}
-			}
-			// UTF-16LE
-			else if (/utf-?16(le)?/i.test(check_charset)) {
+			} else if (/utf-?16(le)?/i.test(check_charset)) {
+				// UTF-16LE
 				for (let i = offset; i &lt; binary.length; i += 2) {
 					utf16.push(binary[i] | (binary[i + 1] &lt;&lt; 8));
 				}
@@ -744,18 +745,16 @@ export default class Unicode {
 				}
 			}
 			return utf32_array;
-		}
-		// UTF-32
-		else {
-			// UTF-32BE
+		} else {
+			// UTF-32
 			if (/utf-?32(be)/i.test(check_charset)) {
+				// UTF-32BE
 				for (let i = offset; i &lt; binary.length; i += 4) {
 					utf32_array.push((binary[i] &lt;&lt; 24) | (binary[i + 1] &lt;&lt; 16) | (binary[i + 2] &lt;&lt; 8) | binary[i + 3]);
 				}
 				return utf32_array;
-			}
-			// UTF-32LE
-			else if (/utf-?32(le)?/i.test(check_charset)) {
+			} else if (/utf-?32(le)?/i.test(check_charset)) {
+				// UTF-32LE
 				for (let i = offset; i &lt; binary.length; i += 4) {
 					utf32_array.push(binary[i] | (binary[i + 1] &lt;&lt; 8) | (binary[i + 2] &lt;&lt; 16) | (binary[i + 3] &lt;&lt; 24));
 				}
@@ -835,13 +834,12 @@ export default class Unicode {
 				}
 			}
 			return binary;
-		}
-		// UTF-16
-		else if (/utf-?16/i.test(charset)) {
+		} else if (/utf-?16/i.test(charset)) {
+			// UTF-16
 			// UTF-16 &#x306B;&#x8A70;&#x3081;&#x66FF;&#x3048;&#x308B;
 			const utf16_array = Unicode.toUTF16ArrayFromCodePoint(utf32_array);
-			// UTF-16BE
 			if (/utf-?16(be)/i.test(charset)) {
+				// UTF-16BE
 				// bom &#x3092;&#x3064;&#x3051;&#x308B;
 				if (is_with_bom_) {
 					binary.push(0xFE);
@@ -851,9 +849,8 @@ export default class Unicode {
 					binary.push(utf16_array[i] &gt;&gt; 8);
 					binary.push(utf16_array[i] &amp; 0xFF);
 				}
-			}
-			// UTF-16LE
-			else if (/utf-?16(le)?/i.test(charset)) {
+			} else if (/utf-?16(le)?/i.test(charset)) {
+				// UTF-16LE
 				// bom &#x3092;&#x3064;&#x3051;&#x308B;
 				if (is_with_bom_) {
 					binary.push(0xFF);
@@ -865,11 +862,10 @@ export default class Unicode {
 				}
 			}
 			return binary;
-		}
-		// UTF-32
-		else if (/utf-?32/i.test(charset)) {
-			// UTF-32BE
+		} else if (/utf-?32/i.test(charset)) {
+			// UTF-32
 			if (/utf-?32(be)/i.test(charset)) {
+				// UTF-32BE
 				// bom &#x3092;&#x3064;&#x3051;&#x308B;
 				if (is_with_bom_) {
 					binary.push(0x00);
@@ -883,9 +879,8 @@ export default class Unicode {
 					binary.push((utf32_array[i] &gt;&gt; 8) &amp; 0xFF);
 					binary.push(utf32_array[i] &amp; 0xFF);
 				}
-			}
-			// UTF-32LE
-			else if (/utf-?32(le)?/i.test(charset)) {
+			} else if (/utf-?32(le)?/i.test(charset)) {
+				// UTF-32LE
 				// bom &#x3092;&#x3064;&#x3051;&#x308B;
 				if (is_with_bom_) {
 					binary.push(0xFF);
@@ -956,11 +951,11 @@ export default class Unicode {
 	static isGraphemeComponentFromCodePoint(codepoint) {
 		// prettier-ignore
 		return (
-			Unicode.isCombiningMarkFromCodePoint(codepoint) || // &#x7D50;&#x5408;&#x6587;&#x5B57;
-			Unicode.isVariationSelectorFromCodePoint(codepoint) || // &#x7570;&#x4F53;&#x5B57;&#x30BB;&#x30EC;&#x30AF;&#x30BF;
-			Unicode.isEmojiModifierFromCodePoint(codepoint) || // &#x30B9;&#x30AD;&#x30F3;&#x30C8;&#x30FC;&#x30F3;&#x4FEE;&#x98FE;&#x5B50;
-			Unicode.isTagCharacterFromCodePoint(codepoint) || // &#x30BF;&#x30B0;&#x6587;&#x5B57;
-			codepoint === 0x200D // ZWJ (ZERO WIDTH JOINER) &#x30BC;&#x30ED;&#x5E45;&#x63A5;&#x5408;&#x5B50;
+			Unicode.isCombiningMarkFromCodePoint(codepoint) // &#x7D50;&#x5408;&#x6587;&#x5B57;
+			|| Unicode.isVariationSelectorFromCodePoint(codepoint) // &#x7570;&#x4F53;&#x5B57;&#x30BB;&#x30EC;&#x30AF;&#x30BF;
+			|| Unicode.isEmojiModifierFromCodePoint(codepoint) // &#x30B9;&#x30AD;&#x30F3;&#x30C8;&#x30FC;&#x30F3;&#x4FEE;&#x98FE;&#x5B50;
+			|| Unicode.isTagCharacterFromCodePoint(codepoint) // &#x30BF;&#x30B0;&#x6587;&#x5B57;
+			|| codepoint === 0x200D // ZWJ (ZERO WIDTH JOINER) &#x30BC;&#x30ED;&#x5E45;&#x63A5;&#x5408;&#x5B50;
 		);
 	}
 
@@ -975,10 +970,10 @@ export default class Unicode {
 	static isZeroWidthCharacterFromCodePoint(codepoint) {
 		// prettier-ignore
 		return (
-			codepoint === 0x200B || // ZWSP (ZERO WIDTH SPACE) &#x30BC;&#x30ED;&#x5E45;&#x30B9;&#x30DA;&#x30FC;&#x30B9;
-			codepoint === 0x200C || // ZWNJ (ZERO WIDTH NON-JOINER) &#x30BC;&#x30ED;&#x5E45;&#x975E;&#x63A5;&#x5408;&#x5B50;
-			codepoint === 0x200D || // ZWJ (ZERO WIDTH JOINER) &#x30BC;&#x30ED;&#x5E45;&#x63A5;&#x5408;&#x5B50;
-			codepoint === 0x2060 // WJ (WORD JOINER) &#x5358;&#x8A9E;&#x7D50;&#x5408;&#x5B50;
+			codepoint === 0x200B // ZWSP (ZERO WIDTH SPACE) &#x30BC;&#x30ED;&#x5E45;&#x30B9;&#x30DA;&#x30FC;&#x30B9;
+			|| codepoint === 0x200C // ZWNJ (ZERO WIDTH NON-JOINER) &#x30BC;&#x30ED;&#x5E45;&#x975E;&#x63A5;&#x5408;&#x5B50;
+			|| codepoint === 0x200D // ZWJ (ZERO WIDTH JOINER) &#x30BC;&#x30ED;&#x5E45;&#x63A5;&#x5408;&#x5B50;
+			|| codepoint === 0x2060 // WJ (WORD JOINER) &#x5358;&#x8A9E;&#x7D50;&#x5408;&#x5B50;
 		);
 	}
 
@@ -994,29 +989,30 @@ export default class Unicode {
 		}
 		try {
 			return new RegExp(&quot;\\p{Mark}&quot;, &quot;u&quot;).test(String.fromCodePoint(codepoint));
+		// eslint-disable-next-line no-unused-vars
 		} catch (e) {
 			// &#x30D5;&#x30A9;&#x30FC;&#x30EB;&#x30D0;&#x30C3;&#x30AF;&#x51E6;&#x7406;
 			return (
 				// Combining Diacritical Marks
 				// prettier-ignore
-				(0x0300 &lt;= codepoint &amp;&amp; codepoint &lt;= 0x036F) ||
+				(0x0300 &lt;= codepoint &amp;&amp; codepoint &lt;= 0x036F)
 				// Combining Diacritical Marks Extended
 				// prettier-ignore
-				(0x1AB0 &lt;= codepoint &amp;&amp; codepoint &lt;= 0x1AFF) ||
+				|| (0x1AB0 &lt;= codepoint &amp;&amp; codepoint &lt;= 0x1AFF)
 				// Combining Diacritical Marks Supplement
 				// prettier-ignore
-				(0x1DC0 &lt;= codepoint &amp;&amp; codepoint &lt;= 0x1DFF) ||
+				|| (0x1DC0 &lt;= codepoint &amp;&amp; codepoint &lt;= 0x1DFF)
 				// Combining Diacritical Marks for Symbols
 				// prettier-ignore
-				(0x20D0 &lt;= codepoint &amp;&amp; codepoint &lt;= 0x20FF) ||
+				|| (0x20D0 &lt;= codepoint &amp;&amp; codepoint &lt;= 0x20FF)
 				// &#x65E5;&#x672C;&#x8A9E;&#x306B;&#x542B;&#x307E;&#x308C;&#x308B;2&#x7A2E;&#x985E;&#x306E;&#x6587;&#x5B57;
 				// COMBINING VOICED SOUND MARK
 				// COMBINING SEMI-VOICED SOUND MARK
 				// prettier-ignore
-				(0x3099 &lt;= codepoint &amp;&amp; codepoint &lt;= 0x309A) ||
+				|| (0x3099 &lt;= codepoint &amp;&amp; codepoint &lt;= 0x309A)
 				// Combining Half Marks
 				// prettier-ignore
-				(0xFE20 &lt;= codepoint &amp;&amp; codepoint &lt;= 0xFE2F)
+				|| (0xFE20 &lt;= codepoint &amp;&amp; codepoint &lt;= 0xFE2F)
 			);
 		}
 	}
@@ -1030,13 +1026,13 @@ export default class Unicode {
 		return (
 			// &#x30E2;&#x30F3;&#x30B4;&#x30EB;&#x81EA;&#x7531;&#x5B57;&#x5F62;&#x9078;&#x629E;&#x5B50; U+180B&#x301C;U+180D (3&#x500B;)
 			// prettier-ignore
-			(0x180B &lt;= codepoint &amp;&amp; codepoint &lt;= 0x180D) ||
+			(0x180B &lt;= codepoint &amp;&amp; codepoint &lt;= 0x180D)
 			// SVS&#x3067;&#x5229;&#x7528;&#x3055;&#x308C;&#x308B;&#x7570;&#x4F53;&#x5B57;&#x30BB;&#x30EC;&#x30AF;&#x30BF; U+FE00&#x301C;U+FE0F (VS1&#xFF5E;VS16) (16&#x500B;)
 			// prettier-ignore
-			(0xFE00 &lt;= codepoint &amp;&amp; codepoint &lt;= 0xFE0F) ||
+			|| (0xFE00 &lt;= codepoint &amp;&amp; codepoint &lt;= 0xFE0F)
 			// IVS&#x3067;&#x5229;&#x7528;&#x3055;&#x308C;&#x308B;&#x7570;&#x4F53;&#x5B57;&#x30BB;&#x30EC;&#x30AF;&#x30BF; U+E0100&#x301C;U+E01EF (VS17&#xFF5E;VS256) (240&#x500B;)
 			// prettier-ignore
-			(0xE0100 &lt;= codepoint &amp;&amp; codepoint &lt;= 0xE01EF)
+			|| (0xE0100 &lt;= codepoint &amp;&amp; codepoint &lt;= 0xE01EF)
 		);
 	}
 

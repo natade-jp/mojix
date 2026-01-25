@@ -104,7 +104,7 @@ export default class SJIS {
 			if (y) {
 				// 配列なら配列を結合
 				// ※ Unicodeの結合文字の可能性があるため
-				if (y instanceof Array) {
+				if (Array.isArray(y)) {
 					for (let j = 0; j < y.length; j++) {
 						utf16.push(y[j]);
 					}
@@ -320,7 +320,7 @@ export default class SJIS {
 	/**
 	 * 指定した面区点番号から Unicode コードポイントに変換
 	 * @param {MenKuTen|string} menkuten - 面区点番号
-	 * @param {Object<number, number|number[]>} sjis_to_unicode - Shift_JIS-2004 から Unicode への変換マップ
+	 * @param {Record<number, number|number[]>} sjis_to_unicode - Shift_JIS-2004 から Unicode への変換マップ
 	 * @returns {number[]} UTF-32の配列(存在しない場合はnullを返す)
 	 * @ignore
 	 */
@@ -333,7 +333,7 @@ export default class SJIS {
 		if (!unicode) {
 			return null;
 		}
-		if (unicode instanceof Array) {
+		if (Array.isArray(unicode)) {
 			return unicode;
 		} else {
 			return [unicode];
@@ -443,7 +443,7 @@ export default class SJIS {
 		if (!unicode) {
 			return null;
 		}
-		if (unicode instanceof Array) {
+		if (Array.isArray(unicode)) {
 			return unicode;
 		} else {
 			return [unicode];

@@ -990,12 +990,12 @@ export default class Japanese {
 	/**
 	 * 文字幅を考慮して文字列を文字の配列に変換する
 	 * @param {string} text - 変換したいテキスト
-	 * @returns {Array<number[]>} UTF32(コードポイント)の配列が入った配列
+	 * @returns {number[][]} UTF32(コードポイント)の配列が入った配列
 	 */
 	static toMojiArrayFromString(text) {
 		const utf32 = Unicode.toUTF32Array(text);
 		/**
-		 * @type {Array<number[]>}
+		 * @type {number[][]}
 		 */
 		const mojiarray = [];
 		let moji = [];
@@ -1018,7 +1018,7 @@ export default class Japanese {
 
 	/**
 	 * 結合した文字を考慮して文字の配列を文字列に変換する
-	 * @param {Array<number[]>} mojiarray - UTF32(コードポイント)の配列が入った配列
+	 * @param {number[][]} mojiarray - UTF32(コードポイント)の配列が入った配列
 	 * @returns {string} UTF32(コードポイント)の配列が入った配列
 	 */
 	static toStringFromMojiArray(mojiarray) {
@@ -1049,7 +1049,7 @@ export default class Japanese {
 		const moji_array = Japanese.toMojiArrayFromString(text);
 		const SPACE = [0x20]; // ' '
 		/**
-		 * @type {Array<number[]>}
+		 * @type {number[][]}
 		 */
 		const output = [];
 		let is_target = false;

@@ -32,6 +32,8 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mojix.js~Mojix.html">Mojix</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#encode">encode</a><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MenKuTen">MenKuTen</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#tools">tools</a><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiData">MojiData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiEncodeData">MojiEncodeData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiTypeData">MojiTypeData</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -64,10 +66,12 @@ class EUCJPMSMAP {
 		}
 		EUCJPMSMAP.is_initmap = true;
 
+		/* eslint-disable max-len */
+		/* eslint-disable object-property-newline */
 		/**
 		 * &#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
 		 * CP932&#x306E;IBM&#x62E1;&#x5F35;&#x6587;&#x5B57;&#x306E;&#x4E00;&#x90E8;&#x306F;&#x3001;eucJP-ms&#x306E;G3&#x306E;83&#x533A;&#x304B;&#x3089;84&#x533A;&#x306B;&#x914D;&#x5217;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x3002;
-		 * @type {Object&lt;number, number&gt;}
+		 * @type {Record&lt;number, number&gt;}
 		 */
 		// prettier-ignore
 		const eucjpms_to_cp932_map = {
@@ -86,9 +90,11 @@ class EUCJPMSMAP {
 			0xF4F0: 0xFBDA, 0xF4F1: 0xFBE8, 0xF4F2: 0xFBE9, 0xF4F3: 0xFBEA, 0xF4F4: 0xFBEE, 0xF4F5: 0xFBF0, 0xF4F6: 0xFBF2, 0xF4F7: 0xFBF6,
 			0xF4F8: 0xFBF7, 0xF4F9: 0xFBF9, 0xF4FA: 0xFBFA, 0xF4FB: 0xFBFC, 0xF4FC: 0xFC42, 0xF4FD: 0xFC49, 0xF4FE: 0xFC4B
 		};
+		/* eslint-enable object-property-newline */
+		/* eslint-enable max-len */
 
 		/**
-		 * @type {Object&lt;number, number&gt;}
+		 * @type {Record&lt;number, number&gt;}
 		 */
 		const cp932_to_eucjpms_map = {};
 
@@ -102,7 +108,7 @@ class EUCJPMSMAP {
 	}
 
 	/**
-	 * @returns {Object&lt;number, number&gt;}
+	 * @returns {Record&lt;number, number&gt;}
 	 */
 	static CP932_TO_EUCJPMS() {
 		EUCJPMSMAP.init();
@@ -110,7 +116,7 @@ class EUCJPMSMAP {
 	}
 
 	/**
-	 * @returns {Object&lt;number, number&gt;}
+	 * @returns {Record&lt;number, number&gt;}
 	 */
 	static EUCJPMS_TO_CP932() {
 		EUCJPMSMAP.init();
@@ -126,13 +132,13 @@ EUCJPMSMAP.is_initmap = false;
 
 /**
  * &#x5909;&#x63DB;&#x7528;&#x30DE;&#x30C3;&#x30D7;
- * @type {Object&lt;number, number&gt;}
+ * @type {Record&lt;number, number&gt;}
  */
 EUCJPMSMAP.cp932_to_eucjpms_map = null;
 
 /**
  * &#x5909;&#x63DB;&#x7528;&#x30DE;&#x30C3;&#x30D7;
- * @type {Object&lt;number, number&gt;}
+ * @type {Record&lt;number, number&gt;}
  */
 EUCJPMSMAP.eucjpms_to_cp932_map = null;
 
@@ -214,10 +220,10 @@ export default class EUCJPMS {
 				break;
 			}
 			{
-				// 3&#x30D0;&#x30A4;&#x30C8;&#x8AAD;&#x307F;&#x8FBC;&#x307F;(G3)
 				if (x1 === SS3) {
-					// &#x6587;&#x5B57;&#x304C;&#x8DB3;&#x308A;&#x306A;&#x3044;
+				// 3&#x30D0;&#x30A4;&#x30C8;&#x8AAD;&#x307F;&#x8FBC;&#x307F;(G3)
 					if (i &gt;= eucjp.length - 2) {
+						// &#x6587;&#x5B57;&#x304C;&#x8DB3;&#x308A;&#x306A;&#x3044;
 						break;
 					}
 					x1 = eucjp[i + 1];
@@ -232,9 +238,8 @@ export default class EUCJPMS {
 					}
 					i += 2;
 					continue;
-				}
-				// 2&#x30D0;&#x30A4;&#x30C8;&#x8AAD;&#x307F;&#x8FBC;&#x307F;
-				else {
+				} else {
+					// 2&#x30D0;&#x30A4;&#x30C8;&#x8AAD;&#x307F;&#x8FBC;&#x307F;
 					x2 = eucjp[i + 1];
 					i += 1;
 				}

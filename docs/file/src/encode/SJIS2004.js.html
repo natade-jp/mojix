@@ -32,6 +32,8 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/mojix.js~Mojix.html">Mojix</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#encode">encode</a><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MenKuTen">MenKuTen</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#tools">tools</a><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiData">MojiData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiEncodeData">MojiEncodeData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MojiTypeData">MojiTypeData</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -71,6 +73,8 @@ class SJIS2004MAP {
 		 * @returns {Object&lt;number, number|number[]&gt;}
 		 */
 		const getSJIS2004ToUnicodeMap = function () {
+			/* eslint-disable max-len */
+			/* eslint-disable object-property-newline */
 			/**
 			 * &#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
 			 * - 2&#x6587;&#x5B57;&#x306B;&#x5909;&#x63DB;&#x3055;&#x308C;&#x308B;&#x5834;&#x5408;&#x3082;&#x3042;&#x308B;&#x306E;&#x3067;&#x6CE8;&#x610F;
@@ -83,7 +87,7 @@ class SJIS2004MAP {
 			// prettier-ignore
 			const sjis2004_to_unicode_map = {
 				// ASCII &#x30B3;&#x30FC;&#x30C9;&#x90E8;&#x5206;&#x306F; CP932 &#x3092;&#x53C2;&#x8003;
-				0x00: 0x00, 
+				0x00: 0x00,
 				0x01: 0x01, 0x02: 0x02, 0x03: 0x03, 0x04: 0x04, 0x05: 0x05, 0x06: 0x06, 0x07: 0x07, 0x08: 0x08,
 				0x09: 0x09, 0x0A: 0x0A, 0x0B: 0x0B, 0x0C: 0x0C, 0x0D: 0x0D, 0x0E: 0x0E, 0x0F: 0x0F, 0x10: 0x10,
 				0x11: 0x11, 0x12: 0x12, 0x13: 0x13, 0x14: 0x14, 0x15: 0x15, 0x16: 0x16, 0x17: 0x17, 0x18: 0x18,
@@ -259,6 +263,8 @@ class SJIS2004MAP {
 				0x8786: 0x32A5, 0x8787: 0x32A6, 0x8788: 0x32A7, 0x8789: 0x32A8, 0x878A: 0x3231, 0x878B: 0x3232, 0x878C: 0x3239, 0x878D: 0x337E,
 				0x878E: 0x337D, 0x878F: 0x337C, 0x8793: 0x222E, 0x8798: 0x221F, 0x8799: 0x22BF, 0x879D: 0x2756, 0x879E: 0x261E
 			};
+			/* eslint-enable object-property-newline */
+			/* eslint-enable max-len */
 
 			/**
 			 * &#x6F22;&#x5B57;&#x306E;2&#x30D0;&#x30A4;&#x30C8;&#x6587;&#x5B57;&#xFF08;0x879f-0xffff&#xFF09;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;&#x4F5C;&#x6210;&#x7528;&#x306E;&#x6587;&#x5B57;&#x5217;
@@ -371,6 +377,7 @@ class SJIS2004MAP {
 			return sjis2004_to_unicode_map;
 		};
 
+		/* eslint-disable max-len */
 		/**
 		 * &#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
 		 * - 2&#x6587;&#x5B57;&#x306B;&#x5909;&#x63DB;&#x3055;&#x308C;&#x308B;&#x5834;&#x5408;&#x3082;&#x3042;&#x308B;&#x306E;&#x3067;&#x6CE8;&#x610F;
@@ -379,6 +386,7 @@ class SJIS2004MAP {
 		 */
 		const sjis2004_to_unicode_map = getSJIS2004ToUnicodeMap();
 
+		/* eslint-disable object-property-newline */
 		/**
 		 * &#x5168;&#x89D2;&#x7528;&#x306E;&#x6587;&#x5B57;&#x304C;&#x3042;&#x308B;&#x5834;&#x5408;&#x306F;&#x3001;&#x5168;&#x89D2;&#x3078;&#x5909;&#x63DB;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x306B;&#x3059;&#x308B;&#x3002;
 		 * &#x4EE5;&#x4E0B;&#x306E;&#x30EA;&#x30B9;&#x30C8;&#x306F;&#x3001;&#x4E0A;&#x8A18;&#x306E;&#x30DE;&#x30C3;&#x30D4;&#x30F3;&#x30B0;&#x30C7;&#x30FC;&#x30BF;&#x306E;Unicode&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;&#x304C;0x100&#x672A;&#x6E80;&#x306E;&#x30C7;&#x30FC;&#x30BF;&#x3092;&#x629C;&#x304D;&#x51FA;&#x3057;&#x3066;&#x3001;
@@ -386,25 +394,27 @@ class SJIS2004MAP {
 		 *
 		 * &#x30E1;&#x30E2;&#xFF1A;&#x4ECA;&#x56DE;&#x306F;&#x4F7F;&#x3063;&#x3066;&#x3044;&#x307E;&#x305B;&#x3093;&#x304C;&#x3001;&#x4EE5;&#x4E0B;&#x306E;&#x6587;&#x732E;&#x3082;&#x53C2;&#x8003;&#x306B;&#x306A;&#x308B;&#x304B;&#x3082;&#x3057;&#x308C;&#x307E;&#x305B;&#x3093;&#x3002;
 		 * ftp://www.unicode.org/Public/MAPPINGS/OBSOLETE/EASTASIA/JIS/JIS0208.TXT
-		 * @type {Object&lt;number, number&gt;}
+		 * @type {Record&lt;number, number&gt;}
 		 */
 		// prettier-ignore
 		const sjis2004_to_unicode_map_2 = {
-			0x8143: 0xFF0C, 0x8144: 0xFF0E, 0x8146: 0xFF1A, 0x8147: 0xFF1B, 0x8148: 0xFF1F, 0x8149: 0xFF01, 0x814C: 0x00B4, 0x814D: 0xFF40, 
-			0x814E: 0x00A8, 0x814F: 0xFF3E, 0x8151: 0xFF3F, 0x815E: 0xFF0F, 0x815F: 0xFF3C, 0x8162: 0xFF5C, 0x8169: 0xFF08, 0x816A: 0xFF09, 
-			0x816D: 0xFF3B, 0x816E: 0xFF3D, 0x816F: 0xFF5B, 0x8170: 0xFF5D, 0x817B: 0xFF0B, 0x817D: 0x00B1, 0x817E: 0x00D7, 0x8180: 0x00F7, 
-			0x8181: 0xFF1D, 0x8183: 0xFF1C, 0x8184: 0xFF1E, 0x818B: 0x00B0, 0x818F: 0xFFE5, 0x8190: 0xFF04, 0x8191: 0xFFE0, 0x8192: 0xFFE1, 
-			0x8193: 0xFF05, 0x8194: 0xFF03, 0x8195: 0xFF06, 0x8196: 0xFF0A, 0x8197: 0xFF20, 0x8198: 0x00A7, 0x81AD: 0xFF07, 0x81AE: 0xFF02, 
-			0x81AF: 0xFF0D, 0x81B0: 0xFF5E, 0x81CA: 0xFFE2, 0x81F7: 0x00B6, 0x824F: 0xFF10, 0x8250: 0xFF11, 0x8251: 0xFF12, 0x8252: 0xFF13, 
-			0x8253: 0xFF14, 0x8254: 0xFF15, 0x8255: 0xFF16, 0x8256: 0xFF17, 0x8257: 0xFF18, 0x8258: 0xFF19, 0x8260: 0xFF21, 0x8261: 0xFF22, 
-			0x8262: 0xFF23, 0x8263: 0xFF24, 0x8264: 0xFF25, 0x8265: 0xFF26, 0x8266: 0xFF27, 0x8267: 0xFF28, 0x8268: 0xFF29, 0x8269: 0xFF2A, 
-			0x826A: 0xFF2B, 0x826B: 0xFF2C, 0x826C: 0xFF2D, 0x826D: 0xFF2E, 0x826E: 0xFF2F, 0x826F: 0xFF30, 0x8270: 0xFF31, 0x8271: 0xFF32, 
-			0x8272: 0xFF33, 0x8273: 0xFF34, 0x8274: 0xFF35, 0x8275: 0xFF36, 0x8276: 0xFF37, 0x8277: 0xFF38, 0x8278: 0xFF39, 0x8279: 0xFF3A, 
-			0x8281: 0xFF41, 0x8282: 0xFF42, 0x8283: 0xFF43, 0x8284: 0xFF44, 0x8285: 0xFF45, 0x8286: 0xFF46, 0x8287: 0xFF47, 0x8288: 0xFF48, 
-			0x8289: 0xFF49, 0x828A: 0xFF4A, 0x828B: 0xFF4B, 0x828C: 0xFF4C, 0x828D: 0xFF4D, 0x828E: 0xFF4E, 0x828F: 0xFF4F, 0x8290: 0xFF50, 
-			0x8291: 0xFF51, 0x8292: 0xFF52, 0x8293: 0xFF53, 0x8294: 0xFF54, 0x8295: 0xFF55, 0x8296: 0xFF56, 0x8297: 0xFF57, 0x8298: 0xFF58, 
+			0x8143: 0xFF0C, 0x8144: 0xFF0E, 0x8146: 0xFF1A, 0x8147: 0xFF1B, 0x8148: 0xFF1F, 0x8149: 0xFF01, 0x814C: 0x00B4, 0x814D: 0xFF40,
+			0x814E: 0x00A8, 0x814F: 0xFF3E, 0x8151: 0xFF3F, 0x815E: 0xFF0F, 0x815F: 0xFF3C, 0x8162: 0xFF5C, 0x8169: 0xFF08, 0x816A: 0xFF09,
+			0x816D: 0xFF3B, 0x816E: 0xFF3D, 0x816F: 0xFF5B, 0x8170: 0xFF5D, 0x817B: 0xFF0B, 0x817D: 0x00B1, 0x817E: 0x00D7, 0x8180: 0x00F7,
+			0x8181: 0xFF1D, 0x8183: 0xFF1C, 0x8184: 0xFF1E, 0x818B: 0x00B0, 0x818F: 0xFFE5, 0x8190: 0xFF04, 0x8191: 0xFFE0, 0x8192: 0xFFE1,
+			0x8193: 0xFF05, 0x8194: 0xFF03, 0x8195: 0xFF06, 0x8196: 0xFF0A, 0x8197: 0xFF20, 0x8198: 0x00A7, 0x81AD: 0xFF07, 0x81AE: 0xFF02,
+			0x81AF: 0xFF0D, 0x81B0: 0xFF5E, 0x81CA: 0xFFE2, 0x81F7: 0x00B6, 0x824F: 0xFF10, 0x8250: 0xFF11, 0x8251: 0xFF12, 0x8252: 0xFF13,
+			0x8253: 0xFF14, 0x8254: 0xFF15, 0x8255: 0xFF16, 0x8256: 0xFF17, 0x8257: 0xFF18, 0x8258: 0xFF19, 0x8260: 0xFF21, 0x8261: 0xFF22,
+			0x8262: 0xFF23, 0x8263: 0xFF24, 0x8264: 0xFF25, 0x8265: 0xFF26, 0x8266: 0xFF27, 0x8267: 0xFF28, 0x8268: 0xFF29, 0x8269: 0xFF2A,
+			0x826A: 0xFF2B, 0x826B: 0xFF2C, 0x826C: 0xFF2D, 0x826D: 0xFF2E, 0x826E: 0xFF2F, 0x826F: 0xFF30, 0x8270: 0xFF31, 0x8271: 0xFF32,
+			0x8272: 0xFF33, 0x8273: 0xFF34, 0x8274: 0xFF35, 0x8275: 0xFF36, 0x8276: 0xFF37, 0x8277: 0xFF38, 0x8278: 0xFF39, 0x8279: 0xFF3A,
+			0x8281: 0xFF41, 0x8282: 0xFF42, 0x8283: 0xFF43, 0x8284: 0xFF44, 0x8285: 0xFF45, 0x8286: 0xFF46, 0x8287: 0xFF47, 0x8288: 0xFF48,
+			0x8289: 0xFF49, 0x828A: 0xFF4A, 0x828B: 0xFF4B, 0x828C: 0xFF4C, 0x828D: 0xFF4D, 0x828E: 0xFF4E, 0x828F: 0xFF4F, 0x8290: 0xFF50,
+			0x8291: 0xFF51, 0x8292: 0xFF52, 0x8293: 0xFF53, 0x8294: 0xFF54, 0x8295: 0xFF55, 0x8296: 0xFF56, 0x8297: 0xFF57, 0x8298: 0xFF58,
 			0x8299: 0xFF59, 0x829A: 0xFF5A
 		};
+		/* eslint-enable object-property-newline */
+		/* eslint-enable max-len */
 
 		// &#x300C;sjis2004_to_unicode_map_2&#x300D;&#x306E;&#x4E2D;&#x306E;&#x7279;&#x6B8A;&#x306A;&#x6587;&#x5B57;&#x306B;&#x3064;&#x3044;&#x3066;
 		// &#x4E00;&#x90E8;CP932&#x3068;Shift_JIS-2004&#x3068;&#x3067;&#x30B3;&#x30FC;&#x30C9;&#x304C;&#x4E00;&#x81F4;&#x3057;&#x3066;&#x3044;&#x306A;&#x3044;&#x6587;&#x5B57;&#x304C;&#x3042;&#x308B;
@@ -421,7 +431,7 @@ class SJIS2004MAP {
 
 		/**
 		 * &#x9006;&#x5F15;&#x304D;&#x30DE;&#x30C3;&#x30D7;&#x4F5C;&#x6210;&#x3002;&#x91CD;&#x8907;&#x304C;&#x3042;&#x308B;&#x5834;&#x5408;&#x306F;&#x3001;&#x5C0F;&#x3055;&#x3044;&#x6570;&#x5024;&#x3092;&#x512A;&#x5148;&#x3055;&#x305B;&#x308B;&#x3002;
-		 * @type {Object&lt;number, number&gt;}
+		 * @type {Record&lt;number, number&gt;}
 		 */
 		const unicode_to_sjis2004_map = {};
 		for (const key in sjis2004_to_unicode_map) {
@@ -446,7 +456,7 @@ class SJIS2004MAP {
 	}
 
 	/**
-	 * @returns {Object&lt;number, number|number[]&gt;}
+	 * @returns {Record&lt;number, number|number[]&gt;}
 	 */
 	static SJIS2004_TO_UNICODE() {
 		SJIS2004MAP.init();
@@ -454,7 +464,7 @@ class SJIS2004MAP {
 	}
 
 	/**
-	 * @returns {Object&lt;number, number&gt;}
+	 * @returns {Record&lt;number, number&gt;}
 	 */
 	static UNICODE_TO_SJIS2004() {
 		SJIS2004MAP.init();
@@ -470,13 +480,13 @@ SJIS2004MAP.is_initmap = false;
 
 /**
  * &#x5909;&#x63DB;&#x7528;&#x30DE;&#x30C3;&#x30D7;
- * @type {Object&lt;number, number|number[]&gt;}
+ * @type {Record&lt;number, number|number[]&gt;}
  */
 SJIS2004MAP.sjis2004_to_unicode_map = null;
 
 /**
  * &#x5909;&#x63DB;&#x7528;&#x30DE;&#x30C3;&#x30D7;
- * @type {Object&lt;number, number&gt;}
+ * @type {Record&lt;number, number&gt;}
  */
 SJIS2004MAP.unicode_to_sjis2004_map = null;
 
@@ -535,7 +545,7 @@ export default class SJIS2004 {
 	 * &#x6307;&#x5B9A;&#x3057;&#x305F;&#x6587;&#x5B57;&#x304B;&#x3089; Shift_JIS-2004 &#x4E0A;&#x306E;&#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;&#x306B;&#x5909;&#x63DB;
 	 * - 2&#x6587;&#x5B57;&#x4EE5;&#x4E0A;&#x3092;&#x6307;&#x5B9A;&#x3057;&#x305F;&#x5834;&#x5408;&#x306F;&#x3001;1&#x6587;&#x5B57;&#x76EE;&#x306E;&#x307F;&#x3092;&#x5909;&#x63DB;&#x3059;&#x308B;
 	 * @param {string} text - &#x5909;&#x63DB;&#x3057;&#x305F;&#x3044;&#x30C6;&#x30AD;&#x30B9;&#x30C8;
-	 * @returns {import(&quot;./SJIS.js&quot;).MenKuTen} &#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;(&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#xFF08;1&#x30D0;&#x30A4;&#x30C8;&#x306E;JIS&#x30B3;&#x30FC;&#x30C9;&#x306A;&#x3069;&#xFF09;&#x306F;null&#x3092;&#x8FD4;&#x3059;)
+	 * @returns {import(&apos;./SJIS.js&apos;).MenKuTen} &#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;(&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#xFF08;1&#x30D0;&#x30A4;&#x30C8;&#x306E;JIS&#x30B3;&#x30FC;&#x30C9;&#x306A;&#x3069;&#xFF09;&#x306F;null&#x3092;&#x8FD4;&#x3059;)
 	 */
 	static toMenKuTen(text) {
 		if (text.length === 0) {
@@ -547,7 +557,7 @@ export default class SJIS2004 {
 
 	/**
 	 * Shift_JIS-2004 &#x4E0A;&#x306E;&#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;&#x304B;&#x3089;&#x6587;&#x5B57;&#x5217;&#x306B;&#x5909;&#x63DB;
-	 * @param {import(&quot;./SJIS.js&quot;).MenKuTen|string} menkuten - &#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;
+	 * @param {import(&apos;./SJIS.js&apos;).MenKuTen|string} menkuten - &#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;
 	 * @returns {string} &#x5909;&#x63DB;&#x5F8C;&#x306E;&#x30C6;&#x30AD;&#x30B9;&#x30C8;
 	 */
 	static fromMenKuTen(menkuten) {
