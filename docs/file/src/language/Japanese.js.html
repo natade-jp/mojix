@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="Moji / Kanji / Unicode analysis utilities (work in progress)"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="mojix"><meta property="twitter:description" content="Moji / Kanji / Unicode analysis utilities (work in progress)"></head>
+<meta name="description" content="Moji / Kanji / Unicode analysis and encoding utilities"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="mojix"><meta property="twitter:description" content="Moji / Kanji / Unicode analysis and encoding utilities"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -1163,23 +1163,28 @@ export default class Japanese {
 			return &quot;&quot;;
 		}
 		for (let i = 0; i &lt; moji_array.length; i++) {
+			// &#x6587;&#x5B57;&#x30C7;&#x30FC;&#x30BF;
+			const moji = moji_array[i];
 			// 1&#x6587;&#x5B57;&#x76EE;&#x306E;&#x6A2A;&#x5E45;&#x3092;&#x53D6;&#x5F97;
-			const ch = moji_array[i][0];
+			const cp = moji[0];
+			// ASCII&#x6587;&#x5B57;, &#x534A;&#x89D2;&#x30AB;&#x30BF;&#x30AB;&#x30CA;, Regional Indicator&#xFF08;&#x5358;&#x4F53;&#xFF09;
 			// prettier-ignore
-			const ch_size = ch &lt; 0x80 || (0xFF61 &lt;= ch &amp;&amp; ch &lt; 0xFFA0) ? 1 : 2;
+			const cp_size = cp &lt; 0x80
+				|| (0xFF61 &lt;= cp &amp;&amp; cp &lt; 0xFFA0)
+				|| (moji.length === 1 &amp;&amp; Unicode.isRegionalIndicatorFromCodePoint(cp)) ? 1 : 2;
 			if (position &gt;= offset) {
 				is_target = true;
-				if (cut_size &gt;= ch_size) {
-					output.push(moji_array[i]);
+				if (cut_size &gt;= cp_size) {
+					output.push(moji);
 				} else {
 					output.push(SPACE);
 				}
-				cut_size -= ch_size;
+				cut_size -= cp_size;
 				if (cut_size &lt;= 0) {
 					break;
 				}
 			}
-			position += ch_size;
+			position += cp_size;
 			// 2&#x30D0;&#x30A4;&#x30C8;&#x6587;&#x5B57;&#x306E;&#x9014;&#x4E2D;&#x3092;offset&#x6307;&#x5B9A;&#x3057;&#x3066;&#x3044;&#x305F;&#x5834;&#x5408;&#x306B;&#x306A;&#x308B;&#x3002;
 			if (position - 1 &gt;= offset &amp;&amp; !is_target) {
 				cut_size--;
