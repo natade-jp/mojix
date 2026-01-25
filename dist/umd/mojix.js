@@ -179,35 +179,35 @@
 				"Khmer", "Mongolian", "Unified Canadian Aboriginal Syllabics Extended", "Limbu", "Tai Le", "New Tai Lue", "Khmer Symbols", "Buginese",
 				"Tai Tham", "Combining Diacritical Marks Extended", "Balinese", "Sundanese", "Batak", "Lepcha", "Ol Chiki", "Cyrillic Extended-C",
 				"Georgian Extended", "Sundanese Supplement", "Vedic Extensions", "Phonetic Extensions", "Phonetic Extensions Supplement", "Combining Diacritical Marks Supplement", "Latin Extended Additional", "Greek Extended",
-				"General Punctuation", "Superscripts and Subscripts", "Currency Symbols", "Combining Diacritical Marks for Symbols", "Letterlike Symbols", "number Forms", "Arrows", "Mathematical Operators",
+				"General Punctuation", "Superscripts and Subscripts", "Currency Symbols", "Combining Diacritical Marks for Symbols", "Letterlike Symbols", "Number Forms", "Arrows", "Mathematical Operators",
 				"Miscellaneous Technical", "Control Pictures", "Optical Character Recognition", "Enclosed Alphanumerics", "Box Drawing", "Block Elements", "Geometric Shapes", "Miscellaneous Symbols",
 				"Dingbats", "Miscellaneous Mathematical Symbols-A", "Supplemental Arrows-A", "Braille Patterns", "Supplemental Arrows-B", "Miscellaneous Mathematical Symbols-B", "Supplemental Mathematical Operators", "Miscellaneous Symbols and Arrows",
 				"Glagolitic", "Latin Extended-C", "Coptic", "Georgian Supplement", "Tifinagh", "Ethiopic Extended", "Cyrillic Extended-A", "Supplemental Punctuation",
 				"CJK Radicals Supplement", "Kangxi Radicals", "Ideographic Description Characters", "CJK Symbols and Punctuation", "Hiragana", "Katakana", "Bopomofo", "Hangul Compatibility Jamo",
 				"Kanbun", "Bopomofo Extended", "CJK Strokes", "Katakana Phonetic Extensions", "Enclosed CJK Letters and Months", "CJK Compatibility", "CJK Unified Ideographs Extension A", "Yijing Hexagram Symbols",
 				"CJK Unified Ideographs", "Yi Syllables", "Yi Radicals", "Lisu", "Vai", "Cyrillic Extended-B", "Bamum", "Modifier Tone Letters",
-				"Latin Extended-D", "Syloti Nagri", "Common Indic number Forms", "Phags-pa", "Saurashtra", "Devanagari Extended", "Kayah Li", "Rejang",
+				"Latin Extended-D", "Syloti Nagri", "Common Indic Number Forms", "Phags-pa", "Saurashtra", "Devanagari Extended", "Kayah Li", "Rejang",
 				"Hangul Jamo Extended-A", "Javanese", "Myanmar Extended-B", "Cham", "Myanmar Extended-A", "Tai Viet", "Meetei Mayek Extensions", "Ethiopic Extended-A",
 				"Latin Extended-E", "Cherokee Supplement", "Meetei Mayek", "Hangul Syllables", "Hangul Jamo Extended-B", "High Surrogates", "High Private Use Surrogates", "Low Surrogates",
 				"Private Use Area", "CJK Compatibility Ideographs", "Alphabetic Presentation Forms", "Arabic Presentation Forms-A", "Variation Selectors", "Vertical Forms", "Combining Half Marks", "CJK Compatibility Forms",
-				"Small Form Variants", "Arabic Presentation Forms-B", "Halfwidth and Fullwidth Forms", "Specials", "Linear B Syllabary", "Linear B Ideograms", "Aegean numbers", "Ancient Greek numbers",
-				"Ancient Symbols", "Phaistos Disc", "Lycian", "Carian", "Coptic Epact numbers", "Old Italic", "Gothic", "Old Permic",
+				"Small Form Variants", "Arabic Presentation Forms-B", "Halfwidth and Fullwidth Forms", "Specials", "Linear B Syllabary", "Linear B Ideograms", "Aegean Numbers", "Ancient Greek Numbers",
+				"Ancient Symbols", "Phaistos Disc", "Lycian", "Carian", "Coptic Epact Numbers", "Old Italic", "Gothic", "Old Permic",
 				"Ugaritic", "Old Persian", "Deseret", "Shavian", "Osmanya", "Osage", "Elbasan", "Caucasian Albanian",
 				"Vithkuqi", "Linear A", "Latin Extended-F", "Cypriot Syllabary", "Imperial Aramaic", "Palmyrene", "Nabataean", "Hatran",
 				"Phoenician", "Lydian", "Meroitic Hieroglyphs", "Meroitic Cursive", "Kharoshthi", "Old South Arabian", "Old North Arabian", "Manichaean",
 				"Avestan", "Inscriptional Parthian", "Inscriptional Pahlavi", "Psalter Pahlavi", "Old Turkic", "Old Hungarian", "Hanifi Rohingya", "Rumi Numeral Symbols",
 				"Yezidi", "Arabic Extended-C", "Old Sogdian", "Sogdian", "Old Uyghur", "Chorasmian", "Elymaic", "Brahmi",
-				"Kaithi", "Sora Sompeng", "Chakma", "Mahajani", "Sharada", "Sinhala Archaic numbers", "Khojki", "Multani",
+				"Kaithi", "Sora Sompeng", "Chakma", "Mahajani", "Sharada", "Sinhala Archaic Numbers", "Khojki", "Multani",
 				"Khudawadi", "Grantha", "Newa", "Tirhuta", "Siddham", "Modi", "Mongolian Supplement", "Takri",
 				"Ahom", "Dogra", "Warang Citi", "Dives Akuru", "Nandinagari", "Zanabazar Square", "Soyombo", "Unified Canadian Aboriginal Syllabics Extended-A",
 				"Pau Cin Hau", "Devanagari Extended-A", "Bhaiksuki", "Marchen", "Masaram Gondi", "Gunjala Gondi", "Makasar", "Kawi",
-				"Lisu Supplement", "Tamil Supplement", "Cuneiform", "Cuneiform numbers and Punctuation", "Early Dynastic Cuneiform", "Cypro-Minoan", "Egyptian Hieroglyphs", "Egyptian Hieroglyph Format Controls",
+				"Lisu Supplement", "Tamil Supplement", "Cuneiform", "Cuneiform Numbers and Punctuation", "Early Dynastic Cuneiform", "Cypro-Minoan", "Egyptian Hieroglyphs", "Egyptian Hieroglyph Format Controls",
 				"Anatolian Hieroglyphs", "Bamum Supplement", "Mro", "Tangsa", "Bassa Vah", "Pahawh Hmong", "Medefaidrin", "Miao",
 				"Ideographic Symbols and Punctuation", "Tangut", "Tangut Components", "Khitan Small Script", "Tangut Supplement", "Kana Extended-B", "Kana Supplement", "Kana Extended-A",
 				"Small Kana Extension", "Nushu", "Duployan", "Shorthand Format Controls", "Znamenny Musical Notation", "Byzantine Musical Symbols", "Musical Symbols", "Ancient Greek Musical Notation",
 				"Kaktovik Numerals", "Mayan Numerals", "Tai Xuan Jing Symbols", "Counting Rod Numerals", "Mathematical Alphanumeric Symbols", "Sutton SignWriting", "Latin Extended-G", "Glagolitic Supplement",
 				"Cyrillic Extended-D", "Nyiakeng Puachue Hmong", "Toto", "Wancho", "Nag Mundari", "Ethiopic Extended-B", "Mende Kikakui", "Adlam",
-				"Indic Siyaq numbers", "Ottoman Siyaq numbers", "Arabic Mathematical Alphabetic Symbols", "Mahjong Tiles", "Domino Tiles", "Playing Cards", "Enclosed Alphanumeric Supplement", "Enclosed Ideographic Supplement",
+				"Indic Siyaq Numbers", "Ottoman Siyaq Numbers", "Arabic Mathematical Alphabetic Symbols", "Mahjong Tiles", "Domino Tiles", "Playing Cards", "Enclosed Alphanumeric Supplement", "Enclosed Ideographic Supplement",
 				"Miscellaneous Symbols and Pictographs", "Emoticons", "Ornamental Dingbats", "Transport and Map Symbols", "Alchemical Symbols", "Geometric Shapes Extended", "Supplemental Arrows-C", "Supplemental Symbols and Pictographs",
 				"Chess Symbols", "Symbols and Pictographs Extended-A", "Symbols for Legacy Computing", "CJK Unified Ideographs Extension B", "CJK Unified Ideographs Extension C", "CJK Unified Ideographs Extension D", "CJK Unified Ideographs Extension E", "CJK Unified Ideographs Extension F", "CJK Unified Ideographs Extension I",
 				"CJK Compatibility Ideographs Supplement", "CJK Unified Ideographs Extension G", "CJK Unified Ideographs Extension H", "CJK Unified Ideographs Extension J", "Tags", "Variation Selectors Supplement", "Supplementary Private Use Area-A", "Supplementary Private Use Area-B"
@@ -2007,7 +2007,7 @@
 		 * 指定した文字から Windows-31J 上の区点番号に変換
 		 * - 2文字以上を指定した場合は、1文字目のみを変換する
 		 * @param {string} text - 変換したいテキスト
-		 * @returns {import('./SJIS.js').MenKuTen} 区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
+		 * @returns {MenKuTen} 区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 		 */
 		static toKuTen(text) {
 			if (text.length === 0) {
@@ -2019,7 +2019,7 @@
 
 		/**
 		 * Windows-31J 上の区点番号から文字列に変換
-		 * @param {import('./SJIS.js').MenKuTen|string} kuten - 区点番号
+		 * @param {MenKuTen|string} kuten - 区点番号
 		 * @returns {string} 変換後のテキスト
 		 */
 		static fromKuTen(kuten) {
@@ -2532,7 +2532,7 @@
 		 * 指定した文字から Shift_JIS-2004 上の面区点番号に変換
 		 * - 2文字以上を指定した場合は、1文字目のみを変換する
 		 * @param {string} text - 変換したいテキスト
-		 * @returns {import('./SJIS.js').MenKuTen} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
+		 * @returns {MenKuTen} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 		 */
 		static toMenKuTen(text) {
 			if (text.length === 0) {
@@ -2544,7 +2544,7 @@
 
 		/**
 		 * Shift_JIS-2004 上の面区点番号から文字列に変換
-		 * @param {import('./SJIS.js').MenKuTen|string} menkuten - 面区点番号
+		 * @param {MenKuTen|string} menkuten - 面区点番号
 		 * @returns {string} 変換後のテキスト
 		 */
 		static fromMenKuTen(menkuten) {
@@ -4693,8 +4693,8 @@
 	/**
 	 * 文字のエンコード情報
 	 * @typedef {Object} MojiEncodeData
-	 * @property {import('../encode/SJIS.js').MenKuTen} kuten 区点 コード
-	 * @property {import('../encode/SJIS.js').MenKuTen} menkuten 面区点 コード
+	 * @property {MenKuTen} kuten 区点 コード
+	 * @property {MenKuTen} menkuten 面区点 コード
 	 * @property {number} cp932_code CP932(Windows-31J) コード
 	 * @property {number} sjis2004_code Shift_JIS-2004 コード
 	 * @property {number[]} utf8_array UTF-8 配列
@@ -5456,7 +5456,7 @@
 		 * 指定した文字から Windows-31J 上の区点番号に変換
 		 * - 2文字以上を指定した場合は、1文字目のみを変換する
 		 * @param {string} text - 変換したいテキスト
-		 * @returns {import('./encode/SJIS.js').MenKuTen} 区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
+		 * @returns {MenKuTen} 区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 		 */
 		static toKuTen(text) {
 			return CP932.toKuTen(text);
@@ -5464,7 +5464,7 @@
 
 		/**
 		 * Windows-31J 上の区点番号から文字列に変換
-		 * @param {import('./encode/SJIS.js').MenKuTen|string} kuten - 区点番号
+		 * @param {MenKuTen|string} kuten - 区点番号
 		 * @returns {string} 変換後のテキスト
 		 */
 		static fromKuTen(kuten) {
@@ -5475,7 +5475,7 @@
 		 * 指定した文字から Shift_JIS-2004 上の面区点番号に変換
 		 * - 2文字以上を指定した場合は、1文字目のみを変換する
 		 * @param {string} text - 変換したいテキスト
-		 * @returns {import('./encode/SJIS.js').MenKuTen} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
+		 * @returns {MenKuTen} 面区点番号(存在しない場合（1バイトのJISコードなど）はnullを返す)
 		 */
 		static toMenKuTen(text) {
 			return SJIS2004.toMenKuTen(text);
@@ -5483,7 +5483,7 @@
 
 		/**
 		 * Shift_JIS-2004 上の面区点番号から文字列に変換
-		 * @param {import('./encode/SJIS.js').MenKuTen|string} menkuten - 面区点番号
+		 * @param {MenKuTen|string} menkuten - 面区点番号
 		 * @returns {string} 変換後のテキスト
 		 */
 		static fromMenKuTen(menkuten) {
@@ -5663,7 +5663,7 @@
 		/**
 		 * 指定した1つのUTF-32 コードポイントに関して、解析を行い情報を返します
 		 * @param {number} unicode_codepoint - UTF-32 のコードポイント
-		 * @returns {import('./tools/MojiAnalyzer.js').MojiData} 文字の情報がつまったオブジェクト
+		 * @returns {MojiData} 文字の情報がつまったオブジェクト
 		 */
 		static getMojiData(unicode_codepoint) {
 			return MojiAnalyzer.getMojiData(unicode_codepoint);
