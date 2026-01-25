@@ -3,7 +3,6 @@
 [![ESDoc coverage badge](https://natade-jp.github.io/mojix/badge.svg)](https://natade-jp.github.io/mojix/)
 ![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)
 
-> ⚠️ **Work in progress**  
 > Mojix is the successor of **MojiJS**.  
 > This project was renamed to avoid confusion with other libraries named "`moji`" or "`moji.js`".
 
@@ -14,8 +13,8 @@
   -   [動作例](https://natade-jp.github.io/mojix/examples/) (コンソール及び[ソースコード](https://natade-jp.github.io/mojix/examples/main.js)を確認してみてください。)
   -   [npm](https://www.npmjs.com/package/mojix)
 - MojiJS の後継ライブラリとして開発されています。
-- API や機能は基本的に MojiJS を引き継いでいます。
-  - Mojix では ECMAScript 3 をサポートしていません。JScript 実行環境が必要な場合は、MojiJS をご利用ください。
+- API や機能は基本的に [MojiJS](https://github.com/natade-jp/MojiJS) を引き継いでいます。
+  - Mojix では ECMAScript 3 をサポートしていません。JScript 実行環境が必要な場合は、[MojiJS](https://github.com/natade-jp/MojiJS) をご利用ください。
 
 ### 主な機能
 
