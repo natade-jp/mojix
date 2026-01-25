@@ -184,8 +184,10 @@ export default class Mojix {
 
 	/**
 	 * 指定したテキストの横幅を半角／全角でカウント
-	 * - 0幅 ... 結合文字, 異体字セレクタ, スキントーン修飾子, タグ文字, ゼロ幅スペース, ゼロ幅非接合子, ゼロ幅接合子, 単語結合子
-	 * - 1幅 ... ASCII文字, 半角カタカナ
+	 * - 0幅 ... グラフェムを構成する要素
+	 *           （結合文字, 異体字セレクタ, スキントーン修飾子,
+	 *            Tag Sequence 構成文字, ZWSP, ZWNJ, ZWJ, WJ）
+	 * - 1幅 ... ASCII文字, 半角カタカナ, Regional Indicator（単体）
 	 * - 2幅 ... 上記以外
 	 * @param {string} text - カウントしたいテキスト
 	 * @returns {number} 文字の横幅
@@ -196,8 +198,10 @@ export default class Mojix {
 
 	/**
 	 * 指定したテキストを切り出す
-	 * - 0幅 ... 結合文字, 異体字セレクタ, スキントーン修飾子, タグ文字, ゼロ幅スペース, ゼロ幅非接合子, ゼロ幅接合子, 単語結合子
-	 * - 1幅 ... ASCII文字, 半角カタカナ
+	 * - 0幅 ... グラフェムを構成する要素
+	 *           （結合文字, 異体字セレクタ, スキントーン修飾子,
+	 *            Tag Sequence 構成文字, ZWSP, ZWNJ, ZWJ, WJ）
+	 * - 1幅 ... ASCII文字, 半角カタカナ, Regional Indicator（単体）
 	 * - 2幅 ... 上記以外
 	 * @param {string} text - 切り出したいテキスト
 	 * @param {number} offset - 切り出し位置

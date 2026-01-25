@@ -96,7 +96,11 @@ testOperator1("toRomajiFromKatakana", "ミョウゴニチ", "myougonichi");
 	// スキントーン修飾子
 	// prettier-ignore
 	test("getWidth", () => { expect(Japanese.getWidth("👍🏻👍🏼👍🏽👍🏾👍🏿")).toBe(10); });
-	// タグ文字
+	// 国旗 (Regional Indicator)
+	// prettier-ignore
+	test("getWidth", () => { expect(Japanese.getWidth("🇯🇵🇯🇵🇯🇵")).toBe(6); });
+	test("getWidth", () => { expect(Japanese.getWidth("🇯🇵🇯🇵🇯🇵🇯")).toBe(7); });
+	// 国旗 (Tag Sequence)
 	// prettier-ignore
 	test("getWidth", () => { expect(Japanese.getWidth("🏴󠁫󠁨󠀱󠀰󠁿🏴󠁫󠁨󠀱󠀱󠁿🏴󠁫󠁨󠀱󠀳󠁿")).toBe(6); });
 	// ゼロ幅接合子
@@ -119,6 +123,9 @@ testOperator1("toRomajiFromKatakana", "ミョウゴニチ", "myougonichi");
 	test("toMojiArrayFromString", () => { expect(Japanese.toMojiArrayFromString("禰󠄀豆子").length).toBe(3); });
 	// prettier-ignore
 	test("toMojiArrayFromString", () => { expect(Japanese.toMojiArrayFromString("👍🏻👍🏼👍🏽👍🏾👍🏿").length).toBe(5); });
+	// prettier-ignore
+	test("toMojiArrayFromString", () => { expect(Japanese.toMojiArrayFromString("🇯🇵🇯🇵🇯🇵").length).toBe(3); });
+	test("toMojiArrayFromString", () => { expect(Japanese.toMojiArrayFromString("🇯🇵🇯🇵🇯🇵🇯").length).toBe(4); });
 	// prettier-ignore
 	test("toMojiArrayFromString", () => { expect(Japanese.toMojiArrayFromString("🏴󠁫󠁨󠀱󠀰󠁿🏴󠁫󠁨󠀱󠀱󠁿🏴󠁫󠁨󠀱󠀳󠁿").length).toBe(3); });
 	// prettier-ignore

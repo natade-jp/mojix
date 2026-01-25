@@ -897,12 +897,17 @@ export default class Unicode {
 	/**
 	 * コードポイントからグラフェム（見た目の1文字）を構成する文字の判定
 	 *
+	 * ※単独では新しいグラフェムを開始せず、直前のベース文字に結合・修飾される要素
+	 *
 	 * 含まれるもの:
 	 * - 結合文字 (Mn / Mc / Me ※VS除外)
 	 * - 異体字セレクタ (VS / IVS / FVS)
 	 * - スキントーン修飾子（EMOJI MODIFIER FITZPATRICK）
 	 * - タグ文字（TAG CHARACTER）
 	 * - ゼロ幅接合子
+	 *
+	 * 含まれないもの
+	 * - 国旗絵文字（Regional Indicator）※ペア規則
 	 *
 	 * @param {number} codepoint - コードポイント
 	 * @returns {boolean} 確認結果
@@ -916,6 +921,35 @@ export default class Unicode {
 			|| Unicode.isTagCharacterFromCodePoint(codepoint) // タグ文字
 			|| codepoint === 0x200D // ZWJ (ZERO WIDTH JOINER) ゼロ幅接合子
 		);
+	}
+
+	/**
+	 * コードポイントから国旗（Regional Indicator）を構成する文字の判定
+	 *
+	 * @param {number} codepoint - コードポイント
+	 * @returns {boolean} 確認結果
+	 */
+	static isRegionalIndicatorFromCodePoint(codepoint) {
+		// prettier-ignore
+		return (0x1F1E6 <= codepoint && codepoint <= 0x1F1FF);
+	}
+
+	/**
+	 * 2つのコードポイントが結合する場合の判定処理
+	 *
+	 * 含まれるもの:
+	 * - 国旗（Regional Indicator）
+	 *
+	 * @param {number|null} codepoint1 - 直前のコードポイント
+	 * @param {number|null} codepoint2 - 現在のコードポイント
+	 * @returns {boolean} 確認結果
+	 */
+	static isRegionalIndicatorContinuation(codepoint1, codepoint2) {
+		if ((codepoint1 == null || codepoint1 === undefined) || codepoint2 == null || codepoint2 === undefined) {
+			return false;
+		}
+		return Unicode.isRegionalIndicatorFromCodePoint(codepoint1)
+			&& Unicode.isRegionalIndicatorFromCodePoint(codepoint2);
 	}
 
 	/**

@@ -945,18 +945,26 @@ export default class Japanese {
 	}
 
 	/**
-	 * 指定したコードポイントの横幅を取得します
-	 * - 0幅 ... 結合文字, 異体字セレクタ, スキントーン修飾子, タグ文字, ゼロ幅スペース, ゼロ幅非接合子, ゼロ幅接合子, 単語結合子
-	 * - 1幅 ... ASCII文字, 半角カタカナ
+	 * 指定したコードポイントの横幅を推定して取得します
+	 * - 0幅 ... グラフェムを構成する要素
+	 *           （結合文字, 異体字セレクタ, スキントーン修飾子,
+	 *            Tag Sequence 構成文字, ZWSP, ZWNJ, ZWJ, WJ）
+	 * - 1幅 ... ASCII文字, 半角カタカナ, Regional Indicator（単体）
 	 * - 2幅 ... 上記以外
-	 * @param {number} cp 調査するコードポイント
+	 * @param {number} cp1 調査するコードポイント
+	 * @param {number} [cp2] 調査するコードポイント
 	 * @returns {number} 文字の横幅
 	 */
-	static getWidthFromCodePoint(cp) {
-		if (Unicode.isGraphemeComponentFromCodePoint(cp) || Unicode.isZeroWidthCharacterFromCodePoint(cp)) {
+	static getWidthFromCodePoint(cp1, cp2) {
+		if (cp2 !== undefined) {
+			if (Unicode.isRegionalIndicatorContinuation(cp1, cp2)) {
+				return 2;
+			}
+		}
+		if (Unicode.isGraphemeComponentFromCodePoint(cp1) || Unicode.isZeroWidthCharacterFromCodePoint(cp1)) {
 			return 0;
 			// prettier-ignore
-		} else if (cp < 0x80 || (0xFF61 <= cp && cp < 0xFFA0)) {
+		} else if (cp1 < 0x80 || (0xFF61 <= cp1 && cp1 < 0xFFA0) || Unicode.isRegionalIndicatorFromCodePoint(cp1)) {
 			return 1;
 		} else {
 			return 2;
@@ -965,8 +973,10 @@ export default class Japanese {
 
 	/**
 	 * 指定したテキストの横幅を半角／全角でカウント
-	 * - 0幅 ... 結合文字, 異体字セレクタ, スキントーン修飾子, タグ文字, ゼロ幅スペース, ゼロ幅非接合子, ゼロ幅接合子, 単語結合子
-	 * - 1幅 ... ASCII文字, 半角カタカナ
+	 * - 0幅 ... グラフェムを構成する要素
+	 *           （結合文字, 異体字セレクタ, スキントーン修飾子,
+	 *            Tag Sequence 構成文字, ZWSP, ZWNJ, ZWJ, WJ）
+	 * - 1幅 ... ASCII文字, 半角カタカナ, Regional Indicator（単体）
 	 * - 2幅 ... 上記以外
 	 * @param {string} text - カウントしたいテキスト
 	 * @returns {number} 文字の横幅
@@ -976,13 +986,24 @@ export default class Japanese {
 		let count = 0;
 		let isZWJ = false;
 		for (let i = 0; i < utf32_array.length; i++) {
+			const cp = utf32_array[i];
+			// 国旗 (Regional Indicator)
+			if (i < utf32_array.length - 1) {
+				const next = utf32_array[i + 1];
+				if (Unicode.isRegionalIndicatorContinuation(cp, next)) {
+					if (!isZWJ) {
+						count += Japanese.getWidthFromCodePoint(cp, next);
+					}
+					i++;
+					isZWJ = false;
+					continue;
+				}
+			}
 			if (!isZWJ) {
-				count += Japanese.getWidthFromCodePoint(utf32_array[i]);
+				count += Japanese.getWidthFromCodePoint(cp);
 			}
-			isZWJ = false;
-			if (utf32_array[i] === 0x200D) {
-				isZWJ = true;
-			}
+			// prettier-ignore
+			isZWJ = cp === 0x200D;
 		}
 		return count;
 	}
@@ -993,27 +1014,63 @@ export default class Japanese {
 	 * @returns {number[][]} UTF32(コードポイント)の配列が入った配列
 	 */
 	static toMojiArrayFromString(text) {
-		const utf32 = Unicode.toUTF32Array(text);
-		/**
-		 * @type {number[][]}
-		 */
-		const mojiarray = [];
+		const utf32_array = Unicode.toUTF32Array(text);
+
+		/** @type {number[][]} */
+		const moji_array = [];
+
+		/** @type {number[]} */
 		let moji = [];
+
 		let isZWJ = false;
-		for (let i = 0; i < utf32.length; i++) {
-			const cp = utf32[i];
-			if (!isZWJ && i > 0 && !Unicode.isGraphemeComponentFromCodePoint(cp)) {
-				mojiarray.push(moji);
+
+		for (let i = 0; i < utf32_array.length; i++) {
+			const cp = utf32_array[i];
+
+			// --- 国旗 (Regional Indicator) は2つで1グラフェム ---
+			if (i < utf32_array.length - 1) {
+				const next = utf32_array[i + 1];
+				if (Unicode.isRegionalIndicatorContinuation(cp, next)) {
+				// 前のグラフェムを確定
+					if (moji.length > 0) {
+						moji_array.push(moji);
+					}
+					// RIペアで新しいグラフェムを作る
+					moji = [cp, next];
+
+					moji_array.push(moji);
+					moji = []; // 次のグラフェムに備える
+
+					i++;       // 2つ目のRIを消費
+					isZWJ = false;
+					continue;
+				}
+			}
+
+			// --- 新しいグラフェム開始判定 ---
+			// 「ZWJ直後」または「グラフェム構成要素」は前に結合させる
+			const isComponent = Unicode.isGraphemeComponentFromCodePoint(cp);
+
+			if (!isZWJ && !isComponent) {
+			// ベース文字が来たので、前のグラフェムを確定して新しく開始
+				if (moji.length > 0) {
+					moji_array.push(moji);
+				}
 				moji = [];
 			}
+
 			moji.push(cp);
-			isZWJ = false;
-			if (cp === 0x200D) {
-				isZWJ = true;
-			}
+
+			// 次ループ用：ZWJ は次の文字とグラフェムを結合するため、新しい境界を作らないフラグを立てる
+			isZWJ = (cp === 0x200D);
 		}
-		mojiarray.push(moji);
-		return mojiarray;
+
+		// 末尾が残っていれば追加
+		if (moji.length > 0) {
+			moji_array.push(moji);
+		}
+
+		return moji_array;
 	}
 
 	/**
@@ -1036,8 +1093,10 @@ export default class Japanese {
 
 	/**
 	 * 指定したテキストの横幅を半角／全角で換算した場合の切り出し
-	 * - 0幅 ... 結合文字, 異体字セレクタ, スキントーン修飾子, タグ文字, ゼロ幅スペース, ゼロ幅非接合子, ゼロ幅接合子, 単語結合子
-	 * - 1幅 ... ASCII文字, 半角カタカナ
+	 * - 0幅 ... グラフェムを構成する要素
+	 *           （結合文字, 異体字セレクタ, スキントーン修飾子,
+	 *            Tag Sequence 構成文字, ZWSP, ZWNJ, ZWJ, WJ）
+	 * - 1幅 ... ASCII文字, 半角カタカナ, Regional Indicator（単体）
 	 * - 2幅 ... 上記以外
 	 * @param {string} text - 切り出したいテキスト
 	 * @param {number} offset - 切り出し位置
