@@ -427,8 +427,8 @@ class MojiAnalizerTools {
  * @property {boolean} is_NEC_special_character Windows-31J(CP932) NEC特殊文字
  * @property {number} kanji_suijun Shift_JIS-2004 を使用して漢字の水準調査(1未満だと水準調査失敗)
  * @property {boolean} is_surrogate_pair 要 Unicode サロゲートペア
- * @property {string} control_name 制御文字名（制御文字ではない場合は null）
- * @property {boolean} is_control_charcter 制御文字
+ * @property {string|null} control_name 制御文字名（制御文字ではない場合は null）
+ * @property {boolean} is_control_character 制御文字
  * @property {string} blockname Unicodeブロック名
  * @property {boolean} is_kanji 漢字
  * @property {boolean} is_hiragana ひらがな
@@ -501,7 +501,7 @@ export default class MojiAnalyzer {
 			kanji_suijun: -1,
 			is_surrogate_pair: false,
 			control_name: null,
-			is_control_charcter: false,
+			is_control_character: false,
 			blockname: "",
 			is_kanji: false,
 			is_hiragana: false,
@@ -654,7 +654,7 @@ export default class MojiAnalyzer {
 
 		// 制御文字かどうか
 		type.control_name = Unicode.toControlCharcterName(unicode_codepoint);
-		type.is_control_charcter = type.control_name ? true : false;
+		type.is_control_character = type.control_name ? true : false;
 
 		// Unicodeのブロック名
 		type.blockname = Unicode.toBlockNameFromUnicode(unicode_codepoint);
