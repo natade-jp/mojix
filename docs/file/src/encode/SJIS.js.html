@@ -145,7 +145,7 @@ export default class SJIS {
 			if (y) {
 				// &#x914D;&#x5217;&#x306A;&#x3089;&#x914D;&#x5217;&#x3092;&#x7D50;&#x5408;
 				// &#x203B; Unicode&#x306E;&#x7D50;&#x5408;&#x6587;&#x5B57;&#x306E;&#x53EF;&#x80FD;&#x6027;&#x304C;&#x3042;&#x308B;&#x305F;&#x3081;
-				if (y instanceof Array) {
+				if (Array.isArray(y)) {
 					for (let j = 0; j &lt; y.length; j++) {
 						utf16.push(y[j]);
 					}
@@ -361,7 +361,7 @@ export default class SJIS {
 	/**
 	 * &#x6307;&#x5B9A;&#x3057;&#x305F;&#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;&#x304B;&#x3089; Unicode &#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;&#x306B;&#x5909;&#x63DB;
 	 * @param {MenKuTen|string} menkuten - &#x9762;&#x533A;&#x70B9;&#x756A;&#x53F7;
-	 * @param {Object&lt;number, number|number[]&gt;} sjis_to_unicode - Shift_JIS-2004 &#x304B;&#x3089; Unicode &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
+	 * @param {Record&lt;number, number|number[]&gt;} sjis_to_unicode - Shift_JIS-2004 &#x304B;&#x3089; Unicode &#x3078;&#x306E;&#x5909;&#x63DB;&#x30DE;&#x30C3;&#x30D7;
 	 * @returns {number[]} UTF-32&#x306E;&#x914D;&#x5217;(&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#x306F;null&#x3092;&#x8FD4;&#x3059;)
 	 * @ignore
 	 */
@@ -374,7 +374,7 @@ export default class SJIS {
 		if (!unicode) {
 			return null;
 		}
-		if (unicode instanceof Array) {
+		if (Array.isArray(unicode)) {
 			return unicode;
 		} else {
 			return [unicode];
@@ -484,7 +484,7 @@ export default class SJIS {
 		if (!unicode) {
 			return null;
 		}
-		if (unicode instanceof Array) {
+		if (Array.isArray(unicode)) {
 			return unicode;
 		} else {
 			return [unicode];
@@ -494,7 +494,7 @@ export default class SJIS {
 	/**
 	 * Shift_JIS &#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;&#x304B;&#x3089;JIS&#x6F22;&#x5B57;&#x6C34;&#x6E96;&#xFF08;JIS Chinese character standard&#xFF09;&#x306B;&#x5909;&#x63DB;
 	 * @param {number} sjis_code - Shift_JIS-2004 &#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;
-	 * @returns {number} -1...&#x5909;&#x63DB;&#x4E0D;&#x53EF;, 0...&#x6C34;&#x6E96;&#x306A;&#x3057;, 1...&#x7B2C;1&#x6C34;&#x6E96;, ...
+	 * @returns {number} 0...&#x8A08;&#x7B97;&#x4E0D;&#x53EF;, 1...&#x7B2C;1&#x6C34;&#x6E96;, ...
 	 */
 	static toJISKanjiSuijunFromSJISCode(sjis_code) {
 		if (!sjis_code) {

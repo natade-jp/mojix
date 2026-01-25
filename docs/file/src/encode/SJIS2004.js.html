@@ -437,7 +437,7 @@ class SJIS2004MAP {
 		for (const key in sjis2004_to_unicode_map) {
 			const x = sjis2004_to_unicode_map[key];
 			const key_num = parseInt(key, 10);
-			if (!(x instanceof Array)) {
+			if (!(Array.isArray(x))) {
 				if (unicode_to_sjis2004_map[x]) {
 					if (x &gt; key_num) {
 						unicode_to_sjis2004_map[x] = key_num;

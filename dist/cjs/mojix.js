@@ -480,7 +480,7 @@ class Unicode {
 	 */
 	static fromCodePoint(codepoint) {
 		let utf16_array = null;
-		if (codepoint instanceof Array) {
+		if (Array.isArray(codepoint)) {
 			utf16_array = Unicode.toUTF16ArrayFromCodePoint(codepoint);
 		} else {
 			const codepoint_array = [];
@@ -876,7 +876,7 @@ class Unicode {
 	 * コードポイントから制御文字名に変換する
 	 * 変換できない場合は null を返す
 	 * @param {number} codepoint - コードポイント
-	 * @returns {string}
+	 * @returns {string|null}
 	 */
 	static toControlCharcterName(codepoint) {
 		Unicode.init();
@@ -899,12 +899,17 @@ class Unicode {
 	/**
 	 * コードポイントからグラフェム（見た目の1文字）を構成する文字の判定
 	 *
+	 * ※単独では新しいグラフェムを開始せず、直前のベース文字に結合・修飾される要素
+	 *
 	 * 含まれるもの:
 	 * - 結合文字 (Mn / Mc / Me ※VS除外)
 	 * - 異体字セレクタ (VS / IVS / FVS)
 	 * - スキントーン修飾子（EMOJI MODIFIER FITZPATRICK）
 	 * - タグ文字（TAG CHARACTER）
 	 * - ゼロ幅接合子
+	 *
+	 * 含まれないもの
+	 * - 国旗（Regional Indicator）※ペア規則
 	 *
 	 * @param {number} codepoint - コードポイント
 	 * @returns {boolean} 確認結果
@@ -918,6 +923,35 @@ class Unicode {
 			|| Unicode.isTagCharacterFromCodePoint(codepoint) // タグ文字
 			|| codepoint === 0x200D // ZWJ (ZERO WIDTH JOINER) ゼロ幅接合子
 		);
+	}
+
+	/**
+	 * コードポイントから国旗（Regional Indicator）を構成する文字の判定
+	 *
+	 * @param {number} codepoint - コードポイント
+	 * @returns {boolean} 確認結果
+	 */
+	static isRegionalIndicatorFromCodePoint(codepoint) {
+		// prettier-ignore
+		return (0x1F1E6 <= codepoint && codepoint <= 0x1F1FF);
+	}
+
+	/**
+	 * 2つのコードポイントが結合する場合の判定処理
+	 *
+	 * 含まれるもの:
+	 * - 国旗（Regional Indicator）
+	 *
+	 * @param {number|null} codepoint1 - 直前のコードポイント
+	 * @param {number|null} codepoint2 - 現在のコードポイント
+	 * @returns {boolean} 確認結果
+	 */
+	static isRegionalIndicatorContinuation(codepoint1, codepoint2) {
+		if ((codepoint1 == null || codepoint1 === undefined) || codepoint2 == null || codepoint2 === undefined) {
+			return false;
+		}
+		return Unicode.isRegionalIndicatorFromCodePoint(codepoint1)
+			&& Unicode.isRegionalIndicatorFromCodePoint(codepoint2);
 	}
 
 	/**
@@ -1134,7 +1168,7 @@ class SJIS {
 			if (y) {
 				// 配列なら配列を結合
 				// ※ Unicodeの結合文字の可能性があるため
-				if (y instanceof Array) {
+				if (Array.isArray(y)) {
 					for (let j = 0; j < y.length; j++) {
 						utf16.push(y[j]);
 					}
@@ -1350,7 +1384,7 @@ class SJIS {
 	/**
 	 * 指定した面区点番号から Unicode コードポイントに変換
 	 * @param {MenKuTen|string} menkuten - 面区点番号
-	 * @param {Object<number, number|number[]>} sjis_to_unicode - Shift_JIS-2004 から Unicode への変換マップ
+	 * @param {Record<number, number|number[]>} sjis_to_unicode - Shift_JIS-2004 から Unicode への変換マップ
 	 * @returns {number[]} UTF-32の配列(存在しない場合はnullを返す)
 	 * @ignore
 	 */
@@ -1363,7 +1397,7 @@ class SJIS {
 		if (!unicode) {
 			return null;
 		}
-		if (unicode instanceof Array) {
+		if (Array.isArray(unicode)) {
 			return unicode;
 		} else {
 			return [unicode];
@@ -1473,7 +1507,7 @@ class SJIS {
 		if (!unicode) {
 			return null;
 		}
-		if (unicode instanceof Array) {
+		if (Array.isArray(unicode)) {
 			return unicode;
 		} else {
 			return [unicode];
@@ -1483,7 +1517,7 @@ class SJIS {
 	/**
 	 * Shift_JIS のコードポイントからJIS漢字水準（JIS Chinese character standard）に変換
 	 * @param {number} sjis_code - Shift_JIS-2004 のコードポイント
-	 * @returns {number} -1...変換不可, 0...水準なし, 1...第1水準, ...
+	 * @returns {number} 0...計算不可, 1...第1水準, ...
 	 */
 	static toJISKanjiSuijunFromSJISCode(sjis_code) {
 		if (!sjis_code) {
@@ -2386,7 +2420,7 @@ class SJIS2004MAP {
 		for (const key in sjis2004_to_unicode_map) {
 			const x = sjis2004_to_unicode_map[key];
 			const key_num = parseInt(key, 10);
-			if (!(x instanceof Array)) {
+			if (!(Array.isArray(x))) {
 				if (unicode_to_sjis2004_map[x]) {
 					if (x > key_num) {
 						unicode_to_sjis2004_map[x] = key_num;
@@ -4051,18 +4085,26 @@ class Japanese {
 	}
 
 	/**
-	 * 指定したコードポイントの横幅を取得します
-	 * - 0幅 ... 結合文字, 異体字セレクタ, スキントーン修飾子, タグ文字, ゼロ幅スペース, ゼロ幅非接合子, ゼロ幅接合子, 単語結合子
-	 * - 1幅 ... ASCII文字, 半角カタカナ
+	 * 指定したコードポイントの横幅を推定して取得します
+	 * - 0幅 ... グラフェムを構成する要素
+	 *           （結合文字, 異体字セレクタ, スキントーン修飾子,
+	 *            Tag Sequence 構成文字, ZWSP, ZWNJ, ZWJ, WJ）
+	 * - 1幅 ... ASCII文字, 半角カタカナ, Regional Indicator（単体）
 	 * - 2幅 ... 上記以外
-	 * @param {number} cp 調査するコードポイント
+	 * @param {number} cp1 調査するコードポイント
+	 * @param {number} [cp2] 調査するコードポイント
 	 * @returns {number} 文字の横幅
 	 */
-	static getWidthFromCodePoint(cp) {
-		if (Unicode.isGraphemeComponentFromCodePoint(cp) || Unicode.isZeroWidthCharacterFromCodePoint(cp)) {
+	static getWidthFromCodePoint(cp1, cp2) {
+		if (cp2 !== undefined) {
+			if (Unicode.isRegionalIndicatorContinuation(cp1, cp2)) {
+				return 2;
+			}
+		}
+		if (Unicode.isGraphemeComponentFromCodePoint(cp1) || Unicode.isZeroWidthCharacterFromCodePoint(cp1)) {
 			return 0;
 			// prettier-ignore
-		} else if (cp < 0x80 || (0xFF61 <= cp && cp < 0xFFA0)) {
+		} else if (cp1 < 0x80 || (0xFF61 <= cp1 && cp1 < 0xFFA0) || Unicode.isRegionalIndicatorFromCodePoint(cp1)) {
 			return 1;
 		} else {
 			return 2;
@@ -4071,8 +4113,10 @@ class Japanese {
 
 	/**
 	 * 指定したテキストの横幅を半角／全角でカウント
-	 * - 0幅 ... 結合文字, 異体字セレクタ, スキントーン修飾子, タグ文字, ゼロ幅スペース, ゼロ幅非接合子, ゼロ幅接合子, 単語結合子
-	 * - 1幅 ... ASCII文字, 半角カタカナ
+	 * - 0幅 ... グラフェムを構成する要素
+	 *           （結合文字, 異体字セレクタ, スキントーン修飾子,
+	 *            Tag Sequence 構成文字, ZWSP, ZWNJ, ZWJ, WJ）
+	 * - 1幅 ... ASCII文字, 半角カタカナ, Regional Indicator（単体）
 	 * - 2幅 ... 上記以外
 	 * @param {string} text - カウントしたいテキスト
 	 * @returns {number} 文字の横幅
@@ -4082,13 +4126,24 @@ class Japanese {
 		let count = 0;
 		let isZWJ = false;
 		for (let i = 0; i < utf32_array.length; i++) {
+			const cp = utf32_array[i];
+			// 国旗 (Regional Indicator)
+			if (i < utf32_array.length - 1) {
+				const next = utf32_array[i + 1];
+				if (Unicode.isRegionalIndicatorContinuation(cp, next)) {
+					if (!isZWJ) {
+						count += Japanese.getWidthFromCodePoint(cp, next);
+					}
+					i++;
+					isZWJ = false;
+					continue;
+				}
+			}
 			if (!isZWJ) {
-				count += Japanese.getWidthFromCodePoint(utf32_array[i]);
+				count += Japanese.getWidthFromCodePoint(cp);
 			}
-			isZWJ = false;
-			if (utf32_array[i] === 0x200D) {
-				isZWJ = true;
-			}
+			// prettier-ignore
+			isZWJ = cp === 0x200D;
 		}
 		return count;
 	}
@@ -4096,35 +4151,71 @@ class Japanese {
 	/**
 	 * 文字幅を考慮して文字列を文字の配列に変換する
 	 * @param {string} text - 変換したいテキスト
-	 * @returns {Array<number[]>} UTF32(コードポイント)の配列が入った配列
+	 * @returns {number[][]} UTF32(コードポイント)の配列が入った配列
 	 */
 	static toMojiArrayFromString(text) {
-		const utf32 = Unicode.toUTF32Array(text);
-		/**
-		 * @type {Array<number[]>}
-		 */
-		const mojiarray = [];
+		const utf32_array = Unicode.toUTF32Array(text);
+
+		/** @type {number[][]} */
+		const moji_array = [];
+
+		/** @type {number[]} */
 		let moji = [];
+
 		let isZWJ = false;
-		for (let i = 0; i < utf32.length; i++) {
-			const cp = utf32[i];
-			if (!isZWJ && i > 0 && !Unicode.isGraphemeComponentFromCodePoint(cp)) {
-				mojiarray.push(moji);
+
+		for (let i = 0; i < utf32_array.length; i++) {
+			const cp = utf32_array[i];
+
+			// --- 国旗 (Regional Indicator) は2つで1グラフェム ---
+			if (i < utf32_array.length - 1) {
+				const next = utf32_array[i + 1];
+				if (Unicode.isRegionalIndicatorContinuation(cp, next)) {
+				// 前のグラフェムを確定
+					if (moji.length > 0) {
+						moji_array.push(moji);
+					}
+					// RIペアで新しいグラフェムを作る
+					moji = [cp, next];
+
+					moji_array.push(moji);
+					moji = []; // 次のグラフェムに備える
+
+					i++;       // 2つ目のRIを消費
+					isZWJ = false;
+					continue;
+				}
+			}
+
+			// --- 新しいグラフェム開始判定 ---
+			// 「ZWJ直後」または「グラフェム構成要素」は前に結合させる
+			const isComponent = Unicode.isGraphemeComponentFromCodePoint(cp);
+
+			if (!isZWJ && !isComponent) {
+			// ベース文字が来たので、前のグラフェムを確定して新しく開始
+				if (moji.length > 0) {
+					moji_array.push(moji);
+				}
 				moji = [];
 			}
+
 			moji.push(cp);
-			isZWJ = false;
-			if (cp === 0x200D) {
-				isZWJ = true;
-			}
+
+			// 次ループ用：ZWJ は次の文字とグラフェムを結合するため、新しい境界を作らないフラグを立てる
+			isZWJ = (cp === 0x200D);
 		}
-		mojiarray.push(moji);
-		return mojiarray;
+
+		// 末尾が残っていれば追加
+		if (moji.length > 0) {
+			moji_array.push(moji);
+		}
+
+		return moji_array;
 	}
 
 	/**
 	 * 結合した文字を考慮して文字の配列を文字列に変換する
-	 * @param {Array<number[]>} mojiarray - UTF32(コードポイント)の配列が入った配列
+	 * @param {number[][]} mojiarray - UTF32(コードポイント)の配列が入った配列
 	 * @returns {string} UTF32(コードポイント)の配列が入った配列
 	 */
 	static toStringFromMojiArray(mojiarray) {
@@ -4142,8 +4233,10 @@ class Japanese {
 
 	/**
 	 * 指定したテキストの横幅を半角／全角で換算した場合の切り出し
-	 * - 0幅 ... 結合文字, 異体字セレクタ, スキントーン修飾子, タグ文字, ゼロ幅スペース, ゼロ幅非接合子, ゼロ幅接合子, 単語結合子
-	 * - 1幅 ... ASCII文字, 半角カタカナ
+	 * - 0幅 ... グラフェムを構成する要素
+	 *           （結合文字, 異体字セレクタ, スキントーン修飾子,
+	 *            Tag Sequence 構成文字, ZWSP, ZWNJ, ZWJ, WJ）
+	 * - 1幅 ... ASCII文字, 半角カタカナ, Regional Indicator（単体）
 	 * - 2幅 ... 上記以外
 	 * @param {string} text - 切り出したいテキスト
 	 * @param {number} offset - 切り出し位置
@@ -4155,7 +4248,7 @@ class Japanese {
 		const moji_array = Japanese.toMojiArrayFromString(text);
 		const SPACE = [0x20]; // ' '
 		/**
-		 * @type {Array<number[]>}
+		 * @type {number[][]}
 		 */
 		const output = [];
 		let is_target = false;
@@ -4617,19 +4710,19 @@ class MojiAnalizerTools {
  * @property {boolean} is_IBM_extended_character Windows-31J(CP932) IBM拡張文字
  * @property {boolean} is_NEC_selection_IBM_extended_character Windows-31J(CP932) NEC選定IBM拡張文字
  * @property {boolean} is_NEC_special_character Windows-31J(CP932) NEC特殊文字
- * @property {number} kanji_suijun Shift_JIS-2004 を使用して漢字の水準調査(1未満だと水準調査失敗)
+ * @property {number} kanji_suijun Shift_JIS-2004 を使用して漢字の水準調査(計算不可の場合 0)
  * @property {boolean} is_surrogate_pair 要 Unicode サロゲートペア
- * @property {string} control_name 制御文字名（制御文字ではない場合は null）
- * @property {boolean} is_control_charcter 制御文字
+ * @property {string|null} control_name 制御文字名（制御文字ではない場合は null）
+ * @property {boolean} is_control_character 制御文字
  * @property {string} blockname Unicodeブロック名
  * @property {boolean} is_kanji 漢字
  * @property {boolean} is_hiragana ひらがな
  * @property {boolean} is_katakana カタカナ
  * @property {boolean} is_fullwidth_ascii 全角ASCII
  * @property {boolean} is_halfwidth_katakana 半角カタカナ
- * @property {boolean} is_emoji 絵文字
- * @property {boolean} is_emoticons 顔文字
- * @property {boolean} is_symbol_base 記号(VS16 が付くと絵文字化)
+ * @property {boolean} is_emoji 絵文字(絵文字表示されることが多い Unicode ブロックに属する文字)
+ * @property {boolean} is_emoticons 顔文字(Emoticons ブロックに属する文字)
+ * @property {boolean} is_symbol_base 記号(テキスト記号の定義だがVS16が続くと絵文字に切り替えが発生)
  * @property {boolean} is_gaiji 外字
  * @property {boolean} is_grapheme_component グラフェムを構成するための文字
  * @property {boolean} is_zero_width_character ゼロ幅文字
@@ -4637,6 +4730,7 @@ class MojiAnalizerTools {
  * @property {boolean} is_variation_selector 異体字セレクタ
  * @property {boolean} is_skin_tone_modifier スキントーン修飾子
  * @property {boolean} is_tag_character タグ文字
+ * @property {boolean} is_regional_indicator 国旗絵文字を構成するための Regional Indicator 文字（2文字で1つの国旗になる）
  */
 
 /**
@@ -4690,10 +4784,10 @@ class MojiAnalyzer {
 			is_IBM_extended_character: false,
 			is_NEC_selection_IBM_extended_character: false,
 			is_NEC_special_character: false,
-			kanji_suijun: -1,
+			kanji_suijun: 0,
 			is_surrogate_pair: false,
 			control_name: null,
-			is_control_charcter: false,
+			is_control_character: false,
 			blockname: "",
 			is_kanji: false,
 			is_hiragana: false,
@@ -4709,7 +4803,8 @@ class MojiAnalyzer {
 			is_combining_mark: false,
 			is_variation_selector: false,
 			is_skin_tone_modifier: false,
-			is_tag_character: false
+			is_tag_character: false,
+			is_regional_indicator: false
 		};
 
 		/**
@@ -4776,7 +4871,7 @@ class MojiAnalyzer {
 		// prettier-ignore
 		type.is_NEC_special_character = cp932code ? 0x8740 <= cp932code && cp932code <= 0x879C : false;
 
-		// Shift_JIS-2004 を使用して漢字の水準調査(ない場合はnullになる)
+		// Shift_JIS-2004 を使用して漢字の水準調査(計算不可の場合 0)
 		type.kanji_suijun = SJIS.toJISKanjiSuijunFromSJISCode(sjis2004code);
 
 		// Unicodeの配列
@@ -4846,7 +4941,7 @@ class MojiAnalyzer {
 
 		// 制御文字かどうか
 		type.control_name = Unicode.toControlCharcterName(unicode_codepoint);
-		type.is_control_charcter = type.control_name ? true : false;
+		type.is_control_character = type.control_name ? true : false;
 
 		// Unicodeのブロック名
 		type.blockname = Unicode.toBlockNameFromUnicode(unicode_codepoint);
@@ -4876,6 +4971,8 @@ class MojiAnalyzer {
 		type.is_skin_tone_modifier = Unicode.isEmojiModifierFromCodePoint(unicode_codepoint);
 		// タグ文字
 		type.is_tag_character = Unicode.isTagCharacterFromCodePoint(unicode_codepoint);
+		// 国旗絵文字を構成するためのRI文字
+		type.is_regional_indicator = Unicode.isRegionalIndicatorFromCodePoint(unicode_codepoint);
 
 		return data;
 	}
@@ -5197,7 +5294,7 @@ class Mojix {
 	 * @returns {string} 変換後のテキスト
 	 */
 	static fromCodePoint(codepoint) {
-		if (codepoint instanceof Array) {
+		if (Array.isArray(codepoint)) {
 			return Unicode.fromCodePoint(codepoint);
 		} else {
 			const codepoint_array = [];
@@ -5280,7 +5377,7 @@ class Mojix {
 	/**
 	 * 結合した文字を考慮して文字列を文字の配列に変換する
 	 * @param {string} text - 変換したいテキスト
-	 * @returns {Array<number[]>} UTF32(コードポイント)の配列が入った配列
+	 * @returns {number[][]} UTF32(コードポイント)の配列が入った配列
 	 */
 	static toMojiArrayFromString(text) {
 		return Japanese.toMojiArrayFromString(text);
@@ -5288,7 +5385,7 @@ class Mojix {
 
 	/**
 	 * 結合した文字を考慮して文字の配列を文字列に変換する
-	 * @param {Array<number[]>} mojiarray - UTF32(コードポイント)の配列が入った配列
+	 * @param {number[][]} mojiarray - UTF32(コードポイント)の配列が入った配列
 	 * @returns {string} UTF32(コードポイント)の配列が入った配列
 	 */
 	static toStringFromMojiArray(mojiarray) {
@@ -5314,8 +5411,10 @@ class Mojix {
 
 	/**
 	 * 指定したテキストの横幅を半角／全角でカウント
-	 * - 0幅 ... 結合文字, 異体字セレクタ, スキントーン修飾子, タグ文字, ゼロ幅スペース, ゼロ幅非接合子, ゼロ幅接合子, 単語結合子
-	 * - 1幅 ... ASCII文字, 半角カタカナ
+	 * - 0幅 ... グラフェムを構成する要素
+	 *           （結合文字, 異体字セレクタ, スキントーン修飾子,
+	 *            Tag Sequence 構成文字, ZWSP, ZWNJ, ZWJ, WJ）
+	 * - 1幅 ... ASCII文字, 半角カタカナ, Regional Indicator（単体）
 	 * - 2幅 ... 上記以外
 	 * @param {string} text - カウントしたいテキスト
 	 * @returns {number} 文字の横幅
@@ -5326,8 +5425,10 @@ class Mojix {
 
 	/**
 	 * 指定したテキストを切り出す
-	 * - 0幅 ... 結合文字, 異体字セレクタ, スキントーン修飾子, タグ文字, ゼロ幅スペース, ゼロ幅非接合子, ゼロ幅接合子, 単語結合子
-	 * - 1幅 ... ASCII文字, 半角カタカナ
+	 * - 0幅 ... グラフェムを構成する要素
+	 *           （結合文字, 異体字セレクタ, スキントーン修飾子,
+	 *            Tag Sequence 構成文字, ZWSP, ZWNJ, ZWJ, WJ）
+	 * - 1幅 ... ASCII文字, 半角カタカナ, Regional Indicator（単体）
 	 * - 2幅 ... 上記以外
 	 * @param {string} text - 切り出したいテキスト
 	 * @param {number} offset - 切り出し位置

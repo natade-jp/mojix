@@ -114,7 +114,7 @@ type MojiTypeData = {
      */
     is_NEC_special_character: boolean;
     /**
-     * Shift_JIS-2004 を使用して漢字の水準調査(1未満だと水準調査失敗)
+     * Shift_JIS-2004 を使用して漢字の水準調査(計算不可の場合 0)
      */
     kanji_suijun: number;
     /**
@@ -124,11 +124,11 @@ type MojiTypeData = {
     /**
      * 制御文字名（制御文字ではない場合は null）
      */
-    control_name: string;
+    control_name: string | null;
     /**
      * 制御文字
      */
-    is_control_charcter: boolean;
+    is_control_character: boolean;
     /**
      * Unicodeブロック名
      */
@@ -154,15 +154,15 @@ type MojiTypeData = {
      */
     is_halfwidth_katakana: boolean;
     /**
-     * 絵文字
+     * 絵文字(絵文字表示されることが多い Unicode ブロックに属する文字)
      */
     is_emoji: boolean;
     /**
-     * 顔文字
+     * 顔文字(Emoticons ブロックに属する文字)
      */
     is_emoticons: boolean;
     /**
-     * 記号(VS16 が付くと絵文字化)
+     * 記号(テキスト記号の定義だがVS16が続くと絵文字に切り替えが発生)
      */
     is_symbol_base: boolean;
     /**
@@ -193,6 +193,10 @@ type MojiTypeData = {
      * タグ文字
      */
     is_tag_character: boolean;
+    /**
+     * 国旗絵文字を構成するための Regional Indicator 文字（2文字で1つの国旗になる）
+     */
+    is_regional_indicator: boolean;
 };
 /**
  * 文字の種別情報
@@ -295,15 +299,15 @@ declare class Mojix {
     /**
      * 結合した文字を考慮して文字列を文字の配列に変換する
      * @param {string} text - 変換したいテキスト
-     * @returns {Array<number[]>} UTF32(コードポイント)の配列が入った配列
+     * @returns {number[][]} UTF32(コードポイント)の配列が入った配列
      */
-    static toMojiArrayFromString(text: string): Array<number[]>;
+    static toMojiArrayFromString(text: string): number[][];
     /**
      * 結合した文字を考慮して文字の配列を文字列に変換する
-     * @param {Array<number[]>} mojiarray - UTF32(コードポイント)の配列が入った配列
+     * @param {number[][]} mojiarray - UTF32(コードポイント)の配列が入った配列
      * @returns {string} UTF32(コードポイント)の配列が入った配列
      */
-    static toStringFromMojiArray(mojiarray: Array<number[]>): string;
+    static toStringFromMojiArray(mojiarray: number[][]): string;
     /**
      * 指定したテキストを切り出す
      * - 単位はコードポイントの文字数
@@ -316,8 +320,10 @@ declare class Mojix {
     static cutTextForCodePoint(text: string, offset: number, size: number): string;
     /**
      * 指定したテキストの横幅を半角／全角でカウント
-     * - 0幅 ... 結合文字, 異体字セレクタ, スキントーン修飾子, タグ文字, ゼロ幅スペース, ゼロ幅非接合子, ゼロ幅接合子, 単語結合子
-     * - 1幅 ... ASCII文字, 半角カタカナ
+     * - 0幅 ... グラフェムを構成する要素
+     *           （結合文字, 異体字セレクタ, スキントーン修飾子,
+     *            Tag Sequence 構成文字, ZWSP, ZWNJ, ZWJ, WJ）
+     * - 1幅 ... ASCII文字, 半角カタカナ, Regional Indicator（単体）
      * - 2幅 ... 上記以外
      * @param {string} text - カウントしたいテキスト
      * @returns {number} 文字の横幅
@@ -325,8 +331,10 @@ declare class Mojix {
     static getWidth(text: string): number;
     /**
      * 指定したテキストを切り出す
-     * - 0幅 ... 結合文字, 異体字セレクタ, スキントーン修飾子, タグ文字, ゼロ幅スペース, ゼロ幅非接合子, ゼロ幅接合子, 単語結合子
-     * - 1幅 ... ASCII文字, 半角カタカナ
+     * - 0幅 ... グラフェムを構成する要素
+     *           （結合文字, 異体字セレクタ, スキントーン修飾子,
+     *            Tag Sequence 構成文字, ZWSP, ZWNJ, ZWJ, WJ）
+     * - 1幅 ... ASCII文字, 半角カタカナ, Regional Indicator（単体）
      * - 2幅 ... 上記以外
      * @param {string} text - 切り出したいテキスト
      * @param {number} offset - 切り出し位置

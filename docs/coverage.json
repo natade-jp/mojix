@@ -1,7 +1,7 @@
 {
   "coverage": "100%",
-  "expectCount": 192,
-  "actualCount": 192,
+  "expectCount": 194,
+  "actualCount": 194,
   "files": {
     "src/encode/CP932.js": {
       "expectCount": 12,
@@ -34,8 +34,8 @@
       "undocumentLines": []
     },
     "src/encode/Unicode.js": {
-      "expectCount": 33,
-      "actualCount": 33,
+      "expectCount": 35,
+      "actualCount": 35,
       "undocumentLines": []
     },
     "src/language/Japanese.js": {

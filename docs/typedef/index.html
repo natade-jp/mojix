@@ -566,7 +566,7 @@
       <td data-ice="name" class="code" data-depth="0">kanji_suijun</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>Shift_JIS-2004 &#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x6F22;&#x5B57;&#x306E;&#x6C34;&#x6E96;&#x8ABF;&#x67FB;(1&#x672A;&#x6E80;&#x3060;&#x3068;&#x6C34;&#x6E96;&#x8ABF;&#x67FB;&#x5931;&#x6557;)</p>
+      <td data-ice="description"><p>Shift_JIS-2004 &#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x6F22;&#x5B57;&#x306E;&#x6C34;&#x6E96;&#x8ABF;&#x67FB;(&#x8A08;&#x7B97;&#x4E0D;&#x53EF;&#x306E;&#x5834;&#x5408; 0)</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
@@ -578,13 +578,13 @@
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">control_name</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null">null</a></span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>&#x5236;&#x5FA1;&#x6587;&#x5B57;&#x540D;&#xFF08;&#x5236;&#x5FA1;&#x6587;&#x5B57;&#x3067;&#x306F;&#x306A;&#x3044;&#x5834;&#x5408;&#x306F; null&#xFF09;</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">is_control_charcter</td>
+      <td data-ice="name" class="code" data-depth="0">is_control_character</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>&#x5236;&#x5FA1;&#x6587;&#x5B57;</p>
@@ -636,21 +636,21 @@
       <td data-ice="name" class="code" data-depth="0">is_emoji</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>&#x7D75;&#x6587;&#x5B57;</p>
+      <td data-ice="description"><p>&#x7D75;&#x6587;&#x5B57;(&#x7D75;&#x6587;&#x5B57;&#x8868;&#x793A;&#x3055;&#x308C;&#x308B;&#x3053;&#x3068;&#x304C;&#x591A;&#x3044; Unicode &#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x306B;&#x5C5E;&#x3059;&#x308B;&#x6587;&#x5B57;)</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">is_emoticons</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>&#x9854;&#x6587;&#x5B57;</p>
+      <td data-ice="description"><p>&#x9854;&#x6587;&#x5B57;(Emoticons &#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x306B;&#x5C5E;&#x3059;&#x308B;&#x6587;&#x5B57;)</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">is_symbol_base</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>&#x8A18;&#x53F7;(VS16 &#x304C;&#x4ED8;&#x304F;&#x3068;&#x7D75;&#x6587;&#x5B57;&#x5316;)</p>
+      <td data-ice="description"><p>&#x8A18;&#x53F7;(&#x30C6;&#x30AD;&#x30B9;&#x30C8;&#x8A18;&#x53F7;&#x306E;&#x5B9A;&#x7FA9;&#x3060;&#x304C;VS16&#x304C;&#x7D9A;&#x304F;&#x3068;&#x7D75;&#x6587;&#x5B57;&#x306B;&#x5207;&#x308A;&#x66FF;&#x3048;&#x304C;&#x767A;&#x751F;)</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
@@ -700,6 +700,13 @@
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>&#x30BF;&#x30B0;&#x6587;&#x5B57;</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">is_regional_indicator</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>&#x56FD;&#x65D7;&#x7D75;&#x6587;&#x5B57;&#x3092;&#x69CB;&#x6210;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Regional Indicator &#x6587;&#x5B57;&#xFF08;2&#x6587;&#x5B57;&#x3067;1&#x3064;&#x306E;&#x56FD;&#x65D7;&#x306B;&#x306A;&#x308B;&#xFF09;</p>
 </td>
     </tr>
 </tbody>

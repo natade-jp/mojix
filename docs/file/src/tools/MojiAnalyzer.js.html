@@ -466,19 +466,19 @@ class MojiAnalizerTools {
  * @property {boolean} is_IBM_extended_character Windows-31J(CP932) IBM&#x62E1;&#x5F35;&#x6587;&#x5B57;
  * @property {boolean} is_NEC_selection_IBM_extended_character Windows-31J(CP932) NEC&#x9078;&#x5B9A;IBM&#x62E1;&#x5F35;&#x6587;&#x5B57;
  * @property {boolean} is_NEC_special_character Windows-31J(CP932) NEC&#x7279;&#x6B8A;&#x6587;&#x5B57;
- * @property {number} kanji_suijun Shift_JIS-2004 &#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x6F22;&#x5B57;&#x306E;&#x6C34;&#x6E96;&#x8ABF;&#x67FB;(1&#x672A;&#x6E80;&#x3060;&#x3068;&#x6C34;&#x6E96;&#x8ABF;&#x67FB;&#x5931;&#x6557;)
+ * @property {number} kanji_suijun Shift_JIS-2004 &#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x6F22;&#x5B57;&#x306E;&#x6C34;&#x6E96;&#x8ABF;&#x67FB;(&#x8A08;&#x7B97;&#x4E0D;&#x53EF;&#x306E;&#x5834;&#x5408; 0)
  * @property {boolean} is_surrogate_pair &#x8981; Unicode &#x30B5;&#x30ED;&#x30B2;&#x30FC;&#x30C8;&#x30DA;&#x30A2;
- * @property {string} control_name &#x5236;&#x5FA1;&#x6587;&#x5B57;&#x540D;&#xFF08;&#x5236;&#x5FA1;&#x6587;&#x5B57;&#x3067;&#x306F;&#x306A;&#x3044;&#x5834;&#x5408;&#x306F; null&#xFF09;
- * @property {boolean} is_control_charcter &#x5236;&#x5FA1;&#x6587;&#x5B57;
+ * @property {string|null} control_name &#x5236;&#x5FA1;&#x6587;&#x5B57;&#x540D;&#xFF08;&#x5236;&#x5FA1;&#x6587;&#x5B57;&#x3067;&#x306F;&#x306A;&#x3044;&#x5834;&#x5408;&#x306F; null&#xFF09;
+ * @property {boolean} is_control_character &#x5236;&#x5FA1;&#x6587;&#x5B57;
  * @property {string} blockname Unicode&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x540D;
  * @property {boolean} is_kanji &#x6F22;&#x5B57;
  * @property {boolean} is_hiragana &#x3072;&#x3089;&#x304C;&#x306A;
  * @property {boolean} is_katakana &#x30AB;&#x30BF;&#x30AB;&#x30CA;
  * @property {boolean} is_fullwidth_ascii &#x5168;&#x89D2;ASCII
  * @property {boolean} is_halfwidth_katakana &#x534A;&#x89D2;&#x30AB;&#x30BF;&#x30AB;&#x30CA;
- * @property {boolean} is_emoji &#x7D75;&#x6587;&#x5B57;
- * @property {boolean} is_emoticons &#x9854;&#x6587;&#x5B57;
- * @property {boolean} is_symbol_base &#x8A18;&#x53F7;(VS16 &#x304C;&#x4ED8;&#x304F;&#x3068;&#x7D75;&#x6587;&#x5B57;&#x5316;)
+ * @property {boolean} is_emoji &#x7D75;&#x6587;&#x5B57;(&#x7D75;&#x6587;&#x5B57;&#x8868;&#x793A;&#x3055;&#x308C;&#x308B;&#x3053;&#x3068;&#x304C;&#x591A;&#x3044; Unicode &#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x306B;&#x5C5E;&#x3059;&#x308B;&#x6587;&#x5B57;)
+ * @property {boolean} is_emoticons &#x9854;&#x6587;&#x5B57;(Emoticons &#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x306B;&#x5C5E;&#x3059;&#x308B;&#x6587;&#x5B57;)
+ * @property {boolean} is_symbol_base &#x8A18;&#x53F7;(&#x30C6;&#x30AD;&#x30B9;&#x30C8;&#x8A18;&#x53F7;&#x306E;&#x5B9A;&#x7FA9;&#x3060;&#x304C;VS16&#x304C;&#x7D9A;&#x304F;&#x3068;&#x7D75;&#x6587;&#x5B57;&#x306B;&#x5207;&#x308A;&#x66FF;&#x3048;&#x304C;&#x767A;&#x751F;)
  * @property {boolean} is_gaiji &#x5916;&#x5B57;
  * @property {boolean} is_grapheme_component &#x30B0;&#x30E9;&#x30D5;&#x30A7;&#x30E0;&#x3092;&#x69CB;&#x6210;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x6587;&#x5B57;
  * @property {boolean} is_zero_width_character &#x30BC;&#x30ED;&#x5E45;&#x6587;&#x5B57;
@@ -486,6 +486,7 @@ class MojiAnalizerTools {
  * @property {boolean} is_variation_selector &#x7570;&#x4F53;&#x5B57;&#x30BB;&#x30EC;&#x30AF;&#x30BF;
  * @property {boolean} is_skin_tone_modifier &#x30B9;&#x30AD;&#x30F3;&#x30C8;&#x30FC;&#x30F3;&#x4FEE;&#x98FE;&#x5B50;
  * @property {boolean} is_tag_character &#x30BF;&#x30B0;&#x6587;&#x5B57;
+ * @property {boolean} is_regional_indicator &#x56FD;&#x65D7;&#x7D75;&#x6587;&#x5B57;&#x3092;&#x69CB;&#x6210;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E; Regional Indicator &#x6587;&#x5B57;&#xFF08;2&#x6587;&#x5B57;&#x3067;1&#x3064;&#x306E;&#x56FD;&#x65D7;&#x306B;&#x306A;&#x308B;&#xFF09;
  */
 
 /**
@@ -539,10 +540,10 @@ export default class MojiAnalyzer {
 			is_IBM_extended_character: false,
 			is_NEC_selection_IBM_extended_character: false,
 			is_NEC_special_character: false,
-			kanji_suijun: -1,
+			kanji_suijun: 0,
 			is_surrogate_pair: false,
 			control_name: null,
-			is_control_charcter: false,
+			is_control_character: false,
 			blockname: &quot;&quot;,
 			is_kanji: false,
 			is_hiragana: false,
@@ -558,7 +559,8 @@ export default class MojiAnalyzer {
 			is_combining_mark: false,
 			is_variation_selector: false,
 			is_skin_tone_modifier: false,
-			is_tag_character: false
+			is_tag_character: false,
+			is_regional_indicator: false
 		};
 
 		/**
@@ -625,7 +627,7 @@ export default class MojiAnalyzer {
 		// prettier-ignore
 		type.is_NEC_special_character = cp932code ? 0x8740 &lt;= cp932code &amp;&amp; cp932code &lt;= 0x879C : false;
 
-		// Shift_JIS-2004 &#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x6F22;&#x5B57;&#x306E;&#x6C34;&#x6E96;&#x8ABF;&#x67FB;(&#x306A;&#x3044;&#x5834;&#x5408;&#x306F;null&#x306B;&#x306A;&#x308B;)
+		// Shift_JIS-2004 &#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x6F22;&#x5B57;&#x306E;&#x6C34;&#x6E96;&#x8ABF;&#x67FB;(&#x8A08;&#x7B97;&#x4E0D;&#x53EF;&#x306E;&#x5834;&#x5408; 0)
 		type.kanji_suijun = SJIS.toJISKanjiSuijunFromSJISCode(sjis2004code);
 
 		// Unicode&#x306E;&#x914D;&#x5217;
@@ -695,7 +697,7 @@ export default class MojiAnalyzer {
 
 		// &#x5236;&#x5FA1;&#x6587;&#x5B57;&#x304B;&#x3069;&#x3046;&#x304B;
 		type.control_name = Unicode.toControlCharcterName(unicode_codepoint);
-		type.is_control_charcter = type.control_name ? true : false;
+		type.is_control_character = type.control_name ? true : false;
 
 		// Unicode&#x306E;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x540D;
 		type.blockname = Unicode.toBlockNameFromUnicode(unicode_codepoint);
@@ -725,6 +727,8 @@ export default class MojiAnalyzer {
 		type.is_skin_tone_modifier = Unicode.isEmojiModifierFromCodePoint(unicode_codepoint);
 		// &#x30BF;&#x30B0;&#x6587;&#x5B57;
 		type.is_tag_character = Unicode.isTagCharacterFromCodePoint(unicode_codepoint);
+		// &#x56FD;&#x65D7;&#x7D75;&#x6587;&#x5B57;&#x3092;&#x69CB;&#x6210;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;RI&#x6587;&#x5B57;
+		type.is_regional_indicator = Unicode.isRegionalIndicatorFromCodePoint(unicode_codepoint);
 
 		return data;
 	}

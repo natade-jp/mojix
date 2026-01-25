@@ -1,5 +1,32 @@
 # History
 
+## Mojix
+
+### v0.0.3 (2026-01-25)
+
+※リリース準備中バージョン
+
+### 機能改善
+
+- 国旗 (Regional Indicator)の文字に対応
+
+### 変更
+
+- MojiJS から名前を変更
+- ECMAScript 3 のサポートを終了
+
+### 不具合修正
+
+- `is_control_character` の綴りが誤っていたのを修正
+
+---
+
+## MojiJS (legacy)
+
+> This section contains the history before the project was renamed to mojix.
+> The original repository is archived at:
+> https://github.com/natade-jp/MojiJS
+
 ## v6.0.1
 
 ### 不具合修正

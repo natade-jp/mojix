@@ -128,3 +128,6 @@ batch();
 
 // esdoc
 NTFile.exec('npx esdoc -c "./scripts/.esdoc.json"');
+
+// esdoc
+NTFile.copy("./dist/umd/mojix.min.js", "./docs/examples/libs/mojix.min.js");

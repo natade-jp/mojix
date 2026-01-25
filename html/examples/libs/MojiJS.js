@@ -1,1 +1,0 @@
-import MojiJS from "../../../build/mojijs.esm.min.js";export default MojiJS;
