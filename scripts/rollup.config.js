@@ -5,37 +5,49 @@ import dts from "rollup-plugin-dts";
 
 /**
  * 公開用ファイルの設定データを作成
- * @param {string} banner - バナー
- * @param {string} moduleName - ライブラリ名
- * @param {string} input_name - 入力となるES6のライブラリのトップファイル名
- * @param {string} output_name - 出力するファイル名
- * @param {string} format - umd, cjs, esm
- * @param {boolean} isUglify - コードを最小化させるか否か
+ * @param {Object} options - オプション
+ * @param {string} options.banner - バナー（minify時に付与）
+ * @param {string} options.globalName - UMD/IIFE でのグローバル変数名（例: "Mojix"）
+ * @param {string} options.input - 入力となるESMのトップファイル名
+ * @param {string} options.outputFile - 出力するファイル名
+ * @param {"umd"|"iife"|"cjs"|"esm"} options.format - 出力フォーマット
+ * @param {boolean} options.isUglify - コードを最小化させるか否か
+ * @returns {import("rollup").RollupOptions}
  */
-const createData = function (banner, moduleName, input_name, output_name, format, isUglify) {
-	const data = {};
-	data.output = {};
+const createData = function ({
+	banner,
+	globalName,
+	input,
+	outputFile,
+	format,
+	isUglify
+}) {
+	/** @type {import("rollup").RollupOptions} */
+	const data = {
+		input,
+		output: {
+			file: outputFile,
+			format
+		},
+		/** @type {import("rollup").Plugin[]} */
+		plugins: [resolve(), commonjs()]
+	};
+
+	// UMD/IIFE の場合のみグローバル名を設定
 	if (format === "umd" || format === "iife") {
-		data.output.name = moduleName;
+		data.output.name = globalName;
 	}
-	data.output.file = output_name;
-	data.output.format = format;
-	data.input = input_name;
-	/**
-	 * @type {import("rollup").Plugin[]}
-	 */
-	data.plugins = [];
 
-	data.plugins.push(resolve()); // node_modules を解決
-	data.plugins.push(commonjs()); // CommonJS を解決
-
+	// minify時のみバナーを残す（/*! ... */ を残したいので comments: /^!/）
 	if (isUglify) {
 		data.output.banner = banner;
-		data.plugins.push(terser({
-			format: {
-				comments: /^!/
-			}
-		}));
+		data.plugins.push(
+			terser({
+				format: {
+					comments: /^!/
+				}
+			})
+		);
 	}
 
 	return data;
@@ -46,24 +58,68 @@ const banner = `/*!
  * AUTHOR: natade (https://twitter.com/natadea, https://github.com/natade-jp/)
  * LICENSE: MIT https://opensource.org/licenses/MIT
  */`;
-const name = "mojix";
+
+const packageName = "mojix";
+const globalName = "Mojix";
 const input = "./src/mojix.js";
+
+/** @type {import("rollup").RollupOptions[]} */
 const data = [];
 
-data.push(createData(banner, name, input, "./dist/umd/" + name + ".js", "umd", false));
-data.push(createData(banner, name, input, "./dist/umd/" + name + ".min.js", "umd", true));
-data.push(createData(banner, name, input, "./dist/cjs/" + name + ".cjs", "cjs", false));
-data.push(createData(banner, name, input, "./dist/esm/" + name + ".js", "esm", false));
+// UMD（グローバルは Mojix、ファイル名は mojix.js）
+data.push(
+	createData({
+		banner,
+		globalName,
+		input,
+		outputFile: `./dist/umd/${packageName}.js`,
+		format: "umd",
+		isUglify: false
+	})
+);
 
-const types = {
-	input: "./tmp/types/mojix.d.ts",
+data.push(
+	createData({
+		banner,
+		globalName,
+		input,
+		outputFile: `./dist/umd/${packageName}.min.js`,
+		format: "umd",
+		isUglify: true
+	})
+);
+
+// CJS / ESM（グローバル名は不要だが、引数を統一するため渡してOK）
+data.push(
+	createData({
+		banner,
+		globalName,
+		input,
+		outputFile: `./dist/cjs/${packageName}.cjs`,
+		format: "cjs",
+		isUglify: false
+	})
+);
+
+data.push(
+	createData({
+		banner,
+		globalName,
+		input,
+		outputFile: `./dist/esm/${packageName}.js`,
+		format: "esm",
+		isUglify: false
+	})
+);
+
+// types
+data.push({
+	input: `./tmp/types/${packageName}.d.ts`,
 	output: {
-		file: "./dist/types/mojix.d.ts",
+		file: `./dist/types/${packageName}.d.ts`,
 		format: "es"
 	},
 	plugins: [dts()]
-};
-
-data.push(types);
+});
 
 export default data;
