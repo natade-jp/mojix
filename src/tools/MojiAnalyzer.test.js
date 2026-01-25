@@ -84,8 +84,8 @@ test_count = 0;
 	testType("①", "is_NEC_selection_IBM_extended_character", false);
 	testType("①", "is_NEC_special_character", true);
 
-	testType("​", "is_control_charcter", true);
-	testType("a", "is_control_charcter", false);
+	testType("​", "is_control_character", true);
+	testType("a", "is_control_character", false);
 	testType("高", "is_kanji", true);
 	testType("あ", "is_kanji", false);
 	testType("あ", "is_hiragana", true);
@@ -122,6 +122,9 @@ test_count = 0;
 	testType(Unicode.toUTF32Array("禰󠄀")[1], "is_tag_character", false);
 	testType(Unicode.toUTF32Array("👍🏻")[1], "is_tag_character", false);
 	testType(Unicode.toUTF32Array("🏴󠁫󠁨󠀱󠀰󠁿")[1], "is_tag_character", true);
+	testType(Unicode.toUTF32Array("🇯🇵")[0], "is_regional_indicator", true);
+	testType(Unicode.toUTF32Array("🇯🇵")[1], "is_regional_indicator", true);
+	testType(Unicode.toUTF32Array("🇯")[0], "is_regional_indicator", true);
 }
 
 test_count = 0;

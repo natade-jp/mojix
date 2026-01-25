@@ -874,7 +874,7 @@ export default class Unicode {
 	 * コードポイントから制御文字名に変換する
 	 * 変換できない場合は null を返す
 	 * @param {number} codepoint - コードポイント
-	 * @returns {string}
+	 * @returns {string|null}
 	 */
 	static toControlCharcterName(codepoint) {
 		Unicode.init();
@@ -907,7 +907,7 @@ export default class Unicode {
 	 * - ゼロ幅接合子
 	 *
 	 * 含まれないもの
-	 * - 国旗絵文字（Regional Indicator）※ペア規則
+	 * - 国旗（Regional Indicator）※ペア規則
 	 *
 	 * @param {number} codepoint - コードポイント
 	 * @returns {boolean} 確認結果

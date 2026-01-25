@@ -453,7 +453,7 @@ export default class SJIS {
 	/**
 	 * Shift_JIS のコードポイントからJIS漢字水準（JIS Chinese character standard）に変換
 	 * @param {number} sjis_code - Shift_JIS-2004 のコードポイント
-	 * @returns {number} -1...変換不可, 0...水準なし, 1...第1水準, ...
+	 * @returns {number} 0...計算不可, 1...第1水準, ...
 	 */
 	static toJISKanjiSuijunFromSJISCode(sjis_code) {
 		if (!sjis_code) {

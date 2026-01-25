@@ -425,7 +425,7 @@ class MojiAnalizerTools {
  * @property {boolean} is_IBM_extended_character Windows-31J(CP932) IBM拡張文字
  * @property {boolean} is_NEC_selection_IBM_extended_character Windows-31J(CP932) NEC選定IBM拡張文字
  * @property {boolean} is_NEC_special_character Windows-31J(CP932) NEC特殊文字
- * @property {number} kanji_suijun Shift_JIS-2004 を使用して漢字の水準調査(1未満だと水準調査失敗)
+ * @property {number} kanji_suijun Shift_JIS-2004 を使用して漢字の水準調査(計算不可の場合 0)
  * @property {boolean} is_surrogate_pair 要 Unicode サロゲートペア
  * @property {string|null} control_name 制御文字名（制御文字ではない場合は null）
  * @property {boolean} is_control_character 制御文字
@@ -435,9 +435,9 @@ class MojiAnalizerTools {
  * @property {boolean} is_katakana カタカナ
  * @property {boolean} is_fullwidth_ascii 全角ASCII
  * @property {boolean} is_halfwidth_katakana 半角カタカナ
- * @property {boolean} is_emoji 絵文字
- * @property {boolean} is_emoticons 顔文字
- * @property {boolean} is_symbol_base 記号(VS16 が付くと絵文字化)
+ * @property {boolean} is_emoji 絵文字(絵文字表示されることが多い Unicode ブロックに属する文字)
+ * @property {boolean} is_emoticons 顔文字(Emoticons ブロックに属する文字)
+ * @property {boolean} is_symbol_base 記号(テキスト記号の定義だがVS16が続くと絵文字に切り替えが発生)
  * @property {boolean} is_gaiji 外字
  * @property {boolean} is_grapheme_component グラフェムを構成するための文字
  * @property {boolean} is_zero_width_character ゼロ幅文字
@@ -445,6 +445,7 @@ class MojiAnalizerTools {
  * @property {boolean} is_variation_selector 異体字セレクタ
  * @property {boolean} is_skin_tone_modifier スキントーン修飾子
  * @property {boolean} is_tag_character タグ文字
+ * @property {boolean} is_regional_indicator 国旗絵文字を構成するための Regional Indicator 文字（2文字で1つの国旗になる）
  */
 
 /**
@@ -498,7 +499,7 @@ export default class MojiAnalyzer {
 			is_IBM_extended_character: false,
 			is_NEC_selection_IBM_extended_character: false,
 			is_NEC_special_character: false,
-			kanji_suijun: -1,
+			kanji_suijun: 0,
 			is_surrogate_pair: false,
 			control_name: null,
 			is_control_character: false,
@@ -517,7 +518,8 @@ export default class MojiAnalyzer {
 			is_combining_mark: false,
 			is_variation_selector: false,
 			is_skin_tone_modifier: false,
-			is_tag_character: false
+			is_tag_character: false,
+			is_regional_indicator: false
 		};
 
 		/**
@@ -584,7 +586,7 @@ export default class MojiAnalyzer {
 		// prettier-ignore
 		type.is_NEC_special_character = cp932code ? 0x8740 <= cp932code && cp932code <= 0x879C : false;
 
-		// Shift_JIS-2004 を使用して漢字の水準調査(ない場合はnullになる)
+		// Shift_JIS-2004 を使用して漢字の水準調査(計算不可の場合 0)
 		type.kanji_suijun = SJIS.toJISKanjiSuijunFromSJISCode(sjis2004code);
 
 		// Unicodeの配列
@@ -684,6 +686,8 @@ export default class MojiAnalyzer {
 		type.is_skin_tone_modifier = Unicode.isEmojiModifierFromCodePoint(unicode_codepoint);
 		// タグ文字
 		type.is_tag_character = Unicode.isTagCharacterFromCodePoint(unicode_codepoint);
+		// 国旗絵文字を構成するためのRI文字
+		type.is_regional_indicator = Unicode.isRegionalIndicatorFromCodePoint(unicode_codepoint);
 
 		return data;
 	}
