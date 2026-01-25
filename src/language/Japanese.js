@@ -1122,23 +1122,28 @@ export default class Japanese {
 			return "";
 		}
 		for (let i = 0; i < moji_array.length; i++) {
+			// 文字データ
+			const moji = moji_array[i];
 			// 1文字目の横幅を取得
-			const ch = moji_array[i][0];
+			const cp = moji[0];
+			// ASCII文字, 半角カタカナ, Regional Indicator（単体）
 			// prettier-ignore
-			const ch_size = ch < 0x80 || (0xFF61 <= ch && ch < 0xFFA0) ? 1 : 2;
+			const cp_size = cp < 0x80
+				|| (0xFF61 <= cp && cp < 0xFFA0)
+				|| (moji.length === 1 && Unicode.isRegionalIndicatorFromCodePoint(cp)) ? 1 : 2;
 			if (position >= offset) {
 				is_target = true;
-				if (cut_size >= ch_size) {
-					output.push(moji_array[i]);
+				if (cut_size >= cp_size) {
+					output.push(moji);
 				} else {
 					output.push(SPACE);
 				}
-				cut_size -= ch_size;
+				cut_size -= cp_size;
 				if (cut_size <= 0) {
 					break;
 				}
 			}
-			position += ch_size;
+			position += cp_size;
 			// 2バイト文字の途中をoffset指定していた場合になる。
 			if (position - 1 >= offset && !is_target) {
 				cut_size--;

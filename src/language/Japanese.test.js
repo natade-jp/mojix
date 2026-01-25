@@ -165,9 +165,19 @@ testOperator1("toRomajiFromKatakana", "ミョウゴニチ", "myougonichi");
 {
 	const text = "Åあ゙禰󠄀";
 	// prettier-ignore
-	test("cutTextForWidth Ex1", () => { expect(Japanese.cutTextForWidth(text, 0, 3)).toBe("Åあ゙"); });
+	test("cutTextForWidth Ex1-1", () => { expect(Japanese.cutTextForWidth(text, 0, 3)).toBe("Åあ゙"); });
 	// prettier-ignore
-	test("cutTextForWidth Ex2", () => { expect(Japanese.cutTextForWidth(text, 1, 3)).toBe("あ゙ "); });
+	test("cutTextForWidth Ex1-2", () => { expect(Japanese.cutTextForWidth(text, 1, 3)).toBe("あ゙ "); });
 	// prettier-ignore
-	test("cutTextForWidth Ex3", () => { expect(Japanese.cutTextForWidth(text, 2, 3)).toBe(" 禰󠄀"); });
+	test("cutTextForWidth Ex1-3", () => { expect(Japanese.cutTextForWidth(text, 2, 3)).toBe(" 禰󠄀"); });
+}
+
+{
+	const text = "🇦🇧🇨123";
+	// prettier-ignore
+	test("cutTextForWidth Ex2-1", () => { expect(Japanese.cutTextForWidth(text, 0, 4)).toBe("🇦🇧🇨1"); });
+	// prettier-ignore
+	test("cutTextForWidth Ex2-2", () => { expect(Japanese.cutTextForWidth(text, 1, 4)).toBe(" 🇨12"); });
+	// prettier-ignore
+	test("cutTextForWidth Ex2-3", () => { expect(Japanese.cutTextForWidth(text, 2, 4)).toBe("🇨123"); });
 }
