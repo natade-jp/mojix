@@ -98,6 +98,7 @@ testOperator1("toRomajiFromKatakana", "ミョウゴニチ", "myougonichi");
 	test("getWidth", () => { expect(Japanese.getWidth("👍🏻👍🏼👍🏽👍🏾👍🏿")).toBe(10); });
 	// 国旗 (Regional Indicator)
 	// prettier-ignore
+	test("getWidth", () => { expect(Japanese.getWidth("🇯")).toBe(1); });
 	test("getWidth", () => { expect(Japanese.getWidth("🇯🇵🇯🇵🇯🇵")).toBe(6); });
 	test("getWidth", () => { expect(Japanese.getWidth("🇯🇵🇯🇵🇯🇵🇯")).toBe(7); });
 	// 国旗 (Tag Sequence)

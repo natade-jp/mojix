@@ -1,6 +1,6 @@
 {
 	"name": "mojix",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Moji / Kanji / Unicode analysis and encoding utilities",
 	"keywords": [
 		"unicode",
