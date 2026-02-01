@@ -4,6 +4,27 @@ import terser from "@rollup/plugin-terser";
 import dts from "rollup-plugin-dts";
 
 /**
+ * JSDoc の {import("...").X} を {X} に置換する
+ * - Rollup でまとめられた後でも効く（最終コード文字列に対して置換）
+ * - {import('./a.js').Foo.Bar} のような場合は最後の識別子 {Bar} にする
+ * @returns {import("rollup").Plugin}
+ */
+function jsdocImportToLocalType() {
+	// {import("...").X} / {import('...').X} を捕捉
+	const re = /\{import\(\s*(['"])[^'"]+\1\s*\)\.([^}]+)\}/g;
+
+	return {
+		name: "jsdoc-import-to-local-type",
+		renderChunk(code) {
+			return code.replace(re, (_m, _q, typePath) => {
+				const last = String(typePath).trim().split(".").pop();
+				return `{${last}}`;
+			});
+		}
+	};
+}
+
+/**
  * 公開用ファイルの設定データを作成
  * @param {Object} options - オプション
  * @param {string} options.banner - バナー（minify時に付与）
@@ -30,7 +51,11 @@ const createData = function ({
 			format
 		},
 		/** @type {import("rollup").Plugin[]} */
-		plugins: [resolve(), commonjs()]
+		plugins: [
+			resolve(),
+			commonjs(),
+			jsdocImportToLocalType()
+		]
 	};
 
 	// UMD/IIFE の場合のみグローバル名を設定
